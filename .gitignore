@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.playwright/
+.data-cache/
+.env*
+
+.cache/
