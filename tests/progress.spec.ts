@@ -24,8 +24,10 @@ test('session restores root, catalog, faculties, forward/backward expansions, re
  for(const faculty of ['מדעי המחשב','מתמטיקה','פיזיקה'])await page.getByRole('checkbox',{name:faculty,exact:true}).check();
  await closeFilters(page);await fit(page);
  const forward='root/f:02360299:strong';await node(page,forward).locator('.expand-button').focus();await node(page,forward).locator('.expand-button').press('Enter');await expect(node(page,forward).locator('.expand-button')).toHaveAttribute('aria-expanded','true');
- await node(page).locator('.node-info').click();
- await page.getByRole('dialog',{name:`קדמים של ${courses.get('02340247').name}`,exact:true}).getByRole('button',{name:`הרחבת קדם ${courses.get('02340218').name}`,exact:true}).click();
+ // Test persistence through keyboard controls while branch-focus camera motion settles.
+ // explorer.spec.ts separately covers hover and pointer interaction with this panel.
+ await node(page).locator('.node-info').focus();await node(page).locator('.node-info').press('Enter');
+ const prerequisite=page.getByRole('dialog',{name:`קדמים של ${courses.get('02340247').name}`,exact:true}).getByRole('button',{name:`הרחבת קדם ${courses.get('02340218').name}`,exact:true});await prerequisite.focus();await prerequisite.press('Enter');
  await expect(node(page,'root/b:02340218:strong')).toHaveCount(1);
  await mark(page);await mark(page,'root/b:02340218:strong');
  await page.getByRole('button',{name:'הגדלת המפה',exact:true}).click();

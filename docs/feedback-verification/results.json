@@ -1,0 +1,131 @@
+{
+  "verified_at": "2026-11-17T18:53:49.172042+00:00",
+  "baseline_commit": "341f17bd400c18d579afd4f8e06c570c45c56374",
+  "environment": {
+    "node": "24.21.0",
+    "browser": "Chrome 157.0.8103.79",
+    "os": "Windows",
+    "browser_target": "Vite preview of production dist at 127.0.0.1:5183"
+  },
+  "dependency_install": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "status": "passed",
+    "lockfile_matches_workspace": true
+  },
+  "typecheck": {
+    "command": "tsc -b",
+    "status": "passed"
+  },
+  "production_build": {
+    "command": "vite build",
+    "status": "passed",
+    "index_sha256": "07322b8e43be77689e258598baa87e5eb8ed9e0d145197d66cda75ee3a947aa6"
+  },
+  "unit_and_data_tests": {
+    "passed": 81,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser_tests": {
+    "passed": 63,
+    "failed": 0,
+    "skipped": 0,
+    "feedback_scenarios": 17,
+    "by_file": {
+      "branches.spec.ts": 12,
+      "catalog-layout.spec.ts": 2,
+      "explorer.spec.ts": 7,
+      "feedback.spec.ts": 17,
+      "filters.spec.ts": 10,
+      "progress.spec.ts": 15
+    },
+    "duration": "4.6m"
+  },
+  "additional_navigation_rechecks": {
+    "passed": 6,
+    "failed": 0,
+    "repetitions_per_scenario": 3
+  },
+  "test_stability_change": "Existing persistence test uses supported keyboard panel controls during branch-focus camera animation; all persistence assertions and separate pointer/hover tests retained.",
+  "formspree": {
+    "form_id": "xrpqqyge",
+    "official_react_integration": "@formspree/react 3.0.0",
+    "automated_requests": "mocked or blocked",
+    "real_submissions_sent": 0,
+    "account_configuration_changed": false
+  },
+  "visual_review": {
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "screenshots": [
+      "form-desktop.png",
+      "form-mobile.png",
+      "form-narrow.png",
+      "entry-desktop.png",
+      "entry-mobile.png"
+    ]
+  },
+  "source_mirror": {
+    "matching_source_config_and_test_files": 38,
+    "mismatches": []
+  },
+  "production_dependency_audit": {
+    "known_vulnerabilities": 0,
+    "scope": "npm audit --omit=dev"
+  },
+  "protected_files_unchanged_against_baseline": [
+    "public/data/courses.json",
+    "public/data/catalogs.json",
+    "src/lib/graph.ts",
+    "src/lib/progress.ts",
+    "src/lib/faculty-colors.ts"
+  ],
+  "source_sha256": {
+    "package-lock.json": "0fb57cb2e3ad87a5f7d2346c4efce20f0dc17987fb72d241cdc56a7b31f89608",
+    "package.json": "961d606d368514dcb70daed05cddce314cdb787e52ac077854589972d9002d30",
+    "src/App.tsx": "92023afce63064f7e78946f54b8c378d0329c62f160b24a1d910e3494eef22ce",
+    "src/components/CourseNode.tsx": "536788d6e11eda828339435e1d0a4f3a4ac6952c5847c279bbca425ae800f877",
+    "src/components/CourseSearch.tsx": "1fb4a57ed9dfa058625089f848544e198053a2e7ac2594f6fe2ebf58ea42da41",
+    "src/components/FeedbackPage.tsx": "36f2c0128b478b7c5d618fb0308a3a68e5dc8927e41e522d419f5c083c486e09",
+    "src/components/FilterPanel.tsx": "85341e885bb487d8441e5fedd3d37fe99c04ff5bd4e7e1443dd7b3579f526db6",
+    "src/components/ForwardBranchEdge.tsx": "0b651db4ca2fd84c39b88a2224c8372356736cc3c324b0d4f548450658ed67ef",
+    "src/components/SiteFooter.tsx": "114a11e009fba140fbe021a5c26f51325050e9a106ea39944e5eba9c8fdef908",
+    "src/data/faculty-palette.json": "9f5de5804ff7b5f019720d291649cee55158109a2fb06c7ef7b5754d0264342a",
+    "src/lib/faculty-colors.ts": "81dae480706b5e5da5dedb1f59ea8f43e2bbcd956364512d2a6326cdd3d01d96",
+    "src/lib/feedback.ts": "b256ca70ff1d9a644c036143289c96d5e6dab9aa9f71fff62e1cbe0f05254f9c",
+    "src/lib/filters.ts": "2b7a6c15932718920e6fdf7ea0c9f2eeb615c698dd278f0f7b5f13c53296ddbf",
+    "src/lib/graph.ts": "6765572d0dde849265df27838787a715f206282a8f9a7715adf31dc9dacda54f",
+    "src/lib/navigation.ts": "cb6f359d42fa6fa67149e8aeece1b258957aa04fe6e53927468866f93f9620bf",
+    "src/lib/progress.ts": "b482e7985face66127d48d143b695e148ea4dd9388355b3095d36cb5b155d690",
+    "src/lib/use-progress.ts": "5b11ef5e4a761880902f4e4980708bf39609b149ce2f853ae3f0fbf53d52f6d7",
+    "src/main.tsx": "a463e90635a88d635128645cd2efa330dbb989a8fb36066514c269bd9578d077",
+    "src/styles.css": "d29cb641c7ddb0694d440b875b709b0b24f9d36e325ba11585aaa41a2a5d8c72",
+    "src/types.ts": "e68b5070e60270a48c189f2631c452f9cdf60ee09279c16e62c53814239edf43",
+    "src/vite-env.d.ts": "8c7e72b787c5086bd4a01af253957f3ffbc8d0160fddd9d43504afa2bfb7ef33",
+    "tests/academic-corrections.test.ts": "3f03323744f8345227deaffdcaa967f445675d96ec219bdcc8891e739d5a91ba",
+    "tests/branches.spec.ts": "fa44b5c7569b2ee723534fc2643e58159077bb1b23a33dc0cc349d5ded327f9f",
+    "tests/branches.test.ts": "9a1e384da43fde5eaa601c5afeb2337c7b3af446c5666eb3df224f9911abdbee",
+    "tests/catalog-baseline.test.ts": "ceffe33328c9004f35fe13ac3b5c77c0d4f88e806e7fcc34002bc35362fd36b0",
+    "tests/catalog-layout.spec.ts": "829d73449b3294f3506e15580ed950635696a7a7670013abd606902bf6491c43",
+    "tests/catalogs.test.ts": "2c6da91b0eecbed5fc644c0f73bf5962714130023e642cd4c6e13f1b519367ab",
+    "tests/explorer.spec.ts": "2b584ba8263da46416c1a918899750262c92d85ad9d1e452e3d84fc421a36edc",
+    "tests/faculty-colors.test.ts": "59c589a196a441fed9dfafbf5e84338493056b728dc18e5a2c22a5c6cda04ff1",
+    "tests/feedback.spec.ts": "0afd0b20205ab42f518655d2c484bc549fe815a141c0b3a4da7e3c2c360f6617",
+    "tests/feedback.test.ts": "76b081c19e8fef489ecaa63de346d171efa648f0c7a02fdb3116e0adbb4cbe71",
+    "tests/filters.spec.ts": "29dbf4ed778a4b222509a4b3dc8a2d7a071c006c2820a32f988cc1202ee5fcf0",
+    "tests/filters.test.ts": "0448787b4a3023bd00761af8b506fcf1b5efead65250374a21c5f8c7d2b9f314",
+    "tests/graph.test.ts": "01d3f3f470fae8d8102a36a6a9d781a2bf1e45c6191d7ea19e2c0026017c0c5b",
+    "tests/progress.spec.ts": "d5d68d876be61123cebc3e043dea0772ff3986b32d29693899f24355327bd15f",
+    "tests/progress.test.ts": "38345890d47e2141cd325cf1c1b9538750298e5a4cfa53d2cd8bfe92250b9196",
+    "vercel.json": "8dfd52dc58e4e1e4382839b636f0520deed0500dccddc1e04992a9eb9b8b1b2b",
+    "vite.config.ts": "2b4b922080589d9a047f0cec68b6bc44d3ff4665560691b8f85ee33e8751fe4b"
+  },
+  "manual_checks_remaining": [
+    "Confirm active Formspree form, verified notification recipients and any allowed-domain settings.",
+    "Deploy to Vercel and directly refresh /feedback.",
+    "Send one intentional report after deployment and verify the dashboard entry and notification delivery."
+  ]
+}

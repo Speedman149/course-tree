@@ -3,7 +3,7 @@ import { courseAppearance } from '../lib/faculty-colors';
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Handle, Position, type Node, type NodeProps } from '@xyflow/react';
-import { ArrowUpLeft, BookOpen, Check, ChevronLeft, CircleHelp, GitBranch, Info, Minus, Plus, RotateCcw } from 'lucide-react';
+import { ArrowUpLeft, BookOpen, Bug, Check, ChevronLeft, CircleHelp, GitBranch, Info, Minus, Plus, RotateCcw } from 'lucide-react';
 import type { Course, Requirement, Relation, DegreeCatalog } from '../types';
 import type { CatalogRole } from '../lib/filters';
 import { collectRequirements, forwardConnectionId, type GraphNode } from '../lib/graph';
@@ -24,6 +24,7 @@ export interface ExplorerContextValue {
   hasFilters: boolean;
   markedCourseIds: ReadonlySet<string>;
   toggleMarked: (courseId:string)=>void;
+  reportCourse:(courseId:string)=>void;
   hiddenForwardConnections:ReadonlySet<string>;
   hideForwardConnection:(connectionId:string,parentId:string)=>void;
   restoreForwardConnection:(connectionId:string,parentId:string)=>void;
@@ -121,6 +122,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
         })}</div><p className="panel-hint">לחצו על + כדי להמשיך לחקור את הקדמים במפה.</p>
       </> : <div className="no-prerequisites"><CircleHelp size={22}/><p>{course?.requirementsStatus === 'none' ? 'לא תועדו קדמים לקורס הזה במקור. בדקו את כללי הרישום בקטלוג.' : 'אין במאגר מידע מפוענח על קדמים לקורס הזה.'}</p>{course?.rawRequirements && <p className="raw-requirements">{course.rawRequirements}</p>}</div>}
       {hiddenChildren > 0 && <p className="panel-filter-note">{hiddenChildren} קשרי המשך מוסתרים במסננים. הקדמים מוצגים במלואם וניתנים לפתיחה.</p>}
+      <button className="course-feedback-link" onClick={()=>{close();explorer.reportCourse(item.courseId);}}><Bug size={12}/>דיווח על מידע בקורס</button>
       {course && <div className="panel-footer"><a href={course.source.url} target="_blank" rel="noopener noreferrer">מידע במקור <ArrowUpLeft size={12}/></a>{!isRoot && <button onClick={() => { explorer.setRoot(course); close(); }}>הגדרה כנקודת מוצא <ChevronLeft size={12}/></button>}</div>}
     </div>, document.body)}
   </>;
