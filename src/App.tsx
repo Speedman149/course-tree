@@ -1,14 +1,17 @@
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Background, BackgroundVariant, MarkerType, ReactFlow, useReactFlow, useViewport, type Edge } from '@xyflow/react';
 import dagre from '@dagrejs/dagre';
-import { ArrowDownLeft, ArrowLeft, ArrowRight, BookOpen, Check, ChevronLeft, CircleHelp, Database, ExternalLink, Focus, GitBranch, GraduationCap, Layers, LoaderCircle, Minus, MousePointer2, Move, Plus, RotateCcw, ShieldCheck, SlidersHorizontal, Sparkles, X } from 'lucide-react';
+import { ArrowDownLeft, ArrowLeft, ArrowRight, BookOpen, Bug, Check, ChevronLeft, CircleHelp, Database, ExternalLink, Focus, GitBranch, GraduationCap, Layers, LoaderCircle, Minus, MousePointer2, Move, Plus, RotateCcw, ShieldCheck, SlidersHorizontal, Sparkles, X } from 'lucide-react';
 import CourseSearch from './components/CourseSearch';
+const FeedbackPage = lazy(() => import('./components/FeedbackPage'));
 const FilterPanel = lazy(() => import('./components/FilterPanel'));
 import { createCourseVisibility, getCatalogRoles, getFacultyOptions } from './lib/filters';
 import CourseNode, { CourseLink, ExplorerContext, RequirementExpression, type CourseFlowNode } from './components/CourseNode';
 import { buildCourseIndex, buildDependents, buildGraph, collectRequirements, forwardConnectionId, restoreDirectConnections } from './lib/graph';
 import type { Course, CourseDataset, CatalogDataset } from './types';
 import { useProgress } from './lib/use-progress';
+import {appRoute,navigateApp} from './lib/navigation';
+import {feedbackPageURL,feedbackHistoryOrigin,validCourseNumber,type FeedbackOrigin} from './lib/feedback';
 import type { Progress } from './lib/progress';
 import { courseAppearance, facultyPalette, MARKED_COURSE_COLOR } from './lib/faculty-colors';
 import ForwardBranchEdge from './components/ForwardBranchEdge';
@@ -31,7 +34,10 @@ export default function App() {
   const [markedCourseIds, setMarkedCourseIds] = useState(new Set<string>());
   const [viewportState, setViewportState] = useState<Progress['viewport']>(null);
   const pendingViewport = useRef<Progress['viewport'] | undefined>(undefined);
-  const [aboutPage, setAboutPage] = useState(() => window.location.hash === '#/about');
+  const [route,setRoute] = useState(()=>appRoute(window.location));
+  const [feedbackOrigin,setFeedbackOrigin] = useState<FeedbackOrigin|null>(()=>feedbackHistoryOrigin(window.history.state));
+  const initialPage=useRef(feedbackPageURL(window.location.href));
+  const requestedReportCourse=new URLSearchParams(window.location.search).get('courseId')??'';
   const [facultySelection, setFacultySelection] = useState<Set<string> | null>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const closeFilters = useCallback(() => setFiltersOpen(false), []);
@@ -84,14 +90,14 @@ export default function App() {
     setFacultySelection(saved.facultyIds===null?null:new Set(saved.facultyIds));setCatalogId(saved.catalogId);setCatalogYear(saved.catalogYear);setCatalogFaculty(saved.catalogFaculty);setFilterTab(saved.filterTab);setSearchAll(saved.searchAll);
     setMarkedCourseIds(new Set(saved.markedCourseIds));setRecent(saved.recent);setViewportState(saved.viewport);pendingViewport.current=saved.viewport;
     setBranchFocus(null);setHoveredId(null);setRootViewVersion(version=>version+1);
-    const url=new URL(window.location.href);url.searchParams.set('course',saved.rootId);window.history.replaceState({},'',url);
+    if(appRoute(window.location)!=='feedback'){const url=new URL(window.location.href);url.searchParams.set('course',saved.rootId);window.history.replaceState({},'',url);}
   },[]);
   const progressDatabase=useMemo(()=>({courses:index,facultyIds:new Set(facultyOptions.map(f=>f.id)),programs:catalogs?.programs??null,years:catalogs?.meta.years??[],defaultYear:catalogs?.meta.defaultYear??'2025-2026',defaultRoot:dataset?.courses.find(c=>c.id==='02340114')?.id??dataset?.courses[0]?.id??'02340114'}),[index,facultyOptions,catalogs,dataset]);
   const {ready:progressReady,storageAvailable,clearSaved}=useProgress(progress,progressDatabase,!!dataset,!!catalogs||catalogError,restoreProgress);
   const toggleMarked=useCallback((courseId:string)=>setMarkedCourseIds(previous=>{const next=new Set(previous);if(next.has(courseId))next.delete(courseId);else next.add(courseId);return next;}),[]);
   useEffect(()=>{
-    const navigate=()=>{const about=window.location.hash==='#/about';if(!about)pendingViewport.current=viewportState;setAboutPage(about);};
-    window.addEventListener('hashchange',navigate);return()=>window.removeEventListener('hashchange',navigate);
+    const navigate=()=>{const next=appRoute(window.location);if(next==='tree')pendingViewport.current=viewportState;setFeedbackOrigin(next==='feedback'?feedbackHistoryOrigin(window.history.state):null);setRoute(next);};
+    window.addEventListener('hashchange',navigate);window.addEventListener('popstate',navigate);return()=>{window.removeEventListener('hashchange',navigate);window.removeEventListener('popstate',navigate);};
   },[viewportState]);
 
   const root = index.get(rootId);
@@ -137,7 +143,7 @@ export default function App() {
   },[rememberBranchAnchor]);
 
   useEffect(() => {
-    if (!dataset || !progressReady || aboutPage) return;
+    if (!dataset || !progressReady || route!=='tree') return;
     // Restore a saved viewport before requesting any automatic centering.
     if (pendingViewport.current) { const saved=pendingViewport.current;pendingViewport.current=undefined;requestAnimationFrame(()=>setViewport(saved,{duration:0}));return; }
     pendingViewport.current=undefined;
@@ -148,7 +154,7 @@ export default function App() {
       if (p && container) setCenter(p.x + WIDTH / 2 - container.width * 0.23, p.y + HEIGHT / 2, { zoom: container.width < 600 ? 0.75 : 0.9, duration: 450 });
     });
     return () => cancelAnimationFrame(frame);
-  }, [dataset, rootId, rootViewVersion, isVisible, progressReady, aboutPage]);
+  }, [dataset, rootId, rootViewVersion, isVisible, progressReady, route]);
   useEffect(() => {
     if (!branchFocus) return;
     const focused = graph.nodes.filter(node => node.id === branchFocus.id || (node.parentId === branchFocus.id && node.direction === branchFocus.direction && (!branchFocus.courseId || node.courseId === branchFocus.courseId)));
@@ -196,13 +202,19 @@ export default function App() {
   const knownCount = courses.filter(c => c.requirementsStatus === 'known' || c.requirementsStatus === 'none').length;
   const termLabel = (term: string | undefined) => term ? term.replace('_', ' · ') : 'מקור הקורס';
 
-  if (aboutPage) return <AboutPage/>;
+  const openFeedback=(courseId?:string)=>{
+    const origin:FeedbackOrigin={pageUrl:feedbackPageURL(window.location.href),route:appRoute(window.location),startingCourseId:progressReady?rootId:undefined,...(courseId?{relevantCourseId:courseId}:{})};
+    setFiltersOpen(false);setHoveredId(null);setModal(null);
+    navigateApp(courseId?`/feedback?courseId=${encodeURIComponent(courseId)}`:'/feedback',{feedbackOrigin:origin});
+  };
+  if(route==='feedback')return <Suspense fallback={<div className="feedback-loading" role="status">טוענים את עמוד המשוב…</div>}><FeedbackPage treeCourseId={progressReady?rootId:undefined} origin={feedbackOrigin??{pageUrl:initialPage.current,route:'feedback',startingCourseId:progressReady?rootId:undefined,...(validCourseNumber(requestedReportCourse)?{relevantCourseId:requestedReportCourse}:{})}} courseId={feedbackOrigin?.relevantCourseId??(validCourseNumber(requestedReportCourse)?requestedReportCourse:undefined)}/></Suspense>;
+  if(route==='about')return <AboutPage/>;
 
   return <div className="app-shell" dir="rtl" style={{'--marked-course':MARKED_COURSE_COLOR} as React.CSSProperties}>
     <header className="app-header">
       <a className="brand" href={window.location.pathname} aria-label="מפת הקורסים — לדף הבית"><span className="brand-mark"><GitBranch size={24}/></span><span><strong>מפת הקורסים<span className="brand-dot">.</span></strong><small>לגלות לאן אפשר להמשיך</small></span></a>
       <CourseSearch courses={filteredCourses} allCourses={courses} filtered={hasFilters} disabled={!dataset || !progressReady} searchAll={searchAll} onSearchAllChange={setSearchAll} onSelect={selectRoot}/>
-      <div className="header-actions"><span className="technion-tag"><GraduationCap size={19}/>הטכניון</span><span className="header-divider"/><button className="help-button" onClick={() => setModal('help')}><CircleHelp size={18}/><span>איך זה עובד?</span></button></div>
+      <div className="header-actions"><a className="feedback-trigger" href="/feedback" title="דיווח על תקלה או שליחת משוב" aria-label="דיווח על תקלה או שליחת משוב" onClick={event=>{event.preventDefault();openFeedback();}}><Bug size={19}/></a><span className="technion-tag"><GraduationCap size={19}/>הטכניון</span><span className="header-divider"/><button className="help-button" onClick={() => setModal('help')}><CircleHelp size={18}/><span>איך זה עובד?</span></button></div>
     </header>
 
     <main className="workspace">
@@ -220,7 +232,7 @@ export default function App() {
         {hasFilters && <div className="active-filter-summary" aria-live="polite"><div><strong>{activeCatalog ? `קטלוג נבחר: ${activeCatalog.officialName}${activeCatalog.track && !activeCatalog.officialName.includes(activeCatalog.track) ? ` — ${activeCatalog.track}` : ''} (${activeCatalog.catalogYear})` : 'סינון לפי פקולטה'}</strong>{activeCatalog && <span className="catalog-scope-notice">{activeCatalog.coverage.status === 'inventory-only' ? 'תכנית מתועדת בלבד · דרישות הלימודים טרם אומתו; אין רשימת קורסי המשך מאושרת' : 'ייבוא חלקי של רשימות וכללים · תנאי המקור והמידע החסר מפורטים במסננים; אין אישור זכאות אוטומטי'}</span>}<span>{selectedFaculties.size} מתוך {facultyOptions.length} אפשרויות שיוך · {filteredCourses.length} קורסים מתאימים · {hiddenConnections} קשרי המשך מוסתרים</span>{!isVisible(rootId) && <span className="root-filter-warning">נקודת המוצא מחוץ לסינון ומוצגת כעוגן בלבד. קדמים פתוחים מוצגים ללא סינון.</span>}</div><button aria-label="איפוס כל המסננים" onClick={() => { setFacultySelection(null); setCatalogId(''); }}><X size={14}/><span>איפוס סינון</span></button></div>}
         <div className="graph-canvas">
           {dataset && progressReady ? <>
-            <ExplorerContext.Provider value={{ courses: index, dependents, expandedForward, expandedBackward, toggleForward, toggleBackward, setRoot: selectRoot, onHover: setHoveredId, catalogTerm: String(dataset.meta.latestTerm), isVisible, activeCatalog, catalogRoles, hasFilters, markedCourseIds, toggleMarked, hiddenForwardConnections, hideForwardConnection, restoreForwardConnection }}>
+            <ExplorerContext.Provider value={{ courses: index, dependents, expandedForward, expandedBackward, toggleForward, toggleBackward, setRoot: selectRoot, onHover: setHoveredId, catalogTerm: String(dataset.meta.latestTerm), isVisible, activeCatalog, catalogRoles, hasFilters, markedCourseIds, toggleMarked, hiddenForwardConnections, hideForwardConnection, restoreForwardConnection, reportCourse:openFeedback }}>
               <ReactFlow<CourseFlowNode> nodes={nodes} edges={edges} nodeTypes={nodeTypes} edgeTypes={edgeTypes} minZoom={0.15} maxZoom={1.8} nodesConnectable={false} nodesDraggable={false} elementsSelectable={false} panOnDrag zoomOnDoubleClick={false} defaultViewport={viewportState??undefined} onMoveEnd={(_,viewport)=>setViewportState(viewport)} proOptions={{ hideAttribution: true }} onNodeMouseEnter={(_, node) => setHoveredId(node.id)} onPaneClick={() => setHoveredId(null)}>
                 <Background variant={BackgroundVariant.Dots} gap={22} size={1.1} color="#dadbe5"/>
               </ReactFlow>
@@ -235,7 +247,7 @@ export default function App() {
         <div className="map-footnote"><ShieldCheck size={15}/><p>קשר במפה מציין דרישה לקורס. ייתכנו דרישות נוספות או חלופיות — בדקו את כלל הקדמים המלא בחלונית הקורס.</p><button onClick={() => setModal('data')}>פרטי המאגר<ExternalLink size={12}/></button></div>
       </section>
     </main>
-    <SiteFooter markedCount={markedCourseIds.size} storageAvailable={storageAvailable} onClearMarks={()=>{if(window.confirm('לנקות את כל סימוני הקורסים? הענפים והמסננים יישמרו.'))setMarkedCourseIds(new Set());}} onResetProgress={()=>{if(window.confirm('לאפס את כל ההתקדמות השמורה, הענפים, המסננים וסימוני הקורסים בדפדפן הזה?')){clearSaved();setFiltersOpen(false);}}}/>
+    <SiteFooter treeCourseId={rootId} markedCount={markedCourseIds.size} storageAvailable={storageAvailable} onClearMarks={()=>{if(window.confirm('לנקות את כל סימוני הקורסים? הענפים והמסננים יישמרו.'))setMarkedCourseIds(new Set());}} onResetProgress={()=>{if(window.confirm('לאפס את כל ההתקדמות השמורה, הענפים, המסננים וסימוני הקורסים בדפדפן הזה?')){clearSaved();setFiltersOpen(false);}}}/>
     {filtersOpen && <Suspense fallback={<div className="filter-loading" role="status">טוענים מסננים…</div>}><FilterPanel faculties={facultyOptions} selected={selectedFaculties} onFacultiesChange={setFacultySelection} catalogs={catalogs} catalogError={catalogError} activeCatalog={activeCatalog} onCatalogChange={id=>{setCatalogId(id);const program=catalogs?.programs.find(p=>p.id===id);if(program)setCatalogYear(program.catalogYear);}} tab={filterTab} onTabChange={setFilterTab} year={catalogYear} onYearChange={setCatalogYear} catalogFaculty={catalogFaculty} onCatalogFacultyChange={setCatalogFaculty} courses={index} onCourseSelect={selectRoot} onClose={closeFilters}/></Suspense> }
     {modal && <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) setModal(null); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" onKeyDown={event => {
       if (event.key !== 'Tab') return;

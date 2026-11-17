@@ -144,3 +144,7 @@ The footer includes the independent-project disclaimer, **Developed by Chupchick
 ## Hide one forward branch
 
 The small minus near a forward arrow's child endpoint hides only that connection's branch. Use **הצגת ענפים** by its parent to restore a specific hidden branch with its prior expansions. The original course minus still collapses all children, and reopening the course restores its direct children. Shared courses on other paths, backward prerequisites and global markings are preserved. Hidden connections are saved separately in the migrated version 2 local session. See [individual branch controls](docs/BRANCH_CONTROLS.md).
+
+## Feedback and bug reports
+
+The header bug icon opens the Hebrew `/feedback` page. Course information panels can prefill a course report. The official Formspree React integration handles asynchronous submission, validation, retries and concise technical context, with no account required for visitors. Graph progress is retained when returning. See [feedback setup, privacy and deployment checks](docs/FEEDBACK.md).

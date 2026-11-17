@@ -1,10 +1,15 @@
+import {navigateApp} from '../lib/navigation';
+import {validCourseNumber} from '../lib/feedback';
 interface Props {
+  treeCourseId?: string;
   markedCount?: number;
   storageAvailable?: boolean;
   onClearMarks?: ()=>void;
   onResetProgress?: ()=>void;
 }
-export default function SiteFooter({markedCount,storageAvailable=true,onClearMarks,onResetProgress}:Props) {
+export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress}:Props) {
+ const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
+ const aboutHref=courseId&&validCourseNumber(courseId)?`/?course=${encodeURIComponent(courseId)}#/about`:'/#/about';
  return <footer className="site-footer" aria-label="מידע על האתר">
   {onResetProgress && <div className="saved-progress-controls">
    <span className={storageAvailable?'local-save-status':'local-save-status storage-unavailable'} role="status">{storageAvailable?'ההתקדמות נשמרת בדפדפן הזה':'השמירה המקומית אינה זמינה כרגע'}</span>
@@ -13,7 +18,7 @@ export default function SiteFooter({markedCount,storageAvailable=true,onClearMar
    <button onClick={onResetProgress}>איפוס התקדמות שמורה</button>
   </div>}
   <div className="site-footer-main"><p className="site-disclaimer" lang="en" dir="ltr">Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.</p>
-   <nav aria-label="קישורי האתר"><a href="#/about">אודות / About</a><span className="developer-credit map-developer-credit" dir="ltr">Developed by Chupchick</span></nav>
+   <nav aria-label="קישורי האתר"><a href={aboutHref} onClick={event=>{event.preventDefault();navigateApp(aboutHref);}}>אודות / About</a><span className="developer-credit map-developer-credit" dir="ltr">Developed by Chupchick</span></nav>
   </div>
  </footer>;
 }
