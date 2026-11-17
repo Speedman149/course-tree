@@ -4,6 +4,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { mergeSnapshots, requirementLeaves } from './course-data.mjs';
+import { applyCourseCorrections, loadCourseCorrections } from './course-corrections.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -63,7 +64,7 @@ for (const term of terms) {
   console.log(`${term}: ${records.length} source records`);
 }
 
-const courses = mergeSnapshots(snapshots);
+const {courses, applied: appliedCorrections} = applyCourseCorrections(mergeSnapshots(snapshots), await loadCourseCorrections(root));
 const ids = new Set(courses.map(course => course.id));
 const leaves = courses.flatMap(course => requirementLeaves(course.requirements));
 const missing = [...new Set(leaves.filter(leaf => !ids.has(leaf.courseId)).map(leaf => leaf.courseId))].sort();
@@ -71,6 +72,7 @@ const statuses = Object.fromEntries(['known', 'none', 'unknown', 'unparsed'].map
 const faculties = [...new Set(courses.map(course => course.faculty))].sort();
 const meta = {
   schemaVersion: 1,
+  appliedCorrections,
   generatedAt: new Date().toISOString(),
   defaultRootId: '02340114',
   courseCount: courses.length,

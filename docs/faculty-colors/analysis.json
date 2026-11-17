@@ -1,0 +1,768 @@
+{
+  "courseCount": 3318,
+  "policy": "Deduplicate by canonical course ID. Count each shared course once per documented faculty. Exclude unattributed placeholders/unrecognized administrative units from faculty ranking; retain their neutral labels. Node color uses its primary offering faculty, or the alphabetically first documented owner if primary is absent.",
+  "ranking": [
+    {
+      "id": "civil",
+      "label": "הנדסה אזרחית וסביבתית",
+      "courseCount": 293
+    },
+    {
+      "id": "cs",
+      "label": "מדעי המחשב",
+      "courseCount": 288
+    },
+    {
+      "id": "architecture",
+      "label": "ארכיטקטורה ובינוי ערים",
+      "courseCount": 283
+    },
+    {
+      "id": "ee",
+      "label": "הנדסת חשמל ומחשבים",
+      "courseCount": 223
+    },
+    {
+      "id": "data",
+      "label": "מדעי הנתונים וההחלטות",
+      "courseCount": 195
+    },
+    {
+      "id": "humanities",
+      "label": "המחלקה ללימודים הומניסטיים ואמנות",
+      "courseCount": 180
+    },
+    {
+      "id": "mechanical",
+      "label": "הנדסת מכונות",
+      "courseCount": 164
+    },
+    {
+      "id": "math",
+      "label": "מתמטיקה",
+      "courseCount": 155
+    },
+    {
+      "id": "aerospace",
+      "label": "הנדסת אווירונוטיקה וחלל",
+      "courseCount": 133
+    },
+    {
+      "id": "medicine",
+      "label": "רפואה",
+      "courseCount": 125
+    },
+    {
+      "id": "physics",
+      "label": "פיזיקה",
+      "courseCount": 107
+    },
+    {
+      "id": "chemistry",
+      "label": "כימיה",
+      "courseCount": 105
+    },
+    {
+      "id": "biomedical",
+      "label": "הנדסה ביו-רפואית",
+      "courseCount": 94
+    },
+    {
+      "id": "materials",
+      "label": "מדע והנדסה של חומרים",
+      "courseCount": 86
+    },
+    {
+      "id": "biology",
+      "label": "ביולוגיה",
+      "courseCount": 83
+    },
+    {
+      "id": "chemical",
+      "label": "הנדסה כימית",
+      "courseCount": 72
+    },
+    {
+      "id": "education",
+      "label": "חינוך למדע וטכנולוגיה",
+      "courseCount": 72
+    },
+    {
+      "id": "biotechnology",
+      "label": "הנדסת ביוטכנולוגיה ומזון",
+      "courseCount": 71
+    }
+  ],
+  "assignments": [
+    {
+      "id": "civil",
+      "label": "הנדסה אזרחית וסביבתית",
+      "courseCount": 293,
+      "accent": "#357F70"
+    },
+    {
+      "id": "cs",
+      "label": "מדעי המחשב",
+      "courseCount": 288,
+      "accent": "#7651B5"
+    },
+    {
+      "id": "architecture",
+      "label": "ארכיטקטורה ובינוי ערים",
+      "courseCount": 283,
+      "accent": "#516879"
+    },
+    {
+      "id": "ee",
+      "label": "הנדסת חשמל ומחשבים",
+      "courseCount": 223,
+      "accent": "#187DAA"
+    },
+    {
+      "id": "data",
+      "label": "מדעי הנתונים וההחלטות",
+      "courseCount": 195,
+      "accent": "#267546"
+    },
+    {
+      "id": "humanities",
+      "label": "המחלקה ללימודים הומניסטיים ואמנות",
+      "courseCount": 180,
+      "accent": "#087F8C"
+    },
+    {
+      "id": "mechanical",
+      "label": "הנדסת מכונות",
+      "courseCount": 164,
+      "accent": "#2455A4"
+    },
+    {
+      "id": "math",
+      "label": "מתמטיקה",
+      "courseCount": 155,
+      "accent": "#996B0B"
+    },
+    {
+      "id": "aerospace",
+      "label": "הנדסת אווירונוטיקה וחלל",
+      "courseCount": 133,
+      "accent": "#835187"
+    },
+    {
+      "id": "medicine",
+      "label": "רפואה",
+      "courseCount": 125,
+      "accent": "#806535"
+    },
+    {
+      "id": "physics",
+      "label": "פיזיקה",
+      "courseCount": 107,
+      "accent": "#6E7D22"
+    },
+    {
+      "id": "chemistry",
+      "label": "כימיה",
+      "courseCount": 105,
+      "accent": "#4446A1"
+    }
+  ],
+  "method": "Fixed non-red candidate accents; deterministic swap search maximizes graph-weighted CIELAB separation. Pair weight=3*log(1+direct prerequisite relationships)+log(1+shared one-hop neighborhoods). Neighborhoods include prerequisites and dependents; they approximate same-branch proximity, without changing graph logic.",
+  "weightedScore": 1728.8097546243769,
+  "pairs": [
+    {
+      "i": 1,
+      "j": 3,
+      "a": "cs",
+      "b": "ee",
+      "directEdges": 80,
+      "sharedNeighborhoods": 121,
+      "labDistance": 51.4087724392879
+    },
+    {
+      "i": 4,
+      "j": 7,
+      "a": "data",
+      "b": "math",
+      "directEdges": 74,
+      "sharedNeighborhoods": 84,
+      "labDistance": 57.76587152260768
+    },
+    {
+      "i": 1,
+      "j": 7,
+      "a": "cs",
+      "b": "math",
+      "directEdges": 67,
+      "sharedNeighborhoods": 99,
+      "labDistance": 104.55260974409907
+    },
+    {
+      "i": 1,
+      "j": 4,
+      "a": "cs",
+      "b": "data",
+      "directEdges": 50,
+      "sharedNeighborhoods": 80,
+      "labDistance": 98.81370535777111
+    },
+    {
+      "i": 3,
+      "j": 10,
+      "a": "ee",
+      "b": "physics",
+      "directEdges": 44,
+      "sharedNeighborhoods": 56,
+      "labDistance": 77.15416199968921
+    },
+    {
+      "i": 10,
+      "j": 11,
+      "a": "physics",
+      "b": "chemistry",
+      "directEdges": 38,
+      "sharedNeighborhoods": 57,
+      "labDistance": 106.2492022026936
+    },
+    {
+      "i": 3,
+      "j": 7,
+      "a": "ee",
+      "b": "math",
+      "directEdges": 36,
+      "sharedNeighborhoods": 66,
+      "labDistance": 87.64185240827543
+    },
+    {
+      "i": 0,
+      "j": 7,
+      "a": "civil",
+      "b": "math",
+      "directEdges": 36,
+      "sharedNeighborhoods": 31,
+      "labDistance": 64.22433061115642
+    },
+    {
+      "i": 6,
+      "j": 7,
+      "a": "mechanical",
+      "b": "math",
+      "directEdges": 33,
+      "sharedNeighborhoods": 37,
+      "labDistance": 101.31224164420087
+    },
+    {
+      "i": 8,
+      "j": 10,
+      "a": "aerospace",
+      "b": "physics",
+      "directEdges": 24,
+      "sharedNeighborhoods": 31,
+      "labDistance": 83.01515004782239
+    },
+    {
+      "i": 3,
+      "j": 4,
+      "a": "ee",
+      "b": "data",
+      "directEdges": 20,
+      "sharedNeighborhoods": 45,
+      "labDistance": 56.53458546913627
+    },
+    {
+      "i": 0,
+      "j": 11,
+      "a": "civil",
+      "b": "chemistry",
+      "directEdges": 24,
+      "sharedNeighborhoods": 23,
+      "labDistance": 75.26556289270655
+    },
+    {
+      "i": 7,
+      "j": 10,
+      "a": "math",
+      "b": "physics",
+      "directEdges": 17,
+      "sharedNeighborhoods": 46,
+      "labDistance": 30.39352060036592
+    },
+    {
+      "i": 7,
+      "j": 8,
+      "a": "math",
+      "b": "aerospace",
+      "directEdges": 18,
+      "sharedNeighborhoods": 32,
+      "labDistance": 77.64601877569413
+    },
+    {
+      "i": 7,
+      "j": 11,
+      "a": "math",
+      "b": "chemistry",
+      "directEdges": 17,
+      "sharedNeighborhoods": 21,
+      "labDistance": 105.22252016268378
+    },
+    {
+      "i": 6,
+      "j": 10,
+      "a": "mechanical",
+      "b": "physics",
+      "directEdges": 15,
+      "sharedNeighborhoods": 23,
+      "labDistance": 98.47557965034291
+    },
+    {
+      "i": 0,
+      "j": 6,
+      "a": "civil",
+      "b": "mechanical",
+      "directEdges": 11,
+      "sharedNeighborhoods": 27,
+      "labDistance": 63.70000527670525
+    },
+    {
+      "i": 9,
+      "j": 11,
+      "a": "medicine",
+      "b": "chemistry",
+      "directEdges": 13,
+      "sharedNeighborhoods": 15,
+      "labDistance": 84.29493188072477
+    },
+    {
+      "i": 6,
+      "j": 8,
+      "a": "mechanical",
+      "b": "aerospace",
+      "directEdges": 9,
+      "sharedNeighborhoods": 31,
+      "labDistance": 31.491311327613193
+    },
+    {
+      "i": 0,
+      "j": 1,
+      "a": "civil",
+      "b": "cs",
+      "directEdges": 10,
+      "sharedNeighborhoods": 17,
+      "labDistance": 80.92426426883793
+    },
+    {
+      "i": 4,
+      "j": 8,
+      "a": "data",
+      "b": "aerospace",
+      "directEdges": 9,
+      "sharedNeighborhoods": 21,
+      "labDistance": 77.27640961622103
+    },
+    {
+      "i": 1,
+      "j": 10,
+      "a": "cs",
+      "b": "physics",
+      "directEdges": 8,
+      "sharedNeighborhoods": 25,
+      "labDistance": 108.58586664318537
+    },
+    {
+      "i": 3,
+      "j": 8,
+      "a": "ee",
+      "b": "aerospace",
+      "directEdges": 8,
+      "sharedNeighborhoods": 23,
+      "labDistance": 43.05346568476195
+    },
+    {
+      "i": 1,
+      "j": 11,
+      "a": "cs",
+      "b": "chemistry",
+      "directEdges": 8,
+      "sharedNeighborhoods": 14,
+      "labDistance": 13.813170602162852
+    },
+    {
+      "i": 0,
+      "j": 8,
+      "a": "civil",
+      "b": "aerospace",
+      "directEdges": 7,
+      "sharedNeighborhoods": 20,
+      "labDistance": 61.79480416689072
+    },
+    {
+      "i": 0,
+      "j": 10,
+      "a": "civil",
+      "b": "physics",
+      "directEdges": 8,
+      "sharedNeighborhoods": 11,
+      "labDistance": 44.75524193970828
+    },
+    {
+      "i": 3,
+      "j": 11,
+      "a": "ee",
+      "b": "chemistry",
+      "directEdges": 5,
+      "sharedNeighborhoods": 16,
+      "labDistance": 44.43228187134157
+    },
+    {
+      "i": 4,
+      "j": 6,
+      "a": "data",
+      "b": "mechanical",
+      "directEdges": 3,
+      "sharedNeighborhoods": 13,
+      "labDistance": 82.34264952472118
+    },
+    {
+      "i": 1,
+      "j": 8,
+      "a": "cs",
+      "b": "aerospace",
+      "directEdges": 3,
+      "sharedNeighborhoods": 12,
+      "labDistance": 27.05592222418909
+    },
+    {
+      "i": 8,
+      "j": 11,
+      "a": "aerospace",
+      "b": "chemistry",
+      "directEdges": 3,
+      "sharedNeighborhoods": 12,
+      "labDistance": 29.35755283518546
+    },
+    {
+      "i": 2,
+      "j": 10,
+      "a": "architecture",
+      "b": "physics",
+      "directEdges": 4,
+      "sharedNeighborhoods": 4,
+      "labDistance": 59.607407084906605
+    },
+    {
+      "i": 1,
+      "j": 6,
+      "a": "cs",
+      "b": "mechanical",
+      "directEdges": 2,
+      "sharedNeighborhoods": 10,
+      "labDistance": 25.32398238460329
+    },
+    {
+      "i": 5,
+      "j": 7,
+      "a": "humanities",
+      "b": "math",
+      "directEdges": 3,
+      "sharedNeighborhoods": 3,
+      "labDistance": 76.86048850194436
+    },
+    {
+      "i": 5,
+      "j": 10,
+      "a": "humanities",
+      "b": "physics",
+      "directEdges": 2,
+      "sharedNeighborhoods": 4,
+      "labDistance": 60.75648442344523
+    },
+    {
+      "i": 9,
+      "j": 10,
+      "a": "medicine",
+      "b": "physics",
+      "directEdges": 2,
+      "sharedNeighborhoods": 3,
+      "labDistance": 27.666712109588726
+    },
+    {
+      "i": 0,
+      "j": 3,
+      "a": "civil",
+      "b": "ee",
+      "directEdges": 1,
+      "sharedNeighborhoods": 6,
+      "labDistance": 36.459288330234656
+    },
+    {
+      "i": 1,
+      "j": 9,
+      "a": "cs",
+      "b": "medicine",
+      "directEdges": 1,
+      "sharedNeighborhoods": 4,
+      "labDistance": 85.2027808172282
+    },
+    {
+      "i": 6,
+      "j": 11,
+      "a": "mechanical",
+      "b": "chemistry",
+      "directEdges": 0,
+      "sharedNeighborhoods": 13,
+      "labDistance": 14.413602304173809
+    },
+    {
+      "i": 3,
+      "j": 6,
+      "a": "ee",
+      "b": "mechanical",
+      "directEdges": 0,
+      "sharedNeighborhoods": 12,
+      "labDistance": 31.01457774398266
+    },
+    {
+      "i": 0,
+      "j": 4,
+      "a": "civil",
+      "b": "data",
+      "directEdges": 0,
+      "sharedNeighborhoods": 11,
+      "labDistance": 20.37452337341142
+    },
+    {
+      "i": 4,
+      "j": 10,
+      "a": "data",
+      "b": "physics",
+      "directEdges": 0,
+      "sharedNeighborhoods": 9,
+      "labDistance": 31.734628744367544
+    },
+    {
+      "i": 4,
+      "j": 11,
+      "a": "data",
+      "b": "chemistry",
+      "directEdges": 0,
+      "sharedNeighborhoods": 7,
+      "labDistance": 93.21332984476571
+    },
+    {
+      "i": 0,
+      "j": 9,
+      "a": "civil",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 5,
+      "labDistance": 43.533543603769346
+    },
+    {
+      "i": 1,
+      "j": 5,
+      "a": "cs",
+      "b": "humanities",
+      "directEdges": 0,
+      "sharedNeighborhoods": 2,
+      "labDistance": 69.51461700692602
+    },
+    {
+      "i": 3,
+      "j": 5,
+      "a": "ee",
+      "b": "humanities",
+      "directEdges": 0,
+      "sharedNeighborhoods": 2,
+      "labDistance": 20.764234677856955
+    },
+    {
+      "i": 4,
+      "j": 5,
+      "a": "data",
+      "b": "humanities",
+      "directEdges": 0,
+      "sharedNeighborhoods": 2,
+      "labDistance": 36.597965522486895
+    },
+    {
+      "i": 5,
+      "j": 8,
+      "a": "humanities",
+      "b": "aerospace",
+      "directEdges": 0,
+      "sharedNeighborhoods": 2,
+      "labDistance": 54.84293855764081
+    },
+    {
+      "i": 5,
+      "j": 11,
+      "a": "humanities",
+      "b": "chemistry",
+      "directEdges": 0,
+      "sharedNeighborhoods": 2,
+      "labDistance": 62.79561076890491
+    },
+    {
+      "i": 8,
+      "j": 9,
+      "a": "aerospace",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 2,
+      "labDistance": 58.51169835978395
+    },
+    {
+      "i": 0,
+      "j": 5,
+      "a": "civil",
+      "b": "humanities",
+      "directEdges": 0,
+      "sharedNeighborhoods": 1,
+      "labDistance": 16.815857536496573
+    },
+    {
+      "i": 3,
+      "j": 9,
+      "a": "ee",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 1,
+      "labDistance": 64.71194523374487
+    },
+    {
+      "i": 4,
+      "j": 9,
+      "a": "data",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 1,
+      "labDistance": 41.90954200280663
+    },
+    {
+      "i": 5,
+      "j": 6,
+      "a": "humanities",
+      "b": "mechanical",
+      "directEdges": 0,
+      "sharedNeighborhoods": 1,
+      "labDistance": 49.980775480501705
+    },
+    {
+      "i": 6,
+      "j": 9,
+      "a": "mechanical",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 1,
+      "labDistance": 79.10121711611863
+    },
+    {
+      "i": 7,
+      "j": 9,
+      "a": "math",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 1,
+      "labDistance": 23.485165958883652
+    },
+    {
+      "i": 0,
+      "j": 2,
+      "a": "civil",
+      "b": "architecture",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 27.047526769971768
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "a": "cs",
+      "b": "architecture",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 54.53523126925109
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "a": "architecture",
+      "b": "ee",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 21.53979742571638
+    },
+    {
+      "i": 2,
+      "j": 4,
+      "a": "architecture",
+      "b": "data",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 44.355422711773
+    },
+    {
+      "i": 2,
+      "j": 5,
+      "a": "architecture",
+      "b": "humanities",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 20.816795724058846
+    },
+    {
+      "i": 2,
+      "j": 6,
+      "a": "architecture",
+      "b": "mechanical",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 39.351831470770676
+    },
+    {
+      "i": 2,
+      "j": 7,
+      "a": "architecture",
+      "b": "math",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 67.44303177540334
+    },
+    {
+      "i": 2,
+      "j": 8,
+      "a": "architecture",
+      "b": "aerospace",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 35.54752363266756
+    },
+    {
+      "i": 2,
+      "j": 9,
+      "a": "architecture",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 44.14767107972483
+    },
+    {
+      "i": 2,
+      "j": 11,
+      "a": "architecture",
+      "b": "chemistry",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 49.24914829829969
+    },
+    {
+      "i": 5,
+      "j": 9,
+      "a": "humanities",
+      "b": "medicine",
+      "directEdges": 0,
+      "sharedNeighborhoods": 0,
+      "labDistance": 54.55685461045376
+    }
+  ]
+}

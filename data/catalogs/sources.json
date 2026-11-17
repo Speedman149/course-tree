@@ -1,0 +1,201 @@
+[
+  {
+    "id": "2026-2027-01",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/01-הנדסה-אזרחית-וסביבתית-תשפז.pdf",
+    "sha256": "fda56384ef9d338aeef4e2662cdb641d3aafd98d2be9e127afbf8433de79d4d5",
+    "facultyId": "civil",
+    "catalogYear": "2026-2027",
+    "pageCount": 13,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-03",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/03-הנדסת-מכונות-תשפז.pdf",
+    "sha256": "198666c12d6bb61ef63f16bfc0f37d80afb9a74ddc2dfa562b138a311a78a291",
+    "facultyId": "mechanical",
+    "catalogYear": "2026-2027",
+    "pageCount": 6,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-04",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/04-הנדסת-חשמל-ומחשבים-תשפז.pdf",
+    "sha256": "ff7b42309946bdd7b22f24efa364800315489ccef6f5a8384d7bea700f77005d",
+    "facultyId": "ee",
+    "catalogYear": "2026-2027",
+    "pageCount": 25,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-05",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/05-הנדסה-כימית-תשפז.pdf",
+    "sha256": "0e487a91806cc88b399533c6d2c1c4133727360427c39cc9cf404aae92ee424d",
+    "facultyId": "chemical",
+    "catalogYear": "2026-2027",
+    "pageCount": 10,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-06",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/06-הנדסת-ביוטכנולוגיה-ומזון-תשפז.pdf",
+    "sha256": "58bdf68f0039910995d68543e52e58b57b5cd025f8f90431973167ed81b9baaa",
+    "facultyId": "biotechnology",
+    "catalogYear": "2026-2027",
+    "pageCount": 4,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-09",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/09-מדעי-הנתונים-וההחלטות-תשפז.pdf",
+    "sha256": "a03ececb0cff53a564e830aa3f180c8fbeffe004038ebf0e8957264f81e2d29f",
+    "facultyId": "data",
+    "catalogYear": "2026-2027",
+    "pageCount": 10,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-33",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/33-הנדסה-ביו-רפואית-תשפז.pdf",
+    "sha256": "e3eb578950472fa61e5539492298daa72039dba29966b06b3126037e4f7213e5",
+    "facultyId": "biomedical",
+    "catalogYear": "2026-2027",
+    "pageCount": 7,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-27",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/27-רפואה-תשפז.pdf",
+    "sha256": "9b8cf470558664f810a5f081e360c756157787b6f3d09d963d8cd0b1d3e3ca08",
+    "facultyId": "medicine",
+    "catalogYear": "2026-2027",
+    "pageCount": 16,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-23",
+    "url": "https://undergraduate.cs.technion.ac.il/wp-content/uploads/2026/10/קטלוג-תשפז-סופי.pdf",
+    "sha256": "6b6d4f4e4396b3346aac29811bd22a93b19569af0af1569ace878914c022d208",
+    "facultyId": "cs",
+    "catalogYear": "2026-2027",
+    "pageCount": 26,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-10",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/10-מתמטיקה-תשפז.pdf",
+    "sha256": "844f9c01f3fc94483cf7af7e9a5a5a0da0629ab740a041b33d2966e497814999",
+    "facultyId": "math",
+    "catalogYear": "2026-2027",
+    "pageCount": 10,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-11",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/11-פיזיקה-תשפז.pdf",
+    "sha256": "1fa82a9ec9df070059d7a076ea24f2e4421ae09871dc67e458ba1561b7647650",
+    "facultyId": "physics",
+    "catalogYear": "2026-2027",
+    "pageCount": 13,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-12",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/12-כימיה-תשפז.pdf",
+    "sha256": "6a70e9f48c3d5fd1269f66aa424229ef35456b227806ce99fdff5993fb88346e",
+    "facultyId": "chemistry",
+    "catalogYear": "2026-2027",
+    "pageCount": 8,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-13",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/13-ביולוגיה-תשפז.pdf",
+    "sha256": "e83c1927666595f524eefcf4d9eb074ded5b6349ce73ae746eeaf1ceba67c38b",
+    "facultyId": "biology",
+    "catalogYear": "2026-2027",
+    "pageCount": 9,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-08",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/08-אוירונוטיקה-וחלל-תשפז.pdf",
+    "sha256": "23240ce20fa4b21cc63e9fddcd9bb7336b565c4d1244b557c5c9859fbd68c997",
+    "facultyId": "aerospace",
+    "catalogYear": "2026-2027",
+    "pageCount": 8,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-20",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/20-ארכיטקטורה-ובינוי-ערים-תשפז.pdf",
+    "sha256": "13b3eb136bb940acacb39584f45c13ba8eb1cbad68cd992572fc27f996daa5d8",
+    "facultyId": "architecture",
+    "catalogYear": "2026-2027",
+    "pageCount": 5,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-21",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/21-חינוך-למדע-וטכנולוגיה-תשפז.pdf",
+    "sha256": "3c55c8e999065c53658e57ce3d11484e63bca2cd5f825acf56007a88a3ffda80",
+    "facultyId": "education",
+    "catalogYear": "2026-2027",
+    "pageCount": 15,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-31",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/31-מדע-והנדסה-של-חומרים-תשפז.pdf",
+    "sha256": "acb73f8bdc39d72cf0d6f4c55dfc00890a39d7e0798507c992948e659e7c1ff0",
+    "facultyId": "materials",
+    "catalogYear": "2026-2027",
+    "pageCount": 9,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-32",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2026/10/32-לימודים-הומניסטיים-ואומניות-תשפז.pdf",
+    "sha256": "68ca61f0d18e3eec1a23108182e9346738355c79d473e18cc9b9b8e968d7fc67",
+    "facultyId": "humanities",
+    "catalogYear": "2026-2027",
+    "pageCount": 1,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2025-2026-23",
+    "url": "https://undergraduate.cs.technion.ac.il/wp-content/uploads/2025/10/23-מדעי-המחשב-תשפ״ו.pdf",
+    "sha256": "ec45de88ed8765254ab621f0c97d2cd3c98a2247f87fa003b7f2a6644fecb512",
+    "facultyId": "cs",
+    "catalogYear": "2025-2026",
+    "pageCount": 24,
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2026-2027-08-cross-faculty",
+    "url": "https://aerospace.technion.ac.il/wp-content/uploads/2026/06/קורסי-בחירה-מאושרים-מפקולטות-אחרות-תשפז.pdf",
+    "sha256": "13009fb11132660c873ac0537fddfd5506af19f525b75c27dcb6b41c8eaf25a4",
+    "facultyId": "aerospace",
+    "catalogYear": "2026-2027",
+    "pageCount": 3,
+    "courseNumberColumn": [
+      690,
+      0,
+      726,
+      612
+    ],
+    "parserVersion": "2.1"
+  },
+  {
+    "id": "2025-2026-full",
+    "url": "https://ugportal.technion.ac.il/wp-content/uploads/2025/11/catalog2025-26.pdf",
+    "catalogYear": "2025-2026",
+    "facultyId": "all",
+    "sha256": "aff2590a80708d6df4ef4cbbb9b429677f6814beebe84441dba7f69075e339f3",
+    "pageCount": 380,
+    "printedPageOffset": 0,
+    "fileName": "catalog2025-26.pdf",
+    "description": "User-supplied complete official catalog; undergraduate and graduate sections distinguished.",
+    "extractionSha256": "36af59fdecc20bbf64857faed095ea67cf468d44c08fe534cd6a48a303938889",
+    "parserVersion": "1.26.7"
+  }
+]

@@ -24,7 +24,7 @@ npm run build
 # Serve the production build locally after building.
 npm run preview
 
-# Run 19 graph, parser, provenance and recency-policy tests.
+# Run graph, parser, filtering, catalog, provenance and recency-policy tests.
 npm test
 
 # Test prerequisite parsing and source-recency policy.
@@ -111,3 +111,36 @@ The initial database spans eight snapshots from `2023_201` through `2026_200`, w
 There are 33 records with ambiguous or malformed prerequisite rules and 247 referenced IDs without full course records. Ambiguous rules remain raw and are excluded from graph relationships. The latest available record for an older course may itself come from an older year. Different historical rules are retained as provenance, not silently added to the current graph.
 
 An absent structured prerequisite field means **no requirements were recorded in the source export**. It does not guarantee unrestricted enrollment. Grades, track-specific rules, permissions, minimum-credit requirements and conditions present only in free text may be missing. Official course links use the course-specific Technion SAP route confirmed in CheeseFork's modern link builder, including the selected record's year and session; the official catalog application could not be independently rendered during source research. Check the current official catalog and applicable regulations before registration.
+
+## Faculty filters and degree catalogs
+
+The **מסננים** button opens multi-select faculty filters and the separate **קטלוג תואר** selector. All faculties are enabled and no catalog is selected by default. Faculty ownership comes from source labels; two naming variants are normalized, giving **28 academic units**, plus a separate unknown-ownership option for incomplete catalog records. Multiple documented offering units are supported.
+
+The catalog integrates the supplied **2025–2026** full catalog as its baseline, plus separately versioned **2026–2027** faculty imports. All **57 distinct paths in the undergraduate overview** are recorded, with additional variants, combined programs, double degrees and qualifications found in faculty chapters. All **18 undergraduate faculty/academic-unit chapters** were examined as text. **Complete curriculum verification remains unfinished**: partial imports and inventory-only paths are explicitly labeled. The generated [coverage report](docs/catalogs/COVERAGE.md) contains current counts and per-path source pages. The hierarchical selector and searchable program-course browser preserve actual list memberships and completion rules; any eligible course can become the graph root. Shared programs have one canonical definition and remain discoverable under all participating faculties.
+
+Filters immediately affect forward expansion, already-expanded paths and the default search scope. The search dropdown also offers an explicit all-courses scope so any course can become a root while preserving the active filters. They preserve the underlying data and branch expansion state. Backward prerequisite exploration always remains unfiltered, and panels identify prerequisites outside the selected filters. A root outside the active filters stays visible as a marked navigation anchor.
+
+Source documents can contain open free-choice rules, separate outside-faculty lists or individual approval conditions. These are displayed as explicit unresolved rules and do not silently make every course eligible. The selector and active banner distinguish imported explicit lists from a full eligibility decision. Catalog-only references have unknown prerequisites and links to their official source pages. Course prerequisite logic and existing SAP links remain intact.
+
+See **[docs/CATALOGS.md](docs/CATALOGS.md)** for the exact program/year inventory, official sources, update pipeline, validation and limitations. The reusable generated dataset is `public/data/catalogs.json`; the original SAP dataset remains `public/data/courses.json`.
+
+```sh
+# Catalog collection uses separately pinned Python parsers; first read CATALOGS.md.
+npm run catalogs:update
+
+# Rebuild using the existing catalog extraction cache.
+npm run catalogs:rebuild
+```
+
+The requested developer credit appears unobtrusively on desktop and mobile: **Developed by Chupchick**.
+
+## Remembered exploration and personal markings
+
+The graph automatically remembers roots, expanded forward/backward branches, filters, red course markings and viewport in browser-local storage. Markings are global to a course number and do not imply academic completion. Branch reset preserves markings; clearing markings or all saved progress asks for confirmation. Tabs on the same origin synchronize with latest-write-wins behavior. See [local progress details](docs/LOCAL_PROGRESS.md).
+
+The twelve largest faculties/teaching departments receive fixed, non-red accents based on unique course counts and actual prerequisite connectivity. White/gray relationship badges preserve strong/concurrent distinctions on normal and marked cards. See [the palette and analysis](docs/faculty-colors/README.md).
+
+The footer includes the independent-project disclaimer, **Developed by Chupchick**, and a refresh-safe `#/about` page. No academic database records are changed by these features.
+## Hide one forward branch
+
+The small minus near a forward arrow's child endpoint hides only that connection's branch. Use **הצגת ענפים** by its parent to restore a specific hidden branch with its prior expansions. The original course minus still collapses all children, and reopening the course restores its direct children. Shared courses on other paths, backward prerequisites and global markings are preserved. Hidden connections are saved separately in the migrated version 2 local session. See [individual branch controls](docs/BRANCH_CONTROLS.md).

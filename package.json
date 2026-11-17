@@ -11,7 +11,12 @@
     "data:update": "node scripts/update-data.mjs --discover --refresh",
     "data:rebuild": "node scripts/update-data.mjs --offline",
     "data:test": "node scripts/course-data.test.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "catalogs:extract": "python3 scripts/catalogs/extract.py --compatible-only",
+    "catalogs:update": "python3 scripts/catalogs/extract.py --refresh --compatible-only && node scripts/catalogs/build.mjs",
+    "catalogs:rebuild": "node scripts/catalogs/build.mjs",
+    "catalogs:discover": "node scripts/catalogs/discover.mjs",
+    "catalogs:extract-baseline": "python3 scripts/catalogs/extract.py --source-id 2025-2026-full"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.8",

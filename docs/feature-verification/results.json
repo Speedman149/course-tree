@@ -1,0 +1,82 @@
+{
+  "verifiedAt": "2026-11-16T22:06:16.855642+00:00",
+  "unitDataTests": {
+    "passed": 60,
+    "failed": 0,
+    "command": "npm test"
+  },
+  "browserTests": {
+    "passed": 34,
+    "failed": 0,
+    "runs": [
+      {
+        "name": "full-regression-suite",
+        "passed": 31,
+        "failed": 0
+      },
+      {
+        "name": "degree-switch-and-specialization",
+        "passed": 1,
+        "failed": 0
+      },
+      {
+        "name": "compact-screens",
+        "passed": 2,
+        "failed": 0
+      }
+    ]
+  },
+  "typescript": "passed",
+  "productionBuild": "passed",
+  "visualInspection": {
+    "desktop": "1440x1000",
+    "mobile": "390x844",
+    "compactRegressionViewports": [
+      "320x568",
+      "844x390"
+    ],
+    "screenshots": [
+      "desktop-faculty-markings.png",
+      "mobile-faculty-markings.png",
+      "mobile-about.png"
+    ]
+  },
+  "dataIntegrity": {
+    "runtimeHashes": {
+      "catalogs": "5b71693610e2a8c19a35d096a212cbd03267c199a6a0ec7b3f9888ed4c14eada",
+      "courses": "c8ec8e3f47b331e4e27392bf3d3c6456883f8a78682611f4079853d574f9688e"
+    },
+    "academicFilesUnchanged": true,
+    "graphBuilderUnchanged": true,
+    "facultyAndCatalogVisibilityRulesUnchanged": true,
+    "academicTypesUnchanged": true,
+    "builtRuntimeMatchesSource": true
+  },
+  "sourceHashes": {
+    "src/App.tsx": "15dcbb52152af779901bd4217b1294871490352e516c4dfb9a087928f0535ffd",
+    "src/components/CourseNode.tsx": "39d6a26ed6130b9ee213898d3cf9b2f55fca4c20d4469f9b1dbdf9558d968038",
+    "src/components/CourseSearch.tsx": "1fb4a57ed9dfa058625089f848544e198053a2e7ac2594f6fe2ebf58ea42da41",
+    "src/components/FilterPanel.tsx": "fc9594446e0cdea5d788ca27c514ab24fb1d5c281ef5ff8d0de70e43b2c4fbb1",
+    "src/components/SiteFooter.tsx": "e59071870b7e6665f0365871aea7887ced45c02c0740dc85894c8c78e73b8ff5",
+    "src/lib/progress.ts": "bdb2a25dae0c4844b8f26481a9607a84a28be740c9059e1f46f964efbb017424",
+    "src/lib/use-progress.ts": "5b11ef5e4a761880902f4e4980708bf39609b149ce2f853ae3f0fbf53d52f6d7",
+    "src/lib/faculty-colors.ts": "81dae480706b5e5da5dedb1f59ea8f43e2bbcd956364512d2a6326cdd3d01d96",
+    "src/data/faculty-palette.json": "9f5de5804ff7b5f019720d291649cee55158109a2fb06c7ef7b5754d0264342a",
+    "src/styles.css": "2f8829e07e2c13f0d005fc3b8e6b4567940f0819fb3a0822edb6db8fede3e3a6"
+  },
+  "persistence": {
+    "storageKey": "course-tree.progress",
+    "version": 1,
+    "normalDebounceMs": 300,
+    "markingDebounced": false,
+    "viewportCapture": "onMoveEnd",
+    "crossTabPolicy": "latest validated complete session wins"
+  },
+  "limitations": [
+    "Progress is browser/profile/origin-local, not synchronized between devices.",
+    "Simultaneous tab edits use last-write-wins rather than a merge.",
+    "The existing light theme is preserved; no new dark-mode theme is introduced.",
+    "Unknown saved schema versions fall back safely rather than guessing a migration."
+  ],
+  "dependenciesAdded": []
+}

@@ -1,0 +1,6263 @@
+{
+  "sourceId": "2025-2026-full",
+  "sha256": "aff2590a80708d6df4ef4cbbb9b429677f6814beebe84441dba7f69075e339f3",
+  "pageCount": 380,
+  "extractor": "PyMuPDF 1.26.7, layout-sorted right/left columns",
+  "chapters": [
+    {
+      "facultyId": "cs",
+      "chapterPages": [
+        246,
+        269
+      ],
+      "undergraduatePages": [
+        246,
+        267
+      ],
+      "graduateOnlyPages": [
+        268,
+        269
+      ],
+      "inspection": "Undergraduate narrative, all degree/track headings, finite list boundaries and source conditions inspected. Lists imported with reviewed regions. Formal supplemental programs inventoried or bound to an explicit degree base."
+    },
+    {
+      "facultyId": "math",
+      "chapterPages": [
+        169,
+        178
+      ],
+      "undergraduatePages": [
+        169,
+        176
+      ],
+      "graduateOnlyPages": [
+        177,
+        178
+      ],
+      "inspection": "All undergraduate degree tables, applied-mathematics concentrations, additional-degree permission and game-theory reference inspected. Four-year Mathematics-with-CS appears in overview but complete table was not located."
+    },
+    {
+      "facultyId": "physics",
+      "chapterPages": [
+        179,
+        193
+      ],
+      "undergraduatePages": [
+        179,
+        191
+      ],
+      "graduateOnlyPages": [
+        192,
+        193
+      ],
+      "inspection": "All undergraduate headings and shared-program references inspected; Physics3, Physics4 applied optics and Mathematics/CS combined curricula imported. Other combined engineering curricula assigned to companion modules; two distinct bachelor exits in EE/Physics recorded separately."
+    }
+  ],
+  "visualReviewPages": [
+    174,
+    180,
+    183,
+    184,
+    185,
+    254,
+    255,
+    265
+  ],
+  "reviewedRegions": [
+    {
+      "programId": "cs-three-year",
+      "role": "mandatory",
+      "selector": "248L:24:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "mandatory",
+      "selector": "249R:4:6",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "mandatory",
+      "selector": "255R:17:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-three-year",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "mandatory",
+      "selector": "248L:24:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "mandatory",
+      "selector": "249R:4:6",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "mandatory",
+      "selector": "249R:28:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-complexity",
+      "selector": "249L:20:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-algorithms",
+      "selector": "249L:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-logic",
+      "selector": "249L:53:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-crypto",
+      "selector": "249L:62:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-software",
+      "selector": "250R:6:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-distributed",
+      "selector": "250R:29:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-systems",
+      "selector": "250R:48:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-vision",
+      "selector": "250L:2:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-graphics",
+      "selector": "250L:26:36",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-learning",
+      "selector": "250L:40:66",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year",
+      "role": "cs-special-bio",
+      "selector": "251R:2:11",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "mandatory",
+      "selector": "254R:21:26",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "mandatory",
+      "selector": "254R:34:39",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "mandatory",
+      "selector": "254R:48:54",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "mandatory",
+      "selector": "254R:64:66",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "mandatory",
+      "selector": "254L:8:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-complexity",
+      "selector": "249L:20:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-algorithms",
+      "selector": "249L:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-logic",
+      "selector": "249L:53:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-crypto",
+      "selector": "249L:62:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-software",
+      "selector": "250R:6:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-distributed",
+      "selector": "250R:29:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-systems",
+      "selector": "250R:48:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-vision",
+      "selector": "250L:2:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-graphics",
+      "selector": "250L:26:36",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-learning",
+      "selector": "250L:40:66",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cs-special-bio",
+      "selector": "251R:2:11",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cyber-core",
+      "selector": "254L:39:45",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "role": "cyber-project",
+      "selector": "254L:33:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "mandatory",
+      "selector": "255R:58:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "mandatory",
+      "selector": "255L:5:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "mandatory",
+      "selector": "255L:17:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "mandatory",
+      "selector": "255L:26:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "mandatory",
+      "selector": "255L:34:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "learning-algebra",
+      "selector": "255L:9:14",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "learning-algebra",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-learning-data",
+      "role": "learning-core",
+      "selector": "255L:55:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "mandatory",
+      "selector": "256R:43:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "mandatory",
+      "selector": "256R:54:58",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "mandatory",
+      "selector": "256L:2:8",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "mandatory",
+      "selector": "256L:14:17",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "mandatory",
+      "selector": "256L:22:24",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "mandatory",
+      "selector": "256L:30:32",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-chemistry",
+      "selector": "256L:7:11",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-molecular",
+      "selector": "256L:47:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-micro",
+      "selector": "256L:51:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-list-b",
+      "selector": "256L:59:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-list-b",
+      "selector": "257R:1:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-rest-a",
+      "selector": "208L:36:42",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-rest-b",
+      "selector": "208L:47:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "role": "bio-rest-b",
+      "selector": "209R:3:28",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "mandatory",
+      "selector": "257L:26:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "mandatory",
+      "selector": "257L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "mandatory",
+      "selector": "257L:49:55",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "mandatory",
+      "selector": "257L:60:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "mandatory",
+      "selector": "258R:7:27",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "software-core",
+      "selector": "258L:5:13",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering",
+      "role": "software-microeconomics",
+      "selector": "258R:66:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "mandatory",
+      "selector": "259L:14:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "mandatory",
+      "selector": "259L:29:33",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "mandatory",
+      "selector": "259L:42:49",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "mandatory",
+      "selector": "259L:53:58",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "mandatory",
+      "selector": "260R:4:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-algebra",
+      "selector": "259L:16:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-os",
+      "selector": "260R:6:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-architecture",
+      "selector": "260R:13:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-projects",
+      "selector": "260R:23:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-core",
+      "selector": "260R:40:46",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-networks",
+      "selector": "260R:60:69",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-networks",
+      "selector": "260L:1:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-communications",
+      "selector": "260L:24:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-algorithms",
+      "selector": "260L:53:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-signals",
+      "selector": "261R:2:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-intelligent",
+      "selector": "261R:35:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-circuits",
+      "selector": "261L:7:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-software",
+      "selector": "261L:26:54",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-control",
+      "selector": "261L:57:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-control",
+      "selector": "262R:3:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-languages",
+      "selector": "262R:15:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-quantum",
+      "selector": "262R:31:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-energy",
+      "selector": "262R:49:60",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-physical",
+      "selector": "262R:64:69",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "computer-engineering",
+      "role": "computer-special-physical",
+      "selector": "262L:1:11",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "mandatory",
+      "selector": "263R:31:36",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "mandatory",
+      "selector": "263R:42:46",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "mandatory",
+      "selector": "263R:51:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "mandatory",
+      "selector": "263R:60:64",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "mandatory",
+      "selector": "263L:4:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "mandatory",
+      "selector": "263L:35:38",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "csmath-numerics",
+      "selector": "263L:6:8",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-mathematics",
+      "role": "csmath-science",
+      "selector": "263L:16:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264R:31:37",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264R:47:51",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264R:57:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264R:67:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264L:1:4",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264L:10:14",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264L:18:21",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264L:25:28",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "mandatory",
+      "selector": "264L:32:32",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "csphysics-ode",
+      "selector": "264R:67:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "csphysics-ode",
+      "selector": "264L:6:7",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "csphysics-list1",
+      "selector": "264L:51:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "csphysics-physics3",
+      "selector": "181R:10:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "csphysics-approved-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-physics",
+      "role": "csphysics-approved-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "248L:24:27",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "265R:55:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "265L:5:12",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "265L:20:28",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "mandatory",
+      "selector": "282L:3:55",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "medicine-cs-project-alt",
+      "selector": "265L:22:23",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "medicine-cs-english",
+      "selector": "248L:29:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "medicine-cs-double",
+      "role": "medicine-cs-built-in",
+      "selector": "265R:42:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "mandatory",
+      "selector": "170R:21:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-required-choice",
+      "selector": "170L:22:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-three-year",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "mandatory",
+      "selector": "170R:21:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "mandatory",
+      "selector": "170R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "mandatory",
+      "selector": "174R:19:23",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "mandatory",
+      "selector": "174R:27:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "mandatory",
+      "selector": "174R:41:42",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-a",
+      "selector": "174L:3:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-b",
+      "selector": "174L:12:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-c",
+      "selector": "174L:18:21",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-d",
+      "selector": "174L:24:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-e",
+      "selector": "174L:34:38",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-f",
+      "selector": "174L:41:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:38:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mandatory",
+      "selector": "173R:18:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mandatory",
+      "selector": "173R:26:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mandatory",
+      "selector": "173R:35:39",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mandatory",
+      "selector": "173R:43:47",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mandatory",
+      "selector": "173R:54:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mandatory",
+      "selector": "173R:66:66",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mathcs-a",
+      "selector": "173L:13:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mathcs-b",
+      "selector": "173L:18:24",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mathcs-c",
+      "selector": "173L:27:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "role": "mathcs-d",
+      "selector": "173L:32:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mandatory",
+      "selector": "172R:23:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mandatory",
+      "selector": "172R:36:41",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mandatory",
+      "selector": "172R:49:54",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mandatory",
+      "selector": "172R:58:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mandatory",
+      "selector": "172L:2:7",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mathphysics-math",
+      "selector": "172L:14:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mathphysics-lab",
+      "selector": "172L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mathphysics-science",
+      "selector": "172L:46:52",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mathphysics-physics3",
+      "selector": "181R:10:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-physics",
+      "role": "mathphysics-chemistry",
+      "selector": "172L:60:60",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "mandatory",
+      "selector": "170R:21:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "mandatory",
+      "selector": "170R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "mandatory",
+      "selector": "174R:19:23",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "mandatory",
+      "selector": "174R:27:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "mandatory",
+      "selector": "174R:41:42",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "applied-a",
+      "selector": "174L:3:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "applied-b",
+      "selector": "174L:12:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "applied-c",
+      "selector": "174L:18:21",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "applied-d",
+      "selector": "174L:24:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:38:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "mandatory",
+      "selector": "170R:21:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "mandatory",
+      "selector": "170R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "mandatory",
+      "selector": "174R:19:23",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "mandatory",
+      "selector": "174R:27:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "mandatory",
+      "selector": "174R:41:42",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "applied-b",
+      "selector": "174L:12:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "applied-d",
+      "selector": "174L:24:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:38:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "mandatory",
+      "selector": "170R:21:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "mandatory",
+      "selector": "170R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "mandatory",
+      "selector": "174R:19:23",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "mandatory",
+      "selector": "174R:27:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "mandatory",
+      "selector": "174R:41:42",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "applied-a",
+      "selector": "174L:3:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "applied-b",
+      "selector": "174L:12:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "applied-e",
+      "selector": "174L:34:38",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:38:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "mandatory",
+      "selector": "170R:21:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "mandatory",
+      "selector": "170R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "mandatory",
+      "selector": "174R:19:23",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "mandatory",
+      "selector": "174R:27:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "mandatory",
+      "selector": "174R:41:42",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "applied-a",
+      "selector": "174L:3:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "applied-b",
+      "selector": "174L:12:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "applied-f",
+      "selector": "174L:41:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:38:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "role": "applied-math-other-mandatory",
+      "selector": "170R:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "mandatory",
+      "selector": "180R:54:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "mandatory",
+      "selector": "180L:6:12",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "mandatory",
+      "selector": "180L:22:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "mandatory",
+      "selector": "180L:33:36",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "mandatory",
+      "selector": "180L:42:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "physics-labs",
+      "selector": "180L:9:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "physics-labs",
+      "selector": "180L:28:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "physics-list1",
+      "selector": "180L:51:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "physics-list2",
+      "selector": "180L:64:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "physics-list2",
+      "selector": "181R:1:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-three-year",
+      "role": "physics-list3",
+      "selector": "181R:10:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "180R:54:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "180L:6:12",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "180L:22:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "183R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "183R:38:41",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "183R:45:46",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "mandatory",
+      "selector": "183R:50:52",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "physics-labs",
+      "selector": "180L:9:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "physics-labs",
+      "selector": "180L:28:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "optics-lasers",
+      "selector": "183R:41:41",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "optics-lasers",
+      "selector": "183R:54:54",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "optics-lab-project",
+      "selector": "183R:59:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "physics-list3",
+      "selector": "181R:10:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-four-year",
+      "role": "optics-unique",
+      "selector": "183L:5:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "mandatory",
+      "selector": "248L:24:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "mandatory",
+      "selector": "249R:4:6",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "mandatory",
+      "selector": "255R:17:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-a",
+      "selector": "266R:44:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-b",
+      "selector": "266R:50:52",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-c1",
+      "selector": "266R:57:61",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-c2",
+      "selector": "266R:77:77",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-c2",
+      "selector": "266L:2:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-d",
+      "selector": "266L:15:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-e",
+      "selector": "266L:23:28",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "role": "quantum-f",
+      "selector": "266L:32:47",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "mandatory",
+      "selector": "248L:24:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "mandatory",
+      "selector": "249R:4:6",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "mandatory",
+      "selector": "255R:17:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "role": "lapidim-tech-list",
+      "selector": "267R:21:40",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "mandatory",
+      "selector": "248L:24:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "mandatory",
+      "selector": "249R:4:6",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "mandatory",
+      "selector": "255R:17:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "role": "lapidim-research-course",
+      "selector": "267L:14:15",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "mandatory",
+      "selector": "170R:21:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-science",
+      "selector": "170R:63:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-science",
+      "selector": "170L:1:10",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-required-choice",
+      "selector": "170L:22:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-a",
+      "selector": "170L:39:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-a",
+      "selector": "171R",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-a",
+      "selector": "171L:3:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-seminars",
+      "selector": "171L:21:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "role": "math-game-theory-approved",
+      "selector": "176R:52:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "184R:66:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "184L:1:4",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "184L:13:18",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "184L:26:33",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "184L:40:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "184L:57:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "185R:2:3",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "mandatory",
+      "selector": "185R:9:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-algebra",
+      "selector": "184R:68:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-fields",
+      "selector": "184L:44:47",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-lab-project",
+      "selector": "185R:14:16",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-six",
+      "selector": "185R:29:34",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-physics3",
+      "selector": "181R:10:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-networks",
+      "selector": "108R:60",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-networks",
+      "selector": "108L:1:9",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-control",
+      "selector": "108L:11:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-communication",
+      "selector": "108L:33:58",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-microelectronics",
+      "selector": "108L:60",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-microelectronics",
+      "selector": "109R:1:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-photonics",
+      "selector": "109R:21:46",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-computers",
+      "selector": "109R:48",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-computers",
+      "selector": "109L:1:16",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-biological",
+      "selector": "109L:18:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-signal-image",
+      "selector": "109L:37:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-circuits",
+      "selector": "109L:61",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-circuits",
+      "selector": "110R:3:12",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-honors",
+      "selector": "110R:14:33",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-machine-learning",
+      "selector": "110R:35:58",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-energy",
+      "selector": "110R:60",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-energy",
+      "selector": "110L:1:4",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "role": "physics-ee-elective-quantum",
+      "selector": "110L:6:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "mandatory",
+      "selector": "248L:24:29",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "mandatory",
+      "selector": "248L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "mandatory",
+      "selector": "248L:52:57",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "mandatory",
+      "selector": "249R:4:6",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "mandatory",
+      "selector": "249R:28:30",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-algebra-choice",
+      "selector": "248L:53:53",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-algebra-choice",
+      "selector": "248L:61:62",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-math-extra",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-complexity",
+      "selector": "249L:20:35",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-algorithms",
+      "selector": "249L:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-logic",
+      "selector": "249L:53:59",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-crypto",
+      "selector": "249L:62:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-software",
+      "selector": "250R:6:25",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-distributed",
+      "selector": "250R:29:44",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-systems",
+      "selector": "250R:48:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-vision",
+      "selector": "250L:2:22",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-graphics",
+      "selector": "250L:26:36",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-learning",
+      "selector": "250L:40:66",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-special-bio",
+      "selector": "251R:2:11",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "role": "cs-four-year-learning-data-core",
+      "selector": "255L:55:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "mandatory",
+      "selector": "257L:26:31",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "mandatory",
+      "selector": "257L:39:43",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "mandatory",
+      "selector": "257L:49:55",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "mandatory",
+      "selector": "257L:60:63",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "mandatory",
+      "selector": "258R:7:27",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-digital-choice",
+      "selector": "248L:55:56",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-science",
+      "selector": "249R:39:50",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-science",
+      "selector": "249L:4:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-a",
+      "selector": "251R:19:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-a",
+      "selector": "251L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-a",
+      "selector": "252R:3:70",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-a",
+      "selector": "252L",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-b",
+      "selector": "253R:3:68",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-b",
+      "selector": "253L:3:5",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "cs-list-b",
+      "selector": "249R:13:19",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "software-core",
+      "selector": "258L:5:13",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "software-microeconomics",
+      "selector": "258R:66:67",
+      "sourceId": "2025-2026-full"
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "role": "software-engineering-learning-data-core",
+      "selector": "255L:55:68",
+      "sourceId": "2025-2026-full"
+    }
+  ],
+  "programs": [
+    {
+      "programId": "cs-three-year",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "printedPages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "section": "המסלול הכללי התלת־שנתי"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs3-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "cs-four-year",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            249,
+            250,
+            251,
+            252,
+            253
+          ],
+          "printedPages": [
+            248,
+            249,
+            250,
+            251,
+            252,
+            253
+          ],
+          "section": "המסלול הכללי הארבע־שנתי"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs-special-complexity",
+          "name": "קבוצת התמחות — סיבוכיות של חישובים",
+          "regions": [
+            "249L:20:35"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360313"
+          ]
+        },
+        {
+          "id": "cs-special-algorithms",
+          "name": "קבוצת התמחות — תורת האלגוריתמים",
+          "regions": [
+            "249L:39:50"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-logic",
+          "name": "קבוצת התמחות — לוגיקה ויישומיה",
+          "regions": [
+            "249L:53:59"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-crypto",
+          "name": "קבוצת התמחות — קריפטולוגיה, צפינה ואינפורמציה",
+          "regions": [
+            "249L:62:70"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-software",
+          "name": "קבוצת התמחות — פיתוח מערכות תוכנה",
+          "regions": [
+            "250R:6:25"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360319"
+          ]
+        },
+        {
+          "id": "cs-special-distributed",
+          "name": "קבוצת התמחות — תקשורת ומערכות מבוזרות",
+          "regions": [
+            "250R:29:44"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-systems",
+          "name": "קבוצת התמחות — מערכות מיחשוב",
+          "regions": [
+            "250R:48:70"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360363"
+          ]
+        },
+        {
+          "id": "cs-special-vision",
+          "name": "קבוצת התמחות — ראייה ורובוטיקה",
+          "regions": [
+            "250L:2:22"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360201"
+          ]
+        },
+        {
+          "id": "cs-special-graphics",
+          "name": "קבוצת התמחות — גאומטריה וגרפיקה",
+          "regions": [
+            "250L:26:36"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360216"
+          ]
+        },
+        {
+          "id": "cs-special-learning",
+          "name": "קבוצת התמחות — למידה ובינה מלאכותית",
+          "regions": [
+            "250L:40:66"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360501"
+          ]
+        },
+        {
+          "id": "cs-special-bio",
+          "name": "קבוצת התמחות — ביואינפורמטיקה",
+          "regions": [
+            "251R:2:11"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360522",
+            "00940423"
+          ]
+        },
+        {
+          "id": "cs4-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "cs-cybersecurity",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            254
+          ],
+          "printedPages": [
+            254
+          ],
+          "section": "מגמת סייבר ואבטחת מערכות ממוחשבות"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs-special-complexity",
+          "name": "קבוצת התמחות — סיבוכיות של חישובים",
+          "regions": [
+            "249L:20:35"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360313"
+          ]
+        },
+        {
+          "id": "cs-special-algorithms",
+          "name": "קבוצת התמחות — תורת האלגוריתמים",
+          "regions": [
+            "249L:39:50"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-logic",
+          "name": "קבוצת התמחות — לוגיקה ויישומיה",
+          "regions": [
+            "249L:53:59"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-crypto",
+          "name": "קבוצת התמחות — קריפטולוגיה, צפינה ואינפורמציה",
+          "regions": [
+            "249L:62:70"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-software",
+          "name": "קבוצת התמחות — פיתוח מערכות תוכנה",
+          "regions": [
+            "250R:6:25"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360319"
+          ]
+        },
+        {
+          "id": "cs-special-distributed",
+          "name": "קבוצת התמחות — תקשורת ומערכות מבוזרות",
+          "regions": [
+            "250R:29:44"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-systems",
+          "name": "קבוצת התמחות — מערכות מיחשוב",
+          "regions": [
+            "250R:48:70"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360363"
+          ]
+        },
+        {
+          "id": "cs-special-vision",
+          "name": "קבוצת התמחות — ראייה ורובוטיקה",
+          "regions": [
+            "250L:2:22"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360201"
+          ]
+        },
+        {
+          "id": "cs-special-graphics",
+          "name": "קבוצת התמחות — גאומטריה וגרפיקה",
+          "regions": [
+            "250L:26:36"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360216"
+          ]
+        },
+        {
+          "id": "cs-special-learning",
+          "name": "קבוצת התמחות — למידה ובינה מלאכותית",
+          "regions": [
+            "250L:40:66"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360501"
+          ]
+        },
+        {
+          "id": "cs-special-bio",
+          "name": "קבוצת התמחות — ביואינפורמטיקה",
+          "regions": [
+            "251R:2:11"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360522",
+            "00940423"
+          ]
+        },
+        {
+          "id": "cyber-core",
+          "name": "ליבת סייבר — שבע האפשרויות",
+          "regions": [
+            "254L:39:45"
+          ],
+          "minimumCourses": 3,
+          "creditsMin": 8
+        },
+        {
+          "id": "cyber-project",
+          "name": "פרויקט ייעודי באבטחת מידע או בחומות אש",
+          "regions": [
+            "254L:33:34"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cyber-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "cs-learning-data",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            255,
+            256
+          ],
+          "printedPages": [
+            255,
+            256
+          ],
+          "section": "למידה וניתוח מידע"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "learning-algebra",
+          "name": "אלגברה במ׳ או אלגברה מודרנית ח׳",
+          "regions": [
+            "255L:9:14",
+            "248L:53:53"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "learning-core",
+          "name": "ליבת למידה וניתוח מידע — כל האפשרויות",
+          "regions": [
+            "255L:55:68"
+          ],
+          "minimumCourses": 4,
+          "creditsMin": 12
+        },
+        {
+          "id": "learning-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "cs-bioinformatics",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            247,
+            256,
+            257,
+            208,
+            209
+          ],
+          "printedPages": [
+            247,
+            256,
+            257,
+            208,
+            209
+          ],
+          "section": "ביואינפורמטיקה ורשימות ביולוגיה שהפרק מפנה אליהן"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "bio-chemistry",
+          "name": "כימיה כללית או יסודות הכימיה",
+          "regions": [
+            "256L:7:11"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "bio-molecular",
+          "name": "רשימת ביולוגיה א׳ — מקבץ מולקולרי",
+          "regions": [
+            "256L:47:48"
+          ],
+          "creditsMin": 7.5
+        },
+        {
+          "id": "bio-micro",
+          "name": "רשימת ביולוגיה א׳ — מקבץ מיקרוביולוגיה ואבולוציה",
+          "regions": [
+            "256L:51:53"
+          ],
+          "creditsMin": 7.5
+        },
+        {
+          "id": "bio-list-b",
+          "name": "רשימת ביולוגיה ב׳ — כל עשר האפשרויות",
+          "regions": [
+            "256L:59:63",
+            "257R:1:5"
+          ],
+          "minimumCourses": 2
+        },
+        {
+          "id": "bio-rest-a",
+          "name": "השלמת בחירה — רשימה א׳ בתואר בביולוגיה",
+          "regions": [
+            "208L:36:42"
+          ]
+        },
+        {
+          "id": "bio-rest-b",
+          "name": "השלמת בחירה — רשימה ב׳ בתואר בביולוגיה",
+          "regions": [
+            "208L:47:59",
+            "209R:3:28"
+          ]
+        },
+        {
+          "id": "bioinfo-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "קיימת סתירת מקור: טבלת מסלולי ההרשמה בעמוד 28 מתארת ארבע שנים, ואילו התכנית המפורטת בעמודים 256–257 מעניקה בוגר למדעים, 124 נקודות ושישה סמסטרים. נשמרו נתוני התכנית המפורטת; יש לאמת משך מול הפקולטה."
+      ]
+    },
+    {
+      "programId": "software-engineering",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            257,
+            258
+          ],
+          "printedPages": [
+            257,
+            258
+          ],
+          "section": "הנדסת תוכנה"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "software-core",
+          "name": "ליבת הנדסת תוכנה — כל תשע האפשרויות",
+          "regions": [
+            "258L:5:13"
+          ],
+          "minimumCourses": 3,
+          "creditsMin": 9
+        },
+        {
+          "id": "software-microeconomics",
+          "name": "מיקרו כלכלה 1 — אפשרות מפורשת ברשימה ב׳",
+          "regions": [
+            "258R:66:67"
+          ]
+        },
+        {
+          "id": "software-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "computer-engineering",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            259,
+            260,
+            261,
+            262
+          ],
+          "printedPages": [
+            259,
+            260,
+            261,
+            262
+          ],
+          "section": "הנדסת מחשבים"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "computer-algebra",
+          "name": "אלגברה 1 — חלופות",
+          "regions": [
+            "259L:16:18"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "computer-os",
+          "name": "מערכות הפעלה — קורס אחד או צמד",
+          "regions": [
+            "260R:6:10"
+          ]
+        },
+        {
+          "id": "computer-architecture",
+          "name": "מבנה מחשבים — חלופות",
+          "regions": [
+            "260R:13:15"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "computer-projects",
+          "name": "פרויקטים בשתי חלופות פקולטיות",
+          "regions": [
+            "260R:23:35"
+          ]
+        },
+        {
+          "id": "computer-core",
+          "name": "מקצועות ליבה — כל האפשרויות",
+          "regions": [
+            "260R:40:46"
+          ],
+          "minimumCourses": 2,
+          "creditsMin": 6
+        },
+        {
+          "id": "computer-special-networks",
+          "name": "קבוצת התמחות — רשתות מחשבים, מערכות מבוזרות ומבנה מחשבים",
+          "regions": [
+            "260R:60:69",
+            "260L:1:19"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-communications",
+          "name": "קבוצת התמחות — תקשורת ואינפורמציה",
+          "regions": [
+            "260L:24:44"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-algorithms",
+          "name": "קבוצת התמחות — אלגוריתמים, צפינה, קריפטוגרפיה וסיבוכיות",
+          "regions": [
+            "260L:53:67"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-signals",
+          "name": "קבוצת התמחות — עיבוד אותות ותמונות",
+          "regions": [
+            "261R:2:31"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-intelligent",
+          "name": "קבוצת התמחות — מערכות נבונות",
+          "regions": [
+            "261R:35:68"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-circuits",
+          "name": "קבוצת התמחות — מעגלים אלקטרוניים משולבים",
+          "regions": [
+            "261L:7:22"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-software",
+          "name": "קבוצת התמחות — מערכות תוכנה ותכנות מתקדם",
+          "regions": [
+            "261L:26:54"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-control",
+          "name": "קבוצת התמחות — בקרה ורובוטיקה",
+          "regions": [
+            "261L:57:70",
+            "262R:3:10"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-languages",
+          "name": "קבוצת התמחות — שפות תכנות, שפות פורמליות וטבעיות",
+          "regions": [
+            "262R:15:25"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-quantum",
+          "name": "קבוצת התמחות — טכנולוגיות קוונטיות",
+          "regions": [
+            "262R:31:44"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-energy",
+          "name": "קבוצת התמחות — אנרגיה ומערכות הספק",
+          "regions": [
+            "262R:49:60"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-special-physical",
+          "name": "קבוצת התמחות — יסודות פיזיקליים בהנדסת מחשבים",
+          "regions": [
+            "262R:64:69",
+            "262L:1:11"
+          ],
+          "minimumCourses": 3
+        },
+        {
+          "id": "computer-rest",
+          "name": "יתרת הבחירה משתי הפקולטות",
+          "regions": []
+        },
+        {
+          "id": "computer-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "cs-mathematics",
+      "status": "partial",
+      "programCategory": "combined",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            175,
+            263
+          ],
+          "printedPages": [
+            175,
+            263
+          ],
+          "section": "תוכנית משולבת במדעי המחשב ובמתמטיקה"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "csmath-numerics",
+          "name": "אנליזה נומרית או אלגוריתמים נומריים",
+          "regions": [
+            "263L:6:8"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "csmath-science",
+          "name": "שרשראות מדעיות — כל האפשרויות",
+          "regions": [
+            "263L:16:31"
+          ],
+          "creditsMin": 5
+        },
+        {
+          "id": "csmath-electives",
+          "name": "מקצועות שתי הפקולטות לפי הכלל המפורש",
+          "regions": []
+        },
+        {
+          "id": "csmath-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "cs-physics",
+      "status": "partial",
+      "programCategory": "combined",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            264,
+            186,
+            187
+          ],
+          "printedPages": [
+            264,
+            186,
+            187
+          ],
+          "section": "מדעי המחשב ופיזיקה"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "csphysics-ode",
+          "name": "מד״ר א׳ או מד״ר ת׳ עם השלמת נקודת בחירה",
+          "regions": [
+            "264R:67:67",
+            "264L:6:7"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "csphysics-list1",
+          "name": "רשימה 1מ״פ — כל האפשרויות",
+          "regions": [
+            "264L:51:63"
+          ],
+          "creditsMin": 9
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "csphysics-physics3",
+          "name": "יתרת בחירה בפיזיקה — רשימה 3",
+          "regions": [
+            "181R:10:57"
+          ]
+        },
+        {
+          "id": "csphysics-approved-b",
+          "name": "עד שש נקודות מרשימה ב׳ באישור יועץ",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5"
+          ]
+        },
+        {
+          "id": "csphysics-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "medicine-cs-double",
+      "status": "partial",
+      "programCategory": "double-degree",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            247,
+            265,
+            281,
+            282
+          ],
+          "printedPages": [
+            247,
+            265,
+            281,
+            282
+          ],
+          "section": "תואר כפול ברפואה ובמדעי המחשב"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "medicine-cs-project-alt",
+          "name": "פרויקט מתקדם בתכנות או פרויקט אחר באישור",
+          "regions": [
+            "265L:22:23"
+          ]
+        },
+        {
+          "id": "medicine-cs-english",
+          "name": "אנגלית טכנית — לחייבים לפי דרישה",
+          "regions": [
+            "248L:29:29"
+          ]
+        },
+        {
+          "id": "medicine-cs-open",
+          "name": "חינוך גופני",
+          "regions": [],
+          "creditsMin": 2
+        },
+        {
+          "id": "medicine-cs-built-in",
+          "name": "בחירה הנדסית מובנית — שלושה קורסים קבועים",
+          "regions": [
+            "265R:42:43"
+          ]
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה."
+      ]
+    },
+    {
+      "programId": "mathematics-three-year",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            170,
+            171
+          ],
+          "printedPages": [
+            170,
+            171
+          ],
+          "section": "מתמטיקה תלת־שנתית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 6.5
+        },
+        {
+          "id": "math-required-choice",
+          "name": "חובה/בחירה — כל שמונה האפשרויות",
+          "regions": [
+            "170L:22:29"
+          ],
+          "minimumCourses": 4
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "math-external-approval",
+          "name": "עד שני מקצועות חיצוניים באישור",
+          "regions": []
+        },
+        {
+          "id": "math-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": []
+    },
+    {
+      "programId": "applied-mathematics-three-year",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            174
+          ],
+          "printedPages": [
+            174
+          ],
+          "section": "מתמטיקה יישומית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 3
+        },
+        {
+          "id": "applied-a",
+          "name": "סל א׳ — הסתברות וסטטיסטיקה",
+          "regions": [
+            "174L:3:9"
+          ]
+        },
+        {
+          "id": "applied-b",
+          "name": "סל ב׳ — אופטימיזציה",
+          "regions": [
+            "174L:12:15"
+          ]
+        },
+        {
+          "id": "applied-c",
+          "name": "סל ג׳ — למידת מכונה וניתוח נתונים",
+          "regions": [
+            "174L:18:21"
+          ]
+        },
+        {
+          "id": "applied-d",
+          "name": "סל ד׳ — מערכות, עיבוד אותות ובקרה",
+          "regions": [
+            "174L:24:31"
+          ]
+        },
+        {
+          "id": "applied-e",
+          "name": "סל ה׳ — משוואות דיפרנציאליות ואנליזה נומרית",
+          "regions": [
+            "174L:34:38"
+          ]
+        },
+        {
+          "id": "applied-f",
+          "name": "סל ו׳ — תורת המשחקים וכלכלה",
+          "regions": [
+            "174L:41:50"
+          ]
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "applied-math-other-mandatory",
+          "name": "קורסי חובה אחרים במסלול מתמטיקה המוכרים ליתרת הבחירה",
+          "regions": [
+            "170R:38:48",
+            "170R:53:53"
+          ]
+        },
+        {
+          "id": "applied-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "נשמרו מספרים חריגים במקור: 04402020 בסל ד׳ ו־00490026 בסל ו׳. המספר 000960575 בעל תשע ספרות אינו מיובא כמספר תקני ונרשם באודיט כבלתי פתור; אין תיקון בניחוש."
+      ]
+    },
+    {
+      "programId": "mathematics-cs-three-year",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            173
+          ],
+          "printedPages": [
+            173
+          ],
+          "section": "מתמטיקה עם מדעי המחשב תלת־שנתי"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 5
+        },
+        {
+          "id": "mathcs-a",
+          "name": "סל א׳",
+          "regions": [
+            "173L:13:15"
+          ],
+          "minimumCourses": 2
+        },
+        {
+          "id": "mathcs-b",
+          "name": "סל ב׳",
+          "regions": [
+            "173L:18:24"
+          ]
+        },
+        {
+          "id": "mathcs-c",
+          "name": "סל ג׳",
+          "regions": [
+            "173L:27:29"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "mathcs-d",
+          "name": "סל ד׳",
+          "regions": [
+            "173L:32:35"
+          ]
+        },
+        {
+          "id": "mathcs-rest",
+          "name": "יתרת הבחירה משתי הפקולטות",
+          "regions": []
+        },
+        {
+          "id": "mathcs-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "04402520 מודפס בטבלת החובה. נשמר כפי שנדפס, ללא תיקון ל־00440252; שיוכו למאגר מצריך בירור."
+      ]
+    },
+    {
+      "programId": "mathematics-cs-four-year",
+      "status": "inventory-only",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            29,
+            169,
+            173
+          ],
+          "printedPages": [
+            29,
+            169,
+            173
+          ],
+          "section": "טבלת מסלולי הלימוד והפרק המפורט"
+        }
+      ],
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "groups": [],
+      "remainingGaps": [
+        "המסלול הארבע־שנתי מופיע בטבלת מסלולי הלימוד בעמוד 29; בפרק המתמטיקה סופקה תכנית תלת־שנתית בלבד. תכנית ארבע־שנתית מלאה לא אותרה בפרק ואין להעתיק אליה אוטומטית את התכנית התלת־שנתית.",
+        "נבדק גם פרק המתמטיקה הרשמי הנפרד לתשפ״ו (עשרה עמודים): https://ugportal.technion.ac.il/wp-content/uploads/2025/09/10-%D7%9E%D7%AA%D7%9E%D7%98%D7%99%D7%A7%D7%94-%D7%AA%D7%A9%D7%A4%D7%B4%D7%95.pdf . גם בו מופיעה תכנית מפורטת תלת־שנתית בלבד. תכניות ארבע־שנתיות משנים קודמות לא הועתקו לתשפ״ו."
+      ]
+    },
+    {
+      "programId": "mathematics-physics",
+      "status": "partial",
+      "programCategory": "combined",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            172,
+            182
+          ],
+          "printedPages": [
+            172,
+            182
+          ],
+          "section": "מתמטיקה–פיזיקה"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "mathphysics-math",
+          "name": "בחירה מתמטית — שמונה האפשרויות",
+          "regions": [
+            "172L:14:22"
+          ],
+          "minimumCourses": 2
+        },
+        {
+          "id": "mathphysics-lab",
+          "name": "מעבדה או פרויקט בפיזיקה",
+          "regions": [
+            "172L:39:43"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "mathphysics-science",
+          "name": "בחירה פיזיקלית — שבע האפשרויות",
+          "regions": [
+            "172L:46:52"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "mathphysics-physics3",
+          "name": "יתרת בחירה בפיזיקה — רשימה 3",
+          "regions": [
+            "181R:10:57"
+          ]
+        },
+        {
+          "id": "mathphysics-chemistry",
+          "name": "כימיה לפיזיקאים — אפשרות מפורשת",
+          "regions": [
+            "172L:60:60"
+          ]
+        },
+        {
+          "id": "mathphysics-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": []
+    },
+    {
+      "programId": "mathematics-additional-degree",
+      "status": "inventory-only",
+      "programCategory": "additional-degree",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            176
+          ],
+          "printedPages": [
+            176
+          ],
+          "section": "תואר ראשון נוסף במתמטיקה"
+        }
+      ],
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "groups": [],
+      "remainingGaps": [
+        "אפשרות לתכנית אישית לאחר צבירת 72 נקודות ובהתאם לתקנה 3.2.2. זוהי הרשאה לתואר נוסף, לא תכנית כפולה קבועה; רשימת הקורסים בעמוד 176 מומלצת ותלויה ברקע ולכן לא הוגדרה כחובה אחידה."
+      ]
+    },
+    {
+      "programId": "applied-mathematics-ai-signals",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            174
+          ],
+          "printedPages": [
+            174
+          ],
+          "section": "מתמטיקה יישומית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 3
+        },
+        {
+          "id": "applied-a",
+          "name": "סל א׳ — הסתברות וסטטיסטיקה",
+          "regions": [
+            "174L:3:9"
+          ]
+        },
+        {
+          "id": "applied-b",
+          "name": "סל ב׳ — אופטימיזציה",
+          "regions": [
+            "174L:12:15"
+          ]
+        },
+        {
+          "id": "applied-c",
+          "name": "סל ג׳ — למידת מכונה וניתוח נתונים",
+          "regions": [
+            "174L:18:21"
+          ]
+        },
+        {
+          "id": "applied-d",
+          "name": "סל ד׳ — מערכות, עיבוד אותות ובקרה",
+          "regions": [
+            "174L:24:31"
+          ]
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "applied-math-other-mandatory",
+          "name": "קורסי חובה אחרים במסלול מתמטיקה המוכרים ליתרת הבחירה",
+          "regions": [
+            "170R:38:48",
+            "170R:53:53"
+          ]
+        },
+        {
+          "id": "applied-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "נשמרו מספרים חריגים במקור: 04402020 בסל ד׳ ו־00490026 בסל ו׳. המספר 000960575 בעל תשע ספרות אינו מיובא כמספר תקני ונרשם באודיט כבלתי פתור; אין תיקון בניחוש.",
+        "מגמה רשמית בתוך התואר; רשימות היתרה הכלליות של מתמטיקה נשארות זכאיות לפי הכלל המפורש."
+      ]
+    },
+    {
+      "programId": "applied-mathematics-optimization-control",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            174
+          ],
+          "printedPages": [
+            174
+          ],
+          "section": "מתמטיקה יישומית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 3
+        },
+        {
+          "id": "applied-b",
+          "name": "סל ב׳ — אופטימיזציה",
+          "regions": [
+            "174L:12:15"
+          ]
+        },
+        {
+          "id": "applied-d",
+          "name": "סל ד׳ — מערכות, עיבוד אותות ובקרה",
+          "regions": [
+            "174L:24:31"
+          ]
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "applied-math-other-mandatory",
+          "name": "קורסי חובה אחרים במסלול מתמטיקה המוכרים ליתרת הבחירה",
+          "regions": [
+            "170R:38:48",
+            "170R:53:53"
+          ]
+        },
+        {
+          "id": "applied-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "נשמרו מספרים חריגים במקור: 04402020 בסל ד׳ ו־00490026 בסל ו׳. המספר 000960575 בעל תשע ספרות אינו מיובא כמספר תקני ונרשם באודיט כבלתי פתור; אין תיקון בניחוש.",
+        "מגמה רשמית בתוך התואר; רשימות היתרה הכלליות של מתמטיקה נשארות זכאיות לפי הכלל המפורש."
+      ]
+    },
+    {
+      "programId": "applied-mathematics-modelling-statistics",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            174
+          ],
+          "printedPages": [
+            174
+          ],
+          "section": "מתמטיקה יישומית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 3
+        },
+        {
+          "id": "applied-a",
+          "name": "סל א׳ — הסתברות וסטטיסטיקה",
+          "regions": [
+            "174L:3:9"
+          ]
+        },
+        {
+          "id": "applied-b",
+          "name": "סל ב׳ — אופטימיזציה",
+          "regions": [
+            "174L:12:15"
+          ]
+        },
+        {
+          "id": "applied-e",
+          "name": "סל ה׳ — משוואות דיפרנציאליות ואנליזה נומרית",
+          "regions": [
+            "174L:34:38"
+          ]
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "applied-math-other-mandatory",
+          "name": "קורסי חובה אחרים במסלול מתמטיקה המוכרים ליתרת הבחירה",
+          "regions": [
+            "170R:38:48",
+            "170R:53:53"
+          ]
+        },
+        {
+          "id": "applied-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "נשמרו מספרים חריגים במקור: 04402020 בסל ד׳ ו־00490026 בסל ו׳. המספר 000960575 בעל תשע ספרות אינו מיובא כמספר תקני ונרשם באודיט כבלתי פתור; אין תיקון בניחוש.",
+        "מגמה רשמית בתוך התואר; רשימות היתרה הכלליות של מתמטיקה נשארות זכאיות לפי הכלל המפורש."
+      ]
+    },
+    {
+      "programId": "applied-mathematics-industry-finance",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            174
+          ],
+          "printedPages": [
+            174
+          ],
+          "section": "מתמטיקה יישומית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 3
+        },
+        {
+          "id": "applied-a",
+          "name": "סל א׳ — הסתברות וסטטיסטיקה",
+          "regions": [
+            "174L:3:9"
+          ],
+          "exclusions": [
+            "00440202"
+          ]
+        },
+        {
+          "id": "applied-b",
+          "name": "סל ב׳ — אופטימיזציה",
+          "regions": [
+            "174L:12:15"
+          ]
+        },
+        {
+          "id": "applied-f",
+          "name": "סל ו׳ — תורת המשחקים וכלכלה",
+          "regions": [
+            "174L:41:50"
+          ]
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "applied-math-other-mandatory",
+          "name": "קורסי חובה אחרים במסלול מתמטיקה המוכרים ליתרת הבחירה",
+          "regions": [
+            "170R:38:48",
+            "170R:53:53"
+          ]
+        },
+        {
+          "id": "applied-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": [
+        "נשמרו מספרים חריגים במקור: 04402020 בסל ד׳ ו־00490026 בסל ו׳. המספר 000960575 בעל תשע ספרות אינו מיובא כמספר תקני ונרשם באודיט כבלתי פתור; אין תיקון בניחוש.",
+        "מגמה רשמית בתוך התואר; רשימות היתרה הכלליות של מתמטיקה נשארות זכאיות לפי הכלל המפורש."
+      ]
+    },
+    {
+      "programId": "physics-three-year",
+      "status": "partial",
+      "programCategory": "standard",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            180,
+            181
+          ],
+          "printedPages": [
+            180,
+            181
+          ],
+          "section": "פיזיקה תלת־שנתית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "physics-labs",
+          "name": "תכניות מעבדה א׳/ב׳ — חלופות מתואמות",
+          "regions": [
+            "180L:9:10",
+            "180L:28:29"
+          ]
+        },
+        {
+          "id": "physics-list1",
+          "name": "רשימת בחירה 1 — מעבדה ופרויקט",
+          "regions": [
+            "180L:51:53"
+          ],
+          "creditsMin": 3
+        },
+        {
+          "id": "physics-list2",
+          "name": "רשימת בחירה 2 — כל שבע האפשרויות",
+          "regions": [
+            "180L:64:68",
+            "181R:1:5"
+          ],
+          "minimumCourses": 3,
+          "creditsMin": 10.5
+        },
+        {
+          "id": "physics-list3",
+          "name": "רשימת בחירה 3 — כל האפשרויות המפורשות",
+          "regions": [
+            "181R:10:57"
+          ]
+        },
+        {
+          "id": "physics-advanced-approval",
+          "name": "קורסים מתקדמים לפי אישור מרצה",
+          "regions": []
+        },
+        {
+          "id": "physics-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": []
+    },
+    {
+      "programId": "physics-four-year",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            183
+          ],
+          "printedPages": [
+            183
+          ],
+          "section": "פיזיקה ארבע־שנתי במגמת אופטיקה שימושית"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "physics-labs",
+          "name": "תכניות מעבדה א׳/ב׳ — חלופות מתואמות",
+          "regions": [
+            "180L:9:10",
+            "180L:28:29"
+          ]
+        },
+        {
+          "id": "optics-lasers",
+          "name": "פיזיקה של לייזרים ואופטיקה קוונטית — חלופה",
+          "regions": [
+            "183R:41:41",
+            "183R:54:54"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "optics-lab-project",
+          "name": "רשימת בחירה א׳ — שתי התנסויות",
+          "regions": [
+            "183R:59:62"
+          ],
+          "minimumCourses": 2
+        },
+        {
+          "id": "physics-list3",
+          "name": "רשימת בחירה 3 — כל האפשרויות המפורשות",
+          "regions": [
+            "181R:10:57"
+          ]
+        },
+        {
+          "id": "optics-unique",
+          "name": "הרשימה הייחודית — כל 14 האפשרויות",
+          "regions": [
+            "183L:5:18"
+          ]
+        },
+        {
+          "id": "optics-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        }
+      ],
+      "remainingGaps": []
+    },
+    {
+      "programId": "physics-additional-degree-options",
+      "status": "inventory-only",
+      "programCategory": "additional-degree",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            181
+          ],
+          "printedPages": [
+            181
+          ],
+          "section": "תואר ראשון נוסף"
+        }
+      ],
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "groups": [],
+      "remainingGaps": [
+        "הקטלוג מפנה לאפשרות לתואר נוסף בחשמל, מכונות, כימיה, מדעי המחשב, מתמטיקה, ביו־רפואית, חומרים ואווירונוטיקה. זוהי הרשאה כללית לתארים נוספים, לא שמונה תכניות כפולות בעלות תכנית מאושרת; לא נוצרו צירופי קורסים משוערים."
+      ]
+    },
+    {
+      "programId": "cs-quantum-minor",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "printedPages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "section": "המסלול הכללי התלת־שנתי"
+        },
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            266
+          ],
+          "printedPages": [
+            248,
+            266
+          ],
+          "section": "מדעי המחשב — התמחות משנית בחישוב קוונטי"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs3-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        },
+        {
+          "id": "quantum-a",
+          "name": "קבוצה א׳ — חישוביות",
+          "regions": [
+            "266R:44:44"
+          ]
+        },
+        {
+          "id": "quantum-b",
+          "name": "קבוצה ב׳ — מבוא לאינפורמציה קוונטית",
+          "regions": [
+            "266R:50:52"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "quantum-c1",
+          "name": "קבוצה ג׳1 — קורס בקוונטים",
+          "regions": [
+            "266R:57:61"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "quantum-c2",
+          "name": "קבוצה ג׳2 — טרום קוונטים, שלוש חלופות",
+          "regions": [
+            "266R:77:77",
+            "266L:2:9"
+          ]
+        },
+        {
+          "id": "quantum-d",
+          "name": "קבוצה ד׳ — אינפורמציה קוונטית מתקדמת",
+          "regions": [
+            "266L:15:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "quantum-e",
+          "name": "קבוצה ה׳ — טכנולוגיות קוונטיות",
+          "regions": [
+            "266L:23:28"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "quantum-f",
+          "name": "קבוצה ו׳ — כל מקצועות הליבה",
+          "regions": [
+            "266L:32:47"
+          ],
+          "minimumCourses": 1,
+          "exclusions": [
+            "02340292"
+          ]
+        }
+      ],
+      "remainingGaps": [
+        "וריאנט זה מקובע לתואר הבסיס המצוין בשמו. המקור מאפשר גם מסלולי בסיס אחרים; אין החלפה אוטומטית של תואר הבסיס. דרישות המגמה מתווספות למלוא חובות התואר."
+      ]
+    },
+    {
+      "programId": "cs-lapidim-tech",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "printedPages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "section": "המסלול הכללי התלת־שנתי"
+        },
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            267
+          ],
+          "printedPages": [
+            248,
+            267
+          ],
+          "section": "מדעי המחשב — לפידים מנהיגות Tech"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs3-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        },
+        {
+          "id": "lapidim-tech-list",
+          "name": "יזמות וניהול — כל עשרים האפשרויות המפורשות",
+          "regions": [
+            "267R:21:40"
+          ],
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "תכנית מצוינות נוספת המחייבת תואר בסיס, 12 נקודות ביזמות וניהול, לפחות חציין מעבר לדרישות התואר, ופעילויות נוספות. אין תכנית תואר עצמאית.",
+        "וריאנט זה מקובע לתואר הבסיס המצוין בשמו. המקור מאפשר גם מסלולי בסיס אחרים; אין החלפה אוטומטית של תואר הבסיס. דרישות המגמה מתווספות למלוא חובות התואר."
+      ]
+    },
+    {
+      "programId": "cs-lapidim-research",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "printedPages": [
+            248,
+            249,
+            251,
+            252,
+            253,
+            255
+          ],
+          "section": "המסלול הכללי התלת־שנתי"
+        },
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            267
+          ],
+          "printedPages": [
+            248,
+            267
+          ],
+          "section": "מדעי המחשב — לפידים מנהיגות במחקר"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs3-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        },
+        {
+          "id": "lapidim-research-course",
+          "name": "מבוא למחקר פקולטי במדעי המחשב",
+          "regions": [
+            "267L:14:15"
+          ]
+        },
+        {
+          "id": "lapidim-research-advanced",
+          "name": "שלושה קורסים מתקדמים באישור",
+          "regions": [],
+          "minimumCourses": 3,
+          "creditsMin": 6
+        }
+      ],
+      "remainingGaps": [
+        "תכנית מצוינות נוספת המחייבת תואר בסיס, פרויקט מחקרי, חשיפה למחקר ושלושה קורסים מתקדמים ובהם לפחות שש נקודות מעבר לדרישות התואר. תכנית אישית דורשת אישור.",
+        "וריאנט זה מקובע לתואר הבסיס המצוין בשמו. המקור מאפשר גם מסלולי בסיס אחרים; אין החלפה אוטומטית של תואר הבסיס. דרישות המגמה מתווספות למלוא חובות התואר."
+      ]
+    },
+    {
+      "programId": "software-engineering-excellence",
+      "status": "inventory-only",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            258
+          ],
+          "printedPages": [
+            248,
+            258
+          ],
+          "section": "הנדסת תוכנה — מגמת מצוינות מוגברת ופסגות"
+        }
+      ],
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "groups": [],
+      "remainingGaps": [
+        "נדרשות מלוא דרישות הנדסת תוכנה ועוד 14 נקודות בקורסי תואר שני (או 12 לפי הצעת מחקר מאושרת). תכנית נוספת מותאמת אישית; אין רשימת חובה אחידה מעבר לתואר הבסיס."
+      ]
+    },
+    {
+      "programId": "mathematics-game-theory",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            170,
+            171
+          ],
+          "printedPages": [
+            170,
+            171
+          ],
+          "section": "מתמטיקה תלת־שנתית"
+        },
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            176
+          ],
+          "printedPages": [
+            176
+          ],
+          "section": "מתמטיקה — התמחות בתורת המשחקים"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "math-science",
+          "name": "מקצועות מדעיים — כל האפשרויות",
+          "regions": [
+            "170R:63:67",
+            "170L:1:10"
+          ],
+          "creditsMin": 6.5
+        },
+        {
+          "id": "math-required-choice",
+          "name": "חובה/בחירה — כל שמונה האפשרויות",
+          "regions": [
+            "170L:22:29"
+          ],
+          "minimumCourses": 4
+        },
+        {
+          "id": "math-a",
+          "name": "רשימה א׳ — כל מקצועות המתמטיקה המפורשים",
+          "regions": [
+            "170L:39:68",
+            "171R",
+            "171L:3:18"
+          ]
+        },
+        {
+          "id": "math-seminars",
+          "name": "סמינרים במתמטיקה — כל רשימות שתי ושלוש נקודות",
+          "regions": [
+            "171L:21:56"
+          ]
+        },
+        {
+          "id": "math-external-approval",
+          "name": "עד שני מקצועות חיצוניים באישור",
+          "regions": []
+        },
+        {
+          "id": "math-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 10
+        },
+        {
+          "id": "math-game-theory-approved",
+          "name": "רשימת הקורסים המוכרים במתמטיקה — עד שניים",
+          "regions": [
+            "176R:52:59"
+          ]
+        }
+      ],
+      "remainingGaps": [
+        "תכנית התמחות של הפקולטה למדעי הנתונים וההחלטות הפתוחה למסלולי המתמטיקה; עד שני קורסים מהרשימה המפורשת מוכרים במקום בחירה במתמטיקה. יתרת דרישות התעודה בפרק הפקולטה השותפה.",
+        "וריאנט זה מקובע לתואר הבסיס המצוין בשמו. המקור מאפשר גם מסלולי בסיס אחרים; אין החלפה אוטומטית של תואר הבסיס. דרישות המגמה מתווספות למלוא חובות התואר.",
+        "תכנית הבסיס במתמטיקה יובאה; יתרת דרישות תעודת תורת המשחקים בפרק מדעי הנתונים דורשת השלמה ואינה מוצגת כמאומתת."
+      ]
+    },
+    {
+      "programId": "physics-ee-concentration",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            184,
+            185,
+            108,
+            109,
+            110,
+            181
+          ],
+          "printedPages": [
+            184,
+            185,
+            108,
+            109,
+            110,
+            181
+          ],
+          "section": "פיזיקה במגמה להנדסת חשמל ומחשבים — תואר ראשון 159 נקודות"
+        }
+      ],
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "physics-ee-algebra",
+          "name": "אלגברה 1 — אחת משתי חלופות",
+          "regions": [
+            "184R:68:70"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "physics-ee-fields",
+          "name": "אלקטרומגנטיות ואלקטרודינמיקה או שדות אלקטרומגנטיים",
+          "regions": [
+            "184L:44:47"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "physics-ee-lab-project",
+          "name": "מעבדה לפיזיקה 5ת או פרויקט ת׳",
+          "regions": [
+            "185R:14:16"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "physics-ee-six",
+          "name": "בחירה מפיזיקה — שתי אפשרויות לפחות משש",
+          "regions": [
+            "185R:29:34"
+          ],
+          "minimumCourses": 2
+        },
+        {
+          "id": "physics-ee-physics3",
+          "name": "רשימת בחירה 3 — כל האפשרויות המפורשות",
+          "regions": [
+            "181R:10:57"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-networks",
+          "name": "בחירה מרשימת חשמל — רשתות מחשבים",
+          "regions": [
+            "108R:60",
+            "108L:1:9"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-control",
+          "name": "בחירה מרשימת חשמל — בקרה ורובוטיקה",
+          "regions": [
+            "108L:11:31"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-communication",
+          "name": "בחירה מרשימת חשמל — תקשורת ואינפורמציה",
+          "regions": [
+            "108L:33:58"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-microelectronics",
+          "name": "בחירה מרשימת חשמל — מיקרואלקטרוניקה וננואלקטרוניקה",
+          "regions": [
+            "108L:60",
+            "109R:1:19"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-photonics",
+          "name": "בחירה מרשימת חשמל — אלקטרומגנטיות ופוטוניקה",
+          "regions": [
+            "109R:21:46"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-computers",
+          "name": "בחירה מרשימת חשמל — מחשבים",
+          "regions": [
+            "109R:48",
+            "109L:1:16"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-biological",
+          "name": "בחירה מרשימת חשמל — אותות ומערכות ביולוגיים",
+          "regions": [
+            "109L:18:35"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-signal-image",
+          "name": "בחירה מרשימת חשמל — עיבוד אותות ותמונות",
+          "regions": [
+            "109L:37:59"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-circuits",
+          "name": "בחירה מרשימת חשמל — מעגלים אלקטרוניים משולבים",
+          "regions": [
+            "109L:61",
+            "110R:3:12"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-honors",
+          "name": "בחירה מרשימת חשמל — קבוצת המצטיינים",
+          "regions": [
+            "110R:14:33"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-machine-learning",
+          "name": "בחירה מרשימת חשמל — למידת מכונה ומערכות נבונות",
+          "regions": [
+            "110R:35:58"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-energy",
+          "name": "בחירה מרשימת חשמל — אנרגיה ומערכות הספק",
+          "regions": [
+            "110R:60",
+            "110L:1:4"
+          ]
+        },
+        {
+          "id": "physics-ee-elective-quantum",
+          "name": "בחירה מרשימת חשמל — טכנולוגיות קוונטיות",
+          "regions": [
+            "110L:6:25"
+          ]
+        },
+        {
+          "id": "physics-ee-two-lab-credits",
+          "name": "חובת שתי נקודות מעבדה — רשימת ההכרה טעונה בירור",
+          "regions": [],
+          "creditsMin": 2
+        },
+        {
+          "id": "physics-ee-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "יובאה התכנית העצמאית בת 159 הנקודות, לרבות כל חובות הסמסטרים, חלופות, שש אפשרויות פיזיקה, רשימה 3 ושלוש־עשרה רשימות הבחירה המופנות מחשמל. אין זה איחוד תכניות התארים העצמאיים.",
+        "שני מספרים חריגים מאומתים חזותית נותרו בדיוק כפי שנדפסו: 00404105 (תורת המעגלים החשמליים) ו־04401400 (שדות אלקטרומגנטיים). שיוכם לקורסים תקניים דורש אימות רשמי.",
+        "הברירה של שתי נקודות מעבדה בעמוד 185 אינה מגדירה רשימה מפורשת למסלול זה. מקור מעבדות החשמל בעמוד 108 מגדיר מכסות ותחולה למסלולים אחרים; לא הוסקה זכאות אוטומטית. חובה זו וקטגוריות פתוחות מונעות טענת שלמות.",
+        "התואר הראשון הוא B.Sc. אחד; M.Sc. הוא שלב המשך נפרד המותנה בקבלה, ולא תואר כפול ראשון."
+      ]
+    },
+    {
+      "programId": "electrical-physics-concentration",
+      "status": "inventory-only",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            184
+          ],
+          "printedPages": [
+            184
+          ],
+          "section": "יציאת תואר ראשון בהנדסת חשמל במגמה לפיזיקה"
+        }
+      ],
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "groups": [],
+      "remainingGaps": [
+        "יציאת תואר ראשון בהיקף 162 נקודות המתוארת בעמוד 184; שונה מן התואר המשולב בחשמל ופיזיקה בהיקף 178 נקודות. אין להעתיק את תכנית התואר המשולב או את תכנית ההנדסה הכללית ללא אימות."
+      ]
+    },
+    {
+      "programId": "cs-four-year-learning-data",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            248,
+            249,
+            250,
+            251,
+            252,
+            253
+          ],
+          "printedPages": [
+            248,
+            249,
+            250,
+            251,
+            252,
+            253
+          ],
+          "section": "המסלול הכללי הארבע־שנתי"
+        },
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            256
+          ],
+          "printedPages": [
+            256
+          ],
+          "section": "הכרה במגמת למידה וניתוח מידע למסלול ארבע־שנתי ולהנדסת תוכנה"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-algebra-choice",
+          "name": "אלגברה מודרנית והקורס המתמטי הנוסף — חלופה מתואמת",
+          "regions": [
+            "248L:53:53",
+            "248L:61:62"
+          ]
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-math-extra",
+          "name": "הקורס המתמטי הנוסף — שבע האפשרויות",
+          "regions": [
+            "249R:13:19"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "cs-special-complexity",
+          "name": "קבוצת התמחות — סיבוכיות של חישובים",
+          "regions": [
+            "249L:20:35"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360313"
+          ]
+        },
+        {
+          "id": "cs-special-algorithms",
+          "name": "קבוצת התמחות — תורת האלגוריתמים",
+          "regions": [
+            "249L:39:50"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-logic",
+          "name": "קבוצת התמחות — לוגיקה ויישומיה",
+          "regions": [
+            "249L:53:59"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-crypto",
+          "name": "קבוצת התמחות — קריפטולוגיה, צפינה ואינפורמציה",
+          "regions": [
+            "249L:62:70"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-software",
+          "name": "קבוצת התמחות — פיתוח מערכות תוכנה",
+          "regions": [
+            "250R:6:25"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360319"
+          ]
+        },
+        {
+          "id": "cs-special-distributed",
+          "name": "קבוצת התמחות — תקשורת ומערכות מבוזרות",
+          "regions": [
+            "250R:29:44"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": []
+        },
+        {
+          "id": "cs-special-systems",
+          "name": "קבוצת התמחות — מערכות מיחשוב",
+          "regions": [
+            "250R:48:70"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360363"
+          ]
+        },
+        {
+          "id": "cs-special-vision",
+          "name": "קבוצת התמחות — ראייה ורובוטיקה",
+          "regions": [
+            "250L:2:22"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360201"
+          ]
+        },
+        {
+          "id": "cs-special-graphics",
+          "name": "קבוצת התמחות — גאומטריה וגרפיקה",
+          "regions": [
+            "250L:26:36"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360216"
+          ]
+        },
+        {
+          "id": "cs-special-learning",
+          "name": "קבוצת התמחות — למידה ובינה מלאכותית",
+          "regions": [
+            "250L:40:66"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360501"
+          ]
+        },
+        {
+          "id": "cs-special-bio",
+          "name": "קבוצת התמחות — ביואינפורמטיקה",
+          "regions": [
+            "251R:2:11"
+          ],
+          "minimumCourses": 3,
+          "requiredCourseIds": [
+            "02360522",
+            "00940423"
+          ]
+        },
+        {
+          "id": "cs4-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        },
+        {
+          "id": "cs-four-year-learning-data-core",
+          "name": "ליבת למידה וניתוח מידע — בנוסף לדרישות תואר הבסיס",
+          "regions": [
+            "255L:55:68"
+          ],
+          "minimumCourses": 4,
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה.",
+        "וריאנט הנתמך מפורשות בעמוד 256; תואר הבסיס לא הוחלף בתכנית הלמידה התלת־שנתית."
+      ]
+    },
+    {
+      "programId": "software-engineering-learning-data",
+      "status": "partial",
+      "programCategory": "concentration",
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            257,
+            258
+          ],
+          "printedPages": [
+            257,
+            258
+          ],
+          "section": "הנדסת תוכנה"
+        },
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            256
+          ],
+          "printedPages": [
+            256
+          ],
+          "section": "הכרה במגמת למידה וניתוח מידע למסלול ארבע־שנתי ולהנדסת תוכנה"
+        }
+      ],
+      "mandatoryComplete": true,
+      "electivesComplete": false,
+      "groups": [
+        {
+          "id": "cs-digital-choice",
+          "name": "מערכות ספרתיות ומבנה המחשב — חלופות מספר",
+          "regions": [
+            "248L:55:56"
+          ],
+          "minimumCourses": 1
+        },
+        {
+          "id": "cs-science",
+          "name": "מקצועות מדעיים — כל ארבע השרשראות",
+          "regions": [
+            "249R:39:50",
+            "249L:4:5"
+          ],
+          "creditsMin": 8
+        },
+        {
+          "id": "cs-list-a",
+          "name": "רשימה א׳ — כל המקצועות המפורשים של מדעי המחשב",
+          "regions": [
+            "251R:19:67",
+            "251L",
+            "252R:3:70",
+            "252L"
+          ]
+        },
+        {
+          "id": "cs-list-b",
+          "name": "רשימה ב׳ — כל המקצועות החוץ־פקולטיים",
+          "regions": [
+            "253R:3:68",
+            "253L:3:5",
+            "249R:13:19"
+          ]
+        },
+        {
+          "id": "software-core",
+          "name": "ליבת הנדסת תוכנה — כל תשע האפשרויות",
+          "regions": [
+            "258L:5:13"
+          ],
+          "minimumCourses": 3,
+          "creditsMin": 9
+        },
+        {
+          "id": "software-microeconomics",
+          "name": "מיקרו כלכלה 1 — אפשרות מפורשת ברשימה ב׳",
+          "regions": [
+            "258R:66:67"
+          ]
+        },
+        {
+          "id": "software-open",
+          "name": "בחירה כלל־טכניונית, העשרה וחינוך גופני",
+          "regions": [],
+          "creditsMin": 12
+        },
+        {
+          "id": "software-engineering-learning-data-core",
+          "name": "ליבת למידה וניתוח מידע — בנוסף לדרישות תואר הבסיס",
+          "regions": [
+            "255L:55:68"
+          ],
+          "minimumCourses": 4,
+          "creditsMin": 12
+        }
+      ],
+      "remainingGaps": [
+        "רשימות מפורשות הופרדו מחלופות ומתנאי השלמת תואר. בחירה חופשית ואישור פרטני אינם זכאות סגורה.",
+        "וריאנט הנתמך מפורשות בעמוד 256; תואר הבסיס לא הוחלף בתכנית הלמידה התלת־שנתית."
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "facultyId": "math",
+      "pdfPage": 174,
+      "column": "L",
+      "line": 45,
+      "token": "000960575",
+      "reason": "Nine printed digits; preserve unresolved instead of silently truncating or inventing canonical ID."
+    },
+    {
+      "facultyId": "math",
+      "pdfPage": 174,
+      "column": "L",
+      "line": 25,
+      "token": "04402020",
+      "reason": "Printed anomalous eight-digit number retained; no guessed repair."
+    },
+    {
+      "facultyId": "math",
+      "pdfPage": 174,
+      "column": "L",
+      "line": 49,
+      "token": "00490026",
+      "reason": "Printed number retained although nearby cross-faculty references differ; needs official confirmation."
+    },
+    {
+      "facultyId": "math",
+      "pdfPage": 173,
+      "column": "R",
+      "line": 39,
+      "token": "04402520",
+      "reason": "Printed course number differs from the familiar systems course; retained without guessed substitution."
+    },
+    {
+      "facultyId": "cs",
+      "pdfPages": [
+        28,
+        247,
+        256,
+        257
+      ],
+      "reason": "Bioinformatics duration conflicts: overview lists4yr, detailed6sem124credit bachelor curriculum implies3yr; explicit detail is imported and conflict flagged."
+    },
+    {
+      "facultyId": "cs",
+      "pdfPages": [
+        247,
+        175,
+        263
+      ],
+      "reason": "CS-Math introduction says3yr while overview/Mathematics detailed table says3.5yr; preserved3.5 with source discrepancy note."
+    },
+    {
+      "facultyId": "math",
+      "pdfPages": [
+        29,
+        169,
+        173
+      ],
+      "reason": "Four-year Mathematics-with-CS overview entry has no complete corresponding curriculum in supplied Mathematics chapter."
+    },
+    {
+      "facultyId": "cs",
+      "pdfPages": [
+        258
+      ],
+      "reason": "Software excellence extra MSc coursework is individualized; retained inventory-only, no invented course pool."
+    },
+    {
+      "facultyId": "physics",
+      "pdfPage": 184,
+      "column": "L",
+      "line": 26,
+      "token": "00404105",
+      "reason": "Printed circuit-theory course number visually verified exactly; retained without guessed correction."
+    },
+    {
+      "facultyId": "physics",
+      "pdfPage": 184,
+      "column": "L",
+      "line": 47,
+      "token": "04401400",
+      "reason": "Printed electromagnetic-fields number visually verified exactly; retained without guessed correction."
+    },
+    {
+      "facultyId": "physics",
+      "pdfPages": [
+        185,
+        108
+      ],
+      "reason": "Physics159 requires2laboratorycredits but does not explicitly enumerate an approved pool. EE108labtable statesapplicability todifferentroutes/quotas; notinferredapprovedfor159."
+    }
+  ],
+  "validationIssues": [],
+  "notes": [
+    "All records intentionally remain partial or inventory-only: approval rules, open pools and anomalous source numbers preclude a complete verified automatic eligibility or graduation claim.",
+    "Formal elective subject groups are preserved as lists, not degree titles.",
+    "The medicine-CS double degree uses its prescribed combined curriculum including referred Medicine semesters7–10 at282, not a union of independent degree curricula."
+  ],
+  "validation": {
+    "result": "passed",
+    "checks": [
+      "Unique32programIDs",
+      "All reviewed region bounds",
+      "CS3/4 distinct mandatory curriculum",
+      "Cybersecurity mandatory differences",
+      "Learning specialization does not import CS List B",
+      "Combined degrees use their own tables",
+      "Medicine-CS two qualifications and referred med7–10 core",
+      "Applied concentration-specific eligible basket restrictions",
+      "Inventory-only contains no eligibility",
+      "Quantum supplement includes degree base and degree-specific group restriction",
+      "Physics159 BSc imported from own table,13explicit referredEE pools,unresolved lab rule notautomaticallyeligible",
+      "MSc recommendations not imported as bachelor mandatory",
+      "Learning-and-Data 01040174 OR01040134 alternative is in eligible group; 01040134 visually verified255footnote"
+    ],
+    "regionCount": 491
+  },
+  "additionalOfficialSources": [
+    {
+      "url": "https://ugportal.technion.ac.il/wp-content/uploads/2025/09/10-%D7%9E%D7%AA%D7%9E%D7%98%D7%99%D7%A7%D7%94-%D7%AA%D7%A9%D7%A4%D7%B4%D7%95.pdf",
+      "catalogYear": "2025-2026",
+      "pageCount": 10,
+      "checkedOn": "2026-11-16",
+      "finding": "Separate official Mathematics chapter also has no detailed Mathematics-with-CS four-year curriculum; older year curricula were not copied."
+    }
+  ],
+  "resolvedSourceFragments": [
+    {
+      "programId": "cs-learning-data",
+      "pdfPage": 255,
+      "column": "L",
+      "line": 13,
+      "printedCourseId": "01040134",
+      "rawFragment": "0(1040)134",
+      "resolution": "Visually read the printed page255 footnote, which explicitly allows Algebra Modernit H instead of Algebra BM with one extra elective point. Exact same-year course code also recorded248L:53. Both alternatives now included in conditional group."
+    }
+  ]
+}

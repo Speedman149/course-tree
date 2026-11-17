@@ -1,0 +1,2979 @@
+{
+  "reviewer": "independent-source-review",
+  "sourcePdfSha256": "aff2590a80708d6df4ef4cbbb9b429677f6814beebe84441dba7f69075e339f3",
+  "facultyIds": [
+    "civil",
+    "mechanical",
+    "ee",
+    "chemical",
+    "biotechnology",
+    "aerospace",
+    "data"
+  ],
+  "reviewedPages": [
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168
+  ],
+  "methodology": "Read original catalog2025-26.pdf directly with fresh PyMuPDF extraction. Mapped all assigned undergraduate/graduate boundaries. Visually reviewed original pages 75,77,80,82,83,84,97,99,100,106,111,117,120,124,125,132,133,134,135,136,142,143,147,148,150,151,158,159,164,166. Expected bounded lists below were independently transcribed from original tables. Runtime catalogs.json was read only as claims under test and to identify path/group IDs. No old importer definitions, cached lists or coverage reports used. Exact assertions apply only to bounded lists, never entire degrees. No source implementation or data edited.",
+  "assertions": [
+    {
+      "id": "engineering-civil-common",
+      "pathIds": [
+        "civil-engineering-2025-2026",
+        "civil-water-2025-2026",
+        "civil-transportation-2025-2026",
+        "civil-transportation-construction-minor-2025-2026"
+      ],
+      "kind": "mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 74,
+          "printedPage": 74,
+          "quote": "מקצועות החובה - השיבוץ המומלץ לפי סמסטרים",
+          "explanation": "Heading explicitly establishes mandatory course rows; only the semester arrangement is recommended."
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140102",
+        "01040042",
+        "01040019",
+        "01250001",
+        "00140008",
+        "00140104",
+        "01040044",
+        "01040131",
+        "02340128",
+        "03240033"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-civil-water",
+      "pathIds": [
+        "civil-engineering-2025-2026",
+        "civil-water-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "מקצועות חובה בהתמחות",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140332",
+        "00140412",
+        "00140977",
+        "01240503",
+        "00140325",
+        "00160203"
+      ],
+      "groupId": "civil-water-required"
+    },
+    {
+      "id": "engineering-civil-water-projects",
+      "pathIds": [
+        "civil-engineering-2025-2026",
+        "civil-water-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "פרויקטים:",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140201",
+        "00140202"
+      ],
+      "groupId": "civil-water-projects"
+    },
+    {
+      "id": "engineering-civil-transport",
+      "pathIds": [
+        "civil-engineering-2025-2026",
+        "civil-transportation-2025-2026",
+        "civil-transportation-construction-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "מקצועות חובה בהתמחות",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140779",
+        "00140733",
+        "00940591",
+        "00140735",
+        "00140709",
+        "00140710"
+      ],
+      "groupId": "civil-transport-required"
+    },
+    {
+      "id": "engineering-civil-transport-projects",
+      "pathIds": [
+        "civil-engineering-2025-2026",
+        "civil-transportation-2025-2026",
+        "civil-transportation-construction-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "פרויקטים:",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140721",
+        "00140722",
+        "00140723",
+        "00140724",
+        "00140719",
+        "00140720"
+      ],
+      "groupId": "civil-transport-projects",
+      "expectedMinimumCredits": 5
+    },
+    {
+      "id": "engineering-civil-choice",
+      "pathIds": [
+        "civil-engineering-2025-2026",
+        "civil-water-2025-2026",
+        "civil-transportation-2025-2026",
+        "civil-transportation-construction-minor-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "יש לבחור לפחות התמחות אחת",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Choose at least one complete water or transport specialization, including its required subjects and projects totaling five credits. Do not require both branches."
+    },
+    {
+      "id": "engineering-civil-water-conditional",
+      "pathIds": [
+        "civil-engineering-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "יש לבחור לפחות התמחות אחת",
+          "explanation": "Water-only required subjects are conditional because transport is permitted instead.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140332",
+        "00140977",
+        "01240503",
+        "00140325",
+        "00160203"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-civil-transport-conditional",
+      "pathIds": [
+        "civil-engineering-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 75,
+          "printedPage": 75,
+          "quote": "יש לבחור לפחות התמחות אחת",
+          "explanation": "Transport-only required subjects are conditional because water is permitted instead.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140779",
+        "00140733",
+        "00940591",
+        "00140735",
+        "00140709",
+        "00140710"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-structures-a",
+      "pathIds": [
+        "civil-structures-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 77,
+          "printedPage": 77,
+          "quote": "קבוצה א׳: לפחות שני קורסים",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140107",
+        "00140151",
+        "00160111",
+        "00160122",
+        "00160142",
+        "00160143",
+        "00160144"
+      ],
+      "groupId": "structures-a",
+      "expectedMinimumCourses": 2
+    },
+    {
+      "id": "engineering-structures-b",
+      "pathIds": [
+        "civil-structures-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 77,
+          "printedPage": 77,
+          "quote": "קבוצה ב׳: לפחות קורס אחד",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140205",
+        "00140212",
+        "00140316"
+      ],
+      "groupId": "structures-b",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-structures-joint",
+      "pathIds": [
+        "civil-structures-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 77,
+          "printedPage": 77,
+          "quote": "ובלבד שסך הנקודות מקבוצות א׳ וב׳ לא יפחת",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "At least two group A courses and one group B course, with at least eight credits jointly across A and B. The threshold is not eight credits per group."
+    },
+    {
+      "id": "engineering-environment-open",
+      "pathIds": [
+        "environmental-engineering-2025-2026",
+        "environmental-open-2025-2026",
+        "environmental-technologies-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 80,
+          "printedPage": 80,
+          "quote": "התמחות 1 - הסביבה הפתוחה",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00160329",
+        "00160210",
+        "00160206",
+        "00160339",
+        "00160223"
+      ],
+      "groupId": "environment-open"
+    },
+    {
+      "id": "engineering-environment-technologies",
+      "pathIds": [
+        "environmental-engineering-2025-2026",
+        "environmental-open-2025-2026",
+        "environmental-technologies-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 80,
+          "printedPage": 80,
+          "quote": "התמחות 2 - טכנולוגיות בהנדסת סביבה",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140305",
+        "00140309",
+        "00140935",
+        "00140952",
+        "00160328",
+        "00160336"
+      ],
+      "groupId": "environment-technologies"
+    },
+    {
+      "id": "engineering-environment-choice",
+      "pathIds": [
+        "environmental-engineering-2025-2026",
+        "environmental-open-2025-2026",
+        "environmental-technologies-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 80,
+          "printedPage": 80,
+          "quote": "יש לבחור אחת מההתמחויות הבאות – כולל כל הקורסים המופיעים בה.",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Choose one complete concentration and finish 30 credits using the other concentration and/or additional topics."
+    },
+    {
+      "id": "engineering-mapping3-survey",
+      "pathIds": [
+        "mapping-geoinformation-three-year-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 83,
+          "printedPage": 83,
+          "quote": "שרשרת מדידות גיאודטיות והנדסיות",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140851",
+        "00140852",
+        "00140864",
+        "00140853",
+        "00140866",
+        "00140867"
+      ],
+      "groupId": "mapping3-survey-chain"
+    },
+    {
+      "id": "engineering-mapping3-map",
+      "pathIds": [
+        "mapping-geoinformation-three-year-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 83,
+          "printedPage": 83,
+          "quote": "שרשרת מיפוי ומידע מרחבי",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140855",
+        "00140856",
+        "00140857",
+        "00140889",
+        "00140890",
+        "00140866",
+        "00140869"
+      ],
+      "groupId": "mapping3-map-chain"
+    },
+    {
+      "id": "engineering-mapping4-survey",
+      "pathIds": [
+        "mapping-geoinformation-engineering-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 82,
+          "printedPage": 82,
+          "quote": "שרשרת מדידות גיאודטיות והנדסיות",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140851",
+        "00140852",
+        "00140864",
+        "00140853",
+        "00140866",
+        "00140867"
+      ],
+      "groupId": "mapping4-survey"
+    },
+    {
+      "id": "engineering-mapping4-map",
+      "pathIds": [
+        "mapping-geoinformation-engineering-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 82,
+          "printedPage": 82,
+          "quote": "שרשרת מיפוי ומידע מרחבי",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140855",
+        "00140856",
+        "00140857",
+        "00140889",
+        "00140890",
+        "00140866",
+        "00140869"
+      ],
+      "groupId": "mapping4-mapping"
+    },
+    {
+      "id": "engineering-mapping4-cadastre",
+      "pathIds": [
+        "mapping-geoinformation-engineering-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 82,
+          "printedPage": 82,
+          "quote": "שרשרת קדסטר וניהול מקרקעין",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140885",
+        "00140882",
+        "00140831",
+        "00160828",
+        "00160829",
+        "00160818",
+        "00140866",
+        "00140867"
+      ],
+      "groupId": "mapping4-cadastre"
+    },
+    {
+      "id": "engineering-mapping3-survey-substitute",
+      "pathIds": [
+        "mapping-3-survey-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 83,
+          "printedPage": 83,
+          "quote": "ניתן לקחת לחילופין פרויקט בתעשייה בגיאודזיה ומדידות )00140875",
+          "explanation": "Explicit 875 replacement means default867 is not universally compulsory.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140867"
+      ],
+      "sourceScopeComplete": false,
+      "semanticAssessment": "confirmed_incorrect",
+      "actualGroupIds": []
+    },
+    {
+      "id": "engineering-mapping3-map-substitute",
+      "pathIds": [
+        "mapping-3-mapping-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 83,
+          "printedPage": 83,
+          "quote": "ניתן לקחת לחילופין פרויקט בתעשייה במיפוי ספרתי )00140876",
+          "explanation": "Explicit876 replacement means default857 is not universally compulsory.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140857"
+      ],
+      "sourceScopeComplete": false,
+      "semanticAssessment": "confirmed_incorrect",
+      "actualGroupIds": []
+    },
+    {
+      "id": "engineering-mapping3-project-choice",
+      "pathIds": [
+        "mapping-geoinformation-three-year-2025-2026",
+        "mapping-3-survey-2025-2026",
+        "mapping-3-mapping-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 83,
+          "printedPage": 83,
+          "quote": "ניתן לקחת לחילופין",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Survey: 00140867 OR 00140875. Mapping: 00140857 OR 00140876. Match the alternative to the selected chain; cap total project credits at five."
+    },
+    {
+      "id": "engineering-mapping4-source-crossrefs",
+      "pathIds": [
+        "mapping-geoinformation-engineering-2025-2026",
+        "mapping-4-survey-2025-2026",
+        "mapping-4-mapping-2025-2026",
+        "mapping-4-cadastre-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 82,
+          "printedPage": 82,
+          "quote": "ניתן לקחת לחילופין פרויקט בתעשייה בגיאודזיה ומדידות (00140857)",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "The four-year p82 prints 00140857 as survey-project alternative and 00140867 as mapping-project alternative. These numbers conflict with their industry-project labels. Resolve the source inconsistency before importing the three-year 00140875/00140876 alternatives."
+    },
+    {
+      "id": "engineering-mechanical-a",
+      "pathIds": [
+        "mechanical-engineering-2025-2026",
+        "mechanical-brakim-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 97,
+          "printedPage": 97,
+          "quote": "א. קורסים חישוביים",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00350022",
+        "00360015",
+        "00350199",
+        "00350013",
+        "00350039",
+        "00350054"
+      ],
+      "groupId": "mechanical-a",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-mechanical-optional",
+      "pathIds": [
+        "mechanical-engineering-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 97,
+          "printedPage": 97,
+          "quote": "(מבוא יצירתי להנ׳ מכו׳– רשות)",
+          "explanation": "Explicit optional label in ordinary program.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00350026"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-mechanical-physics-alternatives",
+      "pathIds": [
+        "mechanical-engineering-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 97,
+          "printedPage": 97,
+          "quote": "ניתן ללמוד את הקורסים פיזיקה 1+2",
+          "explanation": "The source permits an expanded sequence; expanded physics is compulsory for Brakim and a prerequisite for optical specialization, not four simultaneous ordinary-program obligations.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01140051",
+        "01140071",
+        "01140052",
+        "01140075"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-brakim-creative",
+      "pathIds": [
+        "mechanical-brakim-2025-2026"
+      ],
+      "kind": "mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 99,
+          "printedPage": 99,
+          "quote": "מבוא יצירתי להנד' מכונ'",
+          "explanation": "Brakim table requires the creative introduction, unlike ordinary program.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00350026"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-mechanical-project-conditions",
+      "pathIds": [
+        "mechanical-engineering-2025-2026",
+        "mechanical-brakim-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 99,
+          "printedPage": 99,
+          "quote": "חובה לקחת את קורסי \"מתודולוגיות פיתוח הנדסי 1+2\"",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Select matching capstone parts. New-product design 00340353 + 00340354 requires methodology subjects 00340382 + 00340383. Other engineering/research capstones permit the methodology subjects with teacher and supervisor approval."
+    },
+    {
+      "id": "engineering-brakim-electives",
+      "pathIds": [
+        "mechanical-brakim-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 99,
+          "printedPage": 99,
+          "quote": "יש לבחור עוד קורסים מרשימות ב',ג',ה' ולהשלים עד 145.5",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Choose at least one A subject; one B in addition to 00340016; one C in addition to 00350026. Choose additional B/C/E subjects to complete 145.5 credits, plus 12 general Technion credits. The source does not specify exactly two additional subjects."
+    },
+    {
+      "id": "engineering-robotics-prereqs",
+      "pathIds": [
+        "robotics-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 99,
+          "printedPage": 99,
+          "quote": "רשימה 1 – מקצועות קדם",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00340040",
+        "00350188",
+        "00440191",
+        "00440268",
+        "00440202",
+        "00840738",
+        "00860733",
+        "00940224",
+        "00940312",
+        "02340268"
+      ],
+      "groupId": "robotics-prereqs",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-robotics-intro",
+      "pathIds": [
+        "robotics-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 100,
+          "printedPage": 100,
+          "quote": "רשימה 2 – קורסי מבוא לרובוטיקה",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00350001",
+        "00460212",
+        "02360927"
+      ],
+      "groupId": "robotics-intro",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-robotics-learning",
+      "pathIds": [
+        "robotics-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 100,
+          "printedPage": 100,
+          "quote": "רשימה 3 – למידה ובינה מלאכותית",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00360049",
+        "00460195",
+        "02360756",
+        "00960411",
+        "00960210",
+        "02360501"
+      ],
+      "groupId": "robotics-learning",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-robotics-lab",
+      "pathIds": [
+        "robotics-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 100,
+          "printedPage": 100,
+          "quote": "רשימה 4 – מעבדה מעשית",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00340401",
+        "00850705",
+        "00950111",
+        "02360006",
+        "00460214",
+        "00440167"
+      ],
+      "groupId": "robotics-lab",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-robotics-core",
+      "pathIds": [
+        "robotics-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 100,
+          "printedPage": 100,
+          "quote": "רשימה 5 – קורסי ליבה ברובוטיקה",
+          "explanation": "Complete bounded source list under this heading; separate neighboring lists excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00360026",
+        "00360044",
+        "00860762",
+        "00860761",
+        "00460213",
+        "00460203",
+        "00970244",
+        "00960208",
+        "02360203",
+        "02360767"
+      ],
+      "groupId": "robotics-core",
+      "expectedMinimumCourses": 4
+    },
+    {
+      "id": "engineering-robotics-outside",
+      "pathIds": [
+        "robotics-minor-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 100,
+          "printedPage": 100,
+          "quote": "ומתוכם לפחות 2 מחוץ לפקולטת האם.",
+          "explanation": "Conditional structure requires separate review; absence of an identical AST alone is not a demonstrated error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "At least four robotics-core subjects, including at least two outside the home faculty. Total 27 credits beyond home-degree compulsory-course requirements; entry after 60 credits with GPA at least 87. The source does not say only ten credits beyond the degree."
+    },
+    {
+      "id": "engineering-computer-safety",
+      "pathIds": [
+        "computer-engineering-2025-2026"
+      ],
+      "kind": "mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 124,
+          "printedPage": 124,
+          "quote": "בטיחות במעבדות חשמל",
+          "explanation": "First row of mandatory-course table; safety prerequisite is compulsory even at zero credits.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00440102"
+      ],
+      "sourceScopeComplete": false,
+      "semanticAssessment": "confirmed_incorrect",
+      "actualGroupIds": []
+    },
+    {
+      "id": "engineering-ee-algebra-alternatives",
+      "pathIds": [
+        "electrical-engineering-2025-2026",
+        "computer-software-engineering-2025-2026",
+        "computer-engineering-2025-2026",
+        "electrical-physics-2025-2026",
+        "electrical-physics-concentration-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 106,
+          "printedPage": 106,
+          "quote": "או",
+          "explanation": "The two algebra versions are alternatives, not two unconditional courses; corresponding path tables repeat this form.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01040064",
+        "01040016"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-computer-core",
+      "pathIds": [
+        "computer-engineering-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 125,
+          "printedPage": 125,
+          "quote": "יש ללמוד 2 קורסים מהרשימה הבאה:",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00440198",
+        "00440202",
+        "02360334",
+        "00440334",
+        "02340292",
+        "02360343"
+      ],
+      "groupId": "computer-core",
+      "expectedMinimumCourses": 2
+    },
+    {
+      "id": "engineering-computer-two-specializations",
+      "pathIds": [
+        "computer-engineering-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 124,
+          "printedPage": 124,
+          "quote": "יש להשלים לפחות שתי קבוצות התמחות",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; an unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Complete at least two specialization groups, with compulsory alternatives and at least three subjects per group. Core and specialization subjects must be disjoint (p125)."
+    },
+    {
+      "id": "engineering-ee-math-structure",
+      "pathIds": [
+        "electrical-mathematics-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 111,
+          "printedPage": 111,
+          "quote": "קבוצות התמחות שונות )קבוצת התמחות כפולה אינה עונה על",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; an unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Complete two distinct specialization groups; a double specialization does not fulfill this requirement. At least 25 elective credits including six in mathematics. At least one subject from the named three-subject extra-mathematics list."
+    },
+    {
+      "id": "engineering-ee-physics-distinction",
+      "pathIds": [
+        "electrical-physics-2025-2026",
+        "electrical-physics-concentration-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 117,
+          "printedPage": 117,
+          "quote": "מוסמך למדעים בהנדסת חשמל ובפיזיקה",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; an unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Concentration: one electrical-engineering BSc plus concentration acknowledgment, 162 credits. Combined program: one BSc in electrical engineering and physics, 178 credits. Neither is two independent BSc degrees."
+    },
+    {
+      "id": "engineering-chemical-statistics",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "רשימה 1: קורסי סטטיסטיקה - יש ללמוד אחד מהקורסים",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00940481",
+        "00140003"
+      ],
+      "groupId": "chemical-statistics",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-chemical-design",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "או",
+          "explanation": "Semester8 lists plant design or energy project as alternatives.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00540410",
+        "00540411"
+      ],
+      "groupId": "chemical-design-choice"
+    },
+    {
+      "id": "engineering-chemical-design-alternatives",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "או",
+          "explanation": "Only one capstone alternative is required.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00540410",
+        "00540411"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-chemical-statistics-alternatives",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "יש ללמוד אחד מהקורסים",
+          "explanation": "The two statistics subjects are alternatives.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00940481",
+        "00140003"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-chemical-general-core",
+      "pathIds": [
+        "chemical-general-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "יש לבחור לפחות 3 קורסים מרשימה",
+          "explanation": "All12 rows; last2 continue at top-right of p133. Three chosen courses must span at least3 source areas. Both pages visually reviewed.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00540375",
+        "01240711",
+        "03140533",
+        "01340113",
+        "01340058",
+        "03340274",
+        "00350022",
+        "00360015",
+        "00460197",
+        "00560146",
+        "00560397",
+        "00560398"
+      ],
+      "groupId": "chemical-general-core",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-chemical-materials-core",
+      "pathIds": [
+        "chemical-materials-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 133,
+          "printedPage": 133,
+          "quote": "יש לבחור שלושה קורסי ליבה לפחות",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00540350",
+        "00540373",
+        "00540378",
+        "00540375",
+        "01240711",
+        "03140533"
+      ],
+      "groupId": "chemical-materials-core",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-chemical-sustainable-core",
+      "pathIds": [
+        "chemical-sustainable-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 134,
+          "printedPage": 134,
+          "quote": "יש לבחור שלושה קורסי ליבה לפחות",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00140309",
+        "00560146",
+        "00560397",
+        "00560398"
+      ],
+      "groupId": "chemical-sustainable-core",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-chemical-computation-core",
+      "pathIds": [
+        "chemical-computation-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 134,
+          "printedPage": 134,
+          "quote": "יש לבחור שלושה קורסי ליבה לפחות",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00350022",
+        "00360015",
+        "00460197",
+        "00560146",
+        "00560149",
+        "00560389",
+        "02360343",
+        "02360703",
+        "00560395"
+      ],
+      "groupId": "chemical-computation-core",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-chemical-pharmaceutical-core",
+      "pathIds": [
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 134,
+          "printedPage": 134,
+          "quote": "יש לבחור שלושה קורסי ליבה לפחות",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00540350",
+        "01240711",
+        "01340113",
+        "03140533",
+        "03340274"
+      ],
+      "groupId": "chemical-pharmaceutical-core",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-chemical-pharma-biology",
+      "pathIds": [
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 134,
+          "printedPage": 134,
+          "quote": "01340058 ביולוגיה 1 במקום 01340127",
+          "explanation": "Explicit concentration-specific substitution.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01340058"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-chemical-pharma-replaced",
+      "pathIds": [
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 134,
+          "printedPage": 134,
+          "quote": "במקום 01340127",
+          "explanation": "Replaced subject is not additionally compulsory.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01340127"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-chemical-one-concentration",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "על כל סטודנט לבחור אחת מהמגמות",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; an unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Choose one concentration. At least 26 credits from its lists 1-3, observing statistics and core restrictions. Complete 29.5 faculty elective credits using allowed faculty pools."
+    },
+    {
+      "id": "engineering-chemical-miniproject",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 132,
+          "printedPage": 132,
+          "quote": "מיני-פרוייקט רק בצמוד למבוא להנדסה",
+          "explanation": "Exact source wording says only concurrently with the introductory subject. Earlier draft interpretation as a replacement was withdrawn.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "00540132 mini-project may be taken only concurrently with introduction to chemical and biochemical engineering (00540478). This is a co-registration condition, not a substitution."
+    },
+    {
+      "id": "engineering-biochemical-statistics",
+      "pathIds": [
+        "biochemical-engineering-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 135,
+          "printedPage": 135,
+          "quote": "יש לבחור קורס אחד",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00940481",
+        "00140003"
+      ],
+      "groupId": "biochemical-chemical-a",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-biochemical-distribution",
+      "pathIds": [
+        "biochemical-engineering-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 135,
+          "printedPage": 135,
+          "quote": "ניתן ללמוד קורס אחד לכל היותר מרשימה ד'.",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; an unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Chemical electives: one statistics subject from A; complete 16.5 credits using B-D; at most one subject from D. Biology p136: at least five credits in A; complete 13 credits from A/B."
+    },
+    {
+      "id": "engineering-biotech-applied-theory",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "מקצועות בסיס ותאוריה - חובת מגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "02760413",
+        "00660513",
+        "00640508"
+      ],
+      "groupId": "biotech-applied-theory"
+    },
+    {
+      "id": "engineering-biotech-applied-experience",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "מקצועות התנסות ומחקר למגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660516",
+        "00660332",
+        "00660010",
+        "00660421",
+        "00660529",
+        "00660533",
+        "00660517"
+      ],
+      "groupId": "biotech-applied-experience"
+    },
+    {
+      "id": "engineering-biotech-medical-theory",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "מקצועות בסיס ותאוריה - חובת מגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "02760413",
+        "00660333",
+        "00660121"
+      ],
+      "groupId": "biotech-medical-theory"
+    },
+    {
+      "id": "engineering-biotech-medical-experience",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "מקצועות התנסות ומחקר למגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660516",
+        "00660334",
+        "00640508",
+        "00660526",
+        "00660329",
+        "00660513",
+        "00660529"
+      ],
+      "groupId": "biotech-medical-experience"
+    },
+    {
+      "id": "engineering-biotech-computational-theory",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "מקצועות בסיס ותאוריה - חובת מגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660529",
+        "00660532",
+        "00660121"
+      ],
+      "groupId": "biotech-computational-theory"
+    },
+    {
+      "id": "engineering-biotech-computational-experience",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "יש לבחור אחד מבין שני הקורסים.",
+          "explanation": "Complete5course pool; starred02360523/01360158 are an internal either/or,not both compulsory.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660531",
+        "02360523",
+        "01360158",
+        "00660526",
+        "00660421"
+      ],
+      "groupId": "biotech-computational-experience"
+    },
+    {
+      "id": "engineering-biotech-food-health-theory",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "יש לבחור אחד מבין שני הקורסים.",
+          "explanation": "Four listed options include2alternative nutrition subjects plus2required concentration subjects.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "02760413",
+        "00660605",
+        "00660614",
+        "00640253"
+      ],
+      "groupId": "biotech-food-health-theory"
+    },
+    {
+      "id": "engineering-biotech-nutrition-alternatives",
+      "pathIds": [
+        "biotechnology-food-health-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "יש לבחור אחד מבין שני הקורסים.",
+          "explanation": "Two marked nutrition subjects are alternatives.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660605",
+        "00660614"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-biotech-sustainability-theory",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 143,
+          "printedPage": 143,
+          "quote": "מקצועות בסיס ותאוריה - חובת מגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660217",
+        "00660252",
+        "00640253"
+      ],
+      "groupId": "biotech-food-sustainability-theory"
+    },
+    {
+      "id": "engineering-biotech-sustainability-experience",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 143,
+          "printedPage": 143,
+          "quote": "מקצועות התנסות ומחקר למגמה",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660010",
+        "00640254",
+        "00660525",
+        "00660329",
+        "00640249",
+        "00660230",
+        "00640251",
+        "00640331"
+      ],
+      "groupId": "biotech-food-sustainability-experience"
+    },
+    {
+      "id": "engineering-biotech-shared",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 143,
+          "printedPage": 143,
+          "quote": "מקצועות התנסות ומחקר המשותפים לחמשת המגמות:",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00660011",
+        "00640001",
+        "00640002",
+        "00660530",
+        "00660012",
+        "00660013",
+        "00640003"
+      ],
+      "groupId": "biotech-shared-experience"
+    },
+    {
+      "id": "engineering-biotech-two-concentrations",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 142,
+          "printedPage": 142,
+          "quote": "הסטודנט יבחר שתיים מבין חמשת המגמות המוצעות.",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; an unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Choose two of five concentrations, each totaling 15.5 credits including at least seven experience/research credits. Complete the selected theory requirements. Replace shared theory with theory from another concentration; shared experience may fulfill only one concentration."
+    },
+    {
+      "id": "engineering-entrepreneurship-required",
+      "pathIds": [
+        "entrepreneurial-leadership-minor-2025-2026"
+      ],
+      "kind": "mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 143,
+          "printedPage": 143,
+          "quote": "03240528 מנהיגות יזמית",
+          "explanation": "First required-course row.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "03240528"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-entrepreneurship-foundations-choice",
+      "pathIds": [
+        "entrepreneurial-leadership-minor-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 143,
+          "printedPage": 143,
+          "quote": "או לחילופין, קורס התמחות בפקולטת האם",
+          "explanation": "Explicit home-faculty specialization alternative to03240527.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "03240527"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-entrepreneurship-electives",
+      "pathIds": [
+        "entrepreneurial-leadership-minor-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 143,
+          "printedPage": 143,
+          "quote": "קורסי בחירה:",
+          "explanation": "Full11general electives plus1named faculty elective in next subsection.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "03240520",
+        "03240541",
+        "03240521",
+        "03240540",
+        "03240526",
+        "03240536",
+        "03240247",
+        "03240518",
+        "03240533",
+        "03240534",
+        "03240542",
+        "00140616"
+      ],
+      "groupId": "entrepreneurship-electives"
+    },
+    {
+      "id": "engineering-aero-air-conditional",
+      "pathIds": [
+        "aerospace-engineering-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 147,
+          "printedPage": 147,
+          "quote": "חובה לבחור אחת מבין שתי קבוצות מקצועות הליבה הבאות:",
+          "explanation": "Flight mechanics1/2 conditional on aeronautics.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00840220",
+        "00840221"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-aero-space-conditional",
+      "pathIds": [
+        "aerospace-engineering-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 147,
+          "printedPage": 147,
+          "quote": "חובה לבחור אחת מבין שתי קבוצות מקצועות הליבה הבאות:",
+          "explanation": "Space engineering/mechanics conditional on astronautics.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00840913",
+        "00850915"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-aero-experiment",
+      "pathIds": [
+        "aerospace-engineering-2025-2026",
+        "aerospace-aeronautics-2025-2026",
+        "aerospace-astronautics-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 147,
+          "printedPage": 147,
+          "quote": "יש לבחור קורס אחד בשיטות ניסוי מתקדמות מבין:",
+          "explanation": "Full9-course alternatives footnote. Unusual printed00805405 preserved literally.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00840156",
+        "00850305",
+        "00805405",
+        "00850455",
+        "00850505",
+        "00850705",
+        "00850220",
+        "00850905",
+        "00850156"
+      ],
+      "groupId": "aero-advanced-experiment",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-aero-projects",
+      "pathIds": [
+        "aerospace-engineering-2025-2026",
+        "aerospace-aeronautics-2025-2026",
+        "aerospace-astronautics-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 147,
+          "printedPage": 147,
+          "quote": "הם יבחרו כצמד",
+          "explanation": "Four choices form2matching pairs; list equality alone does not verify pairing rule.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00840651",
+        "00840652",
+        "00840653",
+        "00840654"
+      ],
+      "groupId": "aero-projects"
+    },
+    {
+      "id": "engineering-aero-seminar",
+      "pathIds": [
+        "aerospace-engineering-2025-2026",
+        "aerospace-aeronautics-2025-2026",
+        "aerospace-astronautics-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 148,
+          "printedPage": 148,
+          "quote": "יש לבחור סמינריון אחד בלבד מבין:",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00850801",
+        "00850802",
+        "00850803",
+        "00850804",
+        "00850805",
+        "00850806",
+        "00850807"
+      ],
+      "groupId": "aero-seminar",
+      "expectedMinimumCourses": 1
+    },
+    {
+      "id": "engineering-aero-electric-alternative",
+      "pathIds": [
+        "aerospace-engineering-2025-2026",
+        "aerospace-aeronautics-2025-2026",
+        "aerospace-astronautics-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 147,
+          "printedPage": 147,
+          "quote": "00850406 הנעה רקטית או 085920 הנעה חשמלית לחלל",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Ordinary astronautics core: 00840913 AND 00850915 AND (00850406 OR electric propulsion, printed 085920 on p147 and 00850920 in p148 pool). Selected astronautics runtime already encodes the canonical rocket/electric alternative; generic core-list omission is not proven incorrect logic."
+    },
+    {
+      "id": "engineering-aero-rocket-alternative",
+      "pathIds": [
+        "aerospace-astronautics-2025-2026"
+      ],
+      "kind": "not-mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 147,
+          "printedPage": 147,
+          "quote": "00850406 הנעה רקטית או 085920 הנעה חשמלית לחלל",
+          "explanation": "The explicit electric alternative makes rocket propulsion conditional even while its source code needs reconciliation.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00850406"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-aero-clusters",
+      "pathIds": [
+        "aerospace-engineering-2025-2026",
+        "aerospace-aeronautics-2025-2026",
+        "aerospace-astronautics-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 148,
+          "printedPage": 148,
+          "quote": "נק' לפחות בשלושה מתוך שבעת האשכולות המפורטים",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "At least three of seven clusters, at least eight credits in each and 24 in total. External-faculty electives are capped at nine credits; this is not a cap on all courses outside selected clusters. A course used as core cannot also count as an elective. Propulsion cluster requires both rocket and jet propulsion."
+    },
+    {
+      "id": "engineering-aerophysics-air",
+      "pathIds": [
+        "aerospace-physics-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 150,
+          "printedPage": 150,
+          "quote": "מקצועות ליבה אוירונוטיקה:",
+          "explanation": "Combined path differs from ordinary aerospace propulsion OR: jet propulsion is sole third row.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00840220",
+        "00840221",
+        "00850407"
+      ],
+      "groupId": "aero-physics-core-air"
+    },
+    {
+      "id": "engineering-aerophysics-space",
+      "pathIds": [
+        "aerospace-physics-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 150,
+          "printedPage": 150,
+          "quote": "מקצועות ליבה אסטרונוטיקה:",
+          "explanation": "Combined path explicitly requires electric propulsion as third row.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00840913",
+        "00850915",
+        "00850920"
+      ],
+      "groupId": "aero-physics-core-space"
+    },
+    {
+      "id": "engineering-aerophysics-list2",
+      "pathIds": [
+        "aerospace-physics-2025-2026",
+        "aerospace-physics-aeronautics-2025-2026",
+        "aerospace-physics-astronautics-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 151,
+          "printedPage": 151,
+          "quote": "רשימת בחירה 2",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01160217",
+        "01160210",
+        "01160029",
+        "01160354",
+        "01160031",
+        "01160004"
+      ],
+      "groupId": "aero-physics-list2",
+      "expectedMinimumCredits": 10.5
+    },
+    {
+      "id": "engineering-aerophysics-distribution",
+      "pathIds": [
+        "aerospace-physics-2025-2026",
+        "aerospace-physics-aeronautics-2025-2026",
+        "aerospace-physics-astronautics-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 151,
+          "printedPage": 151,
+          "quote": "ועוד 2 נק׳ לפחות ממקצועות בחירה מתוך רשימה 3.",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "At least 10.5 credits from physics list 2 and at least two credits from list 3. Physics projects may count only as permitted by the source."
+    },
+    {
+      "id": "engineering-data-science",
+      "pathIds": [
+        "data-information-engineering-2025-2026",
+        "data-mathematical-analysis-2025-2026",
+        "data-cognitive-science-2025-2026",
+        "industrial-management-engineering-2025-2026",
+        "industrial-focus-advanced-industry-2025-2026",
+        "industrial-focus-operations-research-2025-2026",
+        "industrial-focus-game-theory-2025-2026",
+        "information-systems-engineering-2025-2026",
+        "information-systems-focus-operations-research-2025-2026",
+        "information-systems-focus-machine-learning-2025-2026",
+        "information-systems-focus-game-theory-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 158,
+          "printedPage": 158,
+          "quote": "קורס מדעי:",
+          "explanation": "Full12explicit science alternatives; p161/p163 reference this same requirement. Unusual printed1200124 preserved.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01140032",
+        "01140052",
+        "01140054",
+        "01140075",
+        "01200124",
+        "01240510",
+        "01250001",
+        "01250013",
+        "01250801",
+        "01340020",
+        "01340058",
+        "02740300"
+      ],
+      "groupId": "data-scientific",
+      "expectedMinimumCredits": 5.5
+    },
+    {
+      "id": "engineering-data-physics-science",
+      "pathIds": [
+        "data-information-engineering-2025-2026",
+        "data-mathematical-analysis-2025-2026",
+        "data-cognitive-science-2025-2026",
+        "industrial-management-engineering-2025-2026",
+        "industrial-focus-advanced-industry-2025-2026",
+        "industrial-focus-operations-research-2025-2026",
+        "industrial-focus-game-theory-2025-2026",
+        "information-systems-engineering-2025-2026",
+        "information-systems-focus-operations-research-2025-2026",
+        "information-systems-focus-machine-learning-2025-2026",
+        "information-systems-focus-game-theory-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 158,
+          "printedPage": 158,
+          "quote": "נק' מהרשימה הבאה.",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Physics 01140051 OR 01140071. With 01140051, scientific electives require 5.5 credits; with 01140071 they require 4.5 credits."
+    },
+    {
+      "id": "engineering-data-analysis-list",
+      "pathIds": [
+        "data-mathematical-analysis-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 159,
+          "printedPage": 159,
+          "quote": "רשימת בחירה",
+          "explanation": "Full24-source-row concentration list. Some footnotes count rows only as free choice or require advisor approval; membership alone cannot prove bucket credit.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00940701",
+        "00940702",
+        "00960212",
+        "00960226",
+        "00960231",
+        "00960311",
+        "00960335",
+        "00960336",
+        "00960351",
+        "00960415",
+        "00960470",
+        "00960576",
+        "00970211",
+        "00970249",
+        "00970280",
+        "00970317",
+        "00970325",
+        "00980413",
+        "00980414",
+        "00980455",
+        "00980312",
+        "01040030",
+        "01040158",
+        "01040295"
+      ],
+      "groupId": "data-analysis-electives",
+      "expectedMinimumCredits": 7
+    },
+    {
+      "id": "engineering-data-analysis-mandatory",
+      "pathIds": [
+        "data-mathematical-analysis-2025-2026"
+      ],
+      "kind": "mandatory",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 159,
+          "printedPage": 159,
+          "quote": "קורסי בסיס חובה",
+          "explanation": "Five named concentration core subjects.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "01040285",
+        "01040142",
+        "01040273",
+        "01040165",
+        "01040122"
+      ],
+      "sourceScopeComplete": false
+    },
+    {
+      "id": "engineering-cognition-core",
+      "pathIds": [
+        "data-cognitive-science-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 160,
+          "printedPage": 160,
+          "quote": "קורסי ליבה&",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00970622",
+        "00950622",
+        "00940600",
+        "00950605"
+      ],
+      "groupId": "cognition-core"
+    },
+    {
+      "id": "engineering-cognition-basic",
+      "pathIds": [
+        "data-cognitive-science-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 160,
+          "printedPage": 160,
+          "quote": "קורסי בסיס",
+          "explanation": "All distinct printed numbers.0970215 printed twice with different titles; no silently inferred replacement.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00960222",
+        "00960235",
+        "00960275",
+        "00960606",
+        "00960617",
+        "00960693",
+        "00970215",
+        "02160016",
+        "02160020",
+        "02160030"
+      ],
+      "groupId": "cognition-basic",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-cognition-advanced",
+      "pathIds": [
+        "data-cognitive-science-2025-2026"
+      ],
+      "kind": "group",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 160,
+          "printedPage": 160,
+          "quote": "קורסים מתקדמים",
+          "explanation": "Complete independently transcribed bounded source list; neighboring headings excluded.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expectedCourseIds": [
+        "00940697",
+        "00940702",
+        "00960244",
+        "00960620",
+        "00960625",
+        "00960690",
+        "00960694",
+        "00970217",
+        "00970244",
+        "00970292",
+        "00970201",
+        "02160003",
+        "02160019",
+        "02160028"
+      ],
+      "groupId": "cognition-advanced",
+      "expectedMinimumCourses": 3
+    },
+    {
+      "id": "engineering-cognition-selection",
+      "pathIds": [
+        "data-cognitive-science-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 159,
+          "printedPage": 159,
+          "quote": "סמינר במדעי הקוגניציה )0940600",
+          "explanation": "Original paragraph specifies seminar in year two and at least one additional core by year-end; three applies to basic and advanced subjects.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Complete seminar 00940600 in year two and at least one additional core subject by the end of year two; three basic subjects and three advanced subjects, including the source restrictions on research project credit. Do not infer three additional core subjects."
+    },
+    {
+      "id": "engineering-data-project-stars",
+      "pathIds": [
+        "data-information-engineering-2025-2026",
+        "data-mathematical-analysis-2025-2026",
+        "data-cognitive-science-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 158,
+          "printedPage": 158,
+          "quote": "לפחות שני קורסים אשר מסומנים *",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "At least 24.5 credits from named data electives, including at least two starred data-intensive project subjects; at least 10.5 faculty elective credits."
+    },
+    {
+      "id": "engineering-medicine-double-degree",
+      "pathIds": [
+        "medicine-data-engineering-2025-2026"
+      ],
+      "kind": "rule",
+      "mode": "contains",
+      "evidence": [
+        {
+          "pdfPage": 164,
+          "printedPage": 164,
+          "quote": "התכנית מקנה תואר כפול:",
+          "explanation": "Review semantic equivalence with all runtime groups/prose; unequal AST alone is not a confirmed error.",
+          "visuallyReviewed": true
+        }
+      ],
+      "confidence": "high",
+      "expected": "Two BSc qualifications over five years: medical sciences and data/information engineering. Before clinical medicine: 241.5 credits, comprising 225.5 compulsory, 11 data electives, three advanced English and two PE. Later clinical admission and three more years precede MD."
+    },
+    {
+      "id": "engineering-medicine-duration",
+      "pathIds": [
+        "medicine-data-engineering-2025-2026"
+      ],
+      "kind": "field",
+      "mode": "exact",
+      "evidence": [
+        {
+          "pdfPage": 157,
+          "printedPage": 157,
+          "quote": "נתונים ומידע (5 שנתי)",
+          "explanation": "Explicit source overview duration."
+        }
+      ],
+      "confidence": "high",
+      "expected": 5,
+      "field": "durationYears"
+    }
+  ],
+  "manualChecklist": [
+    {
+      "id": "engineering-civil-management",
+      "pathIds": [
+        "civil-management-construction-2025-2026",
+        "civil-transportation-construction-minor-2025-2026"
+      ],
+      "pdfPages": [
+        76,
+        78,
+        79
+      ],
+      "topic": "Construction and minor branches, project lists",
+      "status": "requires-manual-review",
+      "reason": "Full p76/p78/p79 lists, project prerequisites and joint credit thresholds are not independently enumerated here. Keep these paths partially reviewed."
+    },
+    {
+      "id": "engineering-mapping-crossrefs",
+      "pathIds": [
+        "mapping-geoinformation-three-year-2025-2026",
+        "mapping-3-survey-2025-2026",
+        "mapping-3-mapping-2025-2026",
+        "mapping-geoinformation-engineering-2025-2026",
+        "mapping-4-survey-2025-2026",
+        "mapping-4-mapping-2025-2026",
+        "mapping-4-cadastre-2025-2026"
+      ],
+      "pdfPages": [
+        82,
+        83,
+        84
+      ],
+      "topic": "Project cross-references and degree-specific list rules",
+      "status": "requires-manual-review",
+      "reason": "Four-year p82 project labels and numbers conflict. Three-year p83 explicitly permits 00140875/00140876. Reconcile before changing course identities. List A minimum is three subjects for three-year and five for four-year; long B/C pools and five-credit project cap still need full checking."
+    },
+    {
+      "id": "engineering-mechanical-pools",
+      "pathIds": [
+        "mechanical-engineering-2025-2026",
+        "mechanical-brakim-2025-2026"
+      ],
+      "pdfPages": [
+        98,
+        99
+      ],
+      "topic": "Long elective pools B-E and printed identifiers",
+      "status": "requires-manual-review",
+      "reason": "Only list A was exact-transcribed. The source literally prints 03400053 and 03501460. Resolve canonical identities separately. Brakim selection differs from the ordinary degree."
+    },
+    {
+      "id": "engineering-ee-nesting",
+      "pathIds": [
+        "electrical-engineering-2025-2026",
+        "electrical-mathematics-2025-2026",
+        "computer-software-engineering-2025-2026",
+        "computer-engineering-2025-2026",
+        "electrical-physics-2025-2026",
+        "electrical-physics-concentration-2025-2026"
+      ],
+      "pdfPages": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        125,
+        126,
+        127
+      ],
+      "topic": "Specialization alternatives, double groups, laboratory caps and overlap",
+      "status": "requires-manual-review",
+      "reason": "Long specialization pools are not exact-verified here. Check compulsory alternatives, advisor exceptions, double-group counting, laboratory credit caps and disjointness. Electrical mathematics requires two distinct groups; a double group does not satisfy that rule."
+    },
+    {
+      "id": "engineering-ee-honors",
+      "pathIds": [
+        "electrical-research-honors-2025-2026"
+      ],
+      "pdfPages": [
+        105,
+        128
+      ],
+      "topic": "Research honors certificate and home degree",
+      "status": "requires-manual-review",
+      "reason": "Source supports a certificate in addition to a home BSc. The empty inventory path is not a verified standalone curriculum. Admission and research-project conditions remain to be checked."
+    },
+    {
+      "id": "engineering-chemical-pools",
+      "pathIds": [
+        "chemical-engineering-2025-2026",
+        "chemical-general-2025-2026",
+        "chemical-materials-2025-2026",
+        "chemical-sustainable-2025-2026",
+        "chemical-computation-2025-2026",
+        "chemical-pharmaceutical-2025-2026",
+        "biochemical-engineering-2025-2026"
+      ],
+      "pdfPages": [
+        132,
+        133,
+        134,
+        135,
+        136
+      ],
+      "topic": "Long optional pools and research-project conditions",
+      "status": "requires-manual-review",
+      "reason": "Core lists were exact-transcribed. Common mandatory table literally prints 00040041; do not silently repair it. Check all research-project credit caps, semester 7-8 concurrency, pharmaceutical biology replacement, biochemical maximum one D subject and minimum five biology-A credits. Mini-project 00540132 requires concurrent 00540478; it is not a replacement."
+    },
+    {
+      "id": "engineering-biotech-base",
+      "pathIds": [
+        "biotechnology-food-engineering-2025-2026",
+        "biotechnology-applied-2025-2026",
+        "biotechnology-medical-2025-2026",
+        "biotechnology-computational-2025-2026",
+        "biotechnology-food-health-2025-2026",
+        "biotechnology-food-sustainability-2025-2026"
+      ],
+      "pdfPages": [
+        140,
+        141,
+        142,
+        143
+      ],
+      "topic": "Common compulsory subjects and two-concentration accounting",
+      "status": "requires-manual-review",
+      "reason": "Concentration and shared experience pools were checked. Full p141 compulsory table and all recommended extras are not exact-verified. Shared theory must be replaced; experience cannot double-count; each concentration requires seven experience credits. Check nutrition and bioinformatics alternatives."
+    },
+    {
+      "id": "engineering-biotech-extra",
+      "pathIds": [
+        "biotechnology-additional-chemistry-2025-2026",
+        "biotechnology-additional-biology-2025-2026"
+      ],
+      "pdfPages": [
+        140
+      ],
+      "topic": "Additional degree type versus total completion time",
+      "status": "requires-manual-review",
+      "reason": "Source calls the additional chemistry or biology BSc a three-year degree type. It does not establish four-year total combined completion. Exact requirements are referenced to the other faculty; runtime duration is not independently verified here."
+    },
+    {
+      "id": "engineering-aero-anomalies",
+      "pathIds": [
+        "aerospace-engineering-2025-2026",
+        "aerospace-aeronautics-2025-2026",
+        "aerospace-astronautics-2025-2026"
+      ],
+      "pdfPages": [
+        147,
+        148,
+        149
+      ],
+      "topic": "Shortened printed identifiers and astronautics choices",
+      "status": "requires-manual-review",
+      "reason": "Source 085920 versus 00850920, 0805407 versus 00850407, 00805405 and 08800102 need primary course identity reconciliation. Selected astronautics runtime already encodes rocket OR electric propulsion, so no unconditional-rocket defect is established. The generic core group omits the electric option while its prose acknowledges it."
+    },
+    {
+      "id": "engineering-aerophysics-full",
+      "pathIds": [
+        "aerospace-physics-2025-2026",
+        "aerospace-physics-aeronautics-2025-2026",
+        "aerospace-physics-astronautics-2025-2026"
+      ],
+      "pdfPages": [
+        149,
+        150,
+        151,
+        189
+      ],
+      "topic": "Combined compulsory table, physics list 3 and seminar conflict",
+      "status": "requires-manual-review",
+      "reason": "Core choices and physics list 2 were exact-transcribed. Full p149-p150 compulsory table and long physics list 3 are not exhaustively verified. Another reviewer reported source p189 seminar 00850806 versus runtime 00850807; compare the full p150 footnote with the physics chapter before any correction. Ordinary and combined aerospace cores differ."
+    },
+    {
+      "id": "engineering-aero-honors",
+      "pathIds": [
+        "aerospace-silon-2025-2026",
+        "aerospace-gvahim-2025-2026"
+      ],
+      "pdfPages": [
+        146
+      ],
+      "topic": "Accelerated aerospace honors programs",
+      "status": "requires-manual-review",
+      "reason": "Original p146 supports Silon and Gvahim and completion of a masters within five years. Detailed honors curricula are externally referenced; retain inventory-only status."
+    },
+    {
+      "id": "engineering-data-focuses",
+      "pathIds": [
+        "industrial-management-engineering-2025-2026",
+        "industrial-focus-advanced-industry-2025-2026",
+        "industrial-focus-operations-research-2025-2026",
+        "industrial-focus-game-theory-2025-2026",
+        "information-systems-engineering-2025-2026",
+        "information-systems-focus-operations-research-2025-2026",
+        "information-systems-focus-machine-learning-2025-2026",
+        "information-systems-focus-game-theory-2025-2026"
+      ],
+      "pdfPages": [
+        160,
+        161,
+        162,
+        163
+      ],
+      "topic": "Industrial and information-systems focus chains",
+      "status": "requires-manual-review",
+      "reason": "Full p161/p163 branch pools were not independently enumerated. Preserve the 0940412 alternative to 0940411 and differences between home programs. A course appearing in one focus chain does not prove it universally compulsory."
+    },
+    {
+      "id": "engineering-data-electives",
+      "pathIds": [
+        "data-information-engineering-2025-2026",
+        "data-mathematical-analysis-2025-2026",
+        "data-cognitive-science-2025-2026"
+      ],
+      "pdfPages": [
+        158,
+        159,
+        160
+      ],
+      "topic": "General data electives, starred projects and faculty-prefix eligibility",
+      "status": "requires-manual-review",
+      "reason": "Science and concentration sublists were checked. General data electives and automatic 094-097 faculty eligibility were not exact-closed lists here. Duplicate 0970215 titles and science code 1200124 remain unresolved. Independently enumerate the starred project subset. Cognitive program requires seminar plus at least one additional core by end of year two, not three extra core subjects."
+    },
+    {
+      "id": "engineering-medicine-table",
+      "pathIds": [
+        "medicine-data-engineering-2025-2026"
+      ],
+      "pdfPages": [
+        164,
+        165,
+        166
+      ],
+      "topic": "Complete medical and data course-row classification",
+      "status": "requires-manual-review",
+      "reason": "Qualifications and five-year length were checked; the full 71-course import was not exact-verified. Later clinical study is separate. Review zero-credit, first-aid and research rows individually."
+    },
+    {
+      "id": "engineering-economics",
+      "pathIds": [
+        "economics-minor-2025-2026"
+      ],
+      "pdfPages": [
+        166
+      ],
+      "topic": "Economics choices and additional credits",
+      "status": "requires-manual-review",
+      "reason": "Source requires introduction to economics OR principles for engineers, game theory OR noncooperative games, and macro/micro/finance subjects. Seven credits must exceed home-degree requirements; entry GPA is at least 80 after 36 credits. Full final assertions are deferred."
+    },
+    {
+      "id": "engineering-data-honors",
+      "pathIds": [
+        "data-alonim-2025-2026",
+        "industrial-avivim-2025-2026",
+        "data-faculty-excellence-2025-2026"
+      ],
+      "pdfPages": [
+        157
+      ],
+      "topic": "Data honors duration and graduate scope",
+      "status": "requires-manual-review",
+      "reason": "Source supports Alonim and Avivim as 4.5-year BSc plus MSc programs and faculty excellence as five years. Empty inventory paths are not verified curricula."
+    },
+    {
+      "id": "engineering-crossfaculty",
+      "pathIds": [
+        "mathematics-game-theory-2025-2026",
+        "physics-ee-concentration-2025-2026",
+        "chemistry-additional-chemical-engineering-2025-2026",
+        "chemistry-additional-biotechnology-food-2025-2026"
+      ],
+      "pdfPages": [
+        105,
+        140
+      ],
+      "topic": "Originating cross-faculty curricula",
+      "status": "requires-manual-review",
+      "reason": "References in assigned sections do not establish full requirements of mathematics, physics or chemistry-originating paths. Coordinate with those reviewers. Additional teaching degrees require the education chapter."
+    }
+  ],
+  "limitations": [
+    "reviewedPages 73-168 denotes assignment-wide heading and boundary inspection, not full visual or course verification. Methodology lists the pages visually inspected.",
+    "Graduate sections begin at civil85, mechanical101, EE128, chemical137, biotechnology144, aerospace153 and data167. Occurrences there do not by themselves establish undergraduate eligibility.",
+    "No complete degree mandatory or elective coverage is claimed. Exact assertions refer only to independently enumerated bounded lists.",
+    "Printed identifiers and conflicting source cross-references remain unresolved. No silent canonical course correction was made.",
+    "Plain-language rule assertions are source obligations for conservative semantic review. An absent identical AST is not automatically incorrect, since groups or prose may express the same obligation.",
+    "Generic exemptions, individual approvals and external lists were not exhaustively resolved.",
+    "Draft interpretations of mini-project substitution, unconditional astronautics rocket propulsion, three additional cognitive core subjects and two additional Brakim subjects were explicitly withdrawn after exact-source verification."
+  ],
+  "findings": [
+    {
+      "id": "computer-safety-omission",
+      "pathIds": [
+        "computer-engineering-2025-2026"
+      ],
+      "expected": "00440102 is mandatory, including at zero credits.",
+      "actual": "Absent from mandatoryCourseIds; p124 explicitly includes the safety subject in the compulsory table.",
+      "severity": "high",
+      "confidence": "high",
+      "semanticAssessment": "confirmed_incorrect",
+      "explanation": "Mandatory table role is explicit. No alternate safety course, exemption rule or other path constraint converts the missing subject into an optional choice."
+    },
+    {
+      "id": "mapping3-survey-default-classification",
+      "pathIds": [
+        "mapping-3-survey-2025-2026"
+      ],
+      "expected": "00140867 OR 00140875.",
+      "actual": "00140867 is in mandatoryCourseIds. No specific project-choice group or substitution rule; only generic source-following prose.",
+      "severity": "high",
+      "confidence": "high",
+      "semanticAssessment": "confirmed_incorrect",
+      "explanation": "The classification cannot be unconditional because the original source explicitly permits the alternate project. The generic condition acknowledges replacements without identifying this one."
+    },
+    {
+      "id": "mapping3-map-default-classification",
+      "pathIds": [
+        "mapping-3-mapping-2025-2026"
+      ],
+      "expected": "00140857 OR 00140876.",
+      "actual": "00140857 is in mandatoryCourseIds. No specific project-choice group or substitution rule; only generic source-following prose.",
+      "severity": "high",
+      "confidence": "high",
+      "semanticAssessment": "confirmed_incorrect",
+      "explanation": "The source explicitly permits the alternate project, so 00140857 is not universally compulsory."
+    },
+    {
+      "id": "mapping4-project-boundary",
+      "pathIds": [
+        "mapping-geoinformation-engineering-2025-2026",
+        "mapping-4-survey-2025-2026",
+        "mapping-4-mapping-2025-2026",
+        "mapping-4-cadastre-2025-2026"
+      ],
+      "expected": "Reconcile p82 project references 00140857/00140867 and their contradictory labels. 00140875/00140876 are elective-list A rows there.",
+      "actual": "Mandatory-choice mapping-project-alternatives contains 00140875/00140876, the explicit alternatives specified only in the three-year p83 program.",
+      "severity": "high",
+      "confidence": "medium",
+      "semanticAssessment": "unresolved",
+      "explanation": "Partial coverage or source ambiguity; do not treat an absent identical AST alone as an error.",
+      "actualGroupIds": [
+        "mapping-project-alternatives"
+      ]
+    },
+    {
+      "id": "structural-eight-credit-logic",
+      "pathIds": [
+        "civil-structures-2025-2026"
+      ],
+      "expected": "At least eight credits jointly across A+B, with at least two A subjects and one B subject.",
+      "actual": "Individual course minima are correct. No joint eight-credit requirement in requirementRules; source/prose may be intentionally informational.",
+      "severity": "medium",
+      "confidence": "high",
+      "semanticAssessment": "unresolved",
+      "explanation": "Partial coverage or source ambiguity; do not treat an absent identical AST alone as an error."
+    },
+    {
+      "id": "computer-specialization-logic",
+      "pathIds": [
+        "computer-engineering-2025-2026"
+      ],
+      "expected": "At least two complete specialization groups, disjoint from the core subjects.",
+      "actual": "Pools are present; requirementRules encode algebra, operating-systems and architecture alternatives. Two-group selection and disjointness require semantic review.",
+      "severity": "medium",
+      "confidence": "high",
+      "semanticAssessment": "unresolved",
+      "explanation": "Partial coverage or source ambiguity; do not treat an absent identical AST alone as an error."
+    }
+  ]
+}

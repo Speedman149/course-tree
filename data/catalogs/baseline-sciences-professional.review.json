@@ -1,0 +1,7755 @@
+{
+  "sourceId": "2025-2026-full",
+  "sourceSha256": "aff2590a80708d6df4ef4cbbb9b429677f6814beebe84441dba7f69075e339f3",
+  "reviewMethod": "Systematic text and section-heading pass through every assigned chapter page; manual source-table region review; visual samples separately enumerated. This is not a claim of full visual verification or full curriculum completion.",
+  "textReviewedPdfPages": [
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    233,
+    234,
+    235,
+    236,
+    237,
+    238,
+    239,
+    240,
+    241,
+    242,
+    243,
+    244,
+    245,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    297,
+    298,
+    299,
+    300,
+    301,
+    302,
+    303,
+    304,
+    305,
+    306,
+    307,
+    308,
+    309,
+    310,
+    311,
+    312
+  ],
+  "visuallyReviewedPdfPages": [
+    291,
+    307,
+    308
+  ],
+  "chapters": [
+    {
+      "facultyId": "chemistry",
+      "pages": [
+        194,
+        205
+      ],
+      "undergraduatePages": [
+        194,
+        202
+      ],
+      "graduatePages": [
+        203,
+        205
+      ],
+      "notes": "Haznek appears in both undergraduate and later graduate discussion. Retained once with undergraduate-connected focus variants, inventory-only; unresolved placeholder numbers not repaired."
+    },
+    {
+      "facultyId": "biology",
+      "pages": [
+        206,
+        216
+      ],
+      "undergraduatePages": [
+        206,
+        214
+      ],
+      "graduatePages": [
+        215,
+        216
+      ],
+      "notes": "Four explicit undergraduate variants, research honors and dual-major; graduate specializations excluded. CS bioinformatics and biochemical engineering owned by other chapter definitions."
+    },
+    {
+      "facultyId": "architecture",
+      "pages": [
+        217,
+        228
+      ],
+      "undergraduatePages": [
+        217,
+        221
+      ],
+      "graduatePages": [
+        222,
+        228
+      ],
+      "notes": "BSc architecture and BLA imported separately. M.Arch1 professional graduate program excluded; BArch overview-only entry retained incomplete."
+    },
+    {
+      "facultyId": "education",
+      "pages": [
+        229,
+        245
+      ],
+      "undergraduatePages": [
+        229,
+        243
+      ],
+      "graduatePages": [
+        244,
+        245
+      ],
+      "notes": "Seven BScEd curricula, post-degree qualification and eight certificate variants. Each named subject elective group remains within its applicable path; ten EE subject groups are not ten independent degrees."
+    },
+    {
+      "facultyId": "medicine",
+      "pages": [
+        270,
+        288
+      ],
+      "undergraduatePages": [
+        272,
+        285
+      ],
+      "graduatePages": [
+        286,
+        288
+      ],
+      "notes": "Preclinical BSc imported; MD clinical cohort timing retained unresolved. Three official double degrees exist. CS/Data curricula maintained by computing/engineering definitions; Biomedical maintained here. Occupational therapy overview supplies no curriculum."
+    },
+    {
+      "facultyId": "materials",
+      "pages": [
+        289,
+        299
+      ],
+      "undergraduatePages": [
+        289,
+        297
+      ],
+      "graduatePages": [
+        298,
+        299
+      ],
+      "notes": "Four degree curricula, computational-data cluster and Gvishim honors path. General research fields not promoted to formal tracks. Chemistry combined/double terminology conflict retained."
+    },
+    {
+      "facultyId": "humanities",
+      "pages": [
+        300,
+        301
+      ],
+      "undergraduatePages": [
+        300,
+        301
+      ],
+      "graduatePages": [
+        301,
+        301
+      ],
+      "notes": "Service teaching/enrichment/English; no independent undergraduate degree defined. Graduate PhD not imported as an undergraduate path."
+    },
+    {
+      "facultyId": "biomedical",
+      "pages": [
+        302,
+        312
+      ],
+      "undergraduatePages": [
+        303,
+        308
+      ],
+      "graduatePages": [
+        309,
+        312
+      ],
+      "notes": "Standard, Physics combined, and Medicine double degree have their own tables. Four elective subject groups remain elective groups, not independent degree titles."
+    }
+  ],
+  "counts": {
+    "programs": 45,
+    "partial": 32,
+    "inventoryOnly": 13,
+    "explicitGroups": 174,
+    "reviewedSelectors": 216
+  },
+  "knownUnresolved": [
+    "Full per-course catalog credits/names are not yet captured independently of SAP; source PDF remains authoritative.",
+    "Mandatory alternatives and suggested-plan footnotes are not all resolved; education plan tables deliberately classified additional pending exact requirement review.",
+    "Teaching certificate CS table prints engineering course numbers against CS course titles; raw IDs are preserved without correction.",
+    "Biology microbiology seminar number differs across semesters; raw 06404130 and13602040 list IDs retained as unresolved records rather than silently repaired.",
+    "Chemistry Haznek has placeholder course numbers and duplicate/non-identical table occurrences.",
+    "Materials Chemistry is called double degree in Chemistry description but single combined BSc in Materials description; qualifications require official clarification.",
+    "Materials Biology totals conflict internally (180 vs179.5;21 vs20 elective credits).",
+    "Architecture broad electives and Biomedical Physics external physics list require additional official enumeration.",
+    "Occupational therapy curriculum is external to supplied catalog; duration3.5 in detailed text differs from overview3.",
+    "MD clinical program is for students starting clinical stage2025–2026; no unverified full six-year cohort merge.",
+    "None of these45 definitions is marked fully verified."
+  ],
+  "programs": [
+    {
+      "programId": "chemistry-three-year",
+      "officialName": "כימיה — תואר בוגר",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            194,
+            195,
+            196
+          ],
+          "printedPages": [
+            194,
+            195,
+            196
+          ],
+          "section": "כימיה — תואר בוגר"
+        }
+      ],
+      "groups": [
+        {
+          "name": "פיזיקה — חלופות לפי הסיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140077",
+            "01140051",
+            "01140071",
+            "01140052",
+            "01140058",
+            "01140075"
+          ],
+          "conditions": [
+            "יש להשלים חלופה בכל אחד מרכיבי פיזיקה 1 ופיזיקה 2, לפי סיווג."
+          ]
+        },
+        {
+          "name": "ביולוגיה — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01340127",
+            "01340058"
+          ],
+          "conditions": [
+            "ביולוגיה 1 מחליפה נושאים בביולוגיה מודרנית; הפרש נקודה נזקף לבחירה."
+          ]
+        },
+        {
+          "name": "תורת הקוונטים — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01240408",
+            "01240400"
+          ],
+          "conditions": [
+            "קורס מורחב 01240400 מחליף 01240408; עודף הנקודות על חשבון בחירה."
+          ]
+        },
+        {
+          "name": "מעבדת המשך — חלופות",
+          "regions": [
+            "195L:25:30"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "מעבדה בכימיה פיזיקלית 2 או בכימיה אורגנית 2."
+          ]
+        },
+        {
+          "name": "מעבדות מתקדמות ופרויקטי מחקר",
+          "regions": [
+            "195L:41:51"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימת בחירה מתקדמת — כל האפשרויות",
+          "regions": [
+            "195L:53:69",
+            "196R:3:34"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה מוגבלת — עד קורס אחד",
+          "regions": [
+            "196R:43:46"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לכל היותר קורס אחד מהרשימה."
+          ]
+        },
+        {
+          "name": "מקצועות בחירה נוספים בכימיה",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה."
+      ]
+    },
+    {
+      "programId": "chemistry-haznek",
+      "officialName": "כימיה — תכנית הזנק למצטיינים",
+      "programCategory": "concentration",
+      "parentProgramId": "chemistry-three-year",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            196,
+            197,
+            198,
+            204,
+            205
+          ],
+          "printedPages": [
+            196,
+            197,
+            198,
+            204,
+            205
+          ],
+          "section": "כימיה — תכנית הזנק למצטיינים"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "מסלול הסמכה משולב עם המשך לתואר שני, לא תואר ראשון נוסף. חלק מהמקצועות משותפים לשני התארים ורישומם נקבע עם החונך.",
+        "המקור כולל מספרי מציין־מקום 126xxxx/126xxx ושני מופעים לא אחידים של תכנית הזנק בעמודים196–198 ו204–205. אין תיקון מספרים או מיזוג לא בדוק."
+      ]
+    },
+    {
+      "programId": "chemistry-haznek-pharmaceutical-biochemistry",
+      "officialName": "כימיה — הזנק — ביוכימיה תרופתית",
+      "programCategory": "concentration",
+      "parentProgramId": "chemistry-haznek",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            197,
+            205
+          ],
+          "printedPages": [
+            197,
+            205
+          ],
+          "section": "כימיה — הזנק — ביוכימיה תרופתית"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "התמקדות רשמית בתכנית הזנק, הנמשכת לתואר שני. דרישות המיקוד כוללות נקודות משותפות לתארים ומקצועות שטרם אומתו; אין שימוש אוטומטי בתכנית הכימיה הכללית."
+      ]
+    },
+    {
+      "programId": "chemistry-haznek-chemical-technologies",
+      "officialName": "כימיה — הזנק — טכנולוגיות כימיות",
+      "programCategory": "concentration",
+      "parentProgramId": "chemistry-haznek",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            197,
+            205
+          ],
+          "printedPages": [
+            197,
+            205
+          ],
+          "section": "כימיה — הזנק — טכנולוגיות כימיות"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "התמקדות רשמית בתכנית הזנק, הנמשכת לתואר שני. דרישות המיקוד כוללות נקודות משותפות לתארים ומקצועות שטרם אומתו; אין שימוש אוטומטי בתכנית הכימיה הכללית."
+      ]
+    },
+    {
+      "programId": "chemistry-haznek-molecular-quantum-technologies",
+      "officialName": "כימיה — הזנק — טכנולוגיות קוונטיות מולקולריות",
+      "programCategory": "concentration",
+      "parentProgramId": "chemistry-haznek",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            197,
+            205
+          ],
+          "printedPages": [
+            197,
+            205
+          ],
+          "section": "כימיה — הזנק — טכנולוגיות קוונטיות מולקולריות"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "התמקדות רשמית בתכנית הזנק, הנמשכת לתואר שני. דרישות המיקוד כוללות נקודות משותפות לתארים ומקצועות שטרם אומתו; אין שימוש אוטומטי בתכנית הכימיה הכללית."
+      ]
+    },
+    {
+      "programId": "chemistry-additional-chemical-engineering",
+      "officialName": "כימיה — אפשרות לתואר נוסף בהנדסה כימית",
+      "programCategory": "additional-degree",
+      "parentProgramId": "chemistry-three-year",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            194
+          ],
+          "printedPages": [
+            194
+          ],
+          "section": "כימיה — אפשרות לתואר נוסף בהנדסה כימית"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "הקטלוג מתעד אפשרות ללימודים לתואר נוסף בתנאים מסוימים ולפי תכנית פרטנית. לא הומצאה תכנית מאיחוד שני תארים. נדרש אימות רשמי של ההרכב, ההכרות והחלופות."
+      ]
+    },
+    {
+      "programId": "chemistry-additional-biotechnology-food",
+      "officialName": "כימיה — אפשרות לתואר נוסף בהנדסת ביוטכנולוגיה ומזון",
+      "programCategory": "additional-degree",
+      "parentProgramId": "chemistry-three-year",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            194
+          ],
+          "printedPages": [
+            194
+          ],
+          "section": "כימיה — אפשרות לתואר נוסף בהנדסת ביוטכנולוגיה ומזון"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "הקטלוג מתעד אפשרות ללימודים לתואר נוסף בתנאים מסוימים ולפי תכנית פרטנית. לא הומצאה תכנית מאיחוד שני תארים. נדרש אימות רשמי של ההרכב, ההכרות והחלופות."
+      ]
+    },
+    {
+      "programId": "chemistry-additional-physics",
+      "officialName": "כימיה — אפשרות לתואר נוסף בפיזיקה",
+      "programCategory": "additional-degree",
+      "parentProgramId": "chemistry-three-year",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            194
+          ],
+          "printedPages": [
+            194
+          ],
+          "section": "כימיה — אפשרות לתואר נוסף בפיזיקה"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "הקטלוג מתעד אפשרות ללימודים לתואר נוסף בתנאים מסוימים ולפי תכנית פרטנית. לא הומצאה תכנית מאיחוד שני תארים. נדרש אימות רשמי של ההרכב, ההכרות והחלופות."
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "officialName": "ביולוגיה — המגמה הכללית",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            206,
+            208,
+            209,
+            212
+          ],
+          "printedPages": [
+            206,
+            208,
+            209,
+            212
+          ],
+          "section": "ביולוגיה — המגמה הכללית"
+        }
+      ],
+      "groups": [
+        {
+          "name": "פיזיקה 1 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140077",
+            "01140051",
+            "01140071"
+          ],
+          "conditions": [
+            "קורס 01140077 לחסרי סיווג; לבעלי סיווג 01140051 או 01140071."
+          ]
+        },
+        {
+          "name": "פיזיקה 2 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140078",
+            "01140052",
+            "01140075"
+          ],
+          "conditions": [
+            "קורס 01140078 לחסרי סיווג; לבעלי סיווג 01140052 או 01140075."
+          ]
+        },
+        {
+          "name": "סמינר בביולוגיה — אחת מארבע אפשרויות",
+          "regions": [
+            "208L:16:26"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "יש לקחת קורס אחד בלבד מתוך ארבעת הסמינרים בסמסטר5 או6; מספר המקומות מוגבל."
+          ]
+        },
+        {
+          "name": "רשימה א׳ — כל שבעת הקורסים",
+          "regions": [
+            "208L:36:42"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — חורף ואביב",
+          "regions": [
+            "208L:47:59",
+            "209R:3:16"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "המכון הבינאוניברסיטאי באילת",
+          "regions": [
+            "209R:19:28"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "מוגבל לשני קורסים; רישום למקצועות חדשים מותנה באישור היועץ."
+          ]
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תנאי רישום למעבדות, למכון באילת, פרויקטים וסמינרים בעמוד 212 נשמרים בתוקף; מגבלות מקום ואישור מרצה אינן אישור אוטומטי."
+      ]
+    },
+    {
+      "programId": "biology-human-development",
+      "officialName": "ביולוגיה — המגמה המחקרית בביולוגיה של האדם וההתפתחות",
+      "programCategory": "concentration",
+      "parentProgramId": "biology-general",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            206,
+            209,
+            210,
+            211,
+            212
+          ],
+          "printedPages": [
+            206,
+            209,
+            210,
+            211,
+            212
+          ],
+          "section": "ביולוגיה — המגמה המחקרית בביולוגיה של האדם וההתפתחות"
+        }
+      ],
+      "groups": [
+        {
+          "name": "פיזיקה 1 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140077",
+            "01140051",
+            "01140071"
+          ],
+          "conditions": [
+            "קורס 01140077 לחסרי סיווג; לבעלי סיווג 01140051 או 01140071."
+          ]
+        },
+        {
+          "name": "פיזיקה 2 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140078",
+            "01140052",
+            "01140075"
+          ],
+          "conditions": [
+            "קורס 01140078 לחסרי סיווג; לבעלי סיווג 01140052 או 01140075."
+          ]
+        },
+        {
+          "name": "סמינר מגמה — לפי ההערות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01340124"
+          ],
+          "conditions": [
+            "יש ללמוד את סמינר המגמה פעם אחת בסמסטר5 או6."
+          ]
+        },
+        {
+          "name": "רשימה א1׳",
+          "regions": [
+            "209L:51:54"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שלושה מקצועות מא1׳; לפחות13 נקודות מא1׳ וב1׳ יחד; יתרת17 נקודות הבחירה מא1׳,ב1׳,ג1׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "רשימה ב1׳",
+          "regions": [
+            "209L:59:69"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שלושה מקצועות מא1׳; לפחות13 נקודות מא1׳ וב1׳ יחד; יתרת17 נקודות הבחירה מא1׳,ב1׳,ג1׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "רשימה ג1׳",
+          "regions": [
+            "210R:5:26"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שלושה מקצועות מא1׳; לפחות13 נקודות מא1׳ וב1׳ יחד; יתרת17 נקודות הבחירה מא1׳,ב1׳,ג1׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תנאי רישום למעבדות, למכון באילת, פרויקטים וסמינרים בעמוד 212 נשמרים בתוקף; מגבלות מקום ואישור מרצה אינן אישור אוטומטי.",
+        "המגמות הן תכניות הסמכה; תחומי ההתמחות לתואר שני המופיעים בעמודים215–216 אינם מגמות תואר ראשון."
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "officialName": "ביולוגיה — המגמה המחקרית במיקרוביולוגיה, אקולוגיה וסביבה",
+      "programCategory": "concentration",
+      "parentProgramId": "biology-general",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            206,
+            209,
+            210,
+            211,
+            212
+          ],
+          "printedPages": [
+            206,
+            209,
+            210,
+            211,
+            212
+          ],
+          "section": "ביולוגיה — המגמה המחקרית במיקרוביולוגיה, אקולוגיה וסביבה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "פיזיקה 1 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140077",
+            "01140051",
+            "01140071"
+          ],
+          "conditions": [
+            "קורס 01140077 לחסרי סיווג; לבעלי סיווג 01140051 או 01140071."
+          ]
+        },
+        {
+          "name": "פיזיקה 2 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140078",
+            "01140052",
+            "01140075"
+          ],
+          "conditions": [
+            "קורס 01140078 לחסרי סיווג; לבעלי סיווג 01140052 או 01140075."
+          ]
+        },
+        {
+          "name": "סמינר מגמה — לפי ההערות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01340125",
+            "01340123"
+          ],
+          "conditions": [
+            "המקור מציג01340125 בסמסטר5 ו01340123 בסמסטר6 עם תווית סמינר3 בשניהם; אי־ההתאמה דורשת בירור."
+          ]
+        },
+        {
+          "name": "רשימה א2׳",
+          "regions": [
+            "210L:48:50"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "כל קורסי א2׳ נדרשים; לפחות4 נקודות מב2׳; יתרת17 נקודות הבחירה מב2׳ או ג2׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "רשימה ב2׳",
+          "regions": [
+            "210L:54:69",
+            "211R:1:2"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "כל קורסי א2׳ נדרשים; לפחות4 נקודות מב2׳; יתרת17 נקודות הבחירה מב2׳ או ג2׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "רשימה ג2׳",
+          "regions": [
+            "211R:6:22"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "כל קורסי א2׳ נדרשים; לפחות4 נקודות מב2׳; יתרת17 נקודות הבחירה מב2׳ או ג2׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תנאי רישום למעבדות, למכון באילת, פרויקטים וסמינרים בעמוד 212 נשמרים בתוקף; מגבלות מקום ואישור מרצה אינן אישור אוטומטי.",
+        "המגמות הן תכניות הסמכה; תחומי ההתמחות לתואר שני המופיעים בעמודים215–216 אינם מגמות תואר ראשון."
+      ]
+    },
+    {
+      "programId": "biology-biochemistry-molecular",
+      "officialName": "ביולוגיה — המגמה המחקרית בביוכימיה וביולוגיה מולקולרית",
+      "programCategory": "concentration",
+      "parentProgramId": "biology-general",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            206,
+            209,
+            210,
+            211,
+            212
+          ],
+          "printedPages": [
+            206,
+            209,
+            210,
+            211,
+            212
+          ],
+          "section": "ביולוגיה — המגמה המחקרית בביוכימיה וביולוגיה מולקולרית"
+        }
+      ],
+      "groups": [
+        {
+          "name": "פיזיקה 1 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140077",
+            "01140051",
+            "01140071"
+          ],
+          "conditions": [
+            "קורס 01140077 לחסרי סיווג; לבעלי סיווג 01140051 או 01140071."
+          ]
+        },
+        {
+          "name": "פיזיקה 2 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140078",
+            "01140052",
+            "01140075"
+          ],
+          "conditions": [
+            "קורס 01140078 לחסרי סיווג; לבעלי סיווג 01140052 או 01140075."
+          ]
+        },
+        {
+          "name": "סמינר מגמה — לפי ההערות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01340126"
+          ],
+          "conditions": [
+            "יש ללמוד את סמינר המגמה פעם אחת בסמסטר5 או6."
+          ]
+        },
+        {
+          "name": "רשימה א3׳",
+          "regions": [
+            "212R:23:27"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות9 נקודות מא3׳; לפחות13 נקודות מא3׳ וב3׳ יחד; יתרת17 נקודות הבחירה מג3׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "רשימה ב3׳",
+          "regions": [
+            "212R:31:42"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות9 נקודות מא3׳; לפחות13 נקודות מא3׳ וב3׳ יחד; יתרת17 נקודות הבחירה מג3׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "רשימה ג3׳",
+          "regions": [
+            "212R:47:66"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות9 נקודות מא3׳; לפחות13 נקודות מא3׳ וב3׳ יחד; יתרת17 נקודות הבחירה מג3׳.",
+            "קורסי אילת כפופים להגבלה של שני קורסים ולהערות הרישום בעמוד212."
+          ]
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תנאי רישום למעבדות, למכון באילת, פרויקטים וסמינרים בעמוד 212 נשמרים בתוקף; מגבלות מקום ואישור מרצה אינן אישור אוטומטי.",
+        "המגמות הן תכניות הסמכה; תחומי ההתמחות לתואר שני המופיעים בעמודים215–216 אינם מגמות תואר ראשון."
+      ]
+    },
+    {
+      "programId": "biology-research-honors",
+      "officialName": "ביולוגיה — תכנית ההצטיינות בדגש מחקרי",
+      "programCategory": "concentration",
+      "parentProgramId": "biology-general",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            207,
+            212
+          ],
+          "printedPages": [
+            207,
+            212
+          ],
+          "section": "ביולוגיה — תכנית ההצטיינות בדגש מחקרי"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "תכנית חלה על מצטיינים מכל מגמות הביולוגיה, לא מסלול מחקר של תואר שני. חובה לבצע פרויקט מחקר למסלול מצטיינים ופרויקט מחקר בביולוגיה; חופש הבחירה באישור היועץ, תכנית פרטנית טרם אומתה."
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "officialName": "ביולוגיה וכימיה — תכנית דו־חוגית",
+      "programCategory": "dual-major",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            194,
+            198,
+            199,
+            206,
+            213,
+            214
+          ],
+          "printedPages": [
+            194,
+            198,
+            199,
+            206,
+            213,
+            214
+          ],
+          "section": "ביולוגיה וכימיה — תכנית דו־חוגית"
+        }
+      ],
+      "groups": [
+        {
+          "name": "פיזיקה 1 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140077",
+            "01140051",
+            "01140071"
+          ],
+          "conditions": [
+            "קורס 01140077 לחסרי סיווג; לבעלי סיווג 01140051 או 01140071."
+          ]
+        },
+        {
+          "name": "פיזיקה 2 — חלופות לפי סיווג",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140078",
+            "01140052",
+            "01140075"
+          ],
+          "conditions": [
+            "קורס 01140078 לחסרי סיווג; לבעלי סיווג 01140052 או 01140075."
+          ]
+        },
+        {
+          "name": "מקצועות בחירה בביולוגיה",
+          "regions": [
+            "199R:18:30"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — אנליזה וספקטרוסקופיה",
+          "regions": [
+            "199R:38:45"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — אנרגיה וקטליזה",
+          "regions": [
+            "199R:48:53"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — יזמות ומחקר",
+          "regions": [
+            "199R:56:60"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה ביולוגית",
+          "regions": [
+            "199R:63:73"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — טכנולוגיה קוונטית",
+          "regions": [
+            "199R:76:80",
+            "199L:3:7"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — סינתזה כימית",
+          "regions": [
+            "199L:10:25"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה פיזיקלית",
+          "regions": [
+            "199L:28:33"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — תאוריה וחישובים",
+          "regions": [
+            "199L:36:44"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה מומלצת מפקולטות נוספות",
+          "regions": [
+            "199L:47:52"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "עמוד194 מכנה את ההסמכה בוגר בביוכימיה מולקולרית, ועמוד206 מכנה אותה בוגר בביולוגיה וכימיה במתכונת דו־חוגית. נשמרה תכנית יחידה עם אי־התאמת שם מסומנת; אין יצירת שני תארים שונים על סמך הניסוח.",
+        "יש לצבור8.5 נקודות מביולוגיה ו8.5 מכימיה; ניתן לכל היותר פרויקט אחד מכל פקולטה. ההערות מאפשרות תכנית אישית למצטיינים באישור שתי ועדות ההוראה."
+      ]
+    },
+    {
+      "programId": "architecture-sciences",
+      "officialName": "מדעי הארכיטקטורה",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            217,
+            218,
+            219
+          ],
+          "printedPages": [
+            217,
+            218,
+            219
+          ],
+          "section": "מדעי הארכיטקטורה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות חברה",
+          "regions": [
+            "219R:52:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "טכנולוגיה ומדעים",
+          "regions": [
+            "219R:60:62"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "מקצועות עיצוב בסיסי",
+          "regions": [
+            "219L:11:21"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה פקולטית ומקצועות מפקולטות אחרות",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "התואר הראשון העיוני אינו כשלעצמו הסמכה מקצועית לאדריכלות. M.Arch1 הוא תואר שני מקצועי נפרד ואינו נכלל כמסלול תואר ראשון.",
+        "תחומי התכנון, עיצוב פנים ושימור המתוארים בפרק אינם מוצגים כתארים או מגמות רשמיים עצמאיים."
+      ]
+    },
+    {
+      "programId": "architecture-barch",
+      "officialName": "ארכיטקטורה — B.Arch.",
+      "programCategory": "standard",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            28,
+            217,
+            218
+          ],
+          "printedPages": [
+            28,
+            217,
+            218
+          ],
+          "section": "ארכיטקטורה — B.Arch."
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "מופיע בסקירת מסלולי התואר הראשון, אך הפרק המפורט מציג מבנה B.Sc. ולאחריו M.Arch1. לא הוחלה עליו תכנית הB.Sc. ואין ייחוס תכנית בת חמש שנים ללא אימות תחולה."
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "officialName": "אדריכלות נוף",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            217,
+            220,
+            221
+          ],
+          "printedPages": [
+            217,
+            220,
+            221
+          ],
+          "section": "אדריכלות נוף"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות חברה",
+          "regions": [
+            "221R:14:17"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "תיאוריות מתקדמות",
+          "regions": [
+            "221R:22:23"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כלים דיגיטליים בסיסיים",
+          "regions": [
+            "220L:60:64"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "יש לאמת אם הרשימה מחייבת או משמשת חלופות במסגרת התכנית."
+          ]
+        },
+        {
+          "name": "כלים דיגיטליים מתקדמים",
+          "regions": [
+            "220L:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הכרה לפי תנאי תכנית הלימודים; אין אישור אוטומטי."
+          ]
+        },
+        {
+          "name": "בחירה פקולטית ופתוחה",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה."
+      ]
+    },
+    {
+      "programId": "medical-sciences",
+      "officialName": "מדעי הרפואה — החטיבה הפרה־קלינית",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            272,
+            275,
+            276
+          ],
+          "printedPages": [
+            272,
+            275,
+            276
+          ],
+          "section": "מדעי הרפואה — החטיבה הפרה־קלינית"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בחירה פקולטיים",
+          "regions": [
+            "276R:55:77",
+            "276L:1:9"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "שפות מפקולטות אחרות המוכרות כבחירה פקולטית",
+          "regions": [
+            "276L:13:15"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "אימונולוגיה בסיסית — הופעה טעונת בירור",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה."
+      ]
+    },
+    {
+      "programId": "medicine",
+      "officialName": "רפואה — המסלול השש־שנתי",
+      "programCategory": "standard",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            28,
+            272,
+            273,
+            275,
+            277,
+            278
+          ],
+          "printedPages": [
+            28,
+            272,
+            273,
+            275,
+            277,
+            278
+          ],
+          "section": "רפואה — המסלול השש־שנתי"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "הקטלוג מפריד בין החטיבה הפרה־קלינית לבין תכנית MD לתלמידים המתחילים את החטיבה הקלינית בתשפ״ו. לא מוזגו דרישות מחזורים שונים לתכנית שש־שנתית אחת ללא אימות.",
+        "הפרק הקליני כולל סבבי חובה קצרים, סבבי בחירה, בחינות גמר ועבודת גמר; רישוי מקצועי כפוף לדרישות נפרדות."
+      ]
+    },
+    {
+      "programId": "occupational-therapy",
+      "officialName": "ריפוי בעיסוק — תכנית משותפת עם אוניברסיטת חיפה",
+      "programCategory": "combined",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            279
+          ],
+          "printedPages": [
+            279
+          ],
+          "section": "ריפוי בעיסוק — תכנית משותפת עם אוניברסיטת חיפה"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "המקור המפורט קובע7 סמסטרים/3.5 שנים, בשונה מהמשך בסקירת המסלולים. ההרשמה והפרטים באוניברסיטת חיפה. התכנית מתועדת אך טבלאות קורסים אינן כלולות בקטלוג זה; אין שיוך מומצא לרפואה או איחוד עם מדעי הרפואה."
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "officialName": "הנדסת חומרים",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            289,
+            290,
+            291
+          ],
+          "printedPages": [
+            289,
+            290,
+            291
+          ],
+          "section": "הנדסת חומרים"
+        }
+      ],
+      "groups": [
+        {
+          "name": "כימיה אורגנית — חלופה מומלצת",
+          "regions": [
+            "290L:24:27"
+          ],
+          "explicitCourseIds": [
+            "01240801"
+          ],
+          "conditions": [
+            "לסטודנטים בעלי אוריינטציה כימית/פולימרים מומלצת המרת כימיה אורגנית1ב׳ לכימיה אורגנית; עודף הנקודות לבחירה."
+          ]
+        },
+        {
+          "name": "בחירה פקולטית בחומרים",
+          "regions": [
+            "290L:37:70",
+            "291R:1:9"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה מפקולטות אחרות — רשימה א׳",
+          "regions": [
+            "291R:16:18"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה מפקולטות אחרות — רשימה ב׳",
+          "regions": [
+            "291R:20:49"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "עד10 נקודות מסך רשימות א׳ וב׳."
+          ]
+        },
+        {
+          "name": "בחירה חופשית מומלצת",
+          "regions": [
+            "290L:31:31"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה."
+      ]
+    },
+    {
+      "programId": "materials-data-computation",
+      "officialName": "הנדסת חומרים — אשכול חישוביות נתונים",
+      "programCategory": "concentration",
+      "parentProgramId": "materials-engineering",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            289,
+            290,
+            291
+          ],
+          "printedPages": [
+            289,
+            290,
+            291
+          ],
+          "section": "הנדסת חומרים — אשכול חישוביות נתונים"
+        }
+      ],
+      "groups": [
+        {
+          "name": "קורסי הבחירה באשכול",
+          "regions": [
+            "291L:23:33"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות קורס אחד מבין00940202 ו02340268."
+          ]
+        },
+        {
+          "name": "יתרת דרישות תואר האב",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "מוצג אשכול קורסים רשמי בתוך הנדסת חומרים, לפי כותרת המקור. הדרישות והזכאות הן בנוסף לדרישות התואר הראשי; לא נטען שזה תואר עצמאי."
+      ]
+    },
+    {
+      "programId": "materials-gvishim",
+      "officialName": "הנדסת חומרים — גבישים למצטייני העתודה",
+      "programCategory": "concentration",
+      "parentProgramId": "materials-engineering",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            289
+          ],
+          "printedPages": [
+            289
+          ],
+          "section": "הנדסת חומרים — גבישים למצטייני העתודה"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "תכנית הסמכה והמשך לתואר שני עם תזה למצטייני העתודה מתוארת במקור, ללא תכנית קורסים מלאה ייחודית. אינה תואר ראשון עצמאי נוסף ואין גזירת תכנית על ידי איחוד תארים."
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "officialName": "הנדסת חומרים ופיזיקה",
+      "programCategory": "combined",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            289,
+            292,
+            293
+          ],
+          "printedPages": [
+            289,
+            292,
+            293
+          ],
+          "section": "הנדסת חומרים ופיזיקה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "בחירה בהנדסת חומרים",
+          "regions": [
+            "292L:34",
+            "293R:1:11"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה בפיזיקה — כל הרשימה המפורשת",
+          "regions": [
+            "293R:17:69"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסים מהמסומנים במקור; ההערה מדברת בארבעה קורסים אך נראים יותר סימונים, ודורשת אימות חזותי."
+          ]
+        },
+        {
+          "name": "בחירה מפקולטות אחרות",
+          "regions": [
+            "293L:11:28"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה חופשית מומלצת",
+          "regions": [
+            "293L:31:31"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קורסים מתקדמים בפיזיקה",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה."
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "officialName": "הנדסת חומרים וכימיה",
+      "programCategory": "combined",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            194,
+            200,
+            201,
+            202,
+            289,
+            294,
+            295
+          ],
+          "printedPages": [
+            194,
+            200,
+            201,
+            202,
+            289,
+            294,
+            295
+          ],
+          "section": "הנדסת חומרים וכימיה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "בחירה בהנדסת חומרים",
+          "regions": [
+            "294L:38",
+            "295R:1:25"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — מעבדות ופרויקטי מחקר",
+          "regions": [
+            "295R:31:41"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — רשימת מקצועות מתקדמים",
+          "regions": [
+            "295R:43",
+            "295L:3:20"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "כימיה — רשימה נוספת מוגבלת",
+          "regions": [
+            "295L:29:33"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "עד קורס אחד מהרשימה."
+          ]
+        },
+        {
+          "name": "בחירה מפקולטות אחרות",
+          "regions": [
+            "295L:36:53"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה חופשית מומלצת",
+          "regions": [
+            "295L:56:57"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה נוספת בכימיה",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "פרק הכימיה בעמוד194 מכנה את התכנית תואר כפול; פרק החומרים בעמוד294 מתאר B.Sc. משולב. נשמרת תכנית אחת ושני המקורות; אין הצהרה על שתי תעודות ללא בירור רשמי."
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "officialName": "הנדסת חומרים וביולוגיה",
+      "programCategory": "combined",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            207,
+            289,
+            296,
+            297
+          ],
+          "printedPages": [
+            207,
+            289,
+            296,
+            297
+          ],
+          "section": "הנדסת חומרים וביולוגיה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א1׳ — הנדסת חומרים",
+          "regions": [
+            "296L:54:59"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה א2׳ — הנדסת חומרים",
+          "regions": [
+            "296L:60",
+            "297R:1:36"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב1׳ — ביולוגיה",
+          "regions": [
+            "297R:40:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב2׳ — ביולוגיה",
+          "regions": [
+            "297R:56"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ג׳ — פקולטות אחרות",
+          "regions": [
+            "297L:3:47"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה חופשית מומלצת",
+          "regions": [
+            "296L:34:37"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "סיכום המקור אינו עקבי:180.0 נקודות בטקסט לעומת179.5 בשורת הסיכום,21 בחירה בסיכום לעומת לפחות20 בטקסט. לא בוצע חישוב זכאות אוטומטי."
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "officialName": "הנדסה ביו־רפואית",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            302,
+            303,
+            304,
+            307,
+            308
+          ],
+          "printedPages": [
+            302,
+            303,
+            304,
+            307,
+            308
+          ],
+          "section": "הנדסה ביו־רפואית"
+        }
+      ],
+      "groups": [
+        {
+          "name": "חשבון דיפרנציאלי ואינטגרלי1 — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01040042",
+            "01040018"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "אלגברה1 — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01040065",
+            "01040016"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "פיזיקה2 לפי סיווג — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140052",
+            "01140078"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "סטטיסטיקה — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "03340023",
+            "00940423"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "הדמיה ואותות רפואיים",
+          "regions": [
+            "307L:10"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; ערכת הליבה מתועדת גם בדרישות השלמת התכנית. קורס המופיע בכמה קבוצות ייחשב באחת בלבד."
+          ]
+        },
+        {
+          "name": "ביומכניקה וזרימה",
+          "regions": [
+            "308R:3:30"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "הנדסת רקמות וביו־חומרים",
+          "regions": [
+            "308R:31:62"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "ביופיזיקה רפואית",
+          "regions": [
+            "308L:1:39"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "בחירה פקולטית כללית",
+          "regions": [
+            "308L:41:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "רק מעבדה מתקדמת אחת תוכר כבחירה פקולטית והשנייה כחופשית; ביודיזיין 1+2 עשויים להחליף פרויקט 1+2 תוך השלמת הפרש נקודות."
+          ]
+        },
+        {
+          "name": "המלצות סמסטריאליות מפורשות",
+          "regions": [],
+          "explicitCourseIds": [
+            "03340021",
+            "01040000",
+            "03340331",
+            "03360026"
+          ],
+          "conditions": [
+            "המלצות לחופשית/פקולטית וחלופות חשבון,אלגברה,פיזיקה וסטטיסטיקה לפי ההערות; אין חובה להשלים את כולן."
+          ]
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה.",
+        "ערכות קורסי הליבה המודגשות בארבע קבוצות הבחירה נבדקו חזותית בעמודים307–308. יתרת פרטי התכנית עדיין מסומנת חלקית."
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "officialName": "הנדסה ביו־רפואית ופיזיקה",
+      "programCategory": "combined",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            303,
+            305,
+            307,
+            308
+          ],
+          "printedPages": [
+            303,
+            305,
+            307,
+            308
+          ],
+          "section": "הנדסה ביו־רפואית ופיזיקה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "חשבון דיפרנציאלי ואינטגרלי1 — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01040042",
+            "01040018"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "אלגברה1 — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01040065",
+            "01040016"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "פיזיקה2 לפי סיווג — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140052",
+            "01140078"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "סטטיסטיקה — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "03340023",
+            "00940423"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "הדמיה ואותות רפואיים",
+          "regions": [
+            "307L:10"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; ערכת הליבה מתועדת גם בדרישות השלמת התכנית. קורס המופיע בכמה קבוצות ייחשב באחת בלבד."
+          ]
+        },
+        {
+          "name": "ביומכניקה וזרימה",
+          "regions": [
+            "308R:3:30"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "הנדסת רקמות וביו־חומרים",
+          "regions": [
+            "308R:31:62"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "ביופיזיקה רפואית",
+          "regions": [
+            "308L:1:39"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "בחירה פקולטית כללית",
+          "regions": [
+            "308L:41:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "רק מעבדה מתקדמת אחת תוכר כבחירה פקולטית והשנייה כחופשית; ביודיזיין 1+2 עשויים להחליף פרויקט 1+2 תוך השלמת הפרש נקודות."
+          ]
+        },
+        {
+          "name": "תוספות המוכרות במסלול המשולב",
+          "regions": [
+            "305L:66:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "במסלול זה בלבד: מעבדה בהנדסה ביו־רפואית2 ומקצוע מתא לרקמה מוכרים כבחירה פקולטית."
+          ]
+        },
+        {
+          "name": "בחירה בפיזיקה",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "נבדקו כותרות ותוכן המקור ונקבעו אזורי טבלאות; אימות חזותי מלא, כל חלופות ההערות וכללי הזיכוי טרם הושלמו. אין להציג את התכנית כמאומתת במלואה.",
+        "ערכות קורסי הליבה המודגשות בארבע קבוצות הבחירה נבדקו חזותית בעמודים307–308. יתרת פרטי התכנית עדיין מסומנת חלקית."
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "officialName": "מדעי הרפואה והנדסה ביו־רפואית — תואר כפול",
+      "programCategory": "double-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            279,
+            280,
+            303,
+            306,
+            307,
+            308
+          ],
+          "printedPages": [
+            279,
+            280,
+            303,
+            306,
+            307,
+            308
+          ],
+          "section": "מדעי הרפואה והנדסה ביו־רפואית — תואר כפול"
+        }
+      ],
+      "groups": [
+        {
+          "name": "חשבון דיפרנציאלי ואינטגרלי1 — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01040042",
+            "01040018"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "אלגברה1 — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01040065",
+            "01040016"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "פיזיקה2 לפי סיווג — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "01140052",
+            "01140078"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "סטטיסטיקה — חלופות",
+          "regions": [],
+          "explicitCourseIds": [
+            "03340023",
+            "00940423"
+          ],
+          "conditions": [
+            "יש לבחור חלופה לפי הערות המקור; עודף נקודות והכרה בכפוף לתכנית המסלול."
+          ]
+        },
+        {
+          "name": "הדמיה ואותות רפואיים",
+          "regions": [
+            "307L:10"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; ערכת הליבה מתועדת גם בדרישות השלמת התכנית. קורס המופיע בכמה קבוצות ייחשב באחת בלבד."
+          ]
+        },
+        {
+          "name": "ביומכניקה וזרימה",
+          "regions": [
+            "308R:3:30"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "הנדסת רקמות וביו־חומרים",
+          "regions": [
+            "308R:31:62"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "ביופיזיקה רפואית",
+          "regions": [
+            "308L:1:39"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "לפחות שני קורסי ליבה המודגשים במקור; אין ספירה כפולה בין קבוצות."
+          ]
+        },
+        {
+          "name": "בחירה פקולטית כללית",
+          "regions": [
+            "308L:41:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "רק מעבדה מתקדמת אחת תוכר כבחירה פקולטית והשנייה כחופשית; ביודיזיין 1+2 עשויים להחליף פרויקט 1+2 תוך השלמת הפרש נקודות."
+          ]
+        },
+        {
+          "name": "בחירה במדעי הרפואה",
+          "regions": [
+            "276R:55:77",
+            "276L:1:15"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "סיווג והכרה לפי הוראות מסלול התואר הכפול והפקולטה לרפואה."
+          ]
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "זוהי תכנית כפולה מפורשת בעלת טבלה משלה, ולא איחוד של תארים נפרדים. המשך לMD דורש עמידה בתנאי מעבר ועוד3 שנים קליניות; סטאז׳ ורישוי נפרדים.",
+        "הכרה בקורסים המקבילים לרפואה מיועדת למי שמשלימים את התואר הכפול במלואו. סיום תואר אחד בלבד מחייב השלמת מלוא דרישותיו.",
+        "ערכות קורסי הליבה המודגשות בארבע קבוצות הבחירה נבדקו חזותית בעמודים307–308. יתרת פרטי התכנית עדיין מסומנת חלקית."
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת מתמטיקה",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            229,
+            230,
+            231
+          ],
+          "printedPages": [
+            229,
+            229,
+            230,
+            231
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת מתמטיקה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "230R",
+            "230L:1:34"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "רשימה א׳ — מקצועות בחינוך",
+          "regions": [
+            "230L:47:67",
+            "231R:1:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — מקצועות במתמטיקה",
+          "regions": [
+            "231R:7:34"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ג׳ — מדע וטכנולוגיה",
+          "regions": [
+            "231R:35:56"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ד׳ — מקצועות כלליים",
+          "regions": [
+            "231R:57",
+            "231L"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-physics",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת פיזיקה",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            232,
+            233
+          ],
+          "printedPages": [
+            229,
+            232,
+            233
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת פיזיקה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "232R:24",
+            "232L:1:62"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "קבוצה א׳ — חינוך מדעי",
+          "regions": [
+            "232L:67"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ב׳ — פיזיקה",
+          "regions": [
+            "233R:1:38"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ג׳ — מדעים וטכנולוגיה",
+          "regions": [
+            "233R:39"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-chemistry",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת כימיה",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            233,
+            234
+          ],
+          "printedPages": [
+            229,
+            233,
+            234
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת כימיה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "233L:20",
+            "234R"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "קבוצה א׳ — כימיה",
+          "regions": [
+            "234L:2:17"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ב׳ — חינוך מדעי",
+          "regions": [
+            "234L:18:26"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ג׳ — ביולוגיה וסביבה",
+          "regions": [
+            "234L:27"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת ביולוגיה ומדעי הסביבה",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            235,
+            236
+          ],
+          "printedPages": [
+            229,
+            235,
+            236
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת ביולוגיה ומדעי הסביבה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "235R:20",
+            "235L:1:56"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "קבוצה א׳ — ביולוגיה",
+          "regions": [
+            "235L:59:72"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ב׳ — מעבדות בביולוגיה",
+          "regions": [
+            "235L:73",
+            "236R:1:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ג׳ — סביבה",
+          "regions": [
+            "236R:13:24"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה ד׳ — חינוך מדעי",
+          "regions": [
+            "236R:25"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-computer-science",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת מדעי המחשב",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            236,
+            237
+          ],
+          "printedPages": [
+            229,
+            236,
+            237
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת מדעי המחשב"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "236L:21",
+            "237R",
+            "237L:1:8"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "רשימה א׳ — מקצועות מדעיים",
+          "regions": [
+            "237L:22:41"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — מדעי המחשב",
+          "regions": [
+            "237L:44:54"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ג׳ — חינוך מדעי והנדסי",
+          "regions": [
+            "237L:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת טכנולוגיה — מכונות",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            238,
+            239
+          ],
+          "printedPages": [
+            229,
+            238,
+            239
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת טכנולוגיה — מכונות"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "238R:23",
+            "238L:1:37"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "מקצועות הנדסיים",
+          "regions": [
+            "238L:44:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "מקצועות הנדסיים יישומיים",
+          "regions": [
+            "238L:59",
+            "239R:1:4"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "מקצועות בחינוך מדעי",
+          "regions": [
+            "239R:5:18"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "מקצועות כלליים",
+          "regions": [
+            "239R:19"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "officialName": "חינוך למדע וטכנולוגיה — הוראת אלקטרוניקה — חשמל",
+      "programCategory": "standard",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            229,
+            239,
+            240,
+            241
+          ],
+          "printedPages": [
+            229,
+            239,
+            240,
+            241
+          ],
+          "section": "חינוך למדע וטכנולוגיה — הוראת אלקטרוניקה — חשמל"
+        }
+      ],
+      "groups": [
+        {
+          "name": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+          "regions": [
+            "239L:26",
+            "240R:1:44"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "הטבלאות כוללות חלופות והמלצות בהערות. כל מספר נשמר כחלק מתכנית המקור אך אינו מסווג כחובת־יחיד ללא פתרון החלופות."
+          ]
+        },
+        {
+          "name": "קבוצה1 — חינוך למדע וטכנולוגיה",
+          "regions": [
+            "240R:49:63"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה2 — פרויקטים",
+          "regions": [
+            "240R:64:67"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה3 — מיקרואלקטרוניקה,ננו וVLSI",
+          "regions": [
+            "240R:68",
+            "240L:1:17"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה4 — אלקטרומגנטיות ופוטוניקה",
+          "regions": [
+            "240L:18:31"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה5 — תקשורת ואינפורמציה",
+          "regions": [
+            "240L:32:47"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה6 — בקרה ורובוטיקה",
+          "regions": [
+            "240L:48:55"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה7 — מחשבים ורשתות",
+          "regions": [
+            "240L:56"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה8 — אותות ומערכות ביולוגיים",
+          "regions": [
+            "241R:1:7"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה9 — עיבוד אותות ותמונות",
+          "regions": [
+            "241R:8:14"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "קבוצה10 — אנרגיה ומערכות הספק",
+          "regions": [
+            "241R:15"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "בחירה כלל־טכניונית והכרה פרטנית",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "תכנית הסמכה רשמית נפרדת. העתקת כל מספרי טבלת התכנית אינה מספיקה להוכחת חובת כל קורס; הסיווג והחלופות סומנו חלקיים.",
+        "קבלת תעודת הוראה מותנית, בין היתר, בממוצע75 בשני קורסי ההתנסות הקלינית. רישיון ההוראה ניתן בידי משרד החינוך."
+      ]
+    },
+    {
+      "programId": "education-post-degree",
+      "officialName": "מבטים — חוג לאחר תואר בחינוך מתמטי,מדעי והנדסי",
+      "programCategory": "teaching-qualification",
+      "status": "inventory-only",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — חוג לאחר תואר בחינוך מתמטי,מדעי והנדסי"
+        }
+      ],
+      "groups": [],
+      "notes": [
+        "אינה תואר ראשון נוסף. אפשר להתחיל במקביל לתואר מדעי/הנדסי לאחר36 נקודות, ממוצע75 ומבדק התאמה; התעודות ניתנות רק לאחר השלמת התואר הראשי. מומלץ לבחור אחת מההתמחויות המפורטות במקום רשומת האב."
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "officialName": "מבטים — הכשרה להוראת מתמטיקה — חטיבת ביניים וחטיבה עליונה",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת מתמטיקה — חטיבת ביניים וחטיבה עליונה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-middle-school",
+      "officialName": "מבטים — הכשרה להוראת מתמטיקה — חטיבת ביניים בלבד",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת מתמטיקה — חטיבת ביניים בלבד"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-physics",
+      "officialName": "מבטים — הכשרה להוראת פיזיקה",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת פיזיקה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-chemistry",
+      "officialName": "מבטים — הכשרה להוראת כימיה",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת כימיה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "officialName": "מבטים — הכשרה להוראת ביולוגיה",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת ביולוגיה"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-computer-science",
+      "officialName": "מבטים — הכשרה להוראת מדעי המחשב",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת מדעי המחשב"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-electrical-electronics",
+      "officialName": "מבטים — הכשרה להוראת אלקטרוניקה — חשמל",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת אלקטרוניקה — חשמל"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    },
+    {
+      "programId": "education-certificate-mechanical-technology",
+      "officialName": "מבטים — הכשרה להוראת טכנולוגיה — מכונות",
+      "programCategory": "teaching-qualification",
+      "parentProgramId": "education-post-degree",
+      "status": "partial",
+      "mandatoryComplete": false,
+      "electivesComplete": false,
+      "visuallyVerified": false,
+      "sourceRefs": [
+        {
+          "sourceId": "2025-2026-full",
+          "pages": [
+            241,
+            242,
+            243
+          ],
+          "printedPages": [
+            241,
+            242,
+            243
+          ],
+          "section": "מבטים — הכשרה להוראת טכנולוגיה — מכונות"
+        }
+      ],
+      "groups": [
+        {
+          "name": "רשימה א׳ — חינוך,למידה והוראה",
+          "regions": [
+            "243R:46:58"
+          ],
+          "explicitCourseIds": [],
+          "conditions": [
+            "שני קורסים שלא נלמדו כחלק מהחובה."
+          ]
+        },
+        {
+          "name": "רשימה ב׳ — מדידה והערכה",
+          "regions": [
+            "243R:65:68"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — הכללה ושילוב",
+          "regions": [
+            "243L:3:6"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "רשימה ב׳ — יזמות וטכנולוגיה",
+          "regions": [
+            "243L:8:12"
+          ],
+          "explicitCourseIds": [],
+          "conditions": []
+        },
+        {
+          "name": "הכרה בקורסים נוספים",
+          "regions": [],
+          "explicitCourseIds": [],
+          "conditions": []
+        }
+      ],
+      "notes": [
+        "36 נקודות במסלול ההתמחות; לרוב8 נקודות מרשימהב׳, ובמתמטיקה5.5 בהתאם לקורס החובה בהערכה.",
+        "קורסי ההתנסות המעשית מותאמים לתחום ההוראה; שני מסלולי הנדסה/טכנולוגיה חולקים טבלה אך מעניקים תעודות בתחומים שונים.",
+        "מקור243 מדפיס במסלול מדעי המחשב מספרים של קורסי הנדסה לצד שמות קורסי מדעי המחשב. נשמרו המספרים כלשונם; תיקון מחייב בירור רשמי."
+      ]
+    }
+  ],
+  "selectorAudit": [
+    {
+      "programId": "chemistry-three-year",
+      "role": "mandatory",
+      "selector": "195R:18:64",
+      "courseIds": [
+        "01040003",
+        "01040019",
+        "01140077",
+        "01340127",
+        "01240117",
+        "01040004",
+        "01040131",
+        "01140052",
+        "01140058",
+        "01240118",
+        "02340128",
+        "01240220",
+        "01240408",
+        "01240415",
+        "01240708",
+        "01240305",
+        "01240212"
+      ]
+    },
+    {
+      "programId": "chemistry-three-year",
+      "role": "mandatory",
+      "selector": "195L:3:27",
+      "courseIds": [
+        "01240611",
+        "03240033",
+        "01240213",
+        "01240417",
+        "01240413",
+        "01240414",
+        "01240610",
+        "01240711",
+        "01240911",
+        "01240214",
+        "01240210",
+        "01240416",
+        "01240703",
+        "01240613",
+        "01340019"
+      ]
+    },
+    {
+      "programId": "chemistry-three-year",
+      "role": "מעבדת המשך — חלופות",
+      "selector": "195L:25:30",
+      "courseIds": [
+        "01240613",
+        "01340019",
+        "01240912"
+      ]
+    },
+    {
+      "programId": "chemistry-three-year",
+      "role": "מעבדות מתקדמות ופרויקטי מחקר",
+      "selector": "195L:41:51",
+      "courseIds": [
+        "01260302",
+        "01260600",
+        "01260603",
+        "01260902",
+        "01260303",
+        "01260901",
+        "01240353",
+        "01240355"
+      ]
+    },
+    {
+      "programId": "chemistry-three-year",
+      "role": "רשימת בחירה מתקדמת — כל האפשרויות",
+      "selector": "195L:53:69",
+      "courseIds": [
+        "01270206",
+        "01270403",
+        "01270427",
+        "01270433",
+        "01270442",
+        "01270459",
+        "01270453",
+        "01270735",
+        "01270437",
+        "01260200",
+        "01270002",
+        "01270005",
+        "01270009",
+        "01270304",
+        "01270441"
+      ]
+    },
+    {
+      "programId": "chemistry-three-year",
+      "role": "רשימת בחירה מתקדמת — כל האפשרויות",
+      "selector": "196R:3:34",
+      "courseIds": [
+        "01270741",
+        "01270742",
+        "01270456",
+        "01270457",
+        "01270446",
+        "01270447",
+        "01270450",
+        "01270451",
+        "01270452",
+        "01260604",
+        "01270460",
+        "01270461",
+        "01260700",
+        "01270729",
+        "01270730",
+        "01270731",
+        "01270738",
+        "01270740",
+        "01270727",
+        "01270200",
+        "01240613",
+        "01260601",
+        "01260602",
+        "01260603",
+        "01270425",
+        "01270436",
+        "01270438",
+        "01270443",
+        "01270454",
+        "01270455",
+        "01270458",
+        "01270459"
+      ]
+    },
+    {
+      "programId": "chemistry-three-year",
+      "role": "רשימה מוגבלת — עד קורס אחד",
+      "selector": "196R:43:46",
+      "courseIds": [
+        "01270109",
+        "01240356",
+        "01270100",
+        "01270744"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "mandatory",
+      "selector": "208R:29:67",
+      "courseIds": [
+        "01040003",
+        "01040019",
+        "01240120",
+        "01340058",
+        "01140077",
+        "03940807",
+        "01340161",
+        "01040004",
+        "01140078",
+        "01340133",
+        "01240122",
+        "01250801",
+        "01340020",
+        "01340019",
+        "01240510",
+        "01340111",
+        "01340134",
+        "01340113",
+        "01340142",
+        "01340082",
+        "01340154"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "mandatory",
+      "selector": "208L:1:15",
+      "courseIds": [
+        "01340040",
+        "01340144",
+        "01340128",
+        "01340117",
+        "01340119",
+        "01340143",
+        "01340121",
+        "03240033",
+        "02340128",
+        "01360158"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "סמינר בביולוגיה — אחת מארבע אפשרויות",
+      "selector": "208L:16:26",
+      "courseIds": [
+        "01340123",
+        "01340124",
+        "01340125",
+        "01340126"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "רשימה א׳ — כל שבעת הקורסים",
+      "selector": "208L:36:42",
+      "courseIds": [
+        "01340069",
+        "01340153",
+        "01340039",
+        "01340156",
+        "01340155",
+        "01340157",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "רשימה ב׳ — חורף ואביב",
+      "selector": "208L:47:59",
+      "courseIds": [
+        "00640615",
+        "00660418",
+        "01340049",
+        "01340088",
+        "01340156",
+        "01340140",
+        "01340141",
+        "01340147",
+        "01340155",
+        "01360042",
+        "01360088",
+        "01340069",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "רשימה ב׳ — חורף ואביב",
+      "selector": "209R:3:16",
+      "courseIds": [
+        "00640413",
+        "01340015",
+        "00170001",
+        "01340039",
+        "01340049",
+        "01340088",
+        "01340129",
+        "01340137",
+        "01340159",
+        "01340151",
+        "01340157",
+        "01340153",
+        "01360014",
+        "01360037"
+      ]
+    },
+    {
+      "programId": "biology-general",
+      "role": "המכון הבינאוניברסיטאי באילת",
+      "selector": "209R:19:28",
+      "courseIds": [
+        "01360202",
+        "01360206",
+        "01360207",
+        "01360200",
+        "01360201",
+        "01360203",
+        "01360204",
+        "01360208"
+      ]
+    },
+    {
+      "programId": "biology-human-development",
+      "role": "mandatory",
+      "selector": "209R:44:68",
+      "courseIds": [
+        "01040003",
+        "01040019",
+        "01240120",
+        "01340058",
+        "01140077",
+        "01340161",
+        "03940807",
+        "01140051",
+        "01140071",
+        "01040004",
+        "01140078",
+        "01340133",
+        "01240122",
+        "01250801",
+        "01340020",
+        "01340019",
+        "01340160"
+      ]
+    },
+    {
+      "programId": "biology-human-development",
+      "role": "mandatory",
+      "selector": "209L:7:38",
+      "courseIds": [
+        "01240510",
+        "01340111",
+        "01340134",
+        "01340113",
+        "01340142",
+        "01340082",
+        "01340154",
+        "03940807",
+        "01340040",
+        "01340144",
+        "01340128",
+        "01340117",
+        "01340119",
+        "01340143",
+        "01340121",
+        "03240033",
+        "02340128",
+        "01360158",
+        "01340124",
+        "01340049"
+      ]
+    },
+    {
+      "programId": "biology-human-development",
+      "role": "רשימה א1׳",
+      "selector": "209L:51:54",
+      "courseIds": [
+        "01340069",
+        "01340155",
+        "01340157",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "biology-human-development",
+      "role": "רשימה ב1׳",
+      "selector": "209L:59:69",
+      "courseIds": [
+        "01340150",
+        "01340129",
+        "01340147",
+        "01360014",
+        "01360088",
+        "01340137",
+        "01340159",
+        "00640615",
+        "00660418",
+        "03340274",
+        "01280719"
+      ]
+    },
+    {
+      "programId": "biology-human-development",
+      "role": "רשימה ג1׳",
+      "selector": "210R:5:26",
+      "courseIds": [
+        "01340156",
+        "01340039",
+        "01340153",
+        "01340141",
+        "01360042",
+        "00640413",
+        "01340015",
+        "01340140",
+        "01340151",
+        "01360037",
+        "01360202",
+        "01360206",
+        "01360207",
+        "01360200",
+        "01360201",
+        "01360203",
+        "01360204",
+        "01360208"
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "role": "mandatory",
+      "selector": "210R:44:68",
+      "courseIds": [
+        "01040003",
+        "01040019",
+        "01240120",
+        "01340058",
+        "01140077",
+        "01340161",
+        "03940807",
+        "01140051",
+        "01140071",
+        "01040004",
+        "01140078",
+        "01340133",
+        "01240122",
+        "01250801",
+        "01340020",
+        "01340019",
+        "01340160"
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "role": "mandatory",
+      "selector": "210L:5:36",
+      "courseIds": [
+        "01240510",
+        "01340111",
+        "01340134",
+        "01340113",
+        "01340142",
+        "01340082",
+        "01340154",
+        "03940807",
+        "01340040",
+        "01340144",
+        "01340128",
+        "01340117",
+        "01340119",
+        "01340143",
+        "01340121",
+        "03240033",
+        "02340128",
+        "01360158",
+        "01340125",
+        "01340049",
+        "01340123"
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "role": "רשימה א2׳",
+      "selector": "210L:48:50",
+      "courseIds": [
+        "01340153",
+        "00170001",
+        "01340162"
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "role": "רשימה ב2׳",
+      "selector": "210L:54:69",
+      "courseIds": [
+        "01340150",
+        "01340039",
+        "01380023",
+        "02760413",
+        "00660418",
+        "06404130",
+        "01360202",
+        "01360206",
+        "01360207",
+        "01360200",
+        "01360201",
+        "01360203"
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "role": "רשימה ב2׳",
+      "selector": "211R:1:2",
+      "courseIds": [
+        "13602040",
+        "01360208"
+      ]
+    },
+    {
+      "programId": "biology-microbiology-ecology",
+      "role": "רשימה ג2׳",
+      "selector": "211R:6:22",
+      "courseIds": [
+        "01340069",
+        "01340137",
+        "01340155",
+        "01340157",
+        "01340156",
+        "01340129",
+        "01340147",
+        "01360014",
+        "01360088",
+        "01340159",
+        "00640615",
+        "01340141",
+        "01360042",
+        "01340015",
+        "01340140",
+        "01340151",
+        "01360037"
+      ]
+    },
+    {
+      "programId": "biology-biochemistry-molecular",
+      "role": "mandatory",
+      "selector": "211L:18:68",
+      "courseIds": [
+        "01040003",
+        "01040019",
+        "01240120",
+        "01340058",
+        "01140077",
+        "01340161",
+        "03940807",
+        "01040004",
+        "01140078",
+        "01340133",
+        "01240122",
+        "01250801",
+        "01340020",
+        "01340019",
+        "01340160",
+        "01240510",
+        "01340111",
+        "01340134",
+        "01340113",
+        "01340142",
+        "01340082",
+        "01340154",
+        "01340040",
+        "01340144",
+        "01340128",
+        "01340117",
+        "01340119",
+        "01340143",
+        "01340121",
+        "03240033"
+      ]
+    },
+    {
+      "programId": "biology-biochemistry-molecular",
+      "role": "mandatory",
+      "selector": "212R:3:12",
+      "courseIds": [
+        "02340128",
+        "01360158",
+        "01340126",
+        "01340049"
+      ]
+    },
+    {
+      "programId": "biology-biochemistry-molecular",
+      "role": "רשימה א3׳",
+      "selector": "212R:23:27",
+      "courseIds": [
+        "01380039",
+        "01340159",
+        "01340156",
+        "01340140",
+        "01340151"
+      ]
+    },
+    {
+      "programId": "biology-biochemistry-molecular",
+      "role": "רשימה ב3׳",
+      "selector": "212R:31:42",
+      "courseIds": [
+        "01340150",
+        "01340069",
+        "01340155",
+        "01340157",
+        "02760413",
+        "01340153",
+        "01340039",
+        "01340141",
+        "01360042",
+        "01360037",
+        "01360088",
+        "01280719"
+      ]
+    },
+    {
+      "programId": "biology-biochemistry-molecular",
+      "role": "רשימה ג3׳",
+      "selector": "212R:47:66",
+      "courseIds": [
+        "01340129",
+        "01340137",
+        "01340147",
+        "01360014",
+        "00640615",
+        "00660418",
+        "00640413",
+        "01340015",
+        "01360202",
+        "01360206",
+        "01360207",
+        "01360200",
+        "01360201",
+        "01360203",
+        "01360204",
+        "01360208"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "mandatory",
+      "selector": "198L:17:74",
+      "courseIds": [
+        "01040003",
+        "01040019",
+        "01240117",
+        "01340058",
+        "03240033",
+        "01140077",
+        "03940800",
+        "01140051",
+        "01140071",
+        "01040004",
+        "01140078",
+        "01240118",
+        "00940481",
+        "01340019",
+        "01340020",
+        "01140052",
+        "01140075",
+        "01240408",
+        "01240415",
+        "01240708",
+        "01340082",
+        "01340113",
+        "01340142",
+        "01240911",
+        "01240414",
+        "01240711",
+        "01340128",
+        "01340119",
+        "01240220",
+        "01240212",
+        "02340128"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "mandatory",
+      "selector": "199R:1:5",
+      "courseIds": [
+        "01340143",
+        "01340117",
+        "01340121"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "מקצועות בחירה בביולוגיה",
+      "selector": "199R:18:30",
+      "courseIds": [
+        "01340039",
+        "01340040",
+        "01340049",
+        "01340069",
+        "01340111",
+        "01340133",
+        "01340141",
+        "01340153",
+        "01340155",
+        "01340156",
+        "01340157",
+        "01360158",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — אנליזה וספקטרוסקופיה",
+      "selector": "199R:38:45",
+      "courseIds": [
+        "01260302",
+        "01270206",
+        "01270207",
+        "01270403",
+        "01270427",
+        "01270433",
+        "01270442",
+        "01270459"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — אנרגיה וקטליזה",
+      "selector": "199R:48:53",
+      "courseIds": [
+        "01270002",
+        "01270453",
+        "01270735",
+        "01270437",
+        "01260200",
+        "01270009"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — יזמות ומחקר",
+      "selector": "199R:56:60",
+      "courseIds": [
+        "01240353",
+        "01240355",
+        "01240356",
+        "01270100",
+        "01270744"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה ביולוגית",
+      "selector": "199R:63:73",
+      "courseIds": [
+        "01240210",
+        "01260304",
+        "01270005",
+        "01270009",
+        "01270441",
+        "01270444",
+        "01270456",
+        "01270741",
+        "01270742",
+        "01270457"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — טכנולוגיה קוונטית",
+      "selector": "199R:76:80",
+      "courseIds": [
+        "01270446",
+        "01270447",
+        "01270450",
+        "01270449",
+        "01270459"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — טכנולוגיה קוונטית",
+      "selector": "199L:3:7",
+      "courseIds": [
+        "01270451",
+        "01270452",
+        "01260604",
+        "01260605",
+        "01270010"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — סינתזה כימית",
+      "selector": "199L:10:25",
+      "courseIds": [
+        "01240305",
+        "01240912",
+        "01260902",
+        "01260303",
+        "01260700",
+        "01260901",
+        "01270712",
+        "01270729",
+        "01270730",
+        "01270731",
+        "01270732",
+        "01270738",
+        "01270740",
+        "01270727",
+        "01260200"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה פיזיקלית",
+      "selector": "199L:28:33",
+      "courseIds": [
+        "01240609",
+        "01240613",
+        "01260600",
+        "01260601",
+        "01260602",
+        "01270445"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "כימיה — תאוריה וחישובים",
+      "selector": "199L:36:44",
+      "courseIds": [
+        "01260603",
+        "01270415",
+        "01270425",
+        "01270436",
+        "01270438",
+        "01270443",
+        "01270454",
+        "01270455",
+        "01270458"
+      ]
+    },
+    {
+      "programId": "biology-chemistry",
+      "role": "בחירה מומלצת מפקולטות נוספות",
+      "selector": "199L:47:52",
+      "courseIds": [
+        "00160327",
+        "00660518",
+        "01040131",
+        "01040218",
+        "03360401",
+        "03360528"
+      ]
+    },
+    {
+      "programId": "architecture-sciences",
+      "role": "mandatory",
+      "selector": "218L:20:65",
+      "courseIds": [
+        "02050574",
+        "02050012",
+        "02050922",
+        "02040000",
+        "01040277",
+        "02050822",
+        "02050878",
+        "02050575",
+        "02050102",
+        "02050410",
+        "01140014",
+        "02050430",
+        "02050886",
+        "02050818",
+        "02050819",
+        "02050576",
+        "02050257",
+        "02050017",
+        "02050501",
+        "02050923",
+        "02050458",
+        "02050304",
+        "02050543",
+        "02050577",
+        "02050492",
+        "02050000",
+        "02050028",
+        "02050426",
+        "02050826",
+        "02050828"
+      ]
+    },
+    {
+      "programId": "architecture-sciences",
+      "role": "mandatory",
+      "selector": "219R:1:29",
+      "courseIds": [
+        "02050582",
+        "02050459",
+        "02050104",
+        "02050542",
+        "02050586",
+        "02050460",
+        "02050105",
+        "02050427",
+        "02050510"
+      ]
+    },
+    {
+      "programId": "architecture-sciences",
+      "role": "מקצועות חברה",
+      "selector": "219R:52:55",
+      "courseIds": [
+        "02050152",
+        "02050154",
+        "02050571",
+        "02050598"
+      ]
+    },
+    {
+      "programId": "architecture-sciences",
+      "role": "טכנולוגיה ומדעים",
+      "selector": "219R:60:62",
+      "courseIds": [
+        "02050071",
+        "02050599",
+        "02060840"
+      ]
+    },
+    {
+      "programId": "architecture-sciences",
+      "role": "מקצועות עיצוב בסיסי",
+      "selector": "219L:11:21",
+      "courseIds": [
+        "02050885",
+        "02050873",
+        "02050877",
+        "02050874",
+        "02050875",
+        "02040950",
+        "02050814",
+        "02050837",
+        "02050838",
+        "02060813",
+        "02060819"
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "role": "mandatory",
+      "selector": "220R:50",
+      "courseIds": [
+        "02050574",
+        "02050012",
+        "02050922",
+        "02040000",
+        "01040277",
+        "02040409",
+        "02050878",
+        "02040060",
+        "02040004",
+        "02040150"
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "role": "mandatory",
+      "selector": "220L:1:58",
+      "courseIds": [
+        "02040004",
+        "02050818",
+        "02050819",
+        "02050886",
+        "02040061",
+        "02040204",
+        "02040090",
+        "02040407",
+        "02050257",
+        "02050923",
+        "02050577",
+        "02040401",
+        "02040094",
+        "01140014",
+        "02040202",
+        "02040063",
+        "02060963",
+        "02040007",
+        "02070041",
+        "02040064",
+        "02040406",
+        "02070457",
+        "02060926",
+        "02040065",
+        "02040408",
+        "02040626",
+        "02040066"
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "role": "מקצועות חברה",
+      "selector": "221R:14:17",
+      "courseIds": [
+        "02050152",
+        "02050154",
+        "02050571",
+        "02050598"
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "role": "תיאוריות מתקדמות",
+      "selector": "221R:22:23",
+      "courseIds": [
+        "02070569",
+        "02070460"
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "role": "כלים דיגיטליים בסיסיים",
+      "selector": "220L:60:64",
+      "courseIds": [
+        "02050818",
+        "02050819"
+      ]
+    },
+    {
+      "programId": "landscape-architecture",
+      "role": "כלים דיגיטליים מתקדמים",
+      "selector": "220L:65:68",
+      "courseIds": [
+        "02050827"
+      ]
+    },
+    {
+      "programId": "medical-sciences",
+      "role": "mandatory",
+      "selector": "275L:21:69",
+      "courseIds": [
+        "01140248",
+        "01240507",
+        "02740138",
+        "02740142",
+        "02740167",
+        "02740257",
+        "01140249",
+        "01250803",
+        "02740143",
+        "02740165",
+        "02740166",
+        "02740266",
+        "02740182",
+        "02740241",
+        "02740242",
+        "02740243",
+        "02740234",
+        "02740258",
+        "02740260",
+        "02740320",
+        "03240397",
+        "02740246",
+        "02740253",
+        "02740235",
+        "02740261",
+        "02740262",
+        "02740265",
+        "02740267",
+        "02740268"
+      ]
+    },
+    {
+      "programId": "medical-sciences",
+      "role": "mandatory",
+      "selector": "276R:3:35",
+      "courseIds": [
+        "02740231",
+        "02740322",
+        "02740323",
+        "02740326",
+        "02740336",
+        "02740348",
+        "02740372",
+        "02740375",
+        "02740251",
+        "02740252",
+        "02740318",
+        "02740319",
+        "02740327",
+        "02740328",
+        "02740352",
+        "02740367",
+        "02740369",
+        "02740376"
+      ]
+    },
+    {
+      "programId": "medical-sciences",
+      "role": "מקצועות בחירה פקולטיים",
+      "selector": "276R:55:77",
+      "courseIds": [
+        "02750109",
+        "02750110",
+        "02750111",
+        "02750112",
+        "02750113",
+        "02750200",
+        "02750214",
+        "02750215",
+        "02750216",
+        "02750217",
+        "02750218",
+        "02750219",
+        "02750304",
+        "02750310",
+        "02750315",
+        "02750316",
+        "02750317",
+        "02750320",
+        "02750321",
+        "02750322",
+        "02750324",
+        "02750325",
+        "02760001"
+      ]
+    },
+    {
+      "programId": "medical-sciences",
+      "role": "מקצועות בחירה פקולטיים",
+      "selector": "276L:1:9",
+      "courseIds": [
+        "02760002",
+        "02760004",
+        "02760005",
+        "02760201",
+        "02760307",
+        "02760431",
+        "02770210",
+        "02770300",
+        "02770301"
+      ]
+    },
+    {
+      "programId": "medical-sciences",
+      "role": "שפות מפקולטות אחרות המוכרות כבחירה פקולטית",
+      "selector": "276L:13:15",
+      "courseIds": [
+        "03240621",
+        "03240627",
+        "03240628"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "mandatory",
+      "selector": "290R:25:30",
+      "courseIds": [
+        "01040019",
+        "01040041",
+        "01140051",
+        "01240117",
+        "02340128",
+        "03240033"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "mandatory",
+      "selector": "290R:37:42",
+      "courseIds": [
+        "01040043",
+        "01040131",
+        "01140052",
+        "03140011",
+        "01240118",
+        "01140081"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "mandatory",
+      "selector": "290R:46:50",
+      "courseIds": [
+        "01040228",
+        "01240400",
+        "03150058",
+        "03140009",
+        "00940481"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "mandatory",
+      "selector": "290R:54:59",
+      "courseIds": [
+        "01240413",
+        "01240414",
+        "01240801",
+        "03150003",
+        "03150051",
+        "03140016"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "mandatory",
+      "selector": "290R:63:67",
+      "courseIds": [
+        "03140150",
+        "03140006",
+        "03150052",
+        "03140309",
+        "03140003"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "mandatory",
+      "selector": "290L:1:21",
+      "courseIds": [
+        "03140311",
+        "03140312",
+        "03150030",
+        "03150039",
+        "03150008",
+        "03150242",
+        "03150059",
+        "03140532",
+        "03150001",
+        "03150037",
+        "03150002",
+        "03150012",
+        "03150014"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "כימיה אורגנית — חלופה מומלצת",
+      "selector": "290L:24:27",
+      "courseIds": [
+        "01250801",
+        "01240801"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "בחירה פקולטית בחומרים",
+      "selector": "290L:37:70",
+      "courseIds": [
+        "03140014",
+        "03140124",
+        "03140126",
+        "03140306",
+        "03150016",
+        "03150017",
+        "03150018",
+        "03150021",
+        "03150025",
+        "03150027",
+        "03150031",
+        "03150034",
+        "03150035",
+        "03150038",
+        "03150040",
+        "03150041",
+        "03150042",
+        "03150044",
+        "03150045",
+        "03150046",
+        "03150049",
+        "03150050",
+        "03150053",
+        "03150054",
+        "03150056",
+        "03150057",
+        "03150060",
+        "03150061",
+        "03150063",
+        "03150200",
+        "03150202",
+        "03160000"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "בחירה פקולטית בחומרים",
+      "selector": "291R:1:9",
+      "courseIds": [
+        "03160001",
+        "03160240",
+        "03170531",
+        "03170627",
+        "03160243",
+        "03160244",
+        "03160541",
+        "03180235"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "בחירה מפקולטות אחרות — רשימה א׳",
+      "selector": "291R:16:18",
+      "courseIds": [
+        "01250102",
+        "01240911",
+        "01240618"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "בחירה מפקולטות אחרות — רשימה ב׳",
+      "selector": "291R:20:49",
+      "courseIds": [
+        "00540135",
+        "00350022",
+        "00350124",
+        "00360065",
+        "00440099",
+        "00440109",
+        "00540369",
+        "00940591",
+        "00350041",
+        "00350034",
+        "00350053",
+        "00350050",
+        "00460012",
+        "00560391",
+        "01040192",
+        "01040215",
+        "01160029",
+        "01240417",
+        "01250101",
+        "01270437",
+        "01270438",
+        "01240416",
+        "00940101",
+        "00340045",
+        "00350046",
+        "00140616",
+        "00360083",
+        "01340058",
+        "01140054",
+        "01240305"
+      ]
+    },
+    {
+      "programId": "materials-engineering",
+      "role": "בחירה חופשית מומלצת",
+      "selector": "290L:31:31",
+      "courseIds": [
+        "03140100"
+      ]
+    },
+    {
+      "programId": "materials-data-computation",
+      "role": "mandatory",
+      "selector": "291L:12:14",
+      "courseIds": [
+        "02340128",
+        "03150058"
+      ]
+    },
+    {
+      "programId": "materials-data-computation",
+      "role": "קורסי הבחירה באשכול",
+      "selector": "291L:23:33",
+      "courseIds": [
+        "00940202",
+        "02340268",
+        "03150057",
+        "03150035",
+        "03140015"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "mandatory",
+      "selector": "292R:27:67",
+      "courseIds": [
+        "01040064",
+        "01040012",
+        "01140074",
+        "01250001",
+        "02340128",
+        "00440102",
+        "01140020",
+        "01040013",
+        "01040136",
+        "01040038",
+        "01140021",
+        "01140076",
+        "03140011",
+        "01040034",
+        "01040215",
+        "01040220",
+        "01040214",
+        "01140101",
+        "01140086",
+        "03140009",
+        "03240033",
+        "01150203",
+        "01140035",
+        "01140036",
+        "01240414",
+        "01240801",
+        "03150003",
+        "03150051"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "mandatory",
+      "selector": "292L:1:29",
+      "courseIds": [
+        "01160217",
+        "01150204",
+        "03140003",
+        "03140006",
+        "03150052",
+        "01140246",
+        "03140311",
+        "03140312",
+        "03150008",
+        "03150030",
+        "03150039",
+        "03140532",
+        "03150037",
+        "03150001",
+        "03150002",
+        "03150014"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "בחירה בהנדסת חומרים",
+      "selector": "292L:34",
+      "courseIds": [
+        "03140014",
+        "03140124",
+        "03140126",
+        "03140306",
+        "03140309",
+        "03140316",
+        "03150012",
+        "03140016",
+        "03150016",
+        "03150017",
+        "03150018",
+        "03150021",
+        "03150025",
+        "03150027",
+        "03150031",
+        "03150034",
+        "03150035",
+        "03150038",
+        "03150040",
+        "03150041",
+        "03150042",
+        "03150044",
+        "03150045",
+        "03150046",
+        "03150049",
+        "03150050",
+        "03150053",
+        "03150056",
+        "03150057",
+        "03150058",
+        "03150059",
+        "03150060",
+        "03150063",
+        "03150061",
+        "03150200",
+        "03150202"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "בחירה בהנדסת חומרים",
+      "selector": "293R:1:11",
+      "courseIds": [
+        "03150242",
+        "03160000",
+        "03160001",
+        "03160240",
+        "03160424",
+        "03170000",
+        "03170531",
+        "03170627",
+        "03160244",
+        "03160541"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "בחירה בפיזיקה — כל הרשימה המפורשת",
+      "selector": "293R:17:69",
+      "courseIds": [
+        "01160210",
+        "01160029",
+        "01160004",
+        "01160354",
+        "01160031",
+        "01160027",
+        "01140226",
+        "01140227",
+        "01160028",
+        "01160030",
+        "01160041",
+        "01170010",
+        "01160105",
+        "01170015",
+        "01170016",
+        "01170018",
+        "01170021",
+        "01170066",
+        "01170090",
+        "01170098",
+        "01170140",
+        "01140250",
+        "01160033",
+        "01140027",
+        "01160161",
+        "01160163",
+        "01160321",
+        "01170001",
+        "01170002",
+        "01170003",
+        "01170004",
+        "01170006",
+        "01140037",
+        "01140102",
+        "01160003",
+        "01160356",
+        "01160355",
+        "02140301",
+        "01160034",
+        "01160110",
+        "01160035",
+        "01160036",
+        "01160037",
+        "01160039",
+        "01160040",
+        "01160081",
+        "01160094"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "בחירה מפקולטות אחרות",
+      "selector": "293L:11:28",
+      "courseIds": [
+        "00340033",
+        "00340044",
+        "00350124",
+        "00360065",
+        "00440099",
+        "00440109",
+        "00540369",
+        "00560166",
+        "00940591",
+        "01270403",
+        "01340127",
+        "00940101",
+        "00340045",
+        "00350046",
+        "00140616",
+        "00360083",
+        "01340058",
+        "00560391"
+      ]
+    },
+    {
+      "programId": "materials-physics",
+      "role": "בחירה חופשית מומלצת",
+      "selector": "293L:31:31",
+      "courseIds": [
+        "03140100"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "mandatory",
+      "selector": "294R:24:70",
+      "courseIds": [
+        "01040019",
+        "01040041",
+        "01140051",
+        "01240117",
+        "02340128",
+        "03240033",
+        "03141000",
+        "01040043",
+        "01040131",
+        "01140052",
+        "01140081",
+        "01240118",
+        "01240220",
+        "03140011",
+        "00940481",
+        "01040228",
+        "01240212",
+        "01240708",
+        "01240400",
+        "03140009",
+        "01240413",
+        "01240414",
+        "01240711",
+        "01240911",
+        "03150003",
+        "03150051",
+        "01240305",
+        "01240416",
+        "01270427"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "mandatory",
+      "selector": "294L:1:33",
+      "courseIds": [
+        "03140003",
+        "03140006",
+        "03150052",
+        "01240213",
+        "01240417",
+        "03140311",
+        "03140312",
+        "03150008",
+        "03150030",
+        "03150039",
+        "01240618",
+        "01340127",
+        "03140532",
+        "03150001",
+        "03150037",
+        "01240214",
+        "03150002",
+        "03150014"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "בחירה בהנדסת חומרים",
+      "selector": "294L:38",
+      "courseIds": [
+        "03140014",
+        "03140016",
+        "03140124",
+        "03140126",
+        "03140306",
+        "03140309",
+        "03140316",
+        "03150012",
+        "03150016",
+        "03150017",
+        "03150018",
+        "03150021",
+        "03150025",
+        "03150027",
+        "03150031",
+        "03150034",
+        "03150035",
+        "03150038",
+        "03150040",
+        "03150041",
+        "03150042",
+        "03150044",
+        "03150045",
+        "03150046",
+        "03150049",
+        "03150050",
+        "03150053",
+        "03150056"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "בחירה בהנדסת חומרים",
+      "selector": "295R:1:25",
+      "courseIds": [
+        "03150057",
+        "03150058",
+        "03150059",
+        "03150060",
+        "03150062",
+        "03150063",
+        "03150200",
+        "03150202",
+        "03150242",
+        "03160000",
+        "03160001",
+        "03160240",
+        "03160243",
+        "03160244",
+        "03160541",
+        "03160424",
+        "03170531",
+        "03170627",
+        "00580134"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "כימיה — מעבדות ופרויקטי מחקר",
+      "selector": "295R:31:41",
+      "courseIds": [
+        "01240353",
+        "01240355",
+        "01260302",
+        "01260303",
+        "01260600",
+        "01260603",
+        "01260605",
+        "01260901",
+        "01260902"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "כימיה — רשימת מקצועות מתקדמים",
+      "selector": "295R:43",
+      "courseIds": [
+        "01240210",
+        "01240912",
+        "01260200",
+        "01260304",
+        "01260601",
+        "01260602",
+        "01260604",
+        "01260700",
+        "01270002",
+        "01270009",
+        "01270010",
+        "01270206",
+        "01270208",
+        "01270403",
+        "01270425",
+        "01270433",
+        "01270436",
+        "01270437",
+        "01270438",
+        "01270441",
+        "01270442",
+        "01270443",
+        "01270446",
+        "01270447",
+        "01270450",
+        "01270451",
+        "01270452",
+        "01270453"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "כימיה — רשימת מקצועות מתקדמים",
+      "selector": "295L:3:20",
+      "courseIds": [
+        "01270454",
+        "01270455",
+        "01270456",
+        "01270457",
+        "01270458",
+        "01270459",
+        "01270460",
+        "01270727",
+        "01270729",
+        "01270730",
+        "01270731",
+        "01270735",
+        "01270738",
+        "01270739",
+        "01270740",
+        "01270741",
+        "01270742"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "כימיה — רשימה נוספת מוגבלת",
+      "selector": "295L:29:33",
+      "courseIds": [
+        "01270109",
+        "01240356",
+        "01270100",
+        "01270744"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "בחירה מפקולטות אחרות",
+      "selector": "295L:36:53",
+      "courseIds": [
+        "00340033",
+        "00340044",
+        "00350124",
+        "00360065",
+        "00440099",
+        "00440109",
+        "00540369",
+        "00560166",
+        "00940591",
+        "00940101",
+        "00340045",
+        "00350046",
+        "00140616",
+        "00360083",
+        "01340058",
+        "00560391",
+        "01140054"
+      ]
+    },
+    {
+      "programId": "materials-chemistry",
+      "role": "בחירה חופשית מומלצת",
+      "selector": "295L:56:57",
+      "courseIds": [
+        "03140100"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "mandatory",
+      "selector": "296R:26:70",
+      "courseIds": [
+        "01040019",
+        "01040041",
+        "01140051",
+        "01240120",
+        "01340058",
+        "03240033",
+        "03140100",
+        "01040043",
+        "01040131",
+        "01140052",
+        "01250801",
+        "01340019",
+        "03140011",
+        "00940481",
+        "01040228",
+        "01240400",
+        "01340020",
+        "01340082",
+        "01340113",
+        "03140009",
+        "01240122",
+        "01240413",
+        "01340117",
+        "01340128",
+        "03150003",
+        "03150051",
+        "02340128",
+        "03140150",
+        "01340142"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "mandatory",
+      "selector": "296L:1:32",
+      "courseIds": [
+        "03140003",
+        "03140006",
+        "03140014",
+        "03150052",
+        "01340121",
+        "01340143",
+        "03140311",
+        "03140312",
+        "03150008",
+        "03150030",
+        "03150039",
+        "01340111",
+        "03140532",
+        "03150001",
+        "03150037",
+        "02760413",
+        "03150002",
+        "03150014"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "רשימה א1׳ — הנדסת חומרים",
+      "selector": "296L:54:59",
+      "courseIds": [
+        "00490315",
+        "00180315",
+        "03150200"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "רשימה א2׳ — הנדסת חומרים",
+      "selector": "296L:60",
+      "courseIds": [
+        "03140016",
+        "03140124",
+        "03140126",
+        "03140306",
+        "03140309",
+        "03140316",
+        "03150012",
+        "03150016",
+        "03150017",
+        "03150021"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "רשימה א2׳ — הנדסת חומרים",
+      "selector": "297R:1:36",
+      "courseIds": [
+        "03150025",
+        "03150027",
+        "03150031",
+        "03150034",
+        "03150035",
+        "03150038",
+        "03150040",
+        "03150041",
+        "03150042",
+        "03150044",
+        "03150045",
+        "03150046",
+        "03150050",
+        "03150053",
+        "03150056",
+        "03150057",
+        "03150058",
+        "03150059",
+        "03150063",
+        "03150060",
+        "03160001",
+        "03150242",
+        "03160000",
+        "03160240",
+        "03160424",
+        "03170531",
+        "03170627",
+        "03160243",
+        "03160244",
+        "03160541",
+        "03150202"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "רשימה ב1׳ — ביולוגיה",
+      "selector": "297R:40:55",
+      "courseIds": [
+        "01340069",
+        "01340133",
+        "01340134",
+        "01340040",
+        "01340144",
+        "01340119",
+        "01340123",
+        "01340153",
+        "01340039",
+        "01340156",
+        "01340155",
+        "01340152",
+        "01360158"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "רשימה ב2׳ — ביולוגיה",
+      "selector": "297R:56",
+      "courseIds": [
+        "01340049",
+        "01340129",
+        "01340140",
+        "01340141",
+        "01340147",
+        "01360014",
+        "01340151",
+        "01360088",
+        "01360042",
+        "01340159",
+        "01360037",
+        "01340137"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "רשימה ג׳ — פקולטות אחרות",
+      "selector": "297L:3:47",
+      "courseIds": [
+        "00170006",
+        "00340033",
+        "00340044",
+        "00350124",
+        "00360065",
+        "00440099",
+        "00440109",
+        "00540369",
+        "00560166",
+        "00640413",
+        "00640611",
+        "00660327",
+        "00660520",
+        "00940591",
+        "00960414",
+        "01040214",
+        "01240212",
+        "01240414",
+        "01240416",
+        "01240417",
+        "01240909",
+        "01240911",
+        "01260304",
+        "01270441",
+        "01270718",
+        "01270730",
+        "02360523",
+        "01340158",
+        "00840630",
+        "03360531",
+        "00940101",
+        "00340045",
+        "00350046",
+        "00140616",
+        "00360083",
+        "03140016",
+        "00560391",
+        "01140054",
+        "01250101"
+      ]
+    },
+    {
+      "programId": "materials-biology",
+      "role": "בחירה חופשית מומלצת",
+      "selector": "296L:34:37",
+      "courseIds": [
+        "03140100"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "mandatory",
+      "selector": "304R:24:76",
+      "courseIds": [
+        "00440102",
+        "01040042",
+        "01040065",
+        "01140071",
+        "01250001",
+        "01340058",
+        "03340021",
+        "01040000",
+        "01040018",
+        "01040016",
+        "01040013",
+        "01040038",
+        "01040136",
+        "01140052",
+        "01240801",
+        "02340128",
+        "01140078",
+        "00440105",
+        "01040214",
+        "01040215",
+        "01040220",
+        "01240503",
+        "01340019",
+        "03340274",
+        "00440131",
+        "01040034",
+        "03340221",
+        "03340222",
+        "03360537"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "mandatory",
+      "selector": "304L:1:40",
+      "courseIds": [
+        "01340113",
+        "03340009",
+        "03340023",
+        "03350010",
+        "03360022",
+        "03360100",
+        "03340331",
+        "00940423",
+        "03340011",
+        "03350001",
+        "03360026",
+        "03340014",
+        "03350002",
+        "03350015",
+        "03350003"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "הדמיה ואותות רפואיים",
+      "selector": "307L:10",
+      "courseIds": [
+        "03360020",
+        "03360207",
+        "03360208",
+        "03360326",
+        "03360502",
+        "03360522",
+        "03360533",
+        "03360546",
+        "03360325",
+        "03360404",
+        "03360504",
+        "03360521",
+        "03360535",
+        "03360536",
+        "03360538",
+        "03360540",
+        "03360544",
+        "03350545",
+        "03360547",
+        "03360549",
+        "03360550",
+        "00340056",
+        "00440101",
+        "00440198",
+        "00440202",
+        "00460188",
+        "00460195",
+        "00460197",
+        "00460200",
+        "00460201",
+        "00460217",
+        "00460332",
+        "00460745",
+        "00460746",
+        "02360523",
+        "02360781"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "ביומכניקה וזרימה",
+      "selector": "308R:3:30",
+      "courseIds": [
+        "03360326",
+        "03360506",
+        "03360517",
+        "03360522",
+        "03360539",
+        "03360541",
+        "03360021",
+        "03360520",
+        "03360521",
+        "03360540",
+        "03360549",
+        "03360550",
+        "00340056",
+        "00350001",
+        "00350199",
+        "00360049",
+        "00360072",
+        "00360086",
+        "00360090",
+        "00840225",
+        "02360332",
+        "02360333"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "הנדסת רקמות וביו־חומרים",
+      "selector": "308R:31:62",
+      "courseIds": [
+        "03360021",
+        "03360402",
+        "03360517",
+        "03360522",
+        "03360528",
+        "03360529",
+        "03360326",
+        "03360404",
+        "03360405",
+        "03360520",
+        "03360521",
+        "03360538",
+        "03360540",
+        "03360544",
+        "03360548",
+        "03360549",
+        "03360550",
+        "00540413",
+        "00560410",
+        "00660121",
+        "00660333",
+        "01340020",
+        "01340069",
+        "01340082",
+        "01340119",
+        "01340121",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "ביופיזיקה רפואית",
+      "selector": "308L:1:39",
+      "courseIds": [
+        "03360020",
+        "03360023",
+        "03360326",
+        "03360522",
+        "03360533",
+        "03360538",
+        "03360550",
+        "03360021",
+        "03360325",
+        "03360402",
+        "03360404",
+        "03360502",
+        "03360504",
+        "03360521",
+        "03360535",
+        "03360536",
+        "03360540",
+        "03360544",
+        "03350545",
+        "03360547",
+        "03360549",
+        "00360090",
+        "00440198",
+        "00460217",
+        "00640250",
+        "01140036",
+        "01140054",
+        "01160321",
+        "01250000",
+        "01260304",
+        "01340082",
+        "01340119",
+        "01340141",
+        "01340156"
+      ]
+    },
+    {
+      "programId": "biomedical-engineering",
+      "role": "בחירה פקולטית כללית",
+      "selector": "308L:41:55",
+      "courseIds": [
+        "03340019",
+        "03340020",
+        "03340305",
+        "03340331",
+        "03350016",
+        "03360001",
+        "03360024",
+        "03360025",
+        "03360543",
+        "02160020"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "mandatory",
+      "selector": "305R:22:73",
+      "courseIds": [
+        "00440102",
+        "01040042",
+        "01040065",
+        "01140020",
+        "01140074",
+        "01250001",
+        "01340058",
+        "03340021",
+        "01040000",
+        "01040018",
+        "01040016",
+        "01040013",
+        "01040038",
+        "01040136",
+        "01140076",
+        "01240801",
+        "02340128",
+        "00440105",
+        "01040214",
+        "01040215",
+        "01040220",
+        "01140021",
+        "01140086",
+        "01340019",
+        "03340274",
+        "00440131",
+        "01040034",
+        "01140035",
+        "03340222",
+        "03360537"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "mandatory",
+      "selector": "305L:4:55",
+      "courseIds": [
+        "01140101",
+        "03340009",
+        "03340023",
+        "03350010",
+        "03360100",
+        "03340331",
+        "00940423",
+        "01140036",
+        "01150203",
+        "03340011",
+        "03350005",
+        "03360533",
+        "03360026",
+        "01160210",
+        "01140037",
+        "01150204",
+        "03340014",
+        "03350003",
+        "01140246",
+        "03350015"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "הדמיה ואותות רפואיים",
+      "selector": "307L:10",
+      "courseIds": [
+        "03360020",
+        "03360207",
+        "03360208",
+        "03360326",
+        "03360502",
+        "03360522",
+        "03360533",
+        "03360546",
+        "03360325",
+        "03360404",
+        "03360504",
+        "03360521",
+        "03360535",
+        "03360536",
+        "03360538",
+        "03360540",
+        "03360544",
+        "03350545",
+        "03360547",
+        "03360549",
+        "03360550",
+        "00340056",
+        "00440101",
+        "00440198",
+        "00440202",
+        "00460188",
+        "00460195",
+        "00460197",
+        "00460200",
+        "00460201",
+        "00460217",
+        "00460332",
+        "00460745",
+        "00460746",
+        "02360523",
+        "02360781"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "ביומכניקה וזרימה",
+      "selector": "308R:3:30",
+      "courseIds": [
+        "03360326",
+        "03360506",
+        "03360517",
+        "03360522",
+        "03360539",
+        "03360541",
+        "03360021",
+        "03360520",
+        "03360521",
+        "03360540",
+        "03360549",
+        "03360550",
+        "00340056",
+        "00350001",
+        "00350199",
+        "00360049",
+        "00360072",
+        "00360086",
+        "00360090",
+        "00840225",
+        "02360332",
+        "02360333"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "הנדסת רקמות וביו־חומרים",
+      "selector": "308R:31:62",
+      "courseIds": [
+        "03360021",
+        "03360402",
+        "03360517",
+        "03360522",
+        "03360528",
+        "03360529",
+        "03360326",
+        "03360404",
+        "03360405",
+        "03360520",
+        "03360521",
+        "03360538",
+        "03360540",
+        "03360544",
+        "03360548",
+        "03360549",
+        "03360550",
+        "00540413",
+        "00560410",
+        "00660121",
+        "00660333",
+        "01340020",
+        "01340069",
+        "01340082",
+        "01340119",
+        "01340121",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "ביופיזיקה רפואית",
+      "selector": "308L:1:39",
+      "courseIds": [
+        "03360020",
+        "03360023",
+        "03360326",
+        "03360522",
+        "03360533",
+        "03360538",
+        "03360550",
+        "03360021",
+        "03360325",
+        "03360402",
+        "03360404",
+        "03360502",
+        "03360504",
+        "03360521",
+        "03360535",
+        "03360536",
+        "03360540",
+        "03360544",
+        "03350545",
+        "03360547",
+        "03360549",
+        "00360090",
+        "00440198",
+        "00460217",
+        "00640250",
+        "01140036",
+        "01140054",
+        "01160321",
+        "01250000",
+        "01260304",
+        "01340082",
+        "01340119",
+        "01340141",
+        "01340156"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "בחירה פקולטית כללית",
+      "selector": "308L:41:55",
+      "courseIds": [
+        "03340019",
+        "03340020",
+        "03340305",
+        "03340331",
+        "03350016",
+        "03360001",
+        "03360024",
+        "03360025",
+        "03360543",
+        "02160020"
+      ]
+    },
+    {
+      "programId": "biomedical-physics",
+      "role": "תוספות המוכרות במסלול המשולב",
+      "selector": "305L:66:68",
+      "courseIds": [
+        "03350002",
+        "03360022"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "mandatory",
+      "selector": "306R:25:76",
+      "courseIds": [
+        "00440102",
+        "01040042",
+        "01040065",
+        "01140071",
+        "01240507",
+        "02740167",
+        "03340021",
+        "01040000",
+        "01040018",
+        "01040016",
+        "01040013",
+        "01040038",
+        "01040136",
+        "01140052",
+        "01250803",
+        "02340128",
+        "01140078",
+        "00440105",
+        "01040214",
+        "01040215",
+        "01040220",
+        "02740241",
+        "02740257",
+        "00440131",
+        "01040034",
+        "03340222",
+        "02740253",
+        "02740266"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "mandatory",
+      "selector": "306L:1:78",
+      "courseIds": [
+        "03340009",
+        "03340023",
+        "03350010",
+        "02740142",
+        "02740323",
+        "02740348",
+        "03340331",
+        "00940423",
+        "03340011",
+        "03340221",
+        "03350001",
+        "02740143",
+        "02740165",
+        "02740262",
+        "02740268",
+        "03360026",
+        "03340014",
+        "03350003",
+        "02740234",
+        "02740242",
+        "02740243",
+        "02740260",
+        "02740320",
+        "03350015",
+        "02740235",
+        "02740246",
+        "02740261",
+        "02740265",
+        "02740267",
+        "02740231",
+        "02740258",
+        "02740322",
+        "02740326",
+        "02740336",
+        "02740372",
+        "02740375",
+        "03240397",
+        "02740251",
+        "02740252",
+        "02740318",
+        "02740319",
+        "02740327",
+        "02740328",
+        "02740352",
+        "02740367"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "הדמיה ואותות רפואיים",
+      "selector": "307L:10",
+      "courseIds": [
+        "03360020",
+        "03360207",
+        "03360208",
+        "03360326",
+        "03360502",
+        "03360522",
+        "03360533",
+        "03360546",
+        "03360325",
+        "03360404",
+        "03360504",
+        "03360521",
+        "03360535",
+        "03360536",
+        "03360538",
+        "03360540",
+        "03360544",
+        "03350545",
+        "03360547",
+        "03360549",
+        "03360550",
+        "00340056",
+        "00440101",
+        "00440198",
+        "00440202",
+        "00460188",
+        "00460195",
+        "00460197",
+        "00460200",
+        "00460201",
+        "00460217",
+        "00460332",
+        "00460745",
+        "00460746",
+        "02360523",
+        "02360781"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "ביומכניקה וזרימה",
+      "selector": "308R:3:30",
+      "courseIds": [
+        "03360326",
+        "03360506",
+        "03360517",
+        "03360522",
+        "03360539",
+        "03360541",
+        "03360021",
+        "03360520",
+        "03360521",
+        "03360540",
+        "03360549",
+        "03360550",
+        "00340056",
+        "00350001",
+        "00350199",
+        "00360049",
+        "00360072",
+        "00360086",
+        "00360090",
+        "00840225",
+        "02360332",
+        "02360333"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "הנדסת רקמות וביו־חומרים",
+      "selector": "308R:31:62",
+      "courseIds": [
+        "03360021",
+        "03360402",
+        "03360517",
+        "03360522",
+        "03360528",
+        "03360529",
+        "03360326",
+        "03360404",
+        "03360405",
+        "03360520",
+        "03360521",
+        "03360538",
+        "03360540",
+        "03360544",
+        "03360548",
+        "03360549",
+        "03360550",
+        "00540413",
+        "00560410",
+        "00660121",
+        "00660333",
+        "01340020",
+        "01340069",
+        "01340082",
+        "01340119",
+        "01340121",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "ביופיזיקה רפואית",
+      "selector": "308L:1:39",
+      "courseIds": [
+        "03360020",
+        "03360023",
+        "03360326",
+        "03360522",
+        "03360533",
+        "03360538",
+        "03360550",
+        "03360021",
+        "03360325",
+        "03360402",
+        "03360404",
+        "03360502",
+        "03360504",
+        "03360521",
+        "03360535",
+        "03360536",
+        "03360540",
+        "03360544",
+        "03350545",
+        "03360547",
+        "03360549",
+        "00360090",
+        "00440198",
+        "00460217",
+        "00640250",
+        "01140036",
+        "01140054",
+        "01160321",
+        "01250000",
+        "01260304",
+        "01340082",
+        "01340119",
+        "01340141",
+        "01340156"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "בחירה פקולטית כללית",
+      "selector": "308L:41:55",
+      "courseIds": [
+        "03340019",
+        "03340020",
+        "03340305",
+        "03340331",
+        "03350016",
+        "03360001",
+        "03360024",
+        "03360025",
+        "03360543",
+        "02160020"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "בחירה במדעי הרפואה",
+      "selector": "276R:55:77",
+      "courseIds": [
+        "02750109",
+        "02750110",
+        "02750111",
+        "02750112",
+        "02750113",
+        "02750200",
+        "02750214",
+        "02750215",
+        "02750216",
+        "02750217",
+        "02750218",
+        "02750219",
+        "02750304",
+        "02750310",
+        "02750315",
+        "02750316",
+        "02750317",
+        "02750320",
+        "02750321",
+        "02750322",
+        "02750324",
+        "02750325",
+        "02760001"
+      ]
+    },
+    {
+      "programId": "medicine-biomedical-engineering",
+      "role": "בחירה במדעי הרפואה",
+      "selector": "276L:1:15",
+      "courseIds": [
+        "02760002",
+        "02760004",
+        "02760005",
+        "02760201",
+        "02760307",
+        "02760431",
+        "02770210",
+        "02770300",
+        "02770301",
+        "03240621",
+        "03240627",
+        "03240628"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "230R",
+      "courseIds": [
+        "01040065",
+        "02340114",
+        "03940901",
+        "02140012",
+        "02160014",
+        "01040032",
+        "01040281",
+        "01040043",
+        "01040044",
+        "01040022",
+        "00940345",
+        "03240033",
+        "02140132",
+        "02160135",
+        "01040215",
+        "01040214",
+        "01040134",
+        "00440268",
+        "02140137",
+        "02160133",
+        "01040034",
+        "01040222",
+        "01040285",
+        "02140092",
+        "02140213",
+        "01060397",
+        "00940313"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "230L:1:34",
+      "courseIds": [
+        "00940314",
+        "00940202",
+        "02140093",
+        "00940423",
+        "01140051",
+        "02160013",
+        "02160112",
+        "02160125"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "רשימה א׳ — מקצועות בחינוך",
+      "selector": "230L:47:67",
+      "courseIds": [
+        "02160022",
+        "02160034",
+        "02160003",
+        "02160033",
+        "02160143",
+        "02180003",
+        "02180006",
+        "02180125",
+        "02140116",
+        "03260005",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "רשימה א׳ — מקצועות בחינוך",
+      "selector": "231R:1:6",
+      "courseIds": [
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "רשימה ב׳ — מקצועות במתמטיקה",
+      "selector": "231R:7:34",
+      "courseIds": [
+        "00940313",
+        "00940314",
+        "01040142",
+        "00970317",
+        "01040030",
+        "01040114",
+        "01040173",
+        "01040172",
+        "01040177",
+        "01040192",
+        "01040220",
+        "01040274",
+        "01040276",
+        "01040279",
+        "01040280",
+        "01040282",
+        "01040283",
+        "01040284",
+        "01060156",
+        "01060173",
+        "02340107"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "רשימה ג׳ — מדע וטכנולוגיה",
+      "selector": "231R:35:56",
+      "courseIds": [
+        "00940220",
+        "00940223",
+        "02340118",
+        "02340122",
+        "02340218",
+        "01140052",
+        "01140054",
+        "01140032",
+        "01140082",
+        "01240801",
+        "01250001",
+        "01250011",
+        "01340058",
+        "01340111",
+        "00850201"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "רשימה ד׳ — מקצועות כלליים",
+      "selector": "231R:57",
+      "courseIds": [
+        "00960600",
+        "01140010",
+        "01140011",
+        "02140400",
+        "02140706",
+        "02140912",
+        "02160003",
+        "02160117",
+        "02160127",
+        "02160131",
+        "02160150",
+        "02160318",
+        "03240238"
+      ]
+    },
+    {
+      "programId": "education-mathematics",
+      "role": "רשימה ד׳ — מקצועות כלליים",
+      "selector": "231L",
+      "courseIds": [
+        "03240329",
+        "03240346",
+        "03240351",
+        "03240389",
+        "03240394",
+        "03240395",
+        "03240402",
+        "03240405"
+      ]
+    },
+    {
+      "programId": "education-physics",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "232R:24",
+      "courseIds": [
+        "02140011",
+        "02140114",
+        "02160026",
+        "01040018",
+        "01040016",
+        "02340128",
+        "03940901",
+        "02140012",
+        "01040022",
+        "01040135",
+        "03940900",
+        "03240033",
+        "01140071",
+        "00440102",
+        "01040215",
+        "01040223",
+        "01140076",
+        "01140075",
+        "01140020",
+        "02140607",
+        "02140302"
+      ]
+    },
+    {
+      "programId": "education-physics",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "232L:1:62",
+      "courseIds": [
+        "01040034",
+        "01140021",
+        "01140073",
+        "02160005",
+        "02140609",
+        "01240120",
+        "01340058",
+        "01140086",
+        "02160004",
+        "02160034",
+        "02160128",
+        "01140035",
+        "02140092",
+        "01240415",
+        "01140036",
+        "02140093"
+      ]
+    },
+    {
+      "programId": "education-physics",
+      "role": "קבוצה א׳ — חינוך מדעי",
+      "selector": "232L:67",
+      "courseIds": [
+        "03240944",
+        "03240864",
+        "03240455"
+      ]
+    },
+    {
+      "programId": "education-physics",
+      "role": "קבוצה ב׳ — פיזיקה",
+      "selector": "233R:1:38",
+      "courseIds": [
+        "01140034",
+        "01140027",
+        "01140250",
+        "01140028",
+        "01140251",
+        "01140102",
+        "01140210",
+        "01140101",
+        "01140036",
+        "01160217",
+        "01140226",
+        "01140227",
+        "01140229",
+        "01140246",
+        "01150203",
+        "01150204",
+        "01160003",
+        "01160028",
+        "01160029",
+        "01160030",
+        "01160105",
+        "01180121",
+        "01170010",
+        "01170016",
+        "03140007",
+        "01160004",
+        "01160354",
+        "01140021"
+      ]
+    },
+    {
+      "programId": "education-physics",
+      "role": "קבוצה ג׳ — מדעים וטכנולוגיה",
+      "selector": "233R:39",
+      "courseIds": [
+        "00350142",
+        "00440105",
+        "00440130",
+        "00460332",
+        "01040191",
+        "01040290",
+        "01040192",
+        "01140010",
+        "01140011",
+        "03240914",
+        "03240961",
+        "03340222",
+        "03360537",
+        "03340303",
+        "03360325",
+        "03360502"
+      ]
+    },
+    {
+      "programId": "education-chemistry",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "233L:20",
+      "courseIds": [
+        "02140011",
+        "01240117",
+        "01340058",
+        "01040003",
+        "00214011",
+        "01240118",
+        "01250801",
+        "01240708",
+        "01040004",
+        "03940901",
+        "02140401",
+        "01140051",
+        "03240033",
+        "01040019",
+        "02140114",
+        "01240220",
+        "01140052"
+      ]
+    },
+    {
+      "programId": "education-chemistry",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "234R",
+      "courseIds": [
+        "02340128",
+        "03940800",
+        "02140402",
+        "02140607",
+        "00134019",
+        "00140968",
+        "01340153",
+        "00140978",
+        "01240415",
+        "00540350",
+        "01240212",
+        "02160128",
+        "00640322",
+        "01240911",
+        "00940481",
+        "01340143",
+        "02140092",
+        "01140054",
+        "02140093",
+        "02160126"
+      ]
+    },
+    {
+      "programId": "education-chemistry",
+      "role": "קבוצה א׳ — כימיה",
+      "selector": "234L:2:17",
+      "courseIds": [
+        "00540351",
+        "01240213",
+        "01240214",
+        "01240305",
+        "01240416",
+        "01240417",
+        "01240703",
+        "01270005",
+        "01270453",
+        "01270433",
+        "01240711",
+        "00140322"
+      ]
+    },
+    {
+      "programId": "education-chemistry",
+      "role": "קבוצה ב׳ — חינוך מדעי",
+      "selector": "234L:18:26",
+      "courseIds": []
+    },
+    {
+      "programId": "education-chemistry",
+      "role": "קבוצה ג׳ — ביולוגיה וסביבה",
+      "selector": "234L:27",
+      "courseIds": [
+        "00140309",
+        "00140313",
+        "00140326",
+        "00140956",
+        "00150001",
+        "00160302",
+        "00170001"
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "235R:20",
+      "courseIds": [
+        "02140011",
+        "01240120",
+        "01340058",
+        "01040003",
+        "03940901",
+        "02140114",
+        "01340019",
+        "01340020",
+        "01250801",
+        "03240033",
+        "01340082",
+        "01340113",
+        "01140051",
+        "01340154",
+        "02140607",
+        "01340128",
+        "01340121",
+        "01340133"
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "235L:1:56",
+      "courseIds": [
+        "01140052",
+        "01340163",
+        "01340111",
+        "02140501",
+        "02340128",
+        "01340117",
+        "01340040",
+        "01340153",
+        "00160302",
+        "02140502",
+        "02140092",
+        "02160128",
+        "02160136",
+        "02140093"
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "קבוצה א׳ — ביולוגיה",
+      "selector": "235L:59:72",
+      "courseIds": [
+        "01340119",
+        "01340155",
+        "01340147",
+        "01340039",
+        "02360525",
+        "01360088",
+        "01340152",
+        "01380013",
+        "02760413"
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "קבוצה ב׳ — מעבדות בביולוגיה",
+      "selector": "235L:73",
+      "courseIds": []
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "קבוצה ב׳ — מעבדות בביולוגיה",
+      "selector": "236R:1:12",
+      "courseIds": [
+        "01340134",
+        "01340142",
+        "01340143",
+        "01340144",
+        "01340159"
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "קבוצה ג׳ — סביבה",
+      "selector": "236R:13:24",
+      "courseIds": [
+        "00140313",
+        "00140321",
+        "00140326",
+        "00170001",
+        "00206972",
+        "02070041",
+        "02060972",
+        "02040150"
+      ]
+    },
+    {
+      "programId": "education-biology-environment",
+      "role": "קבוצה ד׳ — חינוך מדעי",
+      "selector": "236R:25",
+      "courseIds": []
+    },
+    {
+      "programId": "education-computer-science",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "236L:21",
+      "courseIds": [
+        "02140011",
+        "01040031",
+        "01040018",
+        "01040166",
+        "03240033",
+        "03940901",
+        "02340114",
+        "01040032",
+        "01040022",
+        "02140114",
+        "02340141",
+        "00940344",
+        "02340122",
+        "00940219",
+        "02340118"
+      ]
+    },
+    {
+      "programId": "education-computer-science",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "237R",
+      "courseIds": [
+        "02340218",
+        "02340129",
+        "01040131",
+        "00940412",
+        "00940431",
+        "01040034",
+        "02140901",
+        "02340247",
+        "02340252",
+        "00440252",
+        "01040134",
+        "02140902",
+        "00940222",
+        "00940240",
+        "02140092",
+        "02360319"
+      ]
+    },
+    {
+      "programId": "education-computer-science",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "237L:1:8",
+      "courseIds": [
+        "02140093",
+        "02160126"
+      ]
+    },
+    {
+      "programId": "education-computer-science",
+      "role": "רשימה א׳ — מקצועות מדעיים",
+      "selector": "237L:22:41",
+      "courseIds": [
+        "00140968",
+        "01140051",
+        "01140052",
+        "01140054",
+        "01140073",
+        "01140032",
+        "01140082",
+        "01160130",
+        "01250001",
+        "01250011",
+        "01250101",
+        "01250102",
+        "01340054",
+        "01340058"
+      ]
+    },
+    {
+      "programId": "education-computer-science",
+      "role": "רשימה ב׳ — מדעי המחשב",
+      "selector": "237L:44:54",
+      "courseIds": [
+        "03340303"
+      ]
+    },
+    {
+      "programId": "education-computer-science",
+      "role": "רשימה ג׳ — חינוך מדעי והנדסי",
+      "selector": "237L:55",
+      "courseIds": [
+        "02160030",
+        "02160010",
+        "02160022",
+        "02160012",
+        "02160034"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "238R:23",
+      "courseIds": [
+        "00030042",
+        "01040018",
+        "01040016",
+        "01250001",
+        "03240033",
+        "03940800",
+        "00340028",
+        "03140533",
+        "01250013",
+        "01040022",
+        "02340128",
+        "02140011",
+        "00340029",
+        "00340030",
+        "00340033",
+        "00140006",
+        "00340043",
+        "01040131",
+        "02140114",
+        "00340035",
+        "00340022",
+        "00940481",
+        "01140051"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "238L:1:37",
+      "courseIds": [
+        "02140807",
+        "00340015",
+        "00340032",
+        "00340013",
+        "01140052",
+        "01140032",
+        "02140806",
+        "02160031",
+        "01140054",
+        "02140608",
+        "02140092",
+        "02160032",
+        "02140093",
+        "00340371"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות הנדסיים",
+      "selector": "238L:44:58",
+      "courseIds": [
+        "00340010",
+        "00340011",
+        "00340034",
+        "00340044",
+        "00340205",
+        "00350001",
+        "00350022",
+        "00350026",
+        "00350033",
+        "00350041",
+        "00350091",
+        "00350188",
+        "00360001"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות הנדסיים יישומיים",
+      "selector": "238L:59",
+      "courseIds": [
+        "00340339",
+        "00340404",
+        "00340410",
+        "00340413",
+        "00350003",
+        "00350008",
+        "00350033",
+        "00350124",
+        "00350146",
+        "00360026",
+        "00440099"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות הנדסיים יישומיים",
+      "selector": "239R:1:4",
+      "courseIds": [
+        "00440105",
+        "00440145",
+        "03140312"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות בחינוך מדעי",
+      "selector": "239R:5:18",
+      "courseIds": [
+        "02140400",
+        "02140607",
+        "02140609",
+        "02160034",
+        "02160015",
+        "02160110",
+        "02160113",
+        "02160127",
+        "02160143",
+        "02160319",
+        "02180109"
+      ]
+    },
+    {
+      "programId": "education-mechanical-technology",
+      "role": "מקצועות כלליים",
+      "selector": "239R:19",
+      "courseIds": [
+        "00940607",
+        "01040221",
+        "01040223",
+        "01340127",
+        "02340118"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "239L:26",
+      "courseIds": [
+        "02140011",
+        "01040012",
+        "01040016",
+        "02340117",
+        "03940901",
+        "01040038",
+        "01040013",
+        "01040136",
+        "01140071",
+        "03240033",
+        "02140114",
+        "00440268",
+        "00440252",
+        "00440102",
+        "01040220",
+        "01140075",
+        "01140032",
+        "02160031",
+        "00440105"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "מקצועות בתכנית החובה — סיווג פרטני טרם הושלם",
+      "selector": "240R:1:44",
+      "courseIds": [
+        "01040034",
+        "01040214",
+        "01040215",
+        "01140073",
+        "02140807",
+        "00440127",
+        "00440131",
+        "02140806",
+        "02140607",
+        "00440137",
+        "02140092",
+        "02160032",
+        "00440157",
+        "02140093",
+        "02160126",
+        "02160128",
+        "00440167",
+        "00440198"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה1 — חינוך למדע וטכנולוגיה",
+      "selector": "240R:49:63",
+      "courseIds": [
+        "02160011",
+        "02160022",
+        "02160030",
+        "02160131",
+        "02140301",
+        "02140302",
+        "02140609",
+        "02140901",
+        "02140902",
+        "02160110",
+        "02160117",
+        "02160015"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה2 — פרויקטים",
+      "selector": "240R:64:67",
+      "courseIds": [
+        "00440169",
+        "00440170"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה3 — מיקרואלקטרוניקה,ננו וVLSI",
+      "selector": "240R:68",
+      "courseIds": [
+        "00440124",
+        "00440231"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה3 — מיקרואלקטרוניקה,ננו וVLSI",
+      "selector": "240L:1:17",
+      "courseIds": [
+        "00440239",
+        "00460012",
+        "00460129",
+        "00460187",
+        "00460188",
+        "00460189",
+        "00460225",
+        "00460232",
+        "00460237",
+        "00460241",
+        "00460773",
+        "00460851",
+        "00460880",
+        "00460903",
+        "00460968"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה4 — אלקטרומגנטיות ופוטוניקה",
+      "selector": "240L:18:31",
+      "courseIds": [
+        "00440140",
+        "00440148",
+        "00460053",
+        "00460248",
+        "00460216",
+        "00460241",
+        "00460244",
+        "00460256",
+        "00460249",
+        "00460342",
+        "00460773",
+        "01140210"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה5 — תקשורת ואינפורמציה",
+      "selector": "240L:32:47",
+      "courseIds": [
+        "00440140",
+        "00440148",
+        "00440202",
+        "00440214",
+        "00460201",
+        "00460204",
+        "00460205",
+        "00460206",
+        "00460208",
+        "00460216",
+        "00460256",
+        "00460733",
+        "00460868",
+        "02360309"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה6 — בקרה ורובוטיקה",
+      "selector": "240L:48:55",
+      "courseIds": [
+        "00460212",
+        "00440191",
+        "00440192",
+        "00460195",
+        "00460196",
+        "02360330"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה7 — מחשבים ורשתות",
+      "selector": "240L:56",
+      "courseIds": [
+        "00460001",
+        "00460002",
+        "00440334",
+        "00460005",
+        "00460209",
+        "00460266",
+        "00460267",
+        "00460271",
+        "00460272",
+        "00460853",
+        "00460345"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה8 — אותות ומערכות ביולוגיים",
+      "selector": "241R:1:7",
+      "courseIds": [
+        "00460041",
+        "00460326",
+        "00460332",
+        "00460831",
+        "01160029"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה9 — עיבוד אותות ותמונות",
+      "selector": "241R:8:14",
+      "courseIds": [
+        "00460200",
+        "00460745",
+        "00460201",
+        "00460743"
+      ]
+    },
+    {
+      "programId": "education-electrical-electronics",
+      "role": "קבוצה10 — אנרגיה ומערכות הספק",
+      "selector": "241R:15",
+      "courseIds": [
+        "00440139",
+        "00460044",
+        "00460042"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "role": "mandatory",
+      "selector": "242R:63",
+      "courseIds": [
+        "02160135",
+        "02140012"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "role": "mandatory",
+      "selector": "242L:1:9",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02160125",
+        "02140092",
+        "02140093",
+        "02130003"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-secondary",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-middle-school",
+      "role": "mandatory",
+      "selector": "242L:11:28",
+      "courseIds": [
+        "02160135",
+        "02140012",
+        "02140132",
+        "02140213",
+        "02140137",
+        "02160125",
+        "02140092",
+        "02140093",
+        "02130005"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-middle-school",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-middle-school",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-middle-school",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-mathematics-middle-school",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-physics",
+      "role": "mandatory",
+      "selector": "242L:34:47",
+      "courseIds": [
+        "02140011",
+        "02140012",
+        "02140301",
+        "02140302",
+        "02140092",
+        "02140093",
+        "02130001"
+      ]
+    },
+    {
+      "programId": "education-certificate-physics",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-physics",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-physics",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-physics",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-chemistry",
+      "role": "mandatory",
+      "selector": "242L:49:62",
+      "courseIds": [
+        "02140011",
+        "02140012",
+        "02140401",
+        "02140402",
+        "02140092",
+        "02140093",
+        "02130002"
+      ]
+    },
+    {
+      "programId": "education-certificate-chemistry",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-chemistry",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-chemistry",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-chemistry",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "role": "mandatory",
+      "selector": "242L:64",
+      "courseIds": [
+        "02140011",
+        "02140012"
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "role": "mandatory",
+      "selector": "243R:1:7",
+      "courseIds": [
+        "02140501",
+        "02140502",
+        "02140092",
+        "02140093",
+        "02130004"
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-biology",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-computer-science",
+      "role": "mandatory",
+      "selector": "243R:9:20",
+      "courseIds": [
+        "02140011",
+        "02140012",
+        "02140806",
+        "02140807",
+        "02140092",
+        "02140093"
+      ]
+    },
+    {
+      "programId": "education-certificate-computer-science",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-computer-science",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-computer-science",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-computer-science",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-electrical-electronics",
+      "role": "mandatory",
+      "selector": "243R:23:39",
+      "courseIds": [
+        "02140011",
+        "02140012",
+        "02140806",
+        "02140807",
+        "02140092",
+        "02140093"
+      ]
+    },
+    {
+      "programId": "education-certificate-electrical-electronics",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-electrical-electronics",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-electrical-electronics",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-electrical-electronics",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    },
+    {
+      "programId": "education-certificate-mechanical-technology",
+      "role": "mandatory",
+      "selector": "243R:23:39",
+      "courseIds": [
+        "02140011",
+        "02140012",
+        "02140806",
+        "02140807",
+        "02140092",
+        "02140093"
+      ]
+    },
+    {
+      "programId": "education-certificate-mechanical-technology",
+      "role": "רשימה א׳ — חינוך,למידה והוראה",
+      "selector": "243R:46:58",
+      "courseIds": [
+        "02140132",
+        "02140137",
+        "02140301",
+        "02140302",
+        "02140401",
+        "02140402",
+        "02140501",
+        "02140502",
+        "02140901",
+        "02140902",
+        "02140807",
+        "02140806",
+        "02140607"
+      ]
+    },
+    {
+      "programId": "education-certificate-mechanical-technology",
+      "role": "רשימה ב׳ — מדידה והערכה",
+      "selector": "243R:65:68",
+      "courseIds": [
+        "02160033",
+        "02160128",
+        "02160126",
+        "02160037"
+      ]
+    },
+    {
+      "programId": "education-certificate-mechanical-technology",
+      "role": "רשימה ב׳ — הכללה ושילוב",
+      "selector": "243L:3:6",
+      "courseIds": [
+        "02140114",
+        "02160003",
+        "02160014",
+        "02160026"
+      ]
+    },
+    {
+      "programId": "education-certificate-mechanical-technology",
+      "role": "רשימה ב׳ — יזמות וטכנולוגיה",
+      "selector": "243L:8:12",
+      "courseIds": [
+        "02160022",
+        "02160012",
+        "02160034",
+        "02160030",
+        "02160028"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "policy": "Read-only initial audit; curriculum, course, UI, and importer files are not modified.",
+  "inputs": {
+    "public/data/catalogs.json": {
+      "bytes": 1297177,
+      "sha256": "264bc6b68291c29f2cb88910b7dd41253318fbd03ecebfee22eaf91e88492301"
+    },
+    "public/data/courses.json": {
+      "bytes": 2568316,
+      "sha256": "8470df968ba1c1c2af0df77d139e4dba5aed7973d9d0f222d869e37d97147392"
+    }
+  },
+  "sourcePdf": {
+    "fileName": "catalog2025-26.pdf",
+    "sha256": "aff2590a80708d6df4ef4cbbb9b429677f6814beebe84441dba7f69075e339f3",
+    "bytes": 14623637
+  },
+  "sourceExtraction": {
+    "sha256": "9d0e67e8b7ec984cacc9811d00383ddd779b11615e21f9a86a6ec81168c42d85",
+    "engine": {
+      "name": "pdfplumber/pdfminer.six",
+      "version": "0.11.7"
+    }
+  },
+  "runtimeUnchangedAtEnd": true,
+  "reviewFiles": {
+    "audits\\curriculum-accuracy\\reviews\\cs-math-physics.json": "a76ac80465348b15d4cb6a1153f9e0c029273b28593c86847522338525278feb",
+    "audits\\curriculum-accuracy\\reviews\\engineering.json": "cb17e8bf06394a4cee27af6e4ffca54deab4abdbdec1e35e5d7c8215ada4e69e",
+    "audits\\curriculum-accuracy\\reviews\\sciences-professional.json": "0fcbb1bf601dea89a3b18d6e5bdf0bc4661909a5c3b1c9561c37f29ce8dd433e"
+  },
+  "auditToolingHashes": {
+    "scripts\\curriculum-audit\\audit_engine.py": "3980fb582a0b1b7fde35fc307692b316544c46ab6c96d8d8adae5968fbdc2821",
+    "scripts\\curriculum-audit\\extract_source.py": "d6ad85052959dda526cbf0d9a2d90b5d6ad28a58fdcebb5c0c6174f905770015",
+    "scripts\\curriculum-audit\\fetch_official.mjs": "9550ff66825cf8c0a3b7c61c9be9a071057f79f1fcaac5e63e2dd9d12bd3ac4a",
+    "scripts\\curriculum-audit\\official_compare.py": "5fb1542e8ca93d21f5eb593df0dbb7fce88acce73ae633cfb220f3c926a328d1",
+    "scripts\\curriculum-audit\\report_support.py": "d71944ad99edd2326ed8450348537bfaaca38e83d9e94765f0aff48ec5d41223",
+    "scripts\\curriculum-audit\\run_audit.py": "74906063b3b25638281a791e069b98b6fcfb888d7b071bd6c943211902f563f8"
+  }
+}

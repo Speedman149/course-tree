@@ -1,0 +1,16 @@
+{
+  "initialProbe": {
+    "url": "https://portalex.technion.ac.il/sap/opu/odata/sap/Z_CM_EV_CDIR_DATA_SRV/SmObjectSet?sap-client=700&%24filter=Peryr+eq+%272025%27+and+Perid+eq+%27200%27+and+Otjid+eq+%2702340114%27&%24select=Otjid%2CPoints%2CName%2COrgText%2CSmPrereq&%24expand=SmPrereq&%24format=json",
+    "method": "GET",
+    "purpose": "Read-only authoritative course evidence availability probe",
+    "checkedAt": "2026-11-16T15:00:11.526Z",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "bodyPreview": "{\"d\":{\"results\":[]}}",
+    "available": false
+  },
+  "resolution": "The first lookup omitted the required SM object prefix. It was an incorrect key, not an unavailable service.",
+  "authoritativeCollectionAvailable": true,
+  "verifiedTermCollections": 8,
+  "evidenceManifest": "official-sources.json"
+}
