@@ -1,0 +1,65 @@
+{
+  "recordedAt": "2026-11-16T20:17:09.589146+00:00",
+  "runtimeHashes": {
+    "catalogs": "5b71693610e2a8c19a35d096a212cbd03267c199a6a0ec7b3f9888ed4c14eada",
+    "courses": "c8ec8e3f47b331e4e27392bf3d3c6456883f8a78682611f4079853d574f9688e"
+  },
+  "results": [
+    {
+      "category": "Unit and application/data regressions",
+      "command": "node --import tsx --test --experimental-test-isolation=none --test-reporter spec tests/graph.test.ts tests/filters.test.ts tests/catalogs.test.ts tests/catalog-baseline.test.ts tests/academic-corrections.test.ts scripts/course-data.test.mjs",
+      "passed": 46,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "category": "Independent audit mechanism",
+      "command": "python3 -m unittest discover -s scripts/curriculum-audit/tests -v",
+      "passed": 34,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "category": "Independent repair source comparison",
+      "command": "python3 -m unittest discover -s scripts/curriculum-repairs/tests -v",
+      "passed": 3,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "category": "Browser regressions",
+      "command": "node node_modules/@playwright/test/cli.js test",
+      "passed": 19,
+      "failed": 0,
+      "exitCode": 0,
+      "environment": "Windows QA mirror; real Chrome; external Vite at127.0.0.1:5178; identical runtime JSON"
+    },
+    {
+      "category": "Production build",
+      "command": "node node_modules/typescript/bin/tsc -b; node node_modules/vite/bin/vite.js build",
+      "exitCode": 0,
+      "environment": "Existing Windows-compatible QA mirror; built dist copied back into the workspace"
+    },
+    {
+      "category": "Independent full source re-audit",
+      "command": "python3 scripts/curriculum-audit/run_audit.py --pdf <original2025-2026pdf> --output audits/curriculum-repairs/after-corrections --fail-on-confirmed",
+      "exitCode": 2,
+      "expectedNonzero": true,
+      "remainingConfirmedCurriculumDiscrepancies": 33,
+      "remainingConfirmedOfficialStrongPrerequisiteDifferences": 0,
+      "explanation": "The original academic gate still includes the32 deliberately retained graduation/classification findings and the one unresolved inclusion question. This is not hidden or called a pass."
+    },
+    {
+      "category": "Complete before/after retention and scope check",
+      "command": "node --import tsx scripts/curriculum-repairs/report.mts",
+      "exitCode": 0,
+      "validOptionsRemoved": 0,
+      "changedSAPCourseIds": [
+        "00540417"
+      ],
+      "untouchedOtherYearEditions": 20,
+      "interfaceSourceUnchanged": true,
+      "historicalAuditSnapshotUnchanged": true
+    }
+  ]
+}

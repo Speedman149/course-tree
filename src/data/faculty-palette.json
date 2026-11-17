@@ -1,0 +1,74 @@
+[
+  {
+    "id": "civil",
+    "label": "הנדסה אזרחית וסביבתית",
+    "courseCount": 293,
+    "accent": "#357F70"
+  },
+  {
+    "id": "cs",
+    "label": "מדעי המחשב",
+    "courseCount": 288,
+    "accent": "#7651B5"
+  },
+  {
+    "id": "architecture",
+    "label": "ארכיטקטורה ובינוי ערים",
+    "courseCount": 283,
+    "accent": "#516879"
+  },
+  {
+    "id": "ee",
+    "label": "הנדסת חשמל ומחשבים",
+    "courseCount": 223,
+    "accent": "#187DAA"
+  },
+  {
+    "id": "data",
+    "label": "מדעי הנתונים וההחלטות",
+    "courseCount": 195,
+    "accent": "#267546"
+  },
+  {
+    "id": "humanities",
+    "label": "המחלקה ללימודים הומניסטיים ואמנות",
+    "courseCount": 180,
+    "accent": "#087F8C"
+  },
+  {
+    "id": "mechanical",
+    "label": "הנדסת מכונות",
+    "courseCount": 164,
+    "accent": "#2455A4"
+  },
+  {
+    "id": "math",
+    "label": "מתמטיקה",
+    "courseCount": 155,
+    "accent": "#996B0B"
+  },
+  {
+    "id": "aerospace",
+    "label": "הנדסת אווירונוטיקה וחלל",
+    "courseCount": 133,
+    "accent": "#835187"
+  },
+  {
+    "id": "medicine",
+    "label": "רפואה",
+    "courseCount": 125,
+    "accent": "#806535"
+  },
+  {
+    "id": "physics",
+    "label": "פיזיקה",
+    "courseCount": 107,
+    "accent": "#6E7D22"
+  },
+  {
+    "id": "chemistry",
+    "label": "כימיה",
+    "courseCount": 105,
+    "accent": "#4446A1"
+  }
+]

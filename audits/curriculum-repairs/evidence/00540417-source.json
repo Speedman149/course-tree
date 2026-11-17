@@ -1,0 +1,5 @@
+{
+  "url": "https://portalex.technion.ac.il/sap/opu/odata/sap/Z_CM_EV_CDIR_DATA_SRV/SmObjectSet?sap-client=700&%24filter=Peryr+eq+%272026%27+and+Perid+eq+%27200%27+and+Otjid+eq+%27SM00540417%27&%24select=Otjid%2CPoints%2CName%2COrgText%2CSmPrereq%2CZzSemesterNote&%24expand=SmPrereq&%24format=json",
+  "retrievedAt": "2026-11-16T19:58:55.145Z",
+  "sha256": "81e6dfa8648de75ee290b45d980cd769e0e7d01958bc933cd7f236eda23b44dd"
+}

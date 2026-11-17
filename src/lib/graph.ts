@@ -107,6 +107,17 @@ export function instanceId(
   return `${parentId}/${direction === 'forward' ? 'f' : 'b'}:${encodeURIComponent(courseId)}:${relation}`;
 }
 
+/** A stable source-path + target-course + relation key, independent of React Flow. */
+export function forwardConnectionId(parentId: string, courseId: string, relation: Relationship): string {
+  return instanceId(parentId, 'forward', courseId, relation);
+}
+
+/** Course-level + restores direct hidden children without erasing deeper choices. */
+export function restoreDirectConnections(hidden: ReadonlySet<string>, parentId: string): Set<string> {
+  const prefix = `${parentId}/f:`;
+  return new Set([...hidden].filter(id => !id.startsWith(prefix) || id.slice(prefix.length).includes('/')));
+}
+
 /**
  * Match exact course numbers first. Leading-zero normalization is allowed only
  * when it identifies one record; six/seven digit catalog renumbering is never
@@ -138,6 +149,8 @@ export function buildGraph(
   dependents: DependentsIndex,
   expandedForward: ReadonlySet<string>,
   expandedBackward: ReadonlyMap<string, ReadonlySet<string>>,
+  isForwardVisible: (courseId: string) => boolean = () => true,
+  hiddenForwardConnections: ReadonlySet<string> = new Set(),
 ): CourseGraph {
   const root: GraphNode = {
     id: 'root',
@@ -187,6 +200,10 @@ export function buildGraph(
 
     if (expandedForward.has(node.id)) {
       for (const dependent of dependents.get(node.courseId) ?? []) {
+        if (!isForwardVisible(dependent.courseId)) continue;
+        // Traverse from the root only through visible connections. Never globally
+        // delete a course: another parent/path may still reach another instance.
+        if (hiddenForwardConnections.has(forwardConnectionId(node.id, dependent.courseId, dependent.relation))) continue;
         append(dependent.courseId, dependent.relation, 'forward');
       }
     }

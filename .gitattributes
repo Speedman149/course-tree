@@ -1,0 +1,2 @@
+# Preserve checksum-pinned audit artifacts without text or whitespace normalization.
+audits/** -text -whitespace

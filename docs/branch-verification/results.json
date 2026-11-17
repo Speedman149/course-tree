@@ -1,0 +1,74 @@
+{
+  "verifiedAt": "2026-11-17T00:07:04.546323+00:00",
+  "unitDataTests": {
+    "passed": 73,
+    "failed": 0,
+    "command": "npm test"
+  },
+  "browserTests": {
+    "passed": 46,
+    "failed": 0,
+    "newScenarios": 12,
+    "command": "npm run test:e2e",
+    "cleanFullSuite": true
+  },
+  "typescript": "passed",
+  "productionBuild": "passed",
+  "footerMeasurements": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "beforeHeight": 96.59375,
+      "afterHeight": 62.59375,
+      "unchangedText": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "beforeHeight": 134.5,
+      "afterHeight": 103.5,
+      "unchangedText": true
+    }
+  ],
+  "storage": {
+    "key": "course-tree.progress",
+    "version": 2,
+    "migratesVersion1": true,
+    "connectionField": "hiddenForwardConnections",
+    "identity": "stable source instance path + target canonical course ID + relationship; independent of React Flow edge IDs"
+  },
+  "dataIntegrity": {
+    "academicFilesUnchanged": true,
+    "runtimeHashes": {
+      "catalogs": "5b71693610e2a8c19a35d096a212cbd03267c199a6a0ec7b3f9888ed4c14eada",
+      "courses": "c8ec8e3f47b331e4e27392bf3d3c6456883f8a78682611f4079853d574f9688e"
+    },
+    "facultyColorsUnchanged": true,
+    "searchAndFilterComponentsUnchanged": true,
+    "persistenceIOUnchanged": true,
+    "productionRuntimeMatchesWorkspace": true
+  },
+  "sourceHashes": {
+    "src/App.tsx": "ac072753d77bd3444dbf5765c99e81a9bbc5acf111f2ff419c6cb07817968cd4",
+    "src/lib/graph.ts": "6765572d0dde849265df27838787a715f206282a8f9a7715adf31dc9dacda54f",
+    "src/lib/progress.ts": "b482e7985face66127d48d143b695e148ea4dd9388355b3095d36cb5b155d690",
+    "src/lib/use-progress.ts": "5b11ef5e4a761880902f4e4980708bf39609b149ce2f853ae3f0fbf53d52f6d7",
+    "src/components/CourseNode.tsx": "f964c45b7fffd1e90d78726b3e4d440d3e77f9e589dfb716bfc49dc60f890bc3",
+    "src/components/ForwardBranchEdge.tsx": "0b651db4ca2fd84c39b88a2224c8372356736cc3c324b0d4f548450658ed67ef",
+    "src/components/SiteFooter.tsx": "3fef6bf0cf8031397ecdc0b352df085fb611971515f928ea20e34f600acde877",
+    "src/styles.css": "c4a2ec8ec8a938ab91f103129037f035f874845297e92af4dee49b19898e0723"
+  },
+  "visualInspection": {
+    "desktop": "1440x1000",
+    "mobile": "390x844",
+    "screenshots": [
+      "branches-1440.png",
+      "branches-390.png"
+    ]
+  },
+  "dependenciesAdded": []
+}
