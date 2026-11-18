@@ -21,7 +21,7 @@ function instance(page: Page, id: string): Locator {
 async function ready(page: Page, course = '02340114') {
   await page.goto(course === '02340114' ? '/' : `/?course=${course}`);
   await expect(instance(page, 'root').locator('.node-name')).toHaveText(courses.get(course)!.name);
-  await expect(page.getByRole('combobox')).toBeEnabled();
+  await expect(page.locator('.desktop-course-search .search-input')).toBeEnabled();
 }
 async function fit(page: Page) {
   await page.keyboard.press('Escape');
@@ -29,6 +29,7 @@ async function fit(page: Page) {
 }
 async function selectCourse(page: Page, query: string, id: string) {
   const search = page.getByRole('combobox', { name: 'חיפוש קורס לפי מספר או שם' });
+  if(!await search.isVisible())await page.getByRole('button',{name:'חיפוש קורסים',exact:true}).click();
   await search.fill(query);
   const result = page.getByRole('option').filter({ hasText: id });
   await expect(result).toHaveCount(1);
@@ -175,6 +176,8 @@ test('mobile layout fits the screen and supports root search and prerequisite co
   await page.setViewportSize({ width: 390, height: 844 });
   await ready(page);
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await expect(page.getByRole('combobox')).toHaveCount(0);
+  await page.getByRole('button',{name:'חיפוש קורסים',exact:true}).click();
   await expect(page.getByRole('combobox')).toBeInViewport();
   await selectCourse(page, 'אלגוריתמים 1', '02340247');
   await fit(page);
