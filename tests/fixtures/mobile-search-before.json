@@ -1,0 +1,130 @@
+{
+  "320": {
+    ".app-header": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 125
+    },
+    ".brand": {
+      "x": 144.71875,
+      "y": 10.953125,
+      "width": 160.28125,
+      "height": 43.09375
+    },
+    ".header-actions": {
+      "x": 15,
+      "y": 17.5,
+      "width": 117.71875,
+      "height": 30
+    },
+    ".search-container": {
+      "x": 15,
+      "y": 64,
+      "width": 290,
+      "height": 43
+    },
+    ".graph-canvas": {
+      "x": 11,
+      "y": 186,
+      "width": 298,
+      "height": 644.5
+    }
+  },
+  "390": {
+    ".app-header": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 125
+    },
+    ".brand": {
+      "x": 144.71875,
+      "y": 10.953125,
+      "width": 230.28125,
+      "height": 43.09375
+    },
+    ".header-actions": {
+      "x": 15,
+      "y": 17.5,
+      "width": 117.71875,
+      "height": 30
+    },
+    ".search-container": {
+      "x": 15,
+      "y": 64,
+      "width": 360,
+      "height": 43
+    },
+    ".graph-canvas": {
+      "x": 11,
+      "y": 186,
+      "width": 368,
+      "height": 662.5
+    }
+  },
+  "641": {
+    ".app-header": {
+      "x": 0,
+      "y": 0,
+      "width": 641,
+      "height": 80
+    },
+    ".brand": {
+      "x": 399,
+      "y": 17.296875,
+      "width": 220,
+      "height": 44.390625
+    },
+    ".header-actions": {
+      "x": 22,
+      "y": 22.5,
+      "width": 51,
+      "height": 34
+    },
+    ".search-container": {
+      "x": 98,
+      "y": 17,
+      "width": 276,
+      "height": 45
+    },
+    ".graph-canvas": {
+      "x": 20,
+      "y": 160.59375,
+      "width": 601,
+      "height": 727.40625
+    }
+  },
+  "1440": {
+    ".app-header": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 91
+    },
+    ".brand": {
+      "x": 1153,
+      "y": 21.5,
+      "width": 257,
+      "height": 47
+    },
+    ".header-actions": {
+      "x": 30,
+      "y": 28,
+      "width": 257.109375,
+      "height": 34
+    },
+    ".search-container": {
+      "x": 513,
+      "y": 22.5,
+      "width": 590,
+      "height": 45
+    },
+    ".graph-canvas": {
+      "x": 26,
+      "y": 179.59375,
+      "width": 1080,
+      "height": 706.8125
+    }
+  }
+}
