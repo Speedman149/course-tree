@@ -1,3 +1,4 @@
+import { officialSourceURL } from '../lib/urls';
 import type { CSSProperties } from 'react';
 import { courseAppearance } from '../lib/faculty-colors';
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
@@ -35,7 +36,7 @@ export type CourseFlowNode = Node<{ graphNode: GraphNode }, 'course'>;
 export function CourseLink({ course, id }: { course?: Course; id: string }) {
   const explorer = useContext(ExplorerContext);
   const [year, session] = (explorer?.catalogTerm ?? '2026_200').split('_');
-  return <a className="course-link nodrag nopan" href={course?.source.url || `https://portalex.technion.ac.il/ovv/?sap-theme=sap_belize&sap-language=HE&sap-ui-language=HE#/details/${year}/${session}/SM/${id}`} target="_blank" rel="noopener noreferrer" dir="ltr" onClick={e => e.stopPropagation()}>{id}<ArrowUpLeft size={12}/></a>;
+  return <a className="course-link nodrag nopan" href={officialSourceURL(course?.source.url) || `https://portalex.technion.ac.il/ovv/?sap-theme=sap_belize&sap-language=HE&sap-ui-language=HE#/details/${year}/${session}/SM/${id}`} target="_blank" rel="noopener noreferrer" dir="ltr" onClick={e => e.stopPropagation()}>{id}<ArrowUpLeft size={12}/></a>;
 }
 
 export function RequirementExpression({ requirement, courses }: { requirement: Requirement; courses: Map<string, Course> }) {
@@ -123,7 +124,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
       </> : <div className="no-prerequisites"><CircleHelp size={22}/><p>{course?.requirementsStatus === 'none' ? 'לא תועדו קדמים לקורס הזה במקור. בדקו את כללי הרישום בקטלוג.' : 'אין במאגר מידע מפוענח על קדמים לקורס הזה.'}</p>{course?.rawRequirements && <p className="raw-requirements">{course.rawRequirements}</p>}</div>}
       {hiddenChildren > 0 && <p className="panel-filter-note">{hiddenChildren} קשרי המשך מוסתרים במסננים. הקדמים מוצגים במלואם וניתנים לפתיחה.</p>}
       <button className="course-feedback-link" onClick={()=>{close();explorer.reportCourse(item.courseId);}}><Bug size={12}/>דיווח על מידע בקורס</button>
-      {course && <div className="panel-footer"><a href={course.source.url} target="_blank" rel="noopener noreferrer">מידע במקור <ArrowUpLeft size={12}/></a>{!isRoot && <button onClick={() => { explorer.setRoot(course); close(); }}>הגדרה כנקודת מוצא <ChevronLeft size={12}/></button>}</div>}
+      {course && <div className="panel-footer"><a href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer">מידע במקור <ArrowUpLeft size={12}/></a>{!isRoot && <button onClick={() => { explorer.setRoot(course); close(); }}>הגדרה כנקודת מוצא <ChevronLeft size={12}/></button>}</div>}
     </div>, document.body)}
   </>;
 }

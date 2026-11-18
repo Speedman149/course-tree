@@ -1,3 +1,4 @@
+import { officialSourceURL } from '../lib/urls';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { ArrowLeft, BookOpen, Search, X } from 'lucide-react';
@@ -138,7 +139,7 @@ export default function CourseSearch({ courses, allCourses, onSelect, disabled =
         <Search className="search-icon" size={19} aria-hidden="true" />
         <input
           ref={inputRef}
-          className="search-input"
+          className="search-input" maxLength={1000}
           type="text"
           role="combobox"
           aria-label="חיפוש קורס לפי מספר או שם"
@@ -180,7 +181,7 @@ export default function CourseSearch({ courses, allCourses, onSelect, disabled =
               >
                 <span className="search-result-icon" style={{color:courseAppearance(course).accent}}><BookOpen size={17} aria-hidden="true" /></span>
                 <span className="search-result-content"><span className="search-result-name">{course.name}</span><span className="search-result-faculty">{course.faculty}</span>{allScope && !visibleIds.has(course.id) && <span className="search-result-outside-filter">מחוץ לסינון · יוצג כנקודת מוצא</span>}</span>
-                <a className="search-result-number" dir="ltr" href={course.source.url} target="_blank" rel="noopener noreferrer" aria-label={`פרטי קורס ${course.id} בקטלוג`} onClick={event => event.stopPropagation()}>{course.id}</a>
+                <a className="search-result-number" dir="ltr" href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer" aria-label={`פרטי קורס ${course.id} בקטלוג`} onClick={event => event.stopPropagation()}>{course.id}</a>
                 <ArrowLeft className="search-result-arrow" size={15} aria-hidden="true" />
               </div>
             ))}

@@ -24,6 +24,7 @@ export function validateFeedback(values:FeedbackValues):FeedbackErrors {
 /** Whitelist app routes and course IDs; never attach arbitrary URL parameters. */
 export function feedbackPageURL(input:string):string {
   try {
+    if(input.length>8192)return '';
     const url=new URL(input);if(!['https:','http:'].includes(url.protocol))return '';
     const path=url.pathname.replace(/\/$/,'')==='/feedback'?'/feedback':'/';
     const clean=new URL(path,url.origin);

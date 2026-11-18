@@ -4,6 +4,7 @@ PDF text/geometry is evidence of occurrence, never proof of curriculum membershi
 """
 import argparse,hashlib,json,re,sys
 from pathlib import Path
+from importlib.metadata import version
 import pdfplumber
 
 HEBREW=re.compile(r'[\u0590-\u05ff]')
@@ -43,6 +44,9 @@ def group_rows(words,tolerance=2.2):
     return result
 
 def extract(pdf_path,output):
+    parser_version=re.match(r"^(\d{8})(?:$|[.+-])",version("pdfminer.six"))
+    if not parser_version or int(parser_version.group(1))<20251230:
+        raise SystemExit("Update the PDF audit environment using scripts/curriculum-audit/requirements.txt before processing PDFs.")
     raw=pdf_path.read_bytes();result={'schemaVersion':1,'sourcePdf':pdf_path.name,'sha256':hashlib.sha256(raw).hexdigest(),'engine':{'name':'pdfplumber/pdfminer.six','version':pdfplumber.__version__},'independence':'Read original PDF only; no importer cache, classifications, aliases, selectors or coverage report read.','pages':[]}
     with pdfplumber.open(pdf_path) as pdf:
         result['pageCount']=len(pdf.pages)

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { ReactFlowProvider } from '@xyflow/react';
 import { Analytics } from '@vercel/analytics/react';
 import App from './App';
+import { redactAnalyticsEvent } from './lib/analytics';
 import '@xyflow/react/dist/style.css';
 import '@fontsource/heebo/hebrew-400.css';
 import '@fontsource/heebo/hebrew-500.css';
@@ -17,6 +18,6 @@ import './styles.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ReactFlowProvider><App /></ReactFlowProvider>
-    <Analytics />
+    <Analytics beforeSend={redactAnalyticsEvent} />
   </React.StrictMode>,
 );

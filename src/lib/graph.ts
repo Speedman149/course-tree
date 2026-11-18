@@ -33,9 +33,13 @@ export interface GraphEdge {
   direction: BranchDirection;
 }
 
+export const MAX_GRAPH_NODES = 2000;
+export const MAX_GRAPH_DEPTH = 60;
+
 export interface CourseGraph {
   nodes: GraphNode[];
   edges: GraphEdge[];
+  truncated?: boolean;
 }
 
 /**
@@ -50,9 +54,12 @@ export function collectRequirements(
   const leaves: RequirementLeaf[] = [];
   const seen = new Set<string>();
   const pending: Requirement[] = [requirement];
+  const visited = new Set<Requirement>();
 
   while (pending.length) {
     const item = pending.pop()!;
+    if (visited.has(item)) continue;
+    visited.add(item);
     if (item.type === 'course') {
       const key = JSON.stringify([item.courseId, item.relation]);
       if (!seen.has(key)) {
@@ -124,6 +131,7 @@ export function restoreDirectConnections(hidden: ReadonlySet<string>, parentId: 
  * inferred. Explicit source-provided aliases are accepted when unambiguous.
  */
 export function resolveCourseId(query: string, index: CourseIndex): string | null {
+  if (typeof query !== 'string' || query.length > 64) return null;
   const trimmed = query.trim();
   if (index.has(trimmed)) return trimmed;
   if (!/^\d+$/.test(trimmed)) return null;
@@ -160,12 +168,12 @@ export function buildGraph(
     missing: !coursesById.has(rootId),
   };
   const graph: CourseGraph = { nodes: [root], edges: [] };
-  const pending: { node: GraphNode; ancestors: Set<string> }[] = [
-    { node: root, ancestors: new Set([rootId]) },
+  const pending: { node: GraphNode; ancestors: Set<string>; depth: number }[] = [
+    { node: root, ancestors: new Set([rootId]), depth: 0 },
   ];
 
   for (let next = 0; next < pending.length; next++) {
-    const { node, ancestors } = pending[next];
+    const { node, ancestors, depth } = pending[next];
     if (node.cycle || node.missing) continue;
 
     const append = (
@@ -173,6 +181,10 @@ export function buildGraph(
       relation: Relationship,
       direction: BranchDirection,
     ) => {
+      if (graph.nodes.length >= MAX_GRAPH_NODES || depth >= MAX_GRAPH_DEPTH) {
+        graph.truncated = true;
+        return;
+      }
       const child: GraphNode = {
         id: instanceId(node.id, direction, courseId, relation),
         courseId,
@@ -194,6 +206,7 @@ export function buildGraph(
         pending.push({
           node: child,
           ancestors: new Set([...ancestors, courseId]),
+          depth: depth + 1,
         });
       }
     };
@@ -204,6 +217,7 @@ export function buildGraph(
         // Traverse from the root only through visible connections. Never globally
         // delete a course: another parent/path may still reach another instance.
         if (hiddenForwardConnections.has(forwardConnectionId(node.id, dependent.courseId, dependent.relation))) continue;
+        if (graph.nodes.length >= MAX_GRAPH_NODES) { graph.truncated = true; break; }
         append(dependent.courseId, dependent.relation, 'forward');
       }
     }
@@ -213,6 +227,7 @@ export function buildGraph(
       const course = coursesById.get(node.courseId)!;
       for (const requirement of collectRequirements(course.requirements)) {
         if (selectedPrerequisites.has(requirement.courseId)) {
+          if (graph.nodes.length >= MAX_GRAPH_NODES) { graph.truncated = true; break; }
           append(requirement.courseId, requirement.relation, 'backward');
         }
       }

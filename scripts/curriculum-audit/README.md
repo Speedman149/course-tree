@@ -4,13 +4,15 @@ This is a read-only verification tool, not an importer or a data repair. It read
 
 Evidence has three independent layers:
 
-1. The original 2025–2026 PDF is freshly read with **pdfplumber 0.11.7 / pdfminer.six 20250506**, a different extraction engine from the importer. It records raw printed IDs, coordinates and page text. Geometry/identifier occurrence is not evidence of a mandatory/elective role.
+1. The original 2025–2026 PDF is freshly read with **pdfplumber 0.11.9 / pdfminer.six 20251230**, a different extraction engine from the importer. It records raw printed IDs, coordinates and page text. Geometry/identifier occurrence is not evidence of a mandatory/elective role.
 2. Separate AI-assisted source reviews transcribe bounded course lists, mandatory/optional distinctions and logical conditions from the original PDF. Their source quotes and original-PDF SHA-256 are recorded. Visual review means the assistant inspected the source image, not university approval. Syntactically different logic is unresolved unless equivalence or an independently reviewed counterexample is established. These review oracles can themselves contain mistakes; review-scope corrections are explicitly recorded.
 3. Direct official Technion OData responses independently supply names, credits, offering-unit labels and structured strong prerequisites. Each runtime course is compared only with its own stored source term. No third-party export is used as source truth, no other term is substituted, and no prerequisite is inferred from semester order.
 
 ## Run
 
-Python 3.11+ and Node 22+ are sufficient. The comparison/tests use the Python standard library; PDF extraction additionally needs the pinned packages.
+Use the updated pinned environment. The earlier pdfminer.six 20250506 pin has known CMap deserialization advisories. Historical audit reports retain their original engine versions and hashes. New extraction outputs need a separate output directory and input lock.
+
+Python 3.11+ and Node 22+ are sufficient. The comparison core uses the Python standard library. PDF extraction and PDF security regressions need the pinned packages.
 
 ```sh
 python3 -m venv .cache/independent-audit-venv

@@ -12,7 +12,7 @@ export default defineConfig({
   reporter: 'list',
   outputDir: '.playwright/results',
   use: {
-    baseURL: externalBaseURL ?? 'http://127.0.0.1:5173',
+    baseURL: externalBaseURL ?? 'http://127.0.0.1:4173',
     browserName: 'chromium',
     viewport: { width: 1440, height: 1000 },
     trace: 'retain-on-failure',
@@ -22,9 +22,9 @@ export default defineConfig({
       : {},
   },
   webServer: externalBaseURL ? undefined : {
-    command: 'npm run dev -- --port 5173 --strictPort',
-    url: 'http://127.0.0.1:5173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
+    command: 'npm run build && node tests/serve-production.mjs',
+    url: 'http://127.0.0.1:4173',
+    reuseExistingServer: false,
+    timeout: 120_000,
   },
 });

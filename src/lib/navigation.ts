@@ -5,8 +5,13 @@ export function appRoute(location: Pick<Location,'pathname'|'hash'>): AppRoute {
 }
 /** Same-origin SPA navigation; hash-based About links remain supported. */
 export function navigateApp(path:string,state:Record<string,unknown>={}){
-  const target=new URL(path,window.location.href);
-  if(target.origin!==window.location.origin)return;
-  window.history.pushState(state,'',target);
-  window.dispatchEvent(new PopStateEvent('popstate'));
+  if(typeof path!=='string'||path.length>8192)return;
+  try {
+    const target=new URL(path,window.location.href);
+    if(!['http:','https:'].includes(target.protocol)||target.origin!==window.location.origin)return;
+    window.history.pushState(state,'',target);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  } catch {
+    // Invalid URLs and unavailable history leave the current route intact.
+  }
 }

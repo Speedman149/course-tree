@@ -1,2 +1,2 @@
-pdfplumber==0.11.7
-pdfminer.six==20250506
+pdfplumber==0.11.9
+pdfminer.six==20251230
