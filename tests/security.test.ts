@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { validateCourseDataset, validateCatalogDataset, readDatasetJSON, MAX_DATASET_BYTES } from '../src/lib/data-validation';
 import { officialSourceURL } from '../src/lib/urls';
 import { redactAnalyticsEvent } from '../src/lib/analytics';
-import { buildGraph, buildCourseIndex, buildDependents, collectRequirements, instanceId, MAX_GRAPH_DEPTH, MAX_GRAPH_NODES, resolveCourseId } from '../src/lib/graph';
+import { buildGraph, buildCourseIndex, buildDependents, collectRequirements, instanceId, MAX_GRAPH_NODES, resolveCourseId } from '../src/lib/graph';
 import { decodeProgress, validateProgress } from '../src/lib/progress';
 import { validateFeedback, feedbackPageURL, feedbackErrorMessage } from '../src/lib/feedback';
 import type { Course, CourseDataset, CatalogDataset, Requirement } from '../src/types';
@@ -102,31 +102,29 @@ test('wide shared graphs stay bounded with valid edges and retain expansion stat
   const leaves = Array.from({ length: 100 }, (_, i) => String(i + 1000).padStart(8, '0'));
   const data = [mockCourse(root), ...parents.map(id => mockCourse(id, requirement(root))),
     ...leaves.map(id => mockCourse(id, { type: 'and', items: parents.map(requirement) }))];
-  const expanded = new Set(['root', ...parents.map(id => instanceId('root', 'forward', id, 'strong'))]);
-  const graph = buildGraph(root, buildCourseIndex(data), buildDependents(data), expanded, new Map());
-  assert.equal(graph.nodes.length, MAX_GRAPH_NODES);
-  assert.equal(graph.truncated, true);
+  const expanded = new Set([root, ...parents]);
+  const graph = buildGraph([root], buildCourseIndex(data), buildDependents(data), expanded, new Map());
+  assert.equal(graph.nodes.length, data.length);
+  assert.equal(graph.truncated, undefined);
   assert.equal(expanded.size, 101);
   const ids = new Set(graph.nodes.map(node => node.id));
   assert.equal(graph.edges.every(edge => ids.has(edge.source) && ids.has(edge.target)), true);
-  const smaller = buildGraph(root, buildCourseIndex(data), buildDependents(data), new Set(['root']), new Map());
+  const smaller = buildGraph([root], buildCourseIndex(data), buildDependents(data), new Set([root]), new Map());
   assert.equal(smaller.nodes.length, 101);
   assert.equal(smaller.truncated, undefined);
 });
 
 test('deep expansion and cyclic course references terminate without dangling edges', () => {
   const data = Array.from({ length: 150 }, (_, i) => mockCourse(String(i + 1).padStart(8, '0'), i ? requirement(String(i).padStart(8, '0')) : null));
-  const expanded = new Set(['root']);
-  let path = 'root';
-  for (const row of data.slice(1)) { path = instanceId(path, 'forward', row.id, 'strong'); expanded.add(path); }
-  const graph = buildGraph(data[0].id, buildCourseIndex(data), buildDependents(data), expanded, new Map());
-  assert.equal(graph.nodes.length, MAX_GRAPH_DEPTH + 1);
-  assert.equal(graph.truncated, true);
+  const expanded = new Set(data.map(row => row.id));
+  const graph = buildGraph([data[0].id], buildCourseIndex(data), buildDependents(data), expanded, new Map());
+  assert.equal(graph.nodes.length, data.length);
+  assert.equal(graph.truncated, undefined);
   const cyclic = [mockCourse('00000001', requirement('00000002')), mockCourse('00000002', requirement('00000001'))];
-  const child = instanceId('root', 'forward', '00000002', 'strong');
-  const cycle = buildGraph('00000001', buildCourseIndex(cyclic), buildDependents(cyclic), new Set(['root', child]), new Map());
-  assert.equal(cycle.nodes.length, 3);
-  assert.equal(cycle.nodes[2].cycle, true);
+  const child = '00000002';
+  const cycle = buildGraph(['00000001'], buildCourseIndex(cyclic), buildDependents(cyclic), new Set(['00000001', child]), new Map());
+  assert.equal(cycle.nodes.length, 2);
+  assert.equal(cycle.nodes.every(node => node.cycle), true);
 });
 
 test('malformed storage preserves valid markings and safely drops hostile fields', () => {
@@ -136,14 +134,14 @@ test('malformed storage preserves valid markings and safely drops hostile fields
   Object.assign(raw, { rootId: '02340114', markedCourseIds: ['02340114', {}, 'invalid'], expandedForward: ['root', 'root/f:__proto__:strong', {}], expandedBackward: [{}, ['root', [null, '__proto__']]], viewport: { x: Infinity, y: {}, zoom: -1 }, facultyIds: ['cs', {}], catalogId: {} });
   const safe = validateProgress(raw, db);
   assert.deepEqual(safe.markedCourseIds, ['02340114']);
-  assert.deepEqual(safe.expandedForward, ['root']);
+  assert.deepEqual(safe.expandedForward, ['02340114']);
   assert.deepEqual(safe.expandedBackward, []);
   assert.equal(safe.viewport, null);
   assert.equal(({} as { polluted?: boolean }).polluted, undefined);
   assert.equal(decodeProgress('{broken'), null);
   assert.equal(decodeProgress(JSON.stringify({ version: 999, progress: raw })), null);
   assert.equal(decodeProgress(' '.repeat(2_000_001)), null);
-  assert.deepEqual(validateProgress({ ...raw, expandedForward: Array(50_000).fill('root') }, db).expandedForward, ['root']);
+  assert.deepEqual(validateProgress({ ...raw, expandedForward: Array(50_000).fill('root') }, db).expandedForward, ['02340114']);
   assert.equal(resolveCourseId('0'.repeat(100_000), index), null);
 });
 

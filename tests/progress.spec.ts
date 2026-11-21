@@ -6,11 +6,11 @@ const sap=JSON.parse(readFileSync(new URL('../public/data/courses.json',import.m
 const catalogs=JSON.parse(readFileSync(new URL('../public/data/catalogs.json',import.meta.url),'utf8'));
 const courses=new Map([...sap.courses,...catalogs.referencedCourses].map(c=>[c.id,c]));
 const test=base.extend<{runtimeErrors:void}>({runtimeErrors:[async({page},use)=>{const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await use();expect(errors).toEqual([]);},{auto:true}]});
-const node=(page:Page,id='root')=>page.locator(`.react-flow__node[data-id="${id}"]`);
+const node=(page:Page,id?:string)=>id?page.locator(`.react-flow__node[data-id="${id}"]`):page.locator('.react-flow__node:has(.root-node)').first();
 const saved=(page:Page)=>page.evaluate(key=>{const raw=localStorage.getItem(key);return raw?JSON.parse(raw).progress:null;},PROGRESS_KEY);
 async function ready(page:Page,root='02340247') {await page.goto(`/?course=${root}`);await expect(node(page).locator('.course-link')).toHaveText(root);}
 async function fit(page:Page){await page.keyboard.press('Escape');await page.getByRole('button',{name:'התאמת המפה למסך',exact:true}).click();}
-async function mark(page:Page,id='root'){await fit(page);await node(page,id).locator('.mark-button').click();}
+async function mark(page:Page,id?:string){await fit(page);await node(page,id).locator('.mark-button').click();}
 async function seed(page:Page,raw:string){await page.addInitScript(({key,raw})=>{if(!sessionStorage.getItem('seeded-progress')){localStorage.setItem(key,raw);sessionStorage.setItem('seeded-progress','yes');}},{key:PROGRESS_KEY,raw});}
 async function openFilters(page:Page){await page.getByRole('button',{name:'פתיחת מסנני המפה'}).click();}
 async function closeFilters(page:Page){await page.getByRole('button',{name:'הצגת המפה',exact:true}).click();}
@@ -23,22 +23,22 @@ test('session restores root, catalog, faculties, forward/backward expansions, re
  await page.getByRole('tab',{name:/סינון לפי פקולטה/}).click();await page.getByRole('button',{name:'ניקוי הכול',exact:true}).click();
  for(const faculty of ['מדעי המחשב','מתמטיקה','פיזיקה'])await page.getByRole('checkbox',{name:faculty,exact:true}).check();
  await closeFilters(page);await fit(page);
- const forward='root/f:02360299:strong';await node(page,forward).locator('.expand-button').focus();await node(page,forward).locator('.expand-button').press('Enter');await expect(node(page,forward).locator('.expand-button')).toHaveAttribute('aria-expanded','true');
+ const forward='02360299';await node(page,forward).locator('.expand-button').focus();await node(page,forward).locator('.expand-button').press('Enter');await expect(node(page,forward).locator('.expand-button')).toHaveAttribute('aria-expanded','true');
  // Test persistence through keyboard controls while branch-focus camera motion settles.
  // explorer.spec.ts separately covers hover and pointer interaction with this panel.
  await node(page).locator('.node-info').focus();await node(page).locator('.node-info').press('Enter');
  const prerequisite=page.getByRole('dialog',{name:`קדמים של ${courses.get('02340247').name}`,exact:true}).getByRole('button',{name:`הרחבת קדם ${courses.get('02340218').name}`,exact:true});await prerequisite.focus();await prerequisite.press('Enter');
- await expect(node(page,'root/b:02340218:strong')).toHaveCount(1);
- await mark(page);await mark(page,'root/b:02340218:strong');
+ await expect(node(page,'02340218')).toHaveCount(1);
+ await mark(page);await mark(page,'02340218');
  await page.getByRole('button',{name:'הגדלת המפה',exact:true}).click();
  await expect.poll(async()=> (await saved(page))?.expandedForward).toContain(forward);
- await expect.poll(async()=> (await saved(page))?.markedCourseIds).toEqual(['02340218','02340247']);
+ await expect.poll(async()=> (await saved(page))?.markedCourseIds).toEqual(['02340247','02340218']);
  await expect.poll(async()=> (await saved(page))?.viewport?.zoom??0).toBeGreaterThan(0);
  await page.waitForTimeout(650);
  const before=await saved(page);const ids=await page.locator('.react-flow__node').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-id')).sort());
  await page.reload();await expect(node(page).locator('.course-link')).toHaveText('02340247');
  await expect(node(page,forward).locator('.expand-button')).toHaveAttribute('aria-expanded','true');
- await expect(node(page,'root/b:02340218:strong').locator('.mark-button')).toHaveAttribute('aria-pressed','true');
+ await expect(node(page,'02340218').locator('.mark-button')).toHaveAttribute('aria-pressed','true');
  await expect(page.locator('.active-filter-summary')).toContainText('2025-2026');
  expect(await page.locator('.react-flow__node').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-id')).sort())).toEqual(ids);
  await expect.poll(async()=>{const after=await saved(page);return Math.abs((after?.viewport?.zoom??0)-before.viewport.zoom);}).toBeLessThan(.01);
@@ -49,12 +49,12 @@ test('session restores root, catalog, faculties, forward/backward expansions, re
  const reopened=await context.newPage();await reopened.goto('/');await expect(node(reopened).locator('.course-link')).toHaveText('02340247');await expect(node(reopened).locator('.mark-button')).toHaveAttribute('aria-pressed','true');await reopened.close();
 });
 
-test('duplicate course instances share markings across roots, filters and branch reset',async({page})=>{
+test('one shared course preserves its marking across roots, filters and branch reset',async({page})=>{
  await ready(page,'00140855');
- for(const id of ['root/f:00140856:strong','root/f:00140889:strong']){await fit(page);await node(page,id).locator('.expand-button').click();}
- const duplicates=page.locator('.course-node').filter({has:page.locator('.course-link').filter({hasText:'00140866'})});
- await expect(duplicates).toHaveCount(2);await fit(page);await duplicates.first().locator('.mark-button').click();
- for(const duplicate of await duplicates.all())await expect(duplicate).toHaveClass(/user-marked/);
+ for(const id of ['00140856','00140889']){await fit(page);await node(page,id).locator('.expand-button').click();}
+ const shared=page.locator('.course-node').filter({has:page.locator('.course-link').filter({hasText:'00140866'})});
+ await expect(shared).toHaveCount(1);await fit(page);await shared.first().locator('.mark-button').click();
+ for(const duplicate of await shared.all())await expect(duplicate).toHaveClass(/user-marked/);
  await page.getByRole('button',{name:'איפוס ענפים',exact:true}).click();await expect.poll(async()=> (await saved(page))?.markedCourseIds).toContain('00140866');
  const search=page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם'});await search.fill('00140866');await page.getByRole('option').filter({hasText:'00140866'}).click();
  await expect(node(page).locator('.mark-button')).toHaveAttribute('aria-pressed','true');await page.reload();await expect(node(page).locator('.course-node')).toHaveClass(/user-marked/);
@@ -63,7 +63,7 @@ test('duplicate course instances share markings across roots, filters and branch
 });
 
 test('concurrent badge and faculty identity survive red highlighting',async({page})=>{
- await ready(page,'01040067');const id='root/f:01040022:concurrent';const card=node(page,id).locator('.course-node');
+ await ready(page,'01040067');const id='01040022';const card=node(page,id).locator('.course-node');
  await expect(card.locator('.relationship-chip.concurrent')).toHaveText('מקצוע צמוד');
  const accent=courseAppearance(courses.get('01040022')).accent;
  expect(await card.evaluate(el=>(el as HTMLElement).style.getPropertyValue('--faculty-accent'))).toBe(accent);
@@ -137,4 +137,85 @@ for(const viewport of [{width:320,height:568},{width:844,height:390}])test(`comp
  const geometry=await page.evaluate(()=>{const note=document.querySelector('.map-footnote')!.getBoundingClientRect();const footer=document.querySelector('.site-footer')!.getBoundingClientRect();return{noteBottom:note.bottom,footerTop:footer.top};});expect(geometry.noteBottom).toBeLessThanOrEqual(geometry.footerTop+1);
  await page.locator('.canvas-controls').scrollIntoViewIfNeeded();await expect(page.getByRole('button',{name:'הגדלת המפה',exact:true})).toBeInViewport();
  await page.locator('.site-footer').scrollIntoViewIfNeeded();await expect(page.getByText('Developed by Chupchick',{exact:true})).toBeInViewport();await expect(page.locator('.site-disclaimer')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+test('four ordered pins, canonical hidden edges, shared expansion and markings restore from the primary URL', async ({ page }) => {
+  const pins = ['00140855', '02340114', '01040031', '01140051'];
+  const state = {
+    addedCourseIds: pins,
+    expandedForward: ['00140855', '00140889'],
+    expandedBackward: [],
+    hiddenForwardConnections: ['00140855->00140856:strong'],
+    automaticConnections: [],
+    markedCourseIds: ['00140866', '01040031'],
+    facultyIds: ['civil', 'cs', 'math', 'physics'],
+    catalogId: '',
+    catalogYear: '2025-2026',
+    catalogFaculty: '',
+    filterTab: 'faculty',
+    searchAll: false,
+    recent: ['02340247'],
+    viewport: { x: -100, y: 90, zoom: .55 },
+  };
+  await seed(page, JSON.stringify({ version: 3, progress: { ...state, pinnedRootIds: state.addedCourseIds, addedCourseIds: undefined } }));
+  await page.goto('/?course=00140855');
+  await expect(page.locator('.added-badge')).toHaveCount(4);
+  await expect(node(page, '00140866')).toHaveCount(1);
+  await expect(node(page, '00140856')).toHaveCount(0);
+  await expect(node(page, '00140889').locator('.expand-button')).toHaveAttribute('aria-expanded', 'true');
+  await expect(node(page, '01040031').locator('.mark-button')).toHaveAttribute('aria-pressed', 'true');
+  await expect.poll(async () => (await saved(page))?.addedCourseIds).toEqual(pins);
+  await page.reload();
+  await expect(page.locator('.added-badge')).toHaveCount(4);
+  await expect(node(page, '00140866')).toHaveCount(1);
+  const after = await saved(page);
+  expect(after.addedCourseIds).toEqual(pins);
+  expect(after.hiddenForwardConnections).toEqual(state.hiddenForwardConnections);
+  expect(after.markedCourseIds).toEqual(state.markedCourseIds);
+  expect(after.facultyIds).toEqual(state.facultyIds);
+  expect(after.recent).toEqual(state.recent);
+  const ids = await page.locator('.react-flow__node').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-id')));
+  expect(new Set(ids).size).toBe(ids.length);
+});
+
+test('a deliberately empty saved pin set survives refresh and ordinary search opens a sole root', async ({ page }) => {
+  await seed(page, JSON.stringify({
+    version: 3,
+    progress: { pinnedRootIds: [], expandedForward: [], expandedBackward: [], hiddenForwardConnections: [], automaticConnections: [], markedCourseIds: ['01040031'], facultyIds: null },
+  }));
+  await page.goto('/');
+  const search = page.getByRole('combobox', { name: 'חיפוש קורס לפי מספר או שם', exact: true });
+  await expect(search).toBeEnabled();
+  await expect(page.locator('.react-flow__node')).toHaveCount(0);
+  expect((await saved(page)).addedCourseIds).toEqual([]);
+  await page.reload();
+  await expect(search).toBeEnabled();
+  await expect(page.locator('.react-flow__node')).toHaveCount(0);
+  await search.fill('234114');
+  await page.getByRole('option').filter({ hasText: '02340114' }).click();
+  await expect(node(page, '02340114').locator('.course-node')).toHaveClass(/root-node/);
+  await expect(page.locator('.root-node')).toHaveCount(1);
+  await expect.poll(async () => (await saved(page))?.markedCourseIds).toEqual(['01040031']);
+  await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual(['02340114']);
+});
+
+test('an unmarked version2 session is rewritten to schema5 without a user edit', async ({ page }) => {
+  await seed(page, JSON.stringify({
+    version: 2,
+    progress: {
+      rootId: '00140855',
+      expandedForward: ['root', 'root/f:00140889:strong'],
+      expandedBackward: [],
+      hiddenForwardConnections: ['root/f:00140856:strong'],
+      markedCourseIds: [],
+      facultyIds: null,
+    },
+  }));
+  await ready(page, '00140855');
+  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').version, PROGRESS_KEY)).toBe(5);
+  const state = await saved(page);
+  expect(state.addedCourseIds).toEqual(['00140855']);
+  expect(state.expandedForward).toEqual(['00140855', '00140889']);
+  expect(state.hiddenForwardConnections).toEqual(['00140855->00140856:strong']);
+  expect(state.markedCourseIds).toEqual([]);
+  expect(state.automaticConnections).toEqual([]);
 });

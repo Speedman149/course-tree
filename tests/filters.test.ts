@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { Course, DegreeCatalog, Requirement } from '../src/types';
 import { courseFaculties, createCourseVisibility, getCatalogRoles, getFacultyOptions } from '../src/lib/filters';
-import { buildCourseIndex, buildDependents, buildGraph, instanceId } from '../src/lib/graph';
+import { buildCourseIndex, buildDependents, buildGraph } from '../src/lib/graph';
 const cs='הפקולטה למדעי המחשב', math='הפקולטה למתמטיקה';
 const leaf=(courseId:string):Requirement=>({type:'course',courseId,relation:'strong'});
 const course=(id:string,faculty:string,requirements:Requirement|null=null):Course=>({id,name:id,faculty,requirements,requirementsStatus:requirements?'known':'none',source:{url:'https://example.test/'+id}});
@@ -31,17 +31,17 @@ test('degree membership includes all listed electives, multiple roles, and cross
 });
 test('forward filtering prunes a path without connecting across hidden nodes, then restores its expansion',()=>{
  const records=[course('A',cs),course('B',math,leaf('A')),course('C',cs,leaf('B')),course('D',cs,leaf('A'))];
- const index=buildCourseIndex(records),deps=buildDependents(records); const b=instanceId('root','forward','B','strong'); const expansion=new Set(['root',b]);
- const before=buildGraph('A',index,deps,expansion,new Map());
- const filtered=buildGraph('A',index,deps,expansion,new Map(),createCourseVisibility(records,new Set(['cs']),null));
- assert.deepEqual(filtered.nodes.map(n=>n.courseId),['A','D']);assert.equal(expansion.has(b),true);
- assert.deepEqual(buildGraph('A',index,deps,expansion,new Map()),before);
+ const index=buildCourseIndex(records),deps=buildDependents(records); const expansion=new Set(['A','B']);
+ const before=buildGraph(['A'],index,deps,expansion,new Map());
+ const filtered=buildGraph(['A'],index,deps,expansion,new Map(),createCourseVisibility(records,new Set(['cs']),null));
+ assert.deepEqual(filtered.nodes.map(n=>n.courseId),['A','D']);assert.equal(expansion.has('B'),true);
+ assert.deepEqual(buildGraph(['A'],index,deps,expansion,new Map()),before);
 });
 test('backward exploration ignores every filter; forward branches off backward nodes still respect filters',()=>{
  const records=[course('A',cs),course('B',math,leaf('A')),course('C',cs,leaf('B')),course('D',math,leaf('B'))];
- const index=buildCourseIndex(records),deps=buildDependents(records);const b=instanceId('root','backward','B','strong');
- const back=new Map([['root',new Set(['B'])],[b,new Set(['A'])]]);
- const graph=buildGraph('C',index,deps,new Set([b]),back,()=>false);
+ const index=buildCourseIndex(records),deps=buildDependents(records);
+ const back=new Map([['C',new Set(['B'])],['B',new Set(['A'])]]);
+ const graph=buildGraph(['C'],index,deps,new Set(['B']),back,()=>false);
  assert.deepEqual(graph.nodes.map(n=>n.courseId),['C','B','A']);assert.equal(graph.nodes[0].direction,'root');
 });
 test('open approval rules do not silently make every course eligible',()=>{

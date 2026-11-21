@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useRef,useState} from 'react';
-import {PROGRESS_KEY,decodeProgress,defaultProgress,encodeProgress,validateProgress,type Progress,type ProgressDatabase} from './progress';
+import {PROGRESS_KEY,PROGRESS_VERSION,decodeProgress,defaultProgress,encodeProgress,validateProgress,type Progress,type ProgressDatabase} from './progress';
 
 /** Browser-only IO never runs during rendering. Saved sessions wait for both databases; a fresh session can display courses while catalogs load. */
 export function useProgress(current: Progress, db: ProgressDatabase, canRestore: boolean, catalogSettled: boolean, restore: (saved: Progress)=>void) {
@@ -19,11 +19,17 @@ export function useProgress(current: Progress, db: ProgressDatabase, canRestore:
   useEffect(()=>{
     if(!canRestore||initialized.current)return;
     let saved:unknown=null;
-    try{saved=decodeProgress(localStorage.getItem(PROGRESS_KEY));}catch{setStorageAvailable(false);}
+    let migrate=false;
+    try{
+      const stored=localStorage.getItem(PROGRESS_KEY);
+      saved=decodeProgress(stored);
+      migrate=saved!==null&&stored!==null&&JSON.parse(stored).version!==PROGRESS_VERSION;
+    }catch{setStorageAvailable(false);}
     if(saved!==null&&!catalogSettled)return;
     initialized.current=true;
     const restored=validateProgress(saved,database.current,new URLSearchParams(window.location.search).get('course'));
-    signature.current=JSON.stringify(restored);
+    // Rewrite legacy envelopes once the converted state has reached React.
+    signature.current=migrate?'':JSON.stringify(restored);
     restoreRef.current(restored);setReady(true);
   },[canRestore,catalogSettled]);
   const marks=current.markedCourseIds.join(',');

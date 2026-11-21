@@ -18,7 +18,10 @@ async function contained(page:Page,bottom:number){const box=await panel(page).bo
 
 for(const width of [390,320])test(`mobile defaults to only the search icon with no reserved search row at ${width}px`,async({page},testInfo)=>{
  await page.setViewportSize({width,height:1000});await ready(page);await expect(toggle(page)).toBeInViewport();await expect(toggle(page)).toHaveAttribute('aria-expanded','false');await expect(page.getByRole('combobox')).toHaveCount(0);await expect(panel(page)).toHaveCount(0);
- const header=await page.locator('.app-header').boundingBox();const graph=await page.locator('.graph-canvas').boundingBox();expect(header!.height).toBe(65);expect(graph!.height-before[width]['.graph-canvas'].height).toBeCloseTo(60,1);expect(graph!.y).toBeCloseTo(before[width]['.graph-canvas'].y-60,1);
+ const header=await page.locator('.app-header').boundingBox();const graph=await page.locator('.graph-canvas').boundingBox();expect(header!.height).toBe(65);await expect(page.locator('.added-courses')).toHaveCount(0);
+ // The collection now lives in the footer, reserving no graph-toolbar row.
+ expect(graph!.height-before[width]['.graph-canvas'].height).toBeGreaterThan(0);expect(graph!.y).toBeCloseTo(before[width]['.graph-canvas'].y-60,1);
+ for(const key of ['x','width'] as const)expect(graph![key],`mobile graph.${key}`).toBeCloseTo(before[width]['.graph-canvas'][key],1);
  const icon=await toggle(page).boundingBox();const controls=await page.locator('.canvas-controls').boundingBox();expect(icon!.width).toBeGreaterThanOrEqual(40);expect(icon!.x).toBeGreaterThanOrEqual(graph!.x);expect(icon!.y+icon!.height).toBeLessThan(controls!.y);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:testInfo.outputPath(`collapsed-${width}.png`),fullPage:true});
 });
 
@@ -39,7 +42,7 @@ test('existing clear control works, Escape closes, and an outside zoom click sti
 });
 
 test('the existing all-course search scope remains usable without changing active filters',async({page})=>{
- await page.setViewportSize({width:320,height:568});await seeded(page);const progress=await saved(page);await toggle(page).click();await input(page).fill('02340247');await expect(panel(page).getByText('לא נמצאו קורסים',{exact:true})).toBeVisible();const scope=panel(page).getByRole('button',{name:'חיפוש בכל הקורסים',exact:true});await scope.click();await expect(scope).toHaveAttribute('aria-pressed','true');await expect(panel(page).getByRole('option').filter({hasText:'02340247'})).toBeVisible();await close(page).click();await expect.poll(async()=>(await saved(page))?.searchAll).toBe(true);const after=await saved(page);expect(after.facultyIds).toEqual(progress.facultyIds);expect(after.catalogId).toBe(progress.catalogId);expect(after.expandedForward).toEqual(progress.expandedForward);expect(after.rootId).toBe(progress.rootId);
+ await page.setViewportSize({width:320,height:568});await seeded(page);const progress=await saved(page);await toggle(page).click();await input(page).fill('02340247');await expect(panel(page).getByText('לא נמצאו קורסים',{exact:true})).toBeVisible();const scope=panel(page).getByRole('button',{name:'חיפוש בכל הקורסים',exact:true});await scope.click();await expect(scope).toHaveAttribute('aria-pressed','true');await expect(panel(page).getByRole('option').filter({hasText:'02340247'})).toBeVisible();await close(page).click();await expect.poll(async()=>(await saved(page))?.searchAll).toBe(true);const after=await saved(page);expect(after.facultyIds).toEqual(progress.facultyIds);expect(after.catalogId).toBe(progress.catalogId);expect(after.expandedForward).toEqual(progress.expandedForward);expect(after.addedCourseIds).toEqual(progress.addedCourseIds);
 });
 
 test('the panel follows a keyboard-sized visual viewport and keeps the input and close button accessible',async({page},testInfo)=>{
@@ -54,7 +57,12 @@ test('resizing restores desktop search and returns to collapsed mobile without c
 
 for(const width of [1440,641])test(`desktop search and header geometry stay unchanged at ${width}px`,async({page},testInfo)=>{
  await page.setViewportSize({width,height:1000});await page.goto('/?course=02340247');await expect(root(page)).toHaveText('02340247');await page.evaluate(()=>document.fonts.ready);await expect(page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true})).toBeVisible();await expect(toggle(page)).toBeHidden();
- for(const selector of ['.app-header','.brand','.header-actions','.search-container','.graph-canvas']){const box=await page.locator(selector).boundingBox();for(const key of ['x','y','width','height'] as const)expect(box![key],`${selector}.${key}`).toBeCloseTo(before[width][selector][key],1);}
+ for(const selector of ['.app-header','.brand','.header-actions','.search-container']){const box=await page.locator(selector).boundingBox();for(const key of ['x','y','width','height'] as const)expect(box![key],`${selector}.${key}`).toBeCloseTo(before[width][selector][key],1);}
+ // The added collection is in the footer; the desktop search/header/canvas origin stay unchanged.
+ const graph=await page.locator('.graph-canvas').boundingBox();const footer=await page.locator('.site-footer').boundingBox();
+ for(const key of ['x','width'] as const)expect(graph![key],`desktop graph.${key}`).toBeCloseTo(before[width]['.graph-canvas'][key],1);
+ expect(graph!.y).toBeCloseTo(before[width]['.graph-canvas'].y,1);expect(graph!.height).toBeLessThanOrEqual(before[width]['.graph-canvas'].height);
+ expect(graph!.height).toBeGreaterThanOrEqual(before[width]['.graph-canvas'].height-footer!.height);expect(graph!.y+graph!.height).toBeLessThanOrEqual(footer!.y);
  await page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true}).fill('234114');await expect(page.getByRole('option').filter({hasText:'02340114'})).toBeVisible();await page.locator('.app-header').screenshot({path:testInfo.outputPath(`desktop-${width}.png`)});
 });
 

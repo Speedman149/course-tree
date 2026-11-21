@@ -12,11 +12,14 @@ const test = base.extend<{ runtimeErrors: void }>({
     page.on('pageerror', error => errors.push(error.message));
     await use();
     expect(errors, 'browser runtime errors').toEqual([]);
+    const ids = await page.locator('.react-flow__node').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-id')));
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const id of ids) expect(id).toMatch(/^\d{8}$/);
   }, { auto: true }],
 });
 
 function instance(page: Page, id: string): Locator {
-  return page.locator(`.react-flow__node[data-id="${id}"]`);
+  return id === 'root' ? page.locator('.react-flow__node:has(.root-node)') : page.locator(`.react-flow__node[data-id="${id}"]`);
 }
 async function ready(page: Page, course = '02340114') {
   await page.goto(course === '02340114' ? '/' : `/?course=${course}`);
@@ -67,7 +70,7 @@ test('legacy and partial Hebrew searches select roots across faculties and clear
   await expect(page.locator('.react-flow__node')).toHaveCount(1);
   await selectCourse(page, '234114', '02340114');
   await expect(instance(page, 'root').locator('.expand-button')).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.locator('.react-flow__node[data-id^="root/b:"]')).toHaveCount(0);
+  await expect(page.locator('.react-flow__node:has(.backward-node)')).toHaveCount(0);
 
   await search.fill('קורסשאינובמאגר');
   await expect(page.getByText('לא נמצאו קורסים', { exact: true })).toBeVisible();
@@ -75,24 +78,28 @@ test('legacy and partial Hebrew searches select roots across faculties and clear
   await expect(page.getByRole('listbox')).toHaveCount(0);
 });
 
-test('forward diamond branches expand and collapse independently', async ({ page }) => {
-  // This source course has two paths to the same later courses.
+test('forward diamond branches converge on one course and collapse independently', async ({ page }) => {
   await ready(page, '00140855');
   await fit(page);
-  const firstId = 'root/f:00140856:strong';
-  const secondId = 'root/f:00140889:strong';
-  const first = instance(page, firstId);
-  const second = instance(page, secondId);
-  await first.locator('.expand-button').click();
-  await expect(instance(page, `${firstId}/f:00140866:strong`)).toHaveCount(1);
-  await fit(page);
-  await second.locator('.expand-button').click();
-  await expect(instance(page, `${secondId}/f:00140866:strong`)).toHaveCount(1);
-  await fit(page);
-  await first.locator('.expand-button').click();
-  await expect(instance(page, `${firstId}/f:00140866:strong`)).toHaveCount(0);
-  await expect(instance(page, `${secondId}/f:00140866:strong`)).toHaveCount(1);
+  const first = instance(page, '00140856');
+  const second = instance(page, '00140889');
+  const shared = instance(page, '00140866');
+  await first.locator('.expand-button').focus();
+  await first.locator('.expand-button').press('Enter');
+  await expect(shared).toHaveCount(1);
+  await second.locator('.expand-button').focus();
+  await second.locator('.expand-button').press('Enter');
+  await expect(shared).toHaveCount(1);
+  await expect(page.locator('[data-connection="00140856->00140866:strong"]')).toHaveCount(1);
+  await expect(page.locator('[data-connection="00140889->00140866:strong"]')).toHaveCount(1);
+  await first.locator('.expand-button').focus();
+  await first.locator('.expand-button').press('Enter');
+  await expect(shared).toHaveCount(1);
+  await expect(page.locator('[data-connection="00140856->00140866:strong"]')).toHaveCount(0);
   await expect(second.locator('.expand-button')).toHaveAttribute('aria-expanded', 'true');
+  await second.locator('.expand-button').focus();
+  await second.locator('.expand-button').press('Enter');
+  await expect(shared).toHaveCount(0);
 });
 
 test('hover panel stays interactive and recursively explores backward requirements', async ({ page }) => {
@@ -106,7 +113,7 @@ test('hover panel stays interactive and recursively explores backward requiremen
   await expect(panel.locator('.requirement-logic a')).toHaveCount(2);
   const dataCourse = courses.get('02340218')!;
   await panel.getByRole('button', { name: `הרחבת קדם ${dataCourse.name}`, exact: true }).click();
-  const backwardId = 'root/b:02340218:strong';
+  const backwardId = '02340218';
   await expect(instance(page, backwardId)).toHaveCount(1);
   await expect(instance(page, backwardId).locator('.course-node')).toHaveClass(/backward-node/);
   await fit(page);
@@ -116,14 +123,14 @@ test('hover panel stays interactive and recursively explores backward requiremen
   await expect(panel.locator('.requirement-logic')).toContainText('וגם');
   const systemCourse = courses.get('02340124')!;
   await panel.getByRole('button', { name: `הרחבת קדם ${systemCourse.name}`, exact: true }).click();
-  const secondBackwardId = `${backwardId}/b:02340124:strong`;
+  const secondBackwardId = '02340124';
   await expect(instance(page, secondBackwardId)).toHaveCount(1);
   await fit(page);
   await instance(page, secondBackwardId).locator('.node-info').click();
   panel = page.getByRole('dialog', { name: `קדמים של ${systemCourse.name}`, exact: true });
   await expect(panel).toContainText('02340114');
   await panel.getByRole('button', { name: `הרחבת קדם ${courses.get('02340114')!.name}`, exact: true }).click();
-  const thirdBackwardId = `${secondBackwardId}/b:02340114:strong`;
+  const thirdBackwardId = '02340114';
   await expect(instance(page, thirdBackwardId)).toHaveCount(1);
   await fit(page);
   await instance(page, thirdBackwardId).getByRole('button', { name: `כיווץ ענף קדם ${courses.get('02340114')!.name}`, exact: true }).click();
@@ -139,7 +146,7 @@ test('hover panel stays interactive and recursively explores backward requiremen
 
 test('concurrent relationships have gray cards and retain combined requirement logic', async ({ page }) => {
   await ready(page, '01040067');
-  const child = instance(page, 'root/f:01040022:concurrent');
+  const child = instance(page, '01040022');
   await expect(child.locator('.course-node')).toHaveClass(/concurrent/);
   await fit(page);
   await child.locator('.node-info').click();
@@ -191,7 +198,7 @@ test('mobile layout fits the screen and supports root search and prerequisite co
   expect(bounds!.x).toBeGreaterThanOrEqual(0);
   expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(390);
   await panel.getByRole('button', { name: `הרחבת קדם ${courses.get('02340218')!.name}`, exact: true }).click();
-  await expect(instance(page, 'root/b:02340218:strong')).toHaveCount(1);
+  await expect(instance(page, '02340218')).toHaveCount(1);
   await page.keyboard.press('Escape');
   await expect(panel).toHaveCount(0);
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

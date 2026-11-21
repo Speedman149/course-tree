@@ -24,7 +24,7 @@ async function catalog(page:Page,name:string,year='2026-2027'){
 async function rootSearch(page:Page,id:string){
  const search=page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם'});await search.fill(id);await page.getByRole('option').filter({hasText:id}).click();await expect(page.locator('.root-node .course-link')).toHaveText(id);
 }
-async function forwardIds(page:Page){return page.locator('.react-flow__node[data-id*="/f:"]').evaluateAll(nodes=>nodes.map(node=>node.querySelector('.course-link')!.textContent!.trim()));}
+async function forwardIds(page:Page){return page.locator('.react-flow__node:has(.course-node:not(.root-node):not(.backward-node))').evaluateAll(nodes=>nodes.map(node=>node.querySelector('.course-link')!.textContent!.trim()));}
 
 test('faculty checkboxes immediately filter expanded nodes and search; reset restores the existing graph',async({page})=>{
  await ready(page);const before=await page.locator('.react-flow__node').count();
@@ -43,8 +43,8 @@ test('degree catalog includes complete lists, excludes unrelated successors, and
  await expect(page.locator('.catalog-details')).toContainText('רשימה א׳');await expect(page.locator('.catalog-details')).toContainText('רשימה ב׳');
  const listB=page.locator('.catalog-details details').filter({has:page.locator('summary',{hasText:'רשימה ב׳'})});await listB.locator('summary').click();await expect(listB.locator('.catalog-course-list a')).toHaveCount(68);
  await close(page);await expect(page.locator('.active-filter-summary')).toContainText('2026-2027');
- await expect(page.locator('.react-flow__node[data-id="root/f:02140901:strong"]')).toHaveCount(0);
- await expect(page.locator('.react-flow__node[data-id="root/f:01270454:strong"]')).toHaveCount(0);
+ await expect(page.locator('.react-flow__node[data-id="02140901"]')).toHaveCount(0);
+ await expect(page.locator('.react-flow__node[data-id="01270454"]')).toHaveCount(0);
  await page.locator('.root-node .node-info').click();await expect(page.locator('.course-catalog-roles')).toContainText('חובה');await page.keyboard.press('Escape');
  await rootSearch(page,'01040031');await expect(page.locator('.root-node .node-name')).toContainText('אינפיניטסימלי');
 });
@@ -56,7 +56,7 @@ test('catalog and faculty filters intersect while backward prerequisite explorat
  expect(mathRequirement).toBeTruthy();const required=courses.get(mathRequirement.courseId)!;
  await expect(page.locator('.prerequisite-panel')).toContainText('מחוץ לסינון');
  await page.getByRole('button',{name:`הרחבת קדם ${required.name}`,exact:true}).click();
- const backward=page.locator(`.react-flow__node[data-id="root/b:${required.id}:${mathRequirement.relation}"]`);await expect(backward).toHaveCount(1);await expect(backward.locator('.course-node')).toHaveClass(/backward-node/);
+ const backward=page.locator(`.react-flow__node[data-id="${required.id}"]`);await expect(backward).toHaveCount(1);await expect(backward.locator('.course-node')).toHaveClass(/backward-node/);
  await page.keyboard.press('Escape');await page.getByRole('button',{name:'התאמת המפה למסך',exact:true}).click();
  for(const id of await forwardIds(page))expect(courses.get(id)?.faculty).toBe('הפקולטה למדעי המחשב');
  await open(page);await faculty(page,['מתמטיקה']);await close(page);
@@ -86,7 +86,7 @@ test('complete program course browser selects an eligible course as root indepen
  await page.getByRole('textbox',{name:'חיפוש קורסים בתכנית'}).fill('01040031');
  await expect(page.getByRole('list',{name:'קורסים בתכנית'}).getByRole('listitem')).toHaveCount(1);
  const info=page.getByRole('link',{name:'מידע רשמי על 01040031'});await expect(info).toHaveAttribute('target','_blank');
- await page.getByRole('button',{name:'בחירת 01040031 כנקודת מוצא',exact:true}).click();
+ await page.getByRole('button',{name:'בחירת 01040031 לעץ חדש',exact:true}).click();
  await expect(page.getByRole('dialog',{name:'מסנני המפה'})).toHaveCount(0);
  await expect(page.locator('.root-node .course-link')).toHaveText('01040031');
  await expect(page.locator('.root-filter-warning')).toBeVisible();

@@ -1,30 +1,31 @@
 # Course Tree — Project State
 
-Snapshot prepared on 18 November 2026 from the checked-out implementation, runtime JSON, source definitions, and fresh automated tests.
+Snapshot updated on 20 November 2026 for the unified Add Course to Tree refactor, retaining the shared graph and partial-expansion implementation. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
 
 ## 1. Project identity and evidence
 
-Course Tree is a Hebrew, RTL Technion course explorer. Users choose one starting course, explore dependent courses forward and prerequisites backward, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
+Course Tree is a Hebrew, RTL Technion course explorer. Users can explicitly add courses without a fixed selection cap, explore dependent courses forward and prerequisites backward in one shared graph, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
 
-This document records the current implementation. Its only project change is this file. Application code, tests, curriculum data, and styling were preserved during preparation.
+This document describes the current working implementation, including the uncommitted major graph update on the existing security-hardened base. The update changes graph identity, exploration state, collections controls, persistence, and regression tests. It does not regenerate or correct academic datasets.
 
 | Snapshot item | Value |
 |---|---|
 | Repository | `https://github.com/Speedman149/course-tree.git` |
-| Checked-out branch | `preview/mobile-search-phone-2026-11-18` |
-| Application commit | `d0ecb1c545d3fdcf6b433fea0d989c11699d51e2` |
-| Commit subject | `Collapse mobile course search into an overlay` |
+| Checked-out branch | `main` |
+| Base application commit | `9e8d70e7fdd0358b2792b83d259aa30ca1b5c5e8` |
+| Base commit subject | `Harden pre-launch security and document project state` |
+| Current graph update | Working-tree changes after that commit; not committed or deployed by this implementation task |
 | Package | `technion-course-tree`, version `1.0.0`, private ES module |
 | Linux workspace | `/home/seritamar/projects/course-tree` |
 | Windows workspace | `\\wsl.localhost\Ubuntu\home\seritamar\projects\course-tree` |
 | Course data generation | `2026-11-16T20:02:00.949Z` |
 | Catalog data generation | `2026-11-16T20:02:12.830Z` |
 
-The checked-out branch and repository configuration were inspected locally. The deployed production commit, GitHub publication state, Vercel preview URL, Formspree account settings, and Analytics dashboard were outside this verification.
+The branch and base commit were inspected locally. The currently deployed production commit, publication of the new graph update, Vercel preview URL, Formspree account settings, and Analytics dashboard were not checked in this implementation task. `SECURITY_AUDIT.md` retains the separate 18 November security assessment and its limited production observations.
 
 **Implemented** means the feature exists in inspected code. **Partial** means concrete functioning pieces exist alongside an incomplete area. **Not Implemented** identifies an absent feature. **Unverified** identifies behavior dependent on an external service or environment that was not exercised.
 
-Database counts below were calculated from the actual runtime JSON, with faculty normalization checked against `src/lib/filters.ts`. Import coverage flags and historical audit results have their own narrower meanings. Application tests passing does not establish academic accuracy.
+Database counts in sections 9–10 retain the measured runtime JSON/source snapshot. Import coverage flags and historical audit results have their own narrower meanings. Passing application tests does not establish academic accuracy.
 
 ## 2. Layout and appearance
 
@@ -50,7 +51,7 @@ The desktop header is 91px high with 30px horizontal padding. Its brand reads `�
 
 The 308px white sidebar contains the introduction `קורס אחד. הרבה אפשרויות.`, a faculty-colored starting-course summary, linked course number, credits, prerequisite/dependent counts, exploration instructions, recent-course shortcuts, and database information. Recent courses are a history of earlier roots capped at four. Short desktop windows hide that history.
 
-The graph workspace has 26px top and horizontal padding. Its toolbar contains the map heading, visible occurrence count, filters, `עוד שכבה`, and `איפוס ענפים`. The rounded 16px graph canvas has a light dotted grid with 22px spacing. Direction guidance is at the upper right. Zoom and fit controls are at the lower left, the legend at the lower right, and the full-rule reminder is below the canvas.
+The graph workspace has 26px top and horizontal padding. Its toolbar contains the map heading, unique visible-course count, filters, `עוד שכבה`, and `איפוס ענפים`. The rounded 16px graph canvas has a light dotted grid with 22px spacing. Direction guidance is at the upper right. Zoom and fit controls are at the lower left, the legend at the lower right, and the full-rule reminder is below the canvas.
 
 ### Responsive layout
 
@@ -66,68 +67,91 @@ The graph retains fixed-size course cards on narrow screens and relies on zoomin
 
 ### Course cards and information panels
 
-Cards are 286×168px with 11px corners. Each contains a book icon, linked course number, name, faculty label and colored dot, credits when known, prerequisite information, a personal marking button, and a dependent expansion control where applicable. Names occupy a bounded two-line area. The root has a `נקודת מוצא` badge and faculty-colored halo.
+Cards are 286×168px with 11px corners. Each contains a book icon, linked course number, name, faculty label and colored dot, credits when known, prerequisite information, a personal marking button, and a dependent expansion control where applicable. Names occupy a bounded two-line area. Explicitly added courses have a compact `נוסף לעץ` badge with a checkmark and a faculty-colored halo. The badge removes added status; the course can remain as a necessary intermediate or current exploration base. Added status is separate from holding an information panel open. Focusing a course briefly adds a subtle purple highlight and preserves the current zoom.
 
 Final CSS uses a 2px faculty-colored border and light faculty tint. Concurrent-course cards add a gray treatment and `מקצוע צמוד` chip. The ordinary `קדם חזק` rectangular card badge is absent. Backward cards retain the green `קדם` control. Hover increases the shadow and opens an information panel. Marking gives a red border, pale `#fff0f2` fill, and filled red check control. Faculty dots and icons continue to identify the offering unit.
 
 The information panel is a body portal anchored near the card and clamped to the window. It is at most 350px wide or the window width minus 24px. Content scrolls when needed. Hover allows moving between card and panel using a 200ms delayed close. Clicking the information control holds the panel open. A second click, an outside pointer interaction, or Escape dismisses it.
 
-The panel displays the full nested prerequisite expression using `וגם` and `או`, linked course entries, relationship labels, missing/filtered indicators, catalog roles, backward exploration controls, source link, a root-selection action for another course, and course-specific feedback. The component's `pinned` state refers to this held-open panel.
+The panel displays the full nested prerequisite expression using `וגם` and `או`, linked course entries, relationship labels, missing/filtered indicators, catalog roles, backward exploration controls, source link, course-specific feedback, a `הוסף לעץ`/`הסר מהעץ` action, and `פתח עץ חדש` when applicable. The panel's internal `panelHeld` state means held open; explicit added status is determined separately by `addedCourseIds`.
 
 ## 3. Graph behavior
 
-### Starting course and root changes
+### Added courses and the selected exploration course
 
-The fresh default root is `02340114`, `מבוא למדעי המחשב מ׳`, also searchable as legacy number `234114`. Saved progress or an explicit valid `?course=` query can override the default. Aliases and leading-zero normalization resolve legacy IDs when unambiguous.
+There is one authoritative, ordered, unique `addedCourseIds` collection, with no four-course or replacement fixed cap. `primaryCourseId` separately identifies the current exploration base. Fresh `/` progress opens the familiar `02340114` introduction tree without pretending the user explicitly added it. An explicit fresh course URL or an ordinary search/catalog selection chooses that course, opens its new tree, and records that explicit choice. Ordinary selection still replaces the previous tree and additions; filters and red markings survive.
 
-Choosing a course from search, recent history, the catalog course browser, or an information panel replaces the single root. It clears hidden connections and backward selections, resets forward expansion to `root`, recenters, closes the information panel, and replaces the URL's `course` query. Faculty filters, selected catalog, search scope, and personal markings survive.
+Search-result **+** means `הוסף לעץ`; its added state uses a checkmark and `הסר מהעץ`. The same collection drives the node badge, course information action, marked-course menu and the new added-course menu. Explicit add events are idempotent. Adding an already visible course reuses and focuses its card. New related courses reveal suitable real connecting paths; unrelated additions remain independent components in the same graph.
 
-The initial forward expansion set contains `root`, so eligible direct dependents appear initially. A root outside active filters remains visible as an anchor. An outside-filter selection through all-course search retains the filters.
+`קורסים שהוספתי (N)` is a compact footer control beside the marking controls, on both desktop and mobile. The old permanent chips and mobile pin-manager row are removed. Its upward, clamped popover lists only explicit additions, with course name/ID, focus/reconnect and remove actions. The list scrolls, shows a search field after six entries, and has an empty state. Marked courses remain a separate collection.
 
-### Visible graph construction
+Removing an addition removes its added styling and list entry, not every occurrence downstream. Direct expansion opened automatically for that independent addition is tracked separately and removed with it; branches explicitly opened by the user remain. Already-visible additions acquire ownership of their actual active route without introducing new nodes or edges, so removing their former start does not strand the shared path. Needed automatic connector segments are retained transitively for other additions. A removed independent starting course can remain an internal connector anchor while another addition needs its real path, without reappearing in the added collection. Unused automatic segments disappear; manual branch intent remains latent. Removing all additions retains the selected exploration course and reachable manual exploration. An intentionally empty legacy session remains empty until the user chooses or adds a course.
 
-`src/lib/graph.ts` builds a course index and reverse dependent index from prerequisite expressions. Relationships are `strong` or `concurrent`. Every arrow points from prerequisite to dependent. Degree membership never creates prerequisite arrows.
+Clicking a list row first restores its existing saved connector, respecting active filters and restoring only relevant intentionally hidden relationships after this explicit action. It then centers the card with the existing temporary purple highlight. It avoids replacing upstream ownership with a circular route through a downstream addition. If no saved connector exists, it uses the established path planner; no connection is invented for unrelated courses.
 
-Visual identity is path-specific. The root instance ID is `root`. Descendants append `/f:<encoded-course-id>:<relation>` for forward traversal or `/b:<encoded-course-id>:<relation>` for backward traversal. A shared course reached by two paths therefore has separate visual occurrences, each with independent expansion state. Markings share the canonical ID across occurrences.
+### Canonical shared graph and reachability
 
-Traversal starts at the root and follows expansion sets, backward selections, filter eligibility, and enabled forward connections. Only reachable occurrences are emitted. Repeated leaves with the same course ID and relation within one prerequisite expression produce one graph connection. The complete logical expression stays intact in the panel.
+`src/lib/graph.ts` builds the course and reverse-dependent indexes from prerequisite expressions. Every rendered node uses its canonical course ID as its identity; added styling is a separate Boolean derived from the explicit collection. Shared courses have one card, with all active real incoming/outgoing relationships. An edge is unique per prerequisite ID, dependent ID, and `strong` or `concurrent` relation. Parallel relation types remain distinguishable.
 
-A per-path ancestor-course guard stops cycles. Repeated ancestors render terminal cycle cards with `כבר מופיע בענף` or `קשר מעגלי` messaging. Missing records render terminal fallback cards and source links where possible. Missing and cyclic cards cannot continue expansion.
+Every arrow points from prerequisite to dependent, including arrows revealed by backward traversal. Degree membership never creates prerequisite arrows. Repeated identical prerequisite leaves emit one relationship; the full nested AND/OR expression remains available in the information panel.
 
-### Forward expansion and course-level collapse
+Traversal starts at the selected base and all explicitly added anchors and follows active full-course manual forward expansion, individually revealed manual forward connections, selected manual backward prerequisites, and valid automatic connection steps. A course enters the work queue once. Nodes and edges disappear only when they become unreachable from every remaining anchor through enabled traversal. Expansion state for hidden or unreachable courses remains latent.
 
-- The card's **+** adds that visual instance to `expandedForward`, revealing eligible direct dependents.
-- Opening the card clears directly hidden connections under that parent. Deeper hidden choices remain.
-- The card's **−** removes that parent from `expandedForward`, hiding all its outgoing forward branches.
-- Descendant expansion state remains latent. Reopening restores previously expanded subtrees where connections remain enabled.
-- `עוד שכבה` adds all currently visible, nonmissing, noncycle instances to forward expansion. It opens one additional visible frontier and preserves individually hidden connections.
-- `איפוס ענפים` clears hidden forward connections and backward selections, returns forward expansion to `root`, and recenters. Root, filters, and red markings remain.
+Forward and backward reasons for the same real edge are merged, retaining direction and manual/automatic provenance. Forward presentation wins when both directions reveal it. A backward-selected prerequisite can remain visible after its forward connection is hidden because the explicit backward reason is independent.
 
-The reverse index includes all explicit prerequisite leaves, including alternatives. A forward edge indicates participation in a prerequisite rule. The full AND/OR expression is available in the panel.
+Cycle detection marks actual strongly connected course relationships. Cyclic courses render once, with a source-cycle warning, and remain safely explorable using visited-ID traversal. There are no duplicate terminal ancestor cards. Missing records use fallback cards; their unknown prerequisites are never invented.
 
-### Individual-arrow collapse and restore
+The canonical builder has emergency limits of **10,000 nodes** and **50,000 edges**, with a visible truncation notice if exceeded. These exceed the current complete imported graph universe. Canonical traversal has no ordinary path-depth cutoff. The former security-audit limits of 2,000 path occurrences and 60 visible path edges described the previous representation and are historical, not the current graph budget.
 
-`ForwardBranchEdge.tsx` draws a 22px circular minus near the child end of each forward connection, approximately 26px from the endpoint. Its click stops graph-event propagation and hides that connection.
+### Manual expansion and connection hiding
 
-A stable key combines parent instance path, child canonical ID, and relation. Temporary React Flow edge IDs are not persisted. Hiding preserves parent expansion and descendant expansion state. The parent's `הצגת ענפים (N)` details control lists hidden direct branches and restores them individually.
+- The card's **+** manually expands that canonical course's eligible direct dependents and restores hidden direct outgoing connections. Deeper hidden choices remain.
+- The card's **−** removes its full-course and individual manual forward selections and hides its direct forward connections, including automatic forward steps, so automatic ownership does not reopen the collapsed branch.
+- Descendant expansion state remains latent. Reopening restores it where the course remains reachable and connections are enabled.
+- `עוד שכבה` manually expands currently visible course IDs by one frontier while preserving individual hidden connections.
+- `איפוס ענפים` keeps the exploration base and all additions, resets manual forward expansion to those graph anchors, and clears backward selections, hidden connections, and automatic paths. Filters and markings remain.
 
-For A → B and A → C, hiding A → B removes B's occurrence and descendants through that path. C and its expanded descendants stay. If D also occurs through C, that occurrence survives. The graph is rebuilt from reachable path instances, preserving independent branches with the existing duplicated-occurrence representation.
+`ForwardBranchEdge.tsx` preserves the small minus near the child end of each forward arrow. Hiding uses the stable canonical key `${source}->${target}:${relation}`, rather than a path-instance or temporary React Flow edge ID. The parent's existing `הצגת ענפים (N)` list now unifies deliberately hidden and still-unopened eligible direct connections for partially expanded cards. Each entry reveals exactly its typed connection, reusing an existing shared card where applicable. `הצג את כל הענפים` reveals only the remaining eligible direct connections; it does not recursively expand new descendants or convert already-active automatic path steps into manual selections. Existing descendant expansion remains latent and is reused when reachable.
 
-Dagre relayouts after hiding or restoration. The app records the parent's position and viewport, then compensates pan to anchor that parent and preserve zoom. Existing position transitions smooth movement. These controls apply to forward edges.
+For A → B and A → C, hiding A → B removes only that connection and courses no longer reachable through other active reasons. C and its expansion remain. In a diamond B → D ← C, hiding B → D leaves the single D card through C → D. Explicitly added courses remain anchors even when an incoming connection is hidden. Shared canonical expansion means a course reachable through another branch retains its existing expanded descendants.
+
+Hiding or restoring recalculates layout. The app records the parent position and viewport, then compensates pan where practical, preserving zoom. Existing position transitions smooth movement.
+
+### Partial expansion and remaining connections
+
+`forwardExpansionState` derives card state from actual forward relationship keys, independently of full-course expansion intent. Zero active outgoing forward connections shows **+**; some active connections plus remaining eligible connections shows **−** and the unified branch list; all eligible connections active shows **−** without that extra list. A deliberately hidden-branches list also remains available when every direct branch is closed. Connections to pinned endpoints that are visible outside filters still participate in collapse behavior.
+
+The counter counts typed connections rather than missing cards. The faculty/catalog intersection limits suggestions and reveal-all; filtered-out connections remain latent. Changing filters recomputes the remaining list without silently selecting newly eligible branches. Explicit backward exploration retains its separate unfiltered behavior. Unopened connections have no manual reveal intent and are absent from the intentional-hide set; deliberately hidden keys remain distinct and continue to veto automatic pin paths.
+
+`revealedForwardConnections` stores each individually opened branch without promoting its source into full-course expansion. Hides override these selections. Refresh, cross-tab synchronization, branch reset, root changes and automatic pin ownership cleanup handle this field explicitly. Parent anchoring preserves pan/zoom during reveals; focus moves to a remaining menu entry or the card control when a menu item disappears.
 
 ### Backward prerequisite exploration
 
-Open a card's information panel and use the plus beside a prerequisite to reveal it as a card. `expandedBackward` maps each parent instance to selected prerequisite course IDs. The green `קדם` badge includes a minus to remove that backward selection. Descendant state remains latent.
+The plus beside a prerequisite in a course information panel reveals that prerequisite. `expandedBackward` maps a dependent's canonical ID to selected prerequisite IDs. The green `קדם` control removes that course's explicit backward reveal selections and suppresses matching automatic backward steps; a shared or pinned course can remain visible for another reason.
 
-Backward exploration bypasses faculty and catalog visibility restrictions so prerequisites outside the curriculum remain inspectable. The information panel identifies filtered entries. Backward connections use green dashed strokes. Revealed cards can be explored recursively and can participate in forward exploration as path-specific instances.
+Explicit manual backward exploration bypasses faculty/catalog visibility restrictions and forward-hidden connections, preserving inspection of prerequisites outside a degree. Backward-only edges use green dashed strokes. The panel indicates filtered entries. Courses revealed backward can themselves be expanded in either direction without creating duplicate cards.
+
+### Added-course paths and automatic ownership
+
+`connecting-paths.ts` performs a deterministic multi-source breadth-first search from the current graph anchors. A connecting path follows only forward dependency ancestry or only backward prerequisite ancestry. It does not cross through an unrelated sibling or co-prerequisite to invent a connection. Among shortest equal-length paths, it prefers more already visible courses, then existing anchor order.
+
+A permitted short path opens automatically, revealing only its required path steps rather than all sibling dependents. The thresholds are at most **8 newly revealed intermediate courses**, excluding the newly added endpoint and already visible courses, and at most **12 relationship steps**. Longer, hidden, filtered, or unrelated cases keep the new course as a separate added anchor with explanatory feedback as appropriate.
+
+`automaticConnections` retains source/target endpoint IDs and each real step's source, target, relation and traversal direction. `requiredAutomaticConnections` computes the transitive connector dependencies of remaining graph anchors, so removing a course that another added course uses as an intermediate preserves the required segment. Invalid or unneeded automatic records are discarded. Auxiliary starts are derived from real, permitted paths and cannot bypass an intentionally hidden upstream connector. Manual exploration remains separate. Shared edges carry multiple reasons without duplicate rendering.
+
+Automatic search and rendering respect hidden relationships and active forward filters for intermediates. Explicit additions and the selected base remain visible outside filters. The added-list focus/reconnect action can explicitly restore a hidden or long connector; it still does not disable filters. A filtered connector explains the restriction while focusing the available course. Adding alone never silently reopens deliberately hidden relationships.
 
 ### Layout, zoom, and panning
 
-Dagre uses `rankdir: 'RL'`, `ranksep: 110`, `nodesep: 36`, and 50px margins. Forward dependents extend left and backward prerequisites right. Source handles are on the left, target handles on the right. Forward edges use `#b5add7` at 1.6px with arrowheads. Backward edges use `#65a99a` and `5 5` dashes.
+`src/lib/layout.ts` retains Dagre with `rankdir: 'RL'`, `ranksep: 110`, `nodesep: 36`, and 286×168px cards. Source handles are on the left and target handles on the right. Dependents extend left and prerequisites right. Forward edges retain purple strokes; backward-only edges retain green dashes. Strong/concurrent parallel arrows receive small opposite offsets.
 
-Users pan the background, use React Flow wheel/touch interactions, press zoom +/−, or fit the graph. Zoom bounds are 0.15–1.8. Nodes cannot be manually dragged, connected, or selected through React Flow selection. Double-click zoom is disabled. Initial centering uses zoom 0.75 below a 600px canvas width and 0.9 otherwise. Fit-all caps zoom at 1.0. Explicit expansion can focus the parent and newly revealed direct children. Arrow-level collapse anchors the existing viewport where practical.
+Weakly connected components are ordered by their first current graph anchor. Each component's first anchor is aligned horizontally; separate components stack with a 70px gap. Related added courses stay within one directed layout and preserve genuine prerequisite ordering rather than being forced into an artificial root column. Layout does not add academic edges.
 
-Multiple roots, root pinning, and global shared-node deduplication are absent. Recent roots and held-open information panels serve separate purposes.
+An unusually dense component uses a deterministic layered fallback when it has more than 2,000 edges and more than eight edges per course. The same fallback handles a Dagre failure. It preserves every node and edge, uses topological ranks where available, and assigns separated rows for cycles. This bounds layout work without discarding imported relationships; very dense maps can still have many crossing arrows.
+
+Geometry is memoized by canonical node/edge topology and the selected exploration base. Adding/removing already visible course status or changing markings does not rerun Dagre or move the existing cards. Removing a needed intermediate keeps its prior position when topology remains unchanged. Users pan, use wheel/touch zoom, or use +/−/fit controls. Bounds remain 0.15–1.8; nodes cannot be dragged or connected. Double-click zoom is disabled. Fresh root centering uses 0.75 below 600px canvas width and 0.9 otherwise; fit-all caps at 1.0.
+
+Added-list rows and visible marked-course entries focus the existing card with a 350ms pan at the current zoom and an approximately 1.8-second purple highlight. Unrelated expanded branches and red markings are preserved.
 
 ## 4. Search
 
@@ -138,7 +162,7 @@ Multiple roots, root pinning, and global shared-node deduplication are absent. R
 - Hebrew locale comparison breaks ties. Results are capped at 30. Empty search offers the introduction course and a small initial set.
 - Focusing opens results. Arrow keys navigate, Enter chooses, Escape closes, and an X clears input. Outside pointer/focus dismisses the dropdown. IME composition is guarded.
 - Combobox/listbox roles, active-descendant handling, and live result counts support keyboard and assistive technology interaction.
-- Clicking a result row selects the root and clears the query. Its course-number source link opens the source without choosing a root.
+- Clicking a result row opens a new tree for that course and clears the query. The independent plus/check control adds/removes it in the existing tree, without a fixed collection cap. Add/remove clicks stop row selection and retain the search context. Its course-number source link opens the source without selecting a root.
 - Normal search uses the intersection of faculty and catalog eligibility. `חיפוש בכל הקורסים` broadens search while retaining active graph filters. Outside-filter results are labeled. The scope toggle is saved.
 
 ### Mobile search
@@ -159,7 +183,7 @@ Crossing the breakpoint closes the overlay. The desktop search remains mounted a
 
 `src/lib/filters.ts` determines ownership from source offering-unit labels. Explicit aliases merge spelling/name variants into normalized IDs. Unrecognized labels retain `unit:<label>` IDs. Runtime ownership does not infer departments from course-number prefixes. The optional `faculties[]` representation supports multiple associations. Current normalized records have one association each.
 
-Selected faculties form a union. That union intersects degree eligibility when a catalog is active. A null faculty selection means all faculties, including newly loaded units. An empty selection hides forward results and normal search results. The current root and backward exploration remain available. Expansions and hidden connections remain latent while filters hide paths.
+Selected faculties form a union. That union intersects degree eligibility when a catalog is active. A null faculty selection means all faculties, including newly loaded units. An empty selection hides forward results and normal search results. The selected base, explicitly added courses and manual backward exploration remain available. Expansions and hidden connections remain latent while filters hide paths.
 
 ### Catalog selection and display
 
@@ -177,56 +201,56 @@ The catalog detail view shows minimum credits, minimum course counts, maximum cr
 
 `קורסים בתכנית הזו` lists indexed eligible courses independent of graph reachability and faculty checkbox selection. It supports ID/name/alias searching, source links, and root selection. Panel search strings, expanded details, and open state are transient. Coverage JSON is downloadable.
 
-## 6. Personal markings and colors
+## 6. Personal markings, collections, and colors
 
-The check control toggles membership in `markedCourseIds`, keyed by canonical course ID. All occurrences of a course update together. Markings persist across root changes, filters, branch resets, route changes, and refresh. They can also apply to known referenced IDs represented by missing cards.
+Red `markedCourseIds` and explicit `addedCourseIds` are independent. Either, both or neither may apply to a canonical course. Marking remains a personal reference flag, not completion or eligibility. Marking order is insertion order, displayed newest first in `רשימת מסומנים`. Its actions locate visible courses, add/remove them, open a new tree, or remove a mark. `ניקוי סימונים` confirms and clears only red marks.
 
-Marking changes the card's border/fill/check color. Faculty dots/icons retain ownership color, and filter eligibility stays unchanged. The footer counts all marked courses, including hidden ones. There is no marked-course list.
+`CourseCollections.tsx` provides the two separate compact footer popovers. Both are body portals clamped to the visual viewport, with scrollable rows, search for larger lists, Hebrew labels, Escape/X/outside dismissal and focus restoration. Removing a focused row moves focus to a surviving row or the close button. The added-course popover never includes automatic intermediates unless explicitly added. The permanent pin/chip interface is gone.
 
-`ניקוי סימונים` asks for confirmation and clears only markings. It is disabled at zero. `איפוס התקדמות שמורה` confirms a full saved-progress reset, including branches, filters, root, viewport, and markings. Normal autosaving can subsequently write the default state again.
+`איפוס התקדמות שמורה` still confirms a complete local reset. It restores fresh default exploration, clears additions and markings, and resets preferences as before. The new default is not incorrectly counted as an explicit addition.
 
-Faculty colors come from `src/data/faculty-palette.json` through `faculty-colors.ts`. The palette assigns fixed colors to 12 units and a neutral `#637083` fallback to other units. Ownership color is independent of active filters, node position, and personal marking. The primary offering faculty wins when recognized, with deterministic associated-unit fallback. The exact faculty inventory and palette appear in section 9.
+Faculty colors remain sourced from the same palette and ownership mappings: 12 fixed accents and neutral fallback. Addition and red marking do not change academic associations. Exact inventory and colors remain in section 9.
 
 ## 7. Exact persistence behavior
 
-`src/lib/progress.ts` validates state and `use-progress.ts` manages loading, saving, lifecycle flushes, and cross-tab updates. The browser key is `course-tree.progress`. The envelope contains `version: 2`, an ISO `savedAt`, and a `progress` object.
+`src/lib/progress.ts` validates saved state and `use-progress.ts` loads, migrates, saves, flushes, and synchronizes it. The same browser key, `course-tree.progress`, now contains an envelope with `version: 5`, ISO `savedAt`, and `progress`.
 
 | Persisted field | Meaning |
 |---|---|
-| `rootId` | Single canonical starting course |
-| `expandedForward` | Expanded path-instance IDs |
-| `hiddenForwardConnections` | Stable parent-path, child-ID, relation keys |
-| `expandedBackward` | Parent-instance/selected-prerequisite entries |
-| `facultyIds` | Null for all, otherwise selected normalized unit IDs |
-| `catalogId` | Selected degree edition |
-| `catalogYear` | Catalog browsing year |
-| `catalogFaculty` | Catalog browsing faculty |
-| `filterTab` | Last faculty/catalog tab |
-| `searchAll` | All-course search scope |
-| `markedCourseIds` | Canonical personal marking IDs |
-| `recent` | Up to four recent roots |
-| `viewport` | Finite x, y, and zoom, or null |
+| `primaryCourseId` | Current exploration base, or empty for a deliberately empty legacy tree |
+| `addedCourseIds` | Ordered unique explicit additions; empty is valid; bounded only by valid known IDs, not a fixed selection count |
+| `expandedForward` | Full-course forward expansion intent for canonical course IDs |
+| `autoExpandedCourseIds` | Provenance for direct expansion owned by an unrelated addition; explicit manual expansion takes ownership |
+| `revealedForwardConnections` | Individually revealed manual forward connections, using stable real source/target/relation keys |
+| `hiddenForwardConnections` | Stable `${source}->${target}:${relation}` keys for actual source relationships |
+| `expandedBackward` | Canonical dependent ID and selected real prerequisite IDs |
+| `automaticConnections` | Source-supported connector segments retained transitively for current additions and the exploration base |
+| `facultyIds` | Null for all, otherwise selected normalized units |
+| `catalogId`, `catalogYear`, `catalogFaculty` | Active edition and catalog browsing selections |
+| `filterTab`, `searchAll` | Faculty/catalog tab and all-course search scope |
+| `markedCourseIds` | Complete valid canonical marking list, retaining insertion order |
+| `recent` | Up to four prior starting courses |
+| `viewport` | Finite x/y/zoom, or null |
 
-Stored state is validated against loaded course/catalog records and real source relationships. Invalid IDs and stale paths are discarded individually where possible. An explicit valid course query takes precedence over the stored root. If that changes the root, root-specific branches and viewport reset while other usable settings survive.
+`primaryCourseId` is now a separately stored exploration base. `addedCourseIds` records explicit additions without a fixed count cap. All stored IDs and relationships are checked against loaded source indexes. Known IDs include full records and missing course IDs explicitly referenced by real prerequisite expressions. Stale or malformed entries are discarded individually where possible; no edges are inferred from saved text.
 
-Version 1 migrates with an empty hidden-connection set. Malformed JSON and unknown versions fall back safely. Limits include a 2,000,000-character envelope, 60 slash-separated path components including `root`, 5,000 characters per path, up to 1,500 forward/hidden/backward entries, generic string arrays capped at 6,000, finite viewport coordinates below 10 million in absolute value, and zoom 0.15–1.8. Large saved graphs can lose excess entries during validation.
+Versions 1 and 2 replay old path-specific expansion against real relationships and turn the valid old single root into the exploration base plus its preserved explicit selection. Versions 3 and 4 migrate the real stored `pinnedRootIds` array into `addedCourseIds`, using its first course as the base and retaining canonical manual/automatic/partial branch state. Empty legacy pins preserve an empty base and list; no default is resurrected. Version 5 persists only the new collection and base, with no parallel pin array. Revalidating or reloading a migrated/removed collection is idempotent.
 
-For an existing save, initialization waits for course and catalog loading. A catalog load failure retains usable saved catalog intent until it can be validated. Fresh progress can initialize from course data first.
+Older saves lack provenance for automatically opened direct children, so migration conservatively retains their existing expansion intent. New version-5 saves preserve that provenance separately. Markings, filter/catalog/search preferences, recents, viewport, manual forward/backward expansion, deliberately hidden keys and individually revealed connections retain their meanings. Old marking timestamps cannot be reconstructed. Automatic-record validation uses the known source universe and actual relationships rather than old four-root/twelve-pair/48-record assumptions. Needed upstream connector records can survive as internal dependencies when their intermediate course is removed from the explicit collection.
 
-Marking changes write immediately once progress is ready. Other changes debounce by 300ms. Viewport updates save at movement end, avoiding per-frame writes. Page hide and document visibility changes flush pending work. JSON signatures suppress unchanged writes.
+If a valid explicit `?course=` query resolves to the saved exploration base, including an alias, the saved added collection and graph state restore together. A different valid explicit course opens a new tree with that explicit course, resetting full-course/individual-forward/backward expansion, hides, automatic paths and viewport while retaining preferences and marks. Invalid queries are ignored. With no explicit course query, an empty added collection stays empty, while its existing exploration base is retained. The tree URL follows the primary and removes `course` when the exploration base is empty; the query is not a serialization of the complete graph and added collection.
 
-Storage events synchronize validated snapshots across same-origin tabs. This is last-write-wins snapshot replacement, with no field-level merge. Read/write failures leave exploration usable and show `השמירה המקומית אינה זמינה כרגע`.
+Automatic records require distinct known endpoints, a continuous source-supported path, valid traversal directions and no repeated course IDs. Endpoints need not both remain explicitly added: transitive ownership retains legitimate intermediate segments. Invalid or unneeded records are rejected. Hidden relationships leave their valid paths latent. Candidate scanning is bounded by the loaded course/relationship universe, rather than a four-course or 48-record assumption; repeated directed endpoint pairs are deduplicated.
 
-The following are transient and do not survive refresh through this progress envelope.
+The envelope remains limited to 2,000,000 characters. Legacy paths retain the 5,000-character and 60-component limits and up to 1,500 entries for legacy migration. Canonical ID/relationship scan budgets derive from the loaded database with room for stale entries, rather than truncating legitimate marks at an arbitrary small fixed count. Coordinates must be finite, below 10 million in absolute value, with zoom 0.15–1.8. Malformed JSON, array envelopes, unknown versions, invalid IDs, and invalid connection strings fail safely.
 
-- Search query, dropdown selection, and mobile search-open state
-- Filter panel open state, its text queries, and expanded details
-- Hovered or held-open information panels
-- Help/database modals
-- Feedback draft and submission status
-- Layout anchors, temporary expansion focus, and animation state
+Existing-save initialization waits for course/catalog loading; catalog failure preserves usable saved catalog intent until it can be validated. Mark changes save immediately after readiness. Other changes debounce by 300ms. Movement-end updates save viewport, while page hide and visibility changes flush pending work. Unchanged signatures suppress repeated writes.
 
-Routes live in URL/history separately. Feedback origin context uses sanitized browser history state. Persistence is scoped to browser origin and profile. Localhost, each Vercel preview origin, and production have separate storage. There is no account, cloud sync, progress export/import, or cross-device recovery.
+Same-origin storage events validate and replace complete snapshots, including empty or multi-course graphs. Initial URL override is not reapplied to overwrite an incoming cross-tab snapshot. This remains last-write-wins with no per-field merge. Storage failures keep exploration usable and show `השמירה המקומית אינה זמינה כרגע`.
+
+Transient state includes search text/results and mobile-search opening, filter-panel opening/text/details, information panels, collection popovers and their search text, help/database dialogs, feedback drafts/status, tree notices, focus highlights, and layout animation anchors. Routes/history remain separate, with sanitized feedback origin context.
+
+Persistence is scoped to browser origin/profile. Localhost, each Vercel preview origin, and production have separate storage. There is no account, cloud synchronization, progress export/import, or cross-device recovery.
 
 ## 8. Navigation, footer, help, and feedback
 
@@ -234,7 +258,7 @@ Routes live in URL/history separately. Feedback origin context uses sanitized br
 
 `navigation.ts` recognizes tree, About, and feedback. About uses `#/about`. Feedback supports `/feedback`, `/feedback/`, and a hash variant. `navigateApp` uses same-origin `pushState` followed by `popstate`, and App also listens for hash changes.
 
-`vercel.json` rewrites the two feedback paths to `/index.html`. Other static hosting needs corresponding SPA handling for direct feedback visits. Return links can retain a numeric root query so navigation preserves the chosen root even if storage is unavailable.
+`vercel.json` rewrites the two feedback paths to `/index.html`. Other static hosting needs corresponding SPA handling for direct feedback visits. Return links can retain the numeric primary-course query. Full multi-pin state is retained in local progress; the query alone cannot restore all pins on a new browser/origin.
 
 ### Footer and About
 
@@ -242,13 +266,13 @@ The footer preserves this exact disclaimer.
 
 > Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.
 
-It includes `אודות / About` and `Developed by Chupchick`, plus local-save status, marked count, clear markings, and saved-progress reset on the tree page. Final padding is 5px 26px 6px on desktop and 4px 12px 5px on mobile. Disclaimer text is 11px desktop and 10px mobile. Navigation and credits remain compact.
+It includes `אודות / About` and `Developed by Chupchick`, plus local-save status, marked count, `רשימת מסומנים`, clear markings, and saved-progress reset on the tree page. Final padding is 5px 26px 6px on desktop and 4px 12px 5px on mobile. Disclaimer text is 11px desktop and 10px mobile. Navigation and credits remain compact.
 
 `AboutPage` is defined in `SiteFooter.tsx`. It has a white upper header, small brand/home link, and `חזרה למפת הקורסים ←` navigation. The body is centered on `#faf8fd` and contains the heading `אודות / About` and the exact placeholder `idk seems kinda cool ill put something here later`. The large body return button is absent. Navigation works, while the About content is unfinished.
 
 ### Help and database information
 
-The help modal explains forward/backward traversal, individual hiding/restoration, zoom/pan, strong versus concurrent relationships, logical alternatives, faculty colors, and personal markings. The database modal shows current runtime counts, SAP/catalog-only split, source-term policy, ambiguous rules, the current root source, an upstream SAP repository link, and a processed course JSON download.
+The help modal explains the shared graph, up to four pinned starting courses, forward/backward traversal, individual hiding/restoration, zoom/pan, strong versus concurrent relationships, logical alternatives, faculty colors, and personal markings. The database modal shows current runtime counts, SAP/catalog-only split, source-term policy, ambiguous rules, the current root source, an upstream SAP repository link, and a processed course JSON download.
 
 Both modals support Escape, backdrop close, X, a completion button, and keyboard focus cycling. Catalog coverage downloads are in the filter panel. The displayed SAP missing-reference statistic is 247 before catalog-only enrichment. Runtime merging resolves 48 of those IDs, leaving 199, as measured in section 9.
 
@@ -268,7 +292,7 @@ Automated feedback tests intercept requests and simulate responses. Live Formspr
 
 ### Analytics
 
-`main.tsx` mounts `@vercel/analytics` alongside the app. The integration exists in code. Event collection and dashboard configuration were not independently confirmed.
+`main.tsx` mounts `@vercel/analytics` alongside the app. `analytics.ts` removes all query parameters/fragments and normalizes page identity before events are sent. The 18 November security assessment tested this with a same-origin SDK stub under enforced CSP. Actual collection and dashboard/account configuration remain unverified.
 
 
 ## 9. Database inventory and source coverage
@@ -293,7 +317,7 @@ Automated feedback tests intercept requests and simulate responses. Live Formspr
 
 The 557 catalog-only records have generic names, no credit values, `catalogOnly: true`, `requirements: null`, and `requirementsStatus: 'unknown'`. They retain source PDF links and explicit degree membership. Build logic provides a CS ownership association for 95 references supported by CS offering metadata. The other 462 use `שיוך פקולטה לא זמין במקור הקורסים`.
 
-An absent source rule is represented as `none`. Ambiguous rules retain raw text and produce no inferred arrows. Unknown catalog-only records likewise produce no invented prerequisites. Missing references outside the index can still appear as terminal backward cards, but are unavailable as indexed search/root choices.
+An absent source rule is represented as `none`. Ambiguous rules retain raw text and produce no inferred arrows. Unknown catalog-only records likewise produce no invented prerequisites. Missing references outside the full-record index still have fallback cards rather than invented metadata. They are not indexed search results; known referenced IDs can nevertheless remain marked and be pinned or opened from the marked list or a validated course query.
 
 There are 5,225 raw prerequisite AST leaf occurrences. Deduplicating repeated course/relation leaves within each course, as graph indexing does, yields 4,193 connection tuples, comprising 4,184 strong and 9 concurrent tuples. The dataset's `relationshipCount` is the raw occurrence count. These measures have different denominators.
 
@@ -485,13 +509,13 @@ Valid alternative courses remain eligible. Some graduation grouping/classificati
 
 ### Runtime flow
 
-`main.tsx` mounts React StrictMode, a `ReactFlowProvider`, `App`, and Vercel Analytics, then imports React Flow CSS, bundled fonts, and the global stylesheet.
+`main.tsx` mounts React StrictMode, a `ReactFlowProvider`, `App`, and Vercel Analytics with its redaction callback, then imports React Flow CSS, bundled fonts, and the global stylesheet.
 
-`App.tsx` fetches `data/courses.json` and `data/catalogs.json` relative to Vite's base URL, using separate requests and abort cleanup. It validates basic payload shape, merges catalog-only records, derives indexes and filter options, restores validated progress, builds visible graph occurrences, runs Dagre, and supplies callbacks to cards and edges.
+`App.tsx` fetches `data/courses.json` and `data/catalogs.json` relative to Vite's base URL, using separate requests and abort cleanup. Bounded runtime validation checks the payloads before use. App merges catalog-only records, derives indexes/filters, restores schema-5 progress, builds the canonical visible graph, invokes component-aware layout, and supplies callbacks to cards and edges.
 
 Course-load failure presents an error/reload state. Catalog-load failure is reported separately and avoids destroying a usable saved catalog selection. Filter and feedback components are lazy-loaded. This is a client-rendered static application with external Formspree submission. There is no custom application server, account system, or application database service.
 
-React state holds root, expansion/hiding, filters, markings, viewport-related state, and transient panels. Memoized derived indexes and visible graph output feed React Flow. CSS is organized in one `src/styles.css` file, including successive feature overrides. Final override order matters for faculty card colors, compact footer, and mobile search.
+`exploration.ts` centralizes pin, manual expansion, hidden-connection, automatic ownership, and reset transitions in an atomic reducer. App separately holds filters, markings, viewport, and transient UI state. Memoized source indexes, canonical reachability, and topology-keyed geometry feed React Flow. CSS is organized in one `src/styles.css` file, including successive feature overrides. Final override order matters for faculty card colors, compact footer, and mobile search.
 
 ### Dependencies
 
@@ -517,17 +541,24 @@ The following versions come from the inspected lockfile, alongside their package
 
 | File or directory | Responsibility |
 |---|---|
-| `src/App.tsx` | Data loading, graph state/orchestration, Dagre, viewport, toolbar/sidebar, help/data modals |
+| `src/App.tsx` | Data loading, reducer integration, progress, layout/viewport, toolbar/sidebar, help/data modals |
 | `src/main.tsx` | Entry point, providers, fonts, CSS, Analytics |
 | `src/types.ts` | Course, prerequisite, catalog, group, and completion-rule types |
 | `src/components/CourseNode.tsx` | Cards, prerequisite panels, marking, backward controls, restore list |
 | `src/components/ForwardBranchEdge.tsx` | Forward edge drawing and individual minus |
-| `src/components/CourseSearch.tsx` | Shared search ranking and combobox interactions |
+| `src/components/CourseSearch.tsx` | Shared ranking/combobox, sole-root selection, independent pin controls |
+| `src/components/CourseCollections.tsx` | Desktop/mobile pin manager and complete marked-course popover |
 | `src/components/MobileCourseSearch.tsx` | Mobile-only toggle, overlay, viewport handling |
 | `src/components/FilterPanel.tsx` | Faculty/catalog drawer, rules, course browser, source links |
 | `src/components/SiteFooter.tsx` | Footer and About page |
 | `src/components/FeedbackPage.tsx` | Hebrew form and submission UI |
-| `src/lib/graph.ts` | Indexes, requirement traversal, path IDs, reachability, hidden connections |
+| `src/lib/graph.ts` | Canonical shared graph, indexes, actual relationships, cycle/reachability and emergency budgets |
+| `src/lib/exploration.ts` | Atomic pin/manual/automatic/hide/reset state transitions |
+| `src/lib/connecting-paths.ts` | Deterministic directed connecting-path planning and automatic reveal thresholds |
+| `src/lib/layout.ts` | Dagre component alignment and dense/failure layout fallback |
+| `src/lib/data-validation.ts` | Stream-size, nesting, shape and URL checks for runtime JSON |
+| `src/lib/urls.ts` | Trusted source URL and numeric course-query policies |
+| `src/lib/analytics.ts` | Analytics page-identity redaction |
 | `src/lib/filters.ts` | Faculty normalization, catalog roles and eligibility |
 | `src/lib/faculty-colors.ts` | Stable ownership color selection |
 | `src/data/faculty-palette.json` | Twelve faculty accents |
@@ -547,11 +578,13 @@ The following versions come from the inspected lockfile, alongside their package
 | `scripts/curriculum-audit/` | Independent source comparison implementation and its tests |
 | `scripts/curriculum-repairs/` | Repair reporting and independent source regressions |
 | `audits/` | Historical academic findings, evidence, manual reviews |
-| `tests/` | Node unit/data tests, Playwright specs, layout baselines |
+| `tests/` | Unit/data/security tests, canonical graph/pinning/exploration/layout tests, browser specs and layout baselines |
+| `tests/serve-production.mjs` | Production-build browser fixture with configured security headers |
+| `SECURITY_AUDIT.md` | Preserved 18 November threat review, findings, evidence, historical checks and owner actions |
 | `docs/`, `README.md` | Existing focused workflow and feature documentation |
 | `vite.config.ts` | Build identifiers, React plugin, vendor chunk |
 | `playwright.config.ts` | Chromium settings, local server, optional external test URL |
-| `vercel.json` | Direct feedback-route rewrites |
+| `vercel.json` | Direct feedback rewrites and application security headers/CSP |
 | `package.json`, `package-lock.json`, `tsconfig*.json` | Commands, dependency lock, compilation settings |
 
 ### Local development and build
@@ -574,11 +607,19 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-`npm run build` runs `tsc -b && vite build` and outputs `dist/`. `npm run preview` serves that build. No lint script is configured. Playwright normally starts the dev server itself unless `PLAYWRIGHT_BASE_URL` is supplied. `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` can select a local browser.
+`npm run build` runs `tsc -b && vite build` and outputs `dist/`. `npm run preview` serves that build. No lint script is configured. Playwright normally builds and starts the production fixture at port 4173 unless `PLAYWRIGHT_BASE_URL` is supplied; it does not reuse an arbitrary existing server. `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` can select a local browser.
 
-Vercel can build the repository as a Vite static project. The build defines `__APP_VERSION__` from package metadata and `__BUILD_ID__` from a valid hexadecimal `VERCEL_GIT_COMMIT_SHA`, if supplied. Without that environment value, build SHA context is unavailable. Vendor dependencies share a vendor chunk. Existing rewrites enable direct feedback visits.
+Vercel can build the repository as a Vite static project. The build defines `__APP_VERSION__` from package metadata and `__BUILD_ID__` from a valid hexadecimal `VERCEL_GIT_COMMIT_SHA`, if supplied. Without that environment value, build SHA context is unavailable. Vendor dependencies share a vendor chunk. Existing rewrites enable direct feedback visits. Repository security headers include a self-hosted-script CSP with Formspree connect/form permission, MIME-sniffing protection, frame denial, strict-origin-when-cross-origin referrers, and a restricted Permissions-Policy.
 
 Actual Vercel project linkage, branch-to-preview settings, deployed domain, latest production build, and environment/dashboard configuration were not queried. No branch, commit, deployment, or push was performed during this documentation task.
+
+### Preserved security hardening and assessment boundary
+
+The 18 November changes remain in place: bounded 16 MiB streamed dataset loading with cancellation and strict validation, safe source URLs and route/query handling, feedback-context sanitization, Analytics redaction, configured security headers, and security regression fixtures. The graph work changes the former path-occurrence denial-of-service mitigation to canonical visited-ID traversal with 10,000-node/50,000-edge emergency budgets and dense layout fallback, as described in section 3.
+
+`SECURITY_AUDIT.md` remains the historical assessment rather than being relabeled as a new audit of this graph update. Its local success did not verify deployment/account settings. Its recorded production-header observations and dependency-advisory conclusions belong to 18 November; they were not newly queried here.
+
+The PDF audit environment retains patched `pdfplumber==0.11.9` and `pdfminer.six==20251230` plus a stale-engine refusal. The security pass reproduced all 380 baseline page records with matching text/geometry, retaining seven insufficient-text/manual-review statuses. Historical audit locks/reports keep their original engine versions and hashes. Extraction compatibility supplies no new academic verification credit.
 
 ### Data-maintenance commands
 
@@ -599,53 +640,55 @@ These data generators were inspected and left unexecuted during this task. Extra
 
 | Feature | Status | Current behavior and relevant files |
 |---|---|---|
-| ID/name/legacy search | Implemented | Ranked, normalized, keyboard-accessible search in `CourseSearch.tsx` |
-| Single root selection | Implemented | Default, URL, search, recents, catalog browser, and panels in `App.tsx` |
-| Multiple pinned starting courses | Not Implemented | One `rootId`. Panel `pinned` state holds information open. |
-| Recent starting courses | Implemented | Up to four historical shortcuts, saved with progress |
-| Forward dependent expansion | Implemented | Per-occurrence +/− and one-layer action in `graph.ts` and `App.tsx` |
-| Backward prerequisite exploration | Implemented | Per-parent selections, green badges, filter bypass |
-| Individual-arrow collapsing | Implemented | Stable connection hiding, per-parent restore, persisted state |
-| Shared-node graph deduplication | Not Implemented | Shared course IDs render separate path occurrences |
-| Cycle and missing-record handling | Implemented | Terminal labeled cards and bounded traversal |
-| Full prerequisite-expression display | Implemented | Nested AND/OR and relation labels in `CourseNode.tsx` |
-| Zoom, pan, fit, automatic layout | Implemented | React Flow and Dagre in `App.tsx` |
-| Local progress saving | Implemented | Versioned validation, migration, debounce, lifecycle flush |
-| Same-origin cross-tab sync | Implemented | Validated last-write-wins snapshots |
-| Faculty color coding | Implemented | Twelve accents and neutral fallback |
-| Red course markings | Implemented | Canonical-ID marking across occurrences |
-| Marked-course list | Not Implemented | Footer count and clear action only |
-| Faculty filters | Implemented | Source-based normalized ownership in `filters.ts` |
+| ID/name/legacy search | Implemented | Ranked, normalized, keyboard-accessible search; separate pin button |
+| New-tree course selection | Implemented | Ordinary selection replaces the current base/additions and resets exploration state |
+| Add Course to Tree | Implemented | Unrestricted explicit additions, plus/check actions, compact searchable footer list, source-supported reconnect/focus |
+| Intentional empty graph | Implemented | Last unpin stays empty across refresh; fresh/full reset restores default |
+| Recent starting courses | Implemented | Four saved historical shortcuts, separate from the added collection |
+| Canonical shared-node graph | Implemented | One card per course ID, real merged incoming/outgoing relationships |
+| Forward and backward exploration | Implemented | Canonical manual state; explicit backward reveal bypasses filters |
+| Individual-arrow collapse/restore | Implemented | Canonical relationship hides, shared reachability and per-parent restore |
+| Related-pin path planning | Implemented | Short real directed paths, visible-course preference, 8 new intermediate/12 step automatic thresholds |
+| Automatic/manual ownership | Implemented | Endpoint-owned connection steps separate from manual expansion and hide state |
+| Cycle and missing-record handling | Implemented | Canonical cycle warnings with finite traversal; metadata fallbacks |
+| Full prerequisite expression | Implemented | Nested AND/OR, alternatives and relation labels preserved |
+| Zoom, pan, fit, layout | Implemented | React Flow, component-aware Dagre and dense/failure fallback |
+| Local progress saving | Implemented | Schema 5, defensive v1–v4 migration, immediate marks and debounced other state |
+| Same-origin cross-tab sync | Implemented | Validated last-write-wins snapshots, including empty/multi-pin state |
+| Faculty colors and red markings | Implemented | Ownership palette independent of filters, addition status, and marking |
+| Marked-course list | Implemented | Complete newest-first list, search, pin/sole-root/unmark/focus actions |
+| Faculty filters | Implemented | Source-based normalized ownership |
 | Degree catalog filter mechanics | Implemented | Role/rule eligibility and searchable course browser |
-| Full curriculum source coverage | Partial | 141 baseline paths, with partial/inventory-only content |
-| Combined/double-degree catalogs | Partial | Both categories exist, with incomplete source coverage |
+| Full curriculum source coverage | Partial | 141 baseline paths with partial/inventory-only content |
+| Combined/double-degree catalogs | Partial | Both categories exist with incomplete source coverage |
 | Separate catalog years | Implemented | Distinct baseline and next-year editions |
 | Complete next-year path coverage | Partial | 20 editions in the 2026–2027 subset |
-| Graduation eligibility evaluation | Not Implemented | Completion rules are displayed, markings are not evaluated |
-| Collapsible mobile search | Implemented | Mobile-only overlay using current search |
-| Physical-device keyboard behavior | Unverified | Visual viewport logic and emulated tests exist |
-| About page | Partial | Functional navigation, placeholder body content |
-| Footer disclaimer and developer credits | Implemented | Exact text retained in `SiteFooter.tsx` |
-| Help and database modals/downloads | Implemented | Current source policy, counts, links, coverage |
-| Feedback form UI and submission handling | Implemented | Validated Formspree client integration |
-| Live feedback delivery and notifications | Unverified | Depends on Formspree account configuration |
-| Analytics collection/dashboard | Unverified | Analytics component mounted, external collection unchecked |
+| Graduation eligibility evaluation | Not Implemented | Completion rules are displayed; markings are personal |
+| Collapsible mobile search | Implemented | Existing overlay preserved; add/remove does not replace ordinary selection |
+| Physical-device keyboard behavior | Unverified | Viewport-aware overlay/popovers and emulated tests, no physical-device result |
+| About page | Partial | Functional navigation and placeholder body |
+| Footer disclaimer and developer credits | Implemented | Exact wording retained with compact collection controls |
+| Help and database modals/downloads | Implemented | Updated graph guidance, source policy and existing downloads |
+| Feedback UI and submission handling | Implemented | Validated Formspree client; limited primary-course context |
+| Live feedback/notifications | Unverified | Provider/account configuration and mail delivery |
+| Runtime validation and security headers | Implemented | Local source/fixtures; deployed enforcement needs separate confirmation |
+| Analytics dashboard | Unverified | Redaction integration retained; external collection unchecked |
 | Account/cloud/cross-device progress | Not Implemented | Browser-local storage only |
-| Production deployment state | Unverified | Repository build configuration exists |
+| Publication of the major graph update | Unverified | Current work is not committed/deployed by this task |
 
 ## 13. Known gaps, risks, and unresolved information
 
 ### Confirmed limitations and incomplete content
 
-The fresh application test suites produced no failing UI regression. The following limitations are directly supported by data, source code, or recorded source-review evidence.
+The limitations below follow from data, source, or recorded evidence. Current unit/build and browser results are recorded in section 14.
 
 - **Course metadata gaps** include 557 generic catalog references and 199 still-missing prerequisite IDs. Thirty-three detailed records have unparsed expressions. Those areas cannot supply fully verified names, credits, and prerequisites.
 - **Catalog completeness** remains unfinished. The 21 inventory-only baseline paths expose program metadata with no imported eligible set. All other baseline paths are partial. No edition has full mandatory/elective/visual completeness flags.
 - **About content** remains the explicit placeholder quoted above.
-- **Shared courses appear repeatedly** through different paths. This preserves independent interactions and can increase visual density.
+- **Dense shared graphs remain visually complex** despite canonical deduplication. The fallback preserves all relationships, which can produce many crossing arrows.
 - **Historical course snapshots and degree editions differ in time**. Catalog selection narrows degree eligibility without replacing every course's prerequisite record with a same-year record.
 - **Saved progress has browser/origin scope**, last-write-wins cross-tab behavior, and validation caps. Browser data removal or blocked storage prevents durable recovery.
-- **Only one root and no marked-course list** are present. These are absent capabilities, with no implied broken control.
+- **Legacy occurrence choices merge** when migrating to one canonical card. Conflicting old expansion/hide preferences cannot remain independent per occurrence; the conservative merge is documented in section 7. Old marking timestamps are unavailable.
 
 ### Existing academic questions retained from repair triage
 
@@ -663,10 +706,10 @@ The relevant evidence and decision ledger are in `audits/curriculum-repairs/REPO
 
 | Area | Evidence and boundary |
 |---|---|
-| Large graph performance | Path-specific duplication can multiply occurrences. Dagre and graph construction run in the browser. No large-graph stress benchmark or hard live node cap was found. |
+| Large graph performance | Canonical identity removes path multiplication. Emergency budgets and dense fallback bound major work, but very large maps still render in the browser; no physical slow-device benchmark is established. |
 | Startup/data size | Two JSON payloads total about 3.88 MB uncompressed, in addition to application assets. Parsing and indexing occur client-side. No slow-device benchmark was run. |
 | Mobile keyboards | Viewport-resize simulation passed. Native keyboard behavior on physical iOS/Android devices remains unchecked. |
-| Browser compatibility | Current tests used Chromium. Firefox, WebKit, and a full assistive-technology audit were not run. |
+| Browser compatibility | The current added-course refactor exercised 112 Chromium scenarios and targeted focus/pointer follow-ups, with precise results recorded in section 14. Firefox, WebKit, and a full assistive-technology audit remain unchecked. |
 | External forms | Tests mock submissions. Real service rate limits, spam rules, recipient settings, and mail delivery remain unchecked. |
 | Deployed hosting | Local production build passed. Direct routes, settings, and behavior on the actual Vercel deployment were not exercised. |
 | Analytics | Integration code is present. Actual collection and retention/account settings are unverified. |
@@ -676,55 +719,109 @@ The relevant evidence and decision ledger are in `audits/curriculum-repairs/REPO
 
 These are limitations or risks with stated evidence. No new product defect is asserted solely from a hypothetical scenario.
 
-## 14. Fresh verification results
+## 14. Verification results and remaining checks
 
-All checks below ran during preparation of this document. Application code and datasets were unchanged.
+### Current Add Course to Tree refactor — 20 November 2026
 
-| Check | Result |
+Implemented one unrestricted explicit added-course collection, a separately preserved exploration base, footer list, consistent plus/check controls and schema-5 migration. No dependencies or academic data were changed. TypeScript/build and **199 unit/data tests** passed, including 500 additions, more than 48 persisted connector records, source-validated auxiliary anchors, shared-path removal, idempotent additions and genuine v3/v4 migration. A production Chromium check added 20 courses through the real search UI and used its scroll/search/removal/persistence controls; the measured 20-course interaction sequence took about 14 seconds including UI animation and browser-test overhead. This is a functional check, not a physical slow-device benchmark.
+
+The real introduction → Algorithms 1 → Computability example passed: removing Algorithms 1 retained its required card/path without changing its layout position or red markings, including after refresh. Removing the remaining dependent then removed unneeded connector structure while preserving base exploration. Verification used the byte-matched Windows QA build with production headers/rewrites. The complete 112-case browser run initially passed 111 cases and exposed a repeated branch-menu keyboard focus failure. Its cause was node z-order updates replacing the focused element; layering is now CSS-based, and custom card pointer events are explicitly retained with React Flow selection/dragging disabled. After correction, all 40 affected graph/collection/explorer scenarios have passing targeted coverage under the source 30/7-second defaults: the last broad targeted run passed 39, and its remaining mobile test was corrected to dismiss an overlapping course panel before opening footer controls; the full seven-case collection suite then passed. The branch scenario passed five consecutive repeats and the mobile menu passed three consecutive repeats. No known test failures remain; the entire 112-case suite was not repeated after these localized focus fixes. This distinction is retained rather than claiming one final all-green 112-case invocation.
+
+Final checks: **199 unit/data tests passed**, **TypeScript and production build passed**, and `git diff --check` passed. No lint script is configured. A source/QA byte comparison matched **67 relevant files**. Faculty filtering logic, faculty color code/palette and the three public academic JSON fingerprints are unchanged. Visual checks of the 21-entry menu at 1440px, 390px and 320px found viewport-contained, scrollable lists and no horizontal document overflow. Physical mobile devices and Firefox/WebKit remain untested. No commit, push or deployment was performed.
+
+### Prior partial-expansion follow-up — 19 November 2026
+
+The follow-up reuses the branch-restoration menu, adds independently persisted manual forward connections, and migrates progress to schema 4. It changes no academic data or filter eligibility rules. **187 unit/data tests** and TypeScript/production build passed. The final complete Chromium regression run passed **109/109 browser tests**, zero failures/skips, in **5.8 minutes**, including all six new cases at 1440px, 390px and 320px. The production fixture enforced the actual security headers and feedback rewrite; this host used the existing QA-only 90/25-second timing allowances. The same production build passed TypeScript and Vite checks. A byte comparison matched all **66 relevant source/QA files**; the three academic runtime-data fingerprints remain unchanged.
+
+Eleven new model tests cover partial states, individual/all direct reveals, unopened versus intentionally hidden connections, shared descendants, distinct strong/concurrent counts, faculty/catalog intersections and changing eligibility, ownership cleanup, and schema-3/schema-4 validation/migration. Six browser cases cover desktop/mobile partial expansion, deliberate hides plus unopened branches across refresh, collapse/reopen, shared-child reuse, red markings, and intersection filtering. The existing all-branches-hidden regression now expects the requested **+** state while preserving its branch-restoration hint.
+
+The actual `02340114` → `02360343` pin example was also exercised in the production browser: Algorithms 1 (`02340247`) listed 32 remaining connections; revealing `02340247->00460213:strong` reduced the count to 31, retained both pins, survived refresh, and produced no browser runtime error. These figures describe the current runtime dataset, not a fresh academic source audit.
+
+### Prior major graph update — 19 November 2026
+
+| Check | Current result |
 |---|---|
-| Node unit/data tests, `tests/*.test.ts` and `scripts/course-data.test.mjs` | **81 passed**, zero failed or skipped |
+| Node unit/data suite | **176 passed**, zero failures/skips in the final rerun |
 | TypeScript project build, `tsc -b` | **Passed** |
 | Vite production build | **Passed** |
-| Playwright browser regressions | **74 passed**, approximately 5.8 minutes |
-| Independent audit mechanism tests | **34 passed** |
+| Browser suite for the final major graph update | **103 passed**, zero failures/skips in the final full run |
+| Normal Playwright build/server entry point and default timing | **2 focused tests passed**, covering backward/forward reuse and production headers |
+| Independent audit/PDF mechanism tests | **36 passed** in the existing isolated patched PDF environment |
 | Independent repair/source regressions | **3 passed** |
-| QA/source byte comparison | **50 relevant source, test, config, and runtime data files matched** |
+| Academic dataset regeneration or full source re-audit | **Not performed**; existing source inventory, corrections and fingerprints retained |
 
-The Node tests cover graph logic, filtering, baseline catalogs, course parsing/corrections, faculty colors, progress validation/migration, branch visibility, and feedback helpers.
+The unit suite now covers canonical multi-root reachability, shared diamonds/multiple parents, direction and strong/concurrent deduplication, cycles, missing records, manual versus automatic ownership, per-connection hides/restoration, endpoint unpinning and four-pin limits. Connecting-path tests cover shortest directed paths, visible-path preference, hidden/filter restrictions, long-path fallback and threshold boundaries. Reducer tests cover atomic rapid actions and preservation of unrelated state.
 
-The 74 browser tests comprise 12 branch/UI tests, 2 catalog-layout tests, 7 explorer tests, 17 feedback tests, 10 filter tests, 11 mobile-search tests, and 15 progress tests. They exercise shared occurrences, independent restoration, original course-level collapse, backward controls, red markings, faculty/catalog selection, malformed/stale saves, cross-tab updates, compact footer, About navigation, routing, mocked submission success/failure, mobile viewport handling, and desktop geometry.
+`tests/layout.test.ts` adds deterministic disconnected-component alignment and pin order, related-pin prerequisite ordering, nonoverlapping cards, parallel relations, cycles, a 150-course chain, empty input, and dense fallback with every node/edge retained. Progress tests cover v1/v2 replay-based migration, canonical invalid/stale records, continuous real automatic paths, matching/different explicit URL behavior, deliberate empty pins, and marking lists larger than 6,000 valid IDs.
 
-### Verification environment and allowances
+Browser regressions have been adapted to canonical course IDs and schema 3. New `multi-root.spec.ts` and `collections.spec.ts` cover the new interactions alongside existing branch, search, filter, progress, feedback, layout, mobile and security specs. These earlier results predate schema 4; the focused follow-up and its full-run results are recorded above.
 
-Because the workspace is a WSL UNC path and the normal command runner had connectivity/sandbox setup issues, the production build and browser checks ran against a byte-matched Windows QA copy outside the repository. Node was 24.21.0, Chrome was 157.0.8103.79, and Python was 3.14. A temporary local static server served the generated production build with feedback-route fallback.
+### Prior major-update browser verification — 19 November 2026
 
-The source Playwright configuration uses one worker, Chromium, 1440×1000 default viewport, 30-second test timeout, and 7-second expectation timeout. This environment used an external QA-only wrapper with 90-second tests and 25-second expectations to accommodate slow local startup. Individual specs additionally emulate narrow viewports. This was a functional regression run with relaxed timing limits. The original timeout budget was not freshly validated.
+The prior major-update complete Chromium run passed **103/103 tests**, with zero failures/skips, in 7.5 minutes. A separate run through the normal source Playwright entry point built and started the production fixture itself and passed both selected checks in 25.9 seconds using the source 30/7-second defaults. It served the generated production build on loopback with the actual `vercel.json` headers and feedback rewrite through `tests/serve-production.mjs`. One worker and QA-only 90-second test / 25-second expectation allowances accommodated this host; the source configuration defaults remain unchanged.
 
-Formspree requests were mocked/intercepted. No real feedback submission was sent by this verification. The independent Python tests exercised existing mechanism/evidence regressions, without a fresh network fetch or whole-catalog source re-audit.
+Verified interactions include the original backward-to-forward duplication scenario; shared diamonds and multiple parents; four-pin limits; existing-node pinning/focus; short ancestor/descendant connectors without unrelated sibling expansion; hidden-connection opt-in; filtered intermediate paths and unfiltered explicit backward exploration; pin ownership cleanup; single-edge/course collapse and independent restore; deliberate zero-pin refresh; matching/different primary queries; migration and cross-tab state; global marked lists; red-mark independence; and the preserved search, catalog/faculty, footer/About, feedback and security flows.
 
-Build output included approximately 51.07 kB CSS, 65.69 kB main JavaScript, and 478.60 kB vendor JavaScript before gzip, with lazy feedback and filter chunks. Runtime JSON is fetched separately. These sizes describe this build and can change with dependency or source updates.
+The large-graph browser fixture rendered all **101 distinct nodes and 2,550 genuine relationships** without a truncation notice, then collapsed to its marked root without losing the marking. A separate unit fixture preserves the larger shared graph; these are bounded synthetic checks, not a physical slow-phone benchmark.
 
-Normal rerun commands are in section 11. Independent offline test commands are below.
+Initial verification exposed and fixed two focused interaction issues: selecting a search result after its pin button held focus could reopen the dropdown, and removing a focused collection row could strand keyboard focus and Escape handling. Regression checks now cover both. Other old test expectations were updated for canonical identities, the authorized pin row/footer dimensions, complete rather than occurrence-truncated graphs, changed pin-button labels, and debounced storage updates. The final full run includes those corrections.
+
+Visual inspection covered the 1440px desktop shared graph, the four-pin manager at 320px, and the upward marked-course menu at 390px. Geometry checks at all three widths found no horizontal document overflow, no duplicate node IDs, and viewport-contained collection menus. The existing keyboard-sized `visualViewport` simulation, short portrait/landscape layouts, and 640/641px breakpoint checks passed. Physical mobile keyboards/touch devices were not exercised.
+
+A SHA-256 comparison matched **64 relevant source/QA files** across `src/`, `tests/`, `public/`, package/lockfile and runtime/build/test configuration. All three public academic-data fingerprints in section 9 remain unchanged. No curriculum regeneration, live feedback submission, deployment, commit, or push was part of this update.
+
+### Historical verification retained for context
+
+The original 18 November project-state pass recorded **81 unit/data tests**, **74 browser tests**, **34 independent audit mechanism tests**, and **3 repair/source regressions**, with TypeScript/build passing and 50 relevant QA/source files matched. Those counts predate security hardening and this graph update.
+
+The separate 18 November security assessment in `SECURITY_AUDIT.md` recorded the following; these are historical results, not a fresh security/deployment certification of the current update.
+
+| Historical check | Recorded result |
+|---|---|
+| Node unit/data suite | **114 passed**, including 33 security tests |
+| Chromium suite under enforced headers | **88 passed**, including 14 security tests |
+| Normal production-fixture entry point | **2 focused header/CSP tests passed** with source timeout defaults |
+| TypeScript and Vite production build | **Passed** |
+| Audit mechanism/PDF security tests | **36 passed**, including 2 PDF security tests |
+| Independent repair/source regressions | **3 passed** |
+| Patched baseline PDF compatibility | **380 matching page records**, seven manual-review statuses retained |
+| Full npm audit | **4 development High entries** from one reviewed withdrawn advisory/dependency propagation, not suppressed |
+| Production npm audit | **0 advisories** at that assessment date |
+| Updated isolated PDF environment | **0 returned advisories** across eight resolved packages |
+| Lockfile install / QA comparison | **Passed**, 109 packages / 57 matching relevant files |
+| Production artifact inspection | 29 files; no prohibited source/config/secrets or source maps found |
+
+Security headers were locally enforced and tested in that assessment. Its read-only public-site observations still required deployment/header and provider-account follow-up at the time. This update has not rechecked live headers, dependency feeds, provider dashboards, notification recipients, or production state. The old 2,000-occurrence/60-depth graph limits in that report have been replaced by the canonical safeguards described above; the historical report is preserved as evidence of the earlier implementation.
+
+### Environment, scope, and reruns
+
+The WSL UNC workspace required a byte-matched Windows QA copy for executable checks because of command-runner connectivity/setup constraints. The established environment uses Node 24.21.0 and Chromium/Chrome 157.0.8103.79. Current browser details are recorded above. The source Playwright defaults are one worker, a 1440×1000 viewport, 30-second test timeout and 7-second expectation timeout. Its normal entry point builds and serves production output with configured security headers at port 4173; an explicit external URL can select an existing fixture. The current complete browser run and historical full runs used QA-only 90/25-second timing allowances.
+
+Feedback tests intercept Formspree requests; no test result proves mail delivery. Python mechanism/evidence regressions and parser compatibility do not constitute a fresh exhaustive academic comparison. The current Python rerun used the existing isolated `security-pdf-venv`, rather than the global Python lacking pdfplumber. Physical iOS/Android keyboards, Firefox/WebKit, production deployment and external service dashboards remain outside the recorded verification.
+
+Normal application commands are in section 11. Independent offline test commands remain:
 
 ```sh
 python3 -B -m unittest discover -s scripts/curriculum-audit/tests -v
 python3 -B -m unittest discover -s scripts/curriculum-repairs/tests -v
 ```
 
-The full source-audit workflow is documented in `scripts/curriculum-audit/README.md`. Its actual academic accuracy gate may fail on acknowledged unresolved or deliberately retained classification discrepancies. Passing mechanism tests supplies no extra source-verification credit.
+The full academic workflow is documented in `scripts/curriculum-audit/README.md`. Its accuracy gate can fail on acknowledged unresolved or deliberately retained classifications. Passing mechanism tests supplies no extra source-verification credit.
 
 ## 15. Constraints future changes should preserve
 
-- Preserve the single-root model unless a new feature explicitly changes it. Interpret existing panel pinning as information-panel state.
+- Preserve one unrestricted ordered canonical added collection, its separately stored exploration base, legacy intentional empty saves, ordinary new-tree selection, and held-open information panels as distinct concepts.
+- Keep one visible node per course ID and real edge identity by prerequisite, dependent, and relationship type. Preserve shared reachability, cycle safety, and all valid course records.
 - Preserve canonical course IDs, legacy aliases, source terms, and the distinction between unknown, unparsed, and explicitly empty prerequisite rules.
-- Preserve nested AND/OR expressions and strong/concurrent distinctions. Keep curriculum membership separate from prerequisite edges.
-- Preserve path-specific expansion and stable hidden-connection keys. Shared course markings must continue to use canonical IDs.
-- Preserve independent branch restoration, latent descendant state, filter bypass for backward exploration, and root anchor visibility.
-- Keep catalog years and evidence separate. Preserve valid alternatives and recorded incomplete coverage.
-- Preserve faculty ownership colors independently of red personal markings and active filters.
-- Maintain progress migration/validation and origin-scoped storage behavior. New persistence fields require compatibility handling.
-- Preserve mobile-only collapsible search and the existing desktop search experience, including RTL and keyboard interactions.
-- Keep footer wording, current navigation, feedback context sanitization, and source links intact unless explicitly requested.
-- Treat generated datasets, original audit snapshots, and source evidence as distinct artifacts. Source changes require new verification with recorded input hashes.
+- Preserve nested AND/OR expressions and strong/concurrent distinctions. Curriculum membership must not create prerequisite edges.
+- Keep manual expansion, automatic owned path reasons, and per-connection hiding separate. Removing added status must preserve transitive connector reasons still required by remaining additions or the exploration base, and keep independent manual intent.
+- Preserve independent restoration, latent expansion, explicit backward filter bypass, and the selected base and all explicitly added anchors. Automatic paths must respect user-hidden edges and intermediate filters unless the user explicitly restores a hidden connection.
+- Preserve the component-aware Dagre/fallback geometry, viewport anchoring, unique-node counts, and emergency graph budgets with honest truncation feedback.
+- Keep catalog years/evidence separate, valid alternatives available, recorded incomplete coverage intact, and academic corrections tied to authoritative evidence.
+- Preserve ownership colors independently of red marks, pin indicators and focus highlights; keep the complete marked-course list independent of visibility and filters.
+- Maintain schema-5 validation, v1–v4 migration, insertion order of new markings, deliberate empty saves, matching-primary URL restore, and origin-scoped last-write-wins synchronization. New fields require compatibility handling.
+- Preserve mobile-only collapsible search, compact mobile pin controls, desktop search behavior, RTL, keyboard accessibility and viewport-clamped popovers.
+- Keep footer wording, navigation, feedback context sanitization, Analytics redaction, trusted source URLs, bounded dataset loading, and configured security headers intact unless explicitly requested.
+- Preserve historical security/academic reports and input locks. Generated datasets, extraction compatibility, mechanism tests, source verification and deployed behavior are distinct evidence categories.
 
-This snapshot can support implementation discussions. Any future academic correction still requires authoritative evidence for the affected course, catalog year, and requirement.
+This snapshot supports implementation discussions. Any academic correction still requires authoritative evidence for the affected course, catalog year, and requirement.

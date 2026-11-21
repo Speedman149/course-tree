@@ -83,3 +83,72 @@ button.backward-badge{padding:2px 5px;gap:3px;line-height:1.5}button.backward-ba
 }
 @keyframes mobile-search-open{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.mobile-search-panel{animation:none}}
+
+
+/* Canonical starting courses and the global marked-course menu. */
+.search-result-add{width:29px;height:29px;flex-shrink:0;padding:0;border:1px solid transparent;border-radius:6px;color:#9b88b5;background:transparent}
+.search-result-add:hover,.search-result-add:focus-visible{background:#eee7f8;color:#76549c;border-color:#ddcfeb}
+.search-result-add.is-added{background:#ede6f8;color:#74539a;border-color:#d9cae9}
+.collection-control{display:inline-flex;align-items:center;min-width:0}
+.course-collection-popover{position:fixed;z-index:180;display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#fff;border:1px solid #e2d8ed;border-radius:10px;box-shadow:0 10px 38px #39244a29;color:#685775;animation:collection-appear .13s ease-out}
+.collection-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;padding:10px 12px 8px;border-bottom:1px solid #eee7f4}
+.collection-heading>strong{font-size:12px;font-weight:500}
+.collection-heading>button{width:27px;height:27px;padding:0;color:#9a85ad;border-radius:5px}
+.collection-heading>button:hover{background:#f2edf8}
+.marked-credit-summary{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 6px;flex-shrink:0;padding:7px 12px;border-bottom:1px solid #eee7f4;background:#fcfafe;font-size:12px;line-height:1.6}
+.marked-credit-summary strong{font-weight:600}.marked-credit-summary small{font-size:10px;font-weight:400;color:#867292}
+.collection-rows{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px 8px 6px}
+.collection-row{display:flex;align-items:center;gap:7px;padding:8px 2px;border-bottom:1px solid #f0eaf5}
+.collection-row:last-child{border-bottom:0}
+.collection-course-main{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-width:0;flex:1;padding:2px 0;text-align:right;color:#74617f}
+.collection-course-main>span:not(.collection-mark){display:flex;flex-direction:column;gap:2px;min-width:0}
+.collection-course-main strong{font-size:11px;font-weight:500;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.collection-course-main small{font-size:8px;color:#a394ae;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.collection-course-main small b{font-weight:400}
+.collection-course-main:disabled{opacity:1;cursor:default;color:#8e8198}
+.collection-course-main:not(:disabled):hover{color:#705090}
+.collection-row-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.collection-row-actions>button{min-width:27px;min-height:29px;padding:4px;border-radius:5px;color:#9a86ac}
+.collection-row-actions>button:hover{background:#f3edf9;color:#765492}
+.collection-row-actions .collection-add.active{background:#eee6f8;color:#79569d}
+.collection-row-actions .collection-unmark:hover{background:#fff0f2;color:#b84357}
+.collection-mark{display:grid;place-items:center;flex-shrink:0;width:18px;height:18px;border-radius:5px;background:#fff0f2;color:#c62b3d}
+.collection-locate-icon{flex-shrink:0;color:#b4a1c4}
+.collection-search{display:flex;align-items:center;gap:8px;flex-shrink:0;padding:7px 11px;color:#ad9abb}
+.collection-search input{min-width:0;width:100%;padding:7px 9px;border:1px solid #e7dff0;border-radius:6px;background:#fcfafe;color:#75627f;font-size:11px}
+.collection-search input::placeholder{color:#b2a4bc}
+.collection-notice{font-size:10px;line-height:1.6;color:#806a98;background:#f7f2fc;margin:7px 10px;padding:5px 8px;border-radius:5px;flex-shrink:0}
+.collection-empty{margin:0;padding:20px 10px;font-size:11px;line-height:1.8;text-align:center;color:#a08eac}
+.marked-courses-trigger{gap:4px}
+.course-node.is-added:not(.user-marked){box-shadow:0 0 0 3px color-mix(in srgb,var(--faculty-accent,#637083) 13%,transparent),0 5px 18px #66529a10}
+.added-badge{display:inline-flex;align-items:center;gap:3px;margin-inline-start:auto;padding:2px 4px;border-radius:4px;font-size:8px;white-space:nowrap;background:#f0eafa;color:#886daf}
+.course-node.is-focused{outline:2px solid transparent;animation:course-locate 1.6s ease}
+@keyframes collection-appear{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@keyframes course-locate{0%{outline-color:#aa90dc;outline-offset:1px}45%{outline-color:#aa90dc;outline-offset:7px}100%{outline-color:transparent;outline-offset:10px}}
+@media(max-width:640px){
+ .course-collection-popover{border-radius:9px}
+ .collection-heading{padding:8px 10px 6px}.collection-heading>strong{font-size:11px}
+ .collection-row{gap:5px;padding:7px 1px}
+ .collection-course-main{gap:6px}
+ .collection-course-main strong{font-size:10px}.collection-course-main small{font-size:8px}
+ .collection-row-actions{gap:0}.collection-row-actions>button{min-width:29px;min-height:32px}
+ .collection-search input{font-size:16px}
+ .search-result-add{width:31px;height:32px}
+}
+@media(prefers-reduced-motion:reduce){.course-collection-popover{animation:none}.course-node.is-focused{animation:none;outline:2px solid #aa90dc;outline-offset:3px}}
+
+.empty-graph-state{position:absolute;inset:60px 12px 90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;direction:rtl;color:#8e7ba0;pointer-events:none}
+.empty-graph-state h2{font-size:18px;font-weight:500;line-height:1.6;margin:0}
+.empty-graph-state p{font-size:12px;line-height:1.8;margin:0;max-width:360px}
+.empty-graph-state button{pointer-events:auto;min-height:38px;padding:8px 16px;border-radius:7px;background:#eee7f8;color:#79608d;font-size:12px;border:1px solid #dfd2eb}
+.empty-graph-state button:hover{background:#e6daf3}
+.pin-notice{font-size:10px;line-height:1.6;color:#8f78a0;margin:0;max-width:100%;overflow-wrap:anywhere}
+@media(max-width:640px){.empty-graph-state{padding:14px}.empty-graph-state h2{font-size:16px}.empty-graph-state p{font-size:11px}.pin-notice{font-size:9px}}
+
+.added-courses-trigger{gap:4px}.collection-hint{margin:0;padding:6px 12px 9px;color:#a08ead;font-size:9px;line-height:1.7;border-top:1px solid #f0eaf5}.added-badge{cursor:pointer}.added-badge:hover{background:#e7ddf6}
+
+/* Raise interactive cards without reordering React Flow nodes or dropping native focus. */
+.react-flow__node:hover,.react-flow__node:focus-within,.react-flow__node:has(.branch-restores[open]){z-index:1000!important}
+
+/* Custom course controls remain clickable with node selection and dragging disabled. */
+.react-flow__node-course{pointer-events:auto!important}

@@ -177,11 +177,11 @@ test('malicious feedback text and malformed responses stay inert and duplicate s
   expect(await page.evaluate(() => (window as any).__xss)).toBe(0);
 });
 
-test('a large valid saved graph renders a bounded subset and can collapse without losing markings', async ({ page }) => {
+test('a large shared saved graph deduplicates and can collapse without losing markings', async ({ page }) => {
   test.setTimeout(90_000);
   const root = '00000001';
-  const parents = Array.from({ length: 100 }, (_, i) => String(i + 100).padStart(8, '0'));
-  const leaves = Array.from({ length: 100 }, (_, i) => String(i + 1000).padStart(8, '0'));
+  const parents = Array.from({ length: 50 }, (_, i) => String(i + 100).padStart(8, '0'));
+  const leaves = Array.from({ length: 50 }, (_, i) => String(i + 1000).padStart(8, '0'));
   const leaf = (id: string) => ({ type: 'course', courseId: id, relation: 'strong' });
   const course = (id: string, requirements: any = null) => ({ id, name: 'קורס בדיקת עומס ' + id, faculty: 'הפקולטה למדעי המחשב', requirements, requirementsStatus: requirements ? 'known' : 'none', source: { url: 'https://portalex.technion.ac.il/' } });
   const data = { meta: {}, courses: [course(root), ...parents.map(id => course(id, leaf(root))), ...leaves.map(id => course(id, { type: 'and', items: parents.map(leaf) }))] };
@@ -190,8 +190,11 @@ test('a large valid saved graph renders a bounded subset and can collapse withou
     localStorage.setItem(key, JSON.stringify({ version: 2, progress: { rootId: root, expandedForward: ['root', ...parents.map(id => 'root/f:' + id + ':strong')], markedCourseIds: [root] } }));
   }, { key: PROGRESS_KEY, root, parents });
   await page.goto('/?course=' + root);
-  await expect(page.locator('.react-flow__node')).toHaveCount(2000, { timeout: 60_000 });
-  await expect(page.getByText('המפה גדולה מאוד, ולכן מוצג חלק ממנה.', { exact: false })).toBeVisible();
+  await expect(page.locator('.react-flow__node')).toHaveCount(101, { timeout: 60_000 });
+  expect(await page.locator('.react-flow__node').evaluateAll(nodes => new Set(nodes.map(node => node.getAttribute('data-id'))).size)).toBe(101);
+  await expect(page.locator('.react-flow__edge')).toHaveCount(2550);
+  // This complete canonical graph fits the emergency budget; no partial-graph warning is warranted.
+  await expect(page.getByText('המפה גדולה מאוד, ולכן מוצג חלק ממנה.', { exact: false })).toHaveCount(0);
   const toggle = page.locator('.root-node .expand-button');
   await toggle.focus();
   await toggle.press('Enter');

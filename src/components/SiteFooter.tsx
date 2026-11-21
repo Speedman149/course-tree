@@ -1,3 +1,5 @@
+import type {Course} from '../types';
+import {AddedCoursesMenu,MarkedCoursesMenu} from './CourseCollections';
 import {navigateApp} from '../lib/navigation';
 import {validCourseNumber} from '../lib/feedback';
 interface Props {
@@ -6,15 +8,27 @@ interface Props {
   storageAvailable?: boolean;
   onClearMarks?: ()=>void;
   onResetProgress?: ()=>void;
+  courses?: ReadonlyMap<string, Course>;
+  markedCourseIds?: ReadonlySet<string>;
+  addedCourseIds?: readonly string[];
+  visibleCourseIds?: ReadonlySet<string>;
+  onAddedChange?: (courseId: string, added: boolean) => void;
+  onLocateAddedCourse?: (courseId: string) => void;
+  onFocusCourse?: (courseId: string) => void;
+  onSelectCourse?: (courseId: string) => void;
+  onToggleMarked?: (courseId: string) => void;
 }
-export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress}:Props) {
+export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onSelectCourse,onToggleMarked}:Props) {
+ const count=markedCourseIds?.size??markedCount??0;
  const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
  const aboutHref=courseId&&validCourseNumber(courseId)?`/?course=${encodeURIComponent(courseId)}#/about`:'/#/about';
  return <footer className="site-footer" aria-label="מידע על האתר">
   {onResetProgress && <div className="saved-progress-controls">
    <span className={storageAvailable?'local-save-status':'local-save-status storage-unavailable'} role="status">{storageAvailable?'ההתקדמות נשמרת בדפדפן הזה':'השמירה המקומית אינה זמינה כרגע'}</span>
-   <span className="marked-count">קורסים מסומנים: {markedCount??0}</span>
-   <button onClick={onClearMarks} disabled={!markedCount}>ניקוי סימונים</button>
+   <span className="marked-count">קורסים מסומנים: {count}</span>
+   <button onClick={onClearMarks} disabled={!count}>ניקוי סימונים</button>
+   {courses&&markedCourseIds&&addedCourseIds&&visibleCourseIds&&onAddedChange&&onFocusCourse&&onSelectCourse&&onToggleMarked&&<MarkedCoursesMenu courses={courses} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={onAddedChange} onFocusCourse={onFocusCourse} onSelectCourse={onSelectCourse} onToggleMarked={onToggleMarked}/>}
+   {courses&&addedCourseIds&&onAddedChange&&onLocateAddedCourse&&<AddedCoursesMenu courses={courses} addedCourseIds={addedCourseIds} onAddedChange={onAddedChange} onLocateCourse={onLocateAddedCourse}/>}
    <button onClick={onResetProgress}>איפוס התקדמות שמורה</button>
   </div>}
   <div className="site-footer-main"><p className="site-disclaimer" lang="en" dir="ltr">Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.</p>

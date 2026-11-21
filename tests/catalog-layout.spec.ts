@@ -5,6 +5,7 @@ for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
   await page.setViewportSize(viewport);
   await page.goto('/?course=02340114');
   await expect(page.locator('.root-node .course-link')).toHaveText('02340114');
+  await expect(page.getByRole('button',{name:'קורסים שהוספתי',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'פתיחת מסנני המפה'}).click();
   await page.getByRole('tab',{name:/קטלוג תואר/}).click();
   await expect(page.getByRole('combobox',{name:'שנת קטלוג',exact:true})).toHaveValue('2025-2026');
