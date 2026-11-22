@@ -19,8 +19,9 @@ async function contained(page:Page,bottom:number){const box=await panel(page).bo
 for(const width of [390,320])test(`mobile defaults to only the search icon with no reserved search row at ${width}px`,async({page},testInfo)=>{
  await page.setViewportSize({width,height:1000});await ready(page);await expect(toggle(page)).toBeInViewport();await expect(toggle(page)).toHaveAttribute('aria-expanded','false');await expect(page.getByRole('combobox')).toHaveCount(0);await expect(panel(page)).toHaveCount(0);
  const header=await page.locator('.app-header').boundingBox();const graph=await page.locator('.graph-canvas').boundingBox();expect(header!.height).toBe(65);await expect(page.locator('.added-courses')).toHaveCount(0);
- // The collection now lives in the footer, reserving no graph-toolbar row.
- expect(graph!.height-before[width]['.graph-canvas'].height).toBeGreaterThan(0);expect(graph!.y).toBeCloseTo(before[width]['.graph-canvas'].y-60,1);
+ // Collapsed search adds no row: the canvas follows the current responsive toolbar.
+ const toolbar=await page.locator('.map-toolbar').boundingBox();
+ expect(graph!.height-before[width]['.graph-canvas'].height).toBeGreaterThan(0);expect(graph!.y).toBeCloseTo(toolbar!.y+toolbar!.height,1);
  for(const key of ['x','width'] as const)expect(graph![key],`mobile graph.${key}`).toBeCloseTo(before[width]['.graph-canvas'][key],1);
  const icon=await toggle(page).boundingBox();const controls=await page.locator('.canvas-controls').boundingBox();expect(icon!.width).toBeGreaterThanOrEqual(40);expect(icon!.x).toBeGreaterThanOrEqual(graph!.x);expect(icon!.y+icon!.height).toBeLessThan(controls!.y);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:testInfo.outputPath(`collapsed-${width}.png`),fullPage:true});
 });

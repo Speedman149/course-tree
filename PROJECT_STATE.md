@@ -1,20 +1,20 @@
 # Course Tree — Project State
 
-Snapshot updated on 20 November 2026 for the unified Add Course to Tree refactor, retaining the shared graph and partial-expansion implementation. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
+Snapshot updated on 21 November 2026 for ordinary-prerequisite highlighting and the complete help guide, retaining the unified added-course system, marked-credit summary, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
 
 ## 1. Project identity and evidence
 
 Course Tree is a Hebrew, RTL Technion course explorer. Users can explicitly add courses without a fixed selection cap, explore dependent courses forward and prerequisites backward in one shared graph, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
 
-This document describes the current working implementation, including the uncommitted major graph update on the existing security-hardened base. The update changes graph identity, exploration state, collections controls, persistence, and regression tests. It does not regenerate or correct academic datasets.
+This document describes the working implementation on the committed shared-graph and added-course base. The current uncommitted update adds ordinary-prerequisite highlighting, its saved preference, a complete help guide and regression coverage. It does not regenerate or correct academic datasets.
 
 | Snapshot item | Value |
 |---|---|
 | Repository | `https://github.com/Speedman149/course-tree.git` |
 | Checked-out branch | `main` |
-| Base application commit | `9e8d70e7fdd0358b2792b83d259aa30ca1b5c5e8` |
-| Base commit subject | `Harden pre-launch security and document project state` |
-| Current graph update | Working-tree changes after that commit; not committed or deployed by this implementation task |
+| Base application commit | `af6aa43` |
+| Base commit subject | `Unify added courses and preserve shared graph exploration` |
+| Current update | Ordinary-prerequisite highlighting and help guide in the working tree; not committed or deployed by this task |
 | Package | `technion-course-tree`, version `1.0.0`, private ES module |
 | Linux workspace | `/home/seritamar/projects/course-tree` |
 | Windows workspace | `\\wsl.localhost\Ubuntu\home\seritamar\projects\course-tree` |
@@ -229,6 +229,7 @@ Faculty colors remain sourced from the same palette and ownership mappings: 12 f
 | `catalogId`, `catalogYear`, `catalogFaculty` | Active edition and catalog browsing selections |
 | `filterTab`, `searchAll` | Faculty/catalog tab and all-course search scope |
 | `markedCourseIds` | Complete valid canonical marking list, retaining insertion order |
+| `highlightSatisfiedPrerequisites` | Boolean presentation preference, OFF by default; older schema-5 records safely default to false |
 | `recent` | Up to four prior starting courses |
 | `viewport` | Finite x/y/zoom, or null |
 
@@ -272,7 +273,7 @@ It includes `אודות / About` and `Developed by Chupchick`, plus local-save s
 
 ### Help and database information
 
-The help modal explains the shared graph, up to four pinned starting courses, forward/backward traversal, individual hiding/restoration, zoom/pan, strong versus concurrent relationships, logical alternatives, faculty colors, and personal markings. The database modal shows current runtime counts, SAP/catalog-only split, source-term policy, ambiguous rules, the current root source, an upstream SAP repository link, and a processed course JSON download.
+The existing help modal now renders `HelpGuide.tsx`: nine collapsible sections covering quick start, search/additions, navigation/branch controls, prerequisite expressions/colors/relationships, markings/credit totals, prerequisite highlighting, filters/catalogs, local saving/mobile controls, and sources/feedback/limitations. Native summaries participate in the modal keyboard focus cycle. It documents the unrestricted added-course collection rather than obsolete four-pin behavior. The database modal shows current runtime counts, SAP/catalog-only split, source-term policy, ambiguous rules, the current root source, an upstream SAP repository link, and a processed course JSON download.
 
 Both modals support Escape, backdrop close, X, a completion button, and keyboard focus cycling. Catalog coverage downloads are in the filter panel. The displayed SAP missing-reference statistic is 247 before catalog-only enrichment. Runtime merging resolves 48 of those IDs, leaving 199, as measured in section 9.
 
@@ -818,10 +819,39 @@ The full academic workflow is documented in `scripts/curriculum-audit/README.md`
 - Preserve independent restoration, latent expansion, explicit backward filter bypass, and the selected base and all explicitly added anchors. Automatic paths must respect user-hidden edges and intermediate filters unless the user explicitly restores a hidden connection.
 - Preserve the component-aware Dagre/fallback geometry, viewport anchoring, unique-node counts, and emergency graph budgets with honest truncation feedback.
 - Keep catalog years/evidence separate, valid alternatives available, recorded incomplete coverage intact, and academic corrections tied to authoritative evidence.
-- Preserve ownership colors independently of red marks, pin indicators and focus highlights; keep the complete marked-course list independent of visibility and filters.
+- Preserve ownership colors independently of red marks, added-course indicators and focus highlights; keep the complete marked-course list independent of visibility and filters.
 - Maintain schema-5 validation, v1–v4 migration, insertion order of new markings, deliberate empty saves, matching-primary URL restore, and origin-scoped last-write-wins synchronization. New fields require compatibility handling.
-- Preserve mobile-only collapsible search, compact mobile pin controls, desktop search behavior, RTL, keyboard accessibility and viewport-clamped popovers.
+- Preserve mobile-only collapsible search, compact mobile collection controls, desktop search behavior, RTL, keyboard accessibility and viewport-clamped popovers.
 - Keep footer wording, navigation, feedback context sanitization, Analytics redaction, trusted source URLs, bounded dataset loading, and configured security headers intact unless explicitly requested.
 - Preserve historical security/academic reports and input locks. Generated datasets, extraction compatibility, mechanism tests, source verification and deployed behavior are distinct evidence categories.
 
 This snapshot supports implementation discussions. Any academic correction still requires authoritative evidence for the affected course, catalog year, and requirement.
+
+
+## 16. Ordinary-prerequisite highlighting (21 November 2026)
+
+`src/lib/prerequisite-satisfaction.ts` evaluates each course's structured direct requirements against the complete canonical marked-course set. AND/OR grouping is retained; the evaluator never consults visible graph edges, added status, filters, or transitive ancestors. Results are `satisfied`, `unsatisfied`, or `unknown`. Explicit `none` with a null rule confirms no ordinary prerequisites; unknown, unparsed, inconsistent, or empty rules do not imply satisfaction.
+
+Concurrent requirements are recorded separately and do not block an otherwise satisfied ordinary rule. A concurrent-only course has no ordinary prerequisite burden. A future OR mixing an ordinary branch with a concurrent-only alternative is handled conservatively: it remains unknown unless an ordinary alternative is confirmed. No academic relationships or registration rules are invented.
+
+The graph-toolbar switch **הדגשת קורסים לפי קדמים מסומנים**, immediately beside **מסננים** (shortened to **הדגשת קורסים** at narrow widths), has the full accessible label **הדגש קורסים שכל הקדמים הרגילים שלהם מסומנים**. It defaults OFF and uses the existing version-5 progress envelope as an additive boolean field. Refresh, cross-tab restoration and full reset use the existing persistence workflow. Adding/removing courses, changing roots and clearing marks do not conflate the preference with marking state.
+
+When ON, unmarked satisfied cards receive a 3px green outer ring and a green check indicator. The original faculty border and card dimensions remain intact; marked cards keep their red appearance. The course information panel adds the ordinary prerequisite result, marked/unmarked direct requirements, unchanged full logical expression, and a corequisite/registration limitation. No new highlight or explanation is shown when OFF. Calculations are memoized by the course collection and authoritative markings, separately from graph layout and mouse activity.
+
+The marked list's existing credit summary counts every canonical marked course once, independent of graph/filter visibility or added status, and explicitly distinguishes unknown credits from known zero. It does not calculate earned degree credits. Public academic datasets, prerequisite source data, faculty palette, graph reachability and connection ownership are unchanged by this update.
+
+Verification on 21 November 2026:
+
+- `npm test`: **218/218 passed**, including 14 new evaluator/persistence tests, real AND/OR/concurrent formulas, all actual source prerequisite records and catalog-only unknown records. These mechanism tests do not verify academic source accuracy.
+- `npm run build`: **passed**, including TypeScript checking and the Vite production build. No dependency or package-script changes were required.
+- Initial complete Chromium run: **120/121 passed**. The only failure was the historical mobile footer-height assertion after adding the new switch. The visible label and control spacing were compacted; the regression budget allows the switch's larger accessible tap target without allowing another footer row.
+- Final run on the final implementation: **28/28 passed**: 12 branch/appearance checks, seven collection checks, three marked-credit checks, and six new highlighting/help scenarios. This covers immediate mark/unmark/clear, AND/OR behavior with hidden prerequisites, marked-course exclusion, corequisites, unknown records, unchanged node geometry/faculty colors, refresh/cross-tab preference persistence, keyboard interaction, guide content and RTL at desktop and narrow mobile widths. The full 121-case suite was not repeated after the localized label/spacing adjustment.
+- Desktop and 320px Chromium screenshots were visually inspected. Physical devices, Firefox, WebKit and production Vercel behavior were not tested in this task.
+- There is no configured lint script; no lint result is claimed. `git diff --check` passed. All 67 source/test/public files in the Windows QA mirror matched the Course Tree workspace; course/catalog SHA-256 hashes remained unchanged.
+- Temporary production-fixture server was used locally. This update was not committed, pushed, deployed, or submitted through an external form. Historical results in section 14 retain their original scope and dates.
+
+### Toolbar-placement follow-up
+
+At the user's request, the highlighting switch now sits immediately beside `מסננים` in the upper graph toolbar. Narrow screens use the shorter `הדגשת קורסים` label and a responsive toolbar row. The footer toggle and its props were removed, restoring the original compact-footer height assertion. The help guide points to the new location. Satisfaction logic and saved preferences are unchanged.
+
+TypeScript/production build passed. Placement, alignment and horizontal overflow were checked at 1440, 1000, 641, 390 and 320px. Of 31 browser scenarios, 29 passed initially; the two mobile-search checks still expected the old fixed canvas Y position. Their assertion now checks that collapsed search reserves no row between the actual responsive toolbar and canvas, retaining the graph-height gain and width checks. Both passed on rerun, together with both help layouts (4/4 final follow-up checks). No new academic-data or marking changes were made.

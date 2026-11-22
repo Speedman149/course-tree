@@ -7,6 +7,7 @@ import { Handle, Position, type Node, type NodeProps } from '@xyflow/react';
 import { ArrowUpLeft, BookOpen, Bug, Check, ChevronLeft, CircleHelp, GitBranch, Info, Minus, Plus, RotateCcw } from 'lucide-react';
 import type { Course, Requirement, Relation, DegreeCatalog } from '../types';
 import type { CatalogRole } from '../lib/filters';
+import type {PrerequisiteSatisfaction} from '../lib/prerequisite-satisfaction';
 import { collectRequirements, forwardConnectionId, forwardExpansionState, type GraphNode } from '../lib/graph';
 
 export interface ExplorerContextValue {
@@ -29,6 +30,8 @@ export interface ExplorerContextValue {
   catalogRoles: (id: string) => CatalogRole[];
   hasFilters: boolean;
   markedCourseIds: ReadonlySet<string>;
+  highlightSatisfiedPrerequisites: boolean;
+  prerequisiteSatisfaction: ReadonlyMap<string, PrerequisiteSatisfaction>;
   toggleMarked: (courseId:string)=>void;
   reportCourse:(courseId:string)=>void;
   hiddenForwardConnections:ReadonlySet<string>;
@@ -76,6 +79,9 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
   const isConcurrent = item.relations.includes('concurrent');
   const marked=explorer.markedCourseIds.has(item.courseId);
   const appearance=courseAppearance(course);
+  const satisfaction = explorer.prerequisiteSatisfaction.get(item.courseId);
+  const highlight = explorer.highlightSatisfiedPrerequisites && !marked && satisfaction?.status === 'satisfied';
+  const satisfactionLabel = satisfaction?.hasOrdinary ? 'כל הקדמים הרגילים מסומנים' : 'ללא קדמים רגילים לפי המידע במאגר';
 
   const showPanel = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -116,7 +122,8 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
   };
 
   return <>
-    <div ref={cardRef} data-expansion={expansion.status} data-faculty={appearance.id} data-marked={marked} style={{'--faculty-accent':appearance.accent} as CSSProperties} className={`course-node ${marked ? 'user-marked' : ''} ${isConcurrent && item.relations.length === 1 ? 'concurrent' : 'strong'} ${isRoot ? 'root-node' : ''} ${isAdded ? 'is-added' : ''} ${explorer.focusedCourseId === item.courseId ? 'is-focused' : ''} ${isBackward ? 'backward-node' : ''} ${item.cycle ? 'cycle-node' : ''} ${(isRoot || isAdded) && !explorer.isVisible(item.courseId) ? 'outside-filter-root' : ''}`} onMouseEnter={showPanel} onMouseLeave={hidePanel}>
+    <div ref={cardRef} data-expansion={expansion.status} data-faculty={appearance.id} data-marked={marked} data-prerequisite-status={explorer.highlightSatisfiedPrerequisites ? satisfaction?.status ?? 'unknown' : undefined} style={{'--faculty-accent':appearance.accent} as CSSProperties} className={`course-node ${highlight ? 'prerequisites-satisfied' : ''} ${marked ? 'user-marked' : ''} ${isConcurrent && item.relations.length === 1 ? 'concurrent' : 'strong'} ${isRoot ? 'root-node' : ''} ${isAdded ? 'is-added' : ''} ${explorer.focusedCourseId === item.courseId ? 'is-focused' : ''} ${isBackward ? 'backward-node' : ''} ${item.cycle ? 'cycle-node' : ''} ${(isRoot || isAdded) && !explorer.isVisible(item.courseId) ? 'outside-filter-root' : ''}`} onMouseEnter={showPanel} onMouseLeave={hidePanel}>
+      {highlight && <span className="prerequisite-satisfied-indicator" role="img" aria-label={satisfactionLabel} title={`${satisfactionLabel}. מקצועות צמודים ותנאי רישום נוספים אינם נבדקים.`}><Check size={15} aria-hidden="true"/></span>}
       <Handle type="target" position={Position.Right}/>
       <Handle type="source" position={Position.Left}/>
       <div className="node-top"><span className="node-icon"><BookOpen size={16}/></span><CourseLink course={course} id={item.courseId}/>{isAdded && <button className="root-badge added-badge nodrag nopan" title="הסר מהעץ" aria-label={`הסר מהעץ ${item.courseId}`} onClick={event => {event.stopPropagation();close();explorer.setCourseAdded(item.courseId,false);}}><Check size={10}/>נוסף לעץ</button>}{isBackward && <button className="backward-badge nodrag nopan" aria-label={`כיווץ ענף קדם ${course?.name ?? item.courseId}`} onClick={() => { close(); explorer.collapseBackward(item.courseId); }}><Minus size={10}/>קדם</button>}{isConcurrent && <span className="relationship-chip concurrent">מקצוע צמוד</span>}</div>
@@ -138,13 +145,19 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
       {item.cycle && <p className="panel-filter-note"><RotateCcw size={12}/> קיים מעגל בקשרי המקצוע במקור. כל מקצוע מוצג פעם אחת, ואפשר להמשיך לחקור.</p>}
       <button className="course-feedback-link course-add-action" aria-label={`${isAdded ? 'הסר מהעץ' : 'הוסף לעץ'} ${item.courseId}`} aria-pressed={isAdded} onClick={() => { close(); explorer.setCourseAdded(item.courseId,!isAdded); }}>{isAdded ? <Check size={13}/> : <Plus size={13}/>}{isAdded ? 'הסר מהעץ' : 'הוסף לעץ'}</button>
       {explorer.activeCatalog && <div className="course-catalog-roles"><strong>בקטלוג הנבחר</strong>{roles.length ? roles.map(role => <span key={role.id} title={role.description}>{role.label}{role.conditional ? ' · בכפוף לתנאים' : ''}</span>) : <span>מחוץ לרשימות המיובאות של הקטלוג</span>}</div>}
+      {explorer.highlightSatisfiedPrerequisites && <div className={`prerequisite-mark-summary ${satisfaction?.status ?? 'unknown'}`} aria-live="polite">
+        <strong>דרישות קדם לפי סימונים</strong>
+        <p>{satisfaction?.status === 'satisfied' ? satisfactionLabel : satisfaction?.status === 'unsatisfied' ? 'לא כל דרישות הקדם הרגילות מולאו. בקבוצת ״או״ מספיק לקיים חלופה אחת.' : 'אין מידע מספיק או חד־משמעי לבדיקת הקדמים הרגילים.'}</p>
+        {marked && <p>הקורס עצמו מסומן, ולכן אינו מודגש בירוק.</p>}
+        <small>קדמים רגילים בלבד; מקצועות צמודים ותנאי רישום נוספים אינם נבדקים. אין כאן אישור זכאות לרישום.</small>
+      </div>}
       {requirements.length ? <>
         <div className="requirement-logic"><span>כלל הקבלה לקורס</span><div><RequirementExpression requirement={course!.requirements!} courses={explorer.courses}/></div></div>
         <div className="prerequisite-list">{requirements.map(req => {
           const prerequisite = explorer.courses.get(req.courseId);
           const backwardExpanded = explorer.expandedBackward.get(id)?.has(req.courseId);
           return <div className="prerequisite-row" key={`${req.courseId}-${req.relation}`}>
-            <div className="prerequisite-row-content"><CourseLink course={prerequisite} id={req.courseId}/><strong>{prerequisite?.name ?? 'פרטי הקורס אינם במאגר'}</strong>{explorer.hasFilters && !explorer.isVisible(req.courseId) && <span className="prerequisite-outside-filter">מחוץ לסינון · ניתן לחקור אחורה</span>}{explorer.activeCatalog && explorer.catalogRoles(req.courseId).map(role => <span className="prerequisite-catalog-role" key={role.id} title={role.description}>{role.label}</span>)}<span className={`relation-label ${req.relation}`}><i/>{req.relation === 'strong' ? 'קדם חזק · יש להשלים לפני' : 'מקצוע צמוד · אפשר במקביל'}</span></div>
+            <div className="prerequisite-row-content"><CourseLink course={prerequisite} id={req.courseId}/><strong>{prerequisite?.name ?? 'פרטי הקורס אינם במאגר'}</strong>{explorer.hasFilters && !explorer.isVisible(req.courseId) && <span className="prerequisite-outside-filter">מחוץ לסינון · ניתן לחקור אחורה</span>}{explorer.activeCatalog && explorer.catalogRoles(req.courseId).map(role => <span className="prerequisite-catalog-role" key={role.id} title={role.description}>{role.label}</span>)}{explorer.highlightSatisfiedPrerequisites && <span className="prerequisite-mark-state">{req.relation === 'concurrent' ? 'לא נבדק בהדגשה' : explorer.markedCourseIds.has(req.courseId) ? 'מסומן' : 'לא מסומן'}</span>}<span className={`relation-label ${req.relation}`}><i/>{req.relation === 'strong' ? 'קדם חזק · יש להשלים לפני' : 'מקצוע צמוד · אפשר במקביל'}</span></div>
             <button className={`prerequisite-expand ${backwardExpanded ? 'active' : ''}`} aria-label={`${backwardExpanded ? 'כיווץ' : 'הרחבת'} קדם ${prerequisite?.name ?? req.courseId}`} aria-expanded={!!backwardExpanded} disabled={item.missing} onClick={() => explorer.toggleBackward(id, req.courseId)}>{backwardExpanded ? <Minus size={16}/> : <Plus size={16}/>}</button>
           </div>;
         })}</div><p className="panel-hint">לחצו על + כדי להמשיך לחקור את הקדמים במפה.</p>

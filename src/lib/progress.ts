@@ -20,6 +20,7 @@ export interface Progress {
   filterTab: 'faculty' | 'catalog';
   searchAll: boolean;
   markedCourseIds: string[];
+  highlightSatisfiedPrerequisites: boolean;
   recent: string[];
   viewport: { x: number; y: number; zoom: number } | null;
 }
@@ -49,6 +50,7 @@ export const defaultProgress = (db: ProgressDatabase): Progress => ({
   filterTab: 'faculty',
   searchAll: false,
   markedCourseIds: [],
+  highlightSatisfiedPrerequisites: false,
   recent: [],
   viewport: null,
 });
@@ -277,6 +279,7 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
     filterTab: raw.filterTab === 'catalog' ? 'catalog' : 'faculty',
     searchAll: raw.searchAll === true,
     markedCourseIds: strings(raw.markedCourseIds, idScanLimit).filter(id => index.knownIds.has(id)),
+    highlightSatisfiedPrerequisites: raw.highlightSatisfiedPrerequisites === true,
     recent: strings(raw.recent, 100).filter(id => index.knownIds.has(id)).slice(0, 4),
     viewport: keepBranches ? viewport(raw.viewport) : null,
   };
