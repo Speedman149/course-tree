@@ -1,3 +1,4 @@
+import {openCollection, toolsTrigger} from './helpers/mobile-tools';
 import {expect,test as base,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {buildDependents} from '../src/lib/graph';
@@ -12,8 +13,8 @@ const saved=(page:Page)=>page.evaluate(k=>JSON.parse(localStorage.getItem(k)??'{
 async function ready(page:Page){await page.goto('/?course='+A);await expect(node(page,A).locator('.course-link')).toHaveText(A);}
 async function search(page:Page){const input=page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true});if(!await input.isVisible())await page.getByRole('button',{name:'חיפוש קורסים',exact:true}).click();return input;}
 async function add(page:Page,id:string){const input=await search(page);await input.fill(id);await page.getByRole('option').filter({hasText:id}).getByRole('button',{name:'הוסף לעץ '+id,exact:true}).click();await input.press('Escape');await expect(node(page,id).locator('.added-badge')).toBeVisible();}
-async function addedMenu(page:Page){await page.mouse.move(0,0);const trigger=page.getByRole('button',{name:'קורסים שהוספתי',exact:true});await trigger.scrollIntoViewIfNeeded();await page.keyboard.press('Escape');await trigger.click();const menu=page.getByRole('dialog',{name:'קורסים שהוספתי',exact:true});await expect(menu).toBeVisible();return menu;}
-async function markedMenu(page:Page){await page.mouse.move(0,0);const trigger=page.getByRole('button',{name:'רשימת מסומנים',exact:true});await trigger.scrollIntoViewIfNeeded();await page.keyboard.press('Escape');await trigger.click();const menu=page.getByRole('dialog',{name:'רשימת מסומנים',exact:true});await expect(menu).toBeVisible();return menu;}
+async function addedMenu(page:Page){return openCollection(page,'added');}
+async function markedMenu(page:Page){return openCollection(page,'marked');}
 async function mark(page:Page,id:string){const b=node(page,id).locator('.mark-button');await b.focus();await b.press('Enter');await expect(b).toHaveAttribute('aria-pressed','true');}
 async function remove(page:Page,id:string){const menu=await addedMenu(page);await menu.getByRole('button',{name:'הסר מהעץ '+id,exact:true}).click();await page.keyboard.press('Escape');}
 
@@ -54,10 +55,10 @@ test('added-list locate restores a deliberately collapsed connector and keeps on
 
 test('mobile collection menu stays compact and removing every addition preserves exploration and markings',async({page})=>{
  await page.setViewportSize({width:320,height:568});await ready(page);await add(page,B);await mark(page,A);
- let menu=await addedMenu(page);await expect(menu).toBeInViewport();await expect(menu).toHaveAttribute('dir','rtl');
+ let menu=await addedMenu(page);await expect(menu).toBeInViewport();await expect(menu).toHaveCSS('direction','rtl');
  await menu.getByRole('button',{name:'הסר מהעץ '+B,exact:true}).click();await menu.getByRole('button',{name:'הסר מהעץ '+A,exact:true}).click();
  await expect(menu.getByText('עדיין לא הוספתם קורסים לעץ',{exact:true})).toBeVisible();await page.keyboard.press('Escape');
- await expect(page.getByRole('button',{name:'קורסים שהוספתי',exact:true})).toBeFocused();await expect(node(page,A)).toHaveCount(1);
+ await expect(toolsTrigger(page)).toBeFocused();await expect(node(page,A)).toHaveCount(1);
  await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([]);await page.reload();await expect(node(page,A).locator('.mark-button')).toHaveAttribute('aria-pressed','true');
  expect((await saved(page)).addedCourseIds).toEqual([]);expect((await saved(page)).primaryCourseId).toBe(A);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

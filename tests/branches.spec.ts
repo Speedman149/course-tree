@@ -1,3 +1,4 @@
+import {openCollection, toolsTrigger} from './helpers/mobile-tools';
 import {expect, test as base, type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {PROGRESS_KEY} from '../src/lib/progress';
@@ -231,9 +232,12 @@ for (const baseline of footerBefore) test(`footer stays compact with original co
   const height = await page.locator('.site-footer').evaluate(element => element.getBoundingClientRect().height);
   expect(height).toBeLessThan(baseline.height - 8);
   await expect(page.locator('.site-disclaimer')).toHaveText('Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.');
+  if (await toolsTrigger(page).isVisible()) await openCollection(page, 'marked');
   await expect(page.getByRole('button', {name: 'ניקוי סימונים', exact: true})).toBeVisible();
-  await expect(page.getByRole('button', {name: 'רשימת מסומנים', exact: true})).toBeVisible();
+  if (await toolsTrigger(page).isVisible()) await expect(page.locator('[data-tools-section="marked"]>summary')).toBeVisible();
+  else await expect(page.getByRole('button', {name: 'רשימת מסומנים', exact: true})).toBeVisible();
   await expect(page.getByRole('button', {name: 'איפוס התקדמות שמורה', exact: true})).toBeVisible();
+  if (await toolsTrigger(page).isVisible()) await page.keyboard.press('Escape');
   await expect(page.getByRole('link', {name: 'אודות / About', exact: true})).toBeVisible();
   await expect(page.getByText('Developed by Chupchick', {exact: true})).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

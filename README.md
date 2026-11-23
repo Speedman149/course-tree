@@ -141,6 +141,12 @@ The graph automatically remembers roots, expanded forward/backward branches, fil
 The twelve largest faculties/teaching departments receive fixed, non-red accents based on unique course counts and actual prerequisite connectivity. White/gray relationship badges preserve strong/concurrent distinctions on normal and marked cards. See [the palette and analysis](docs/faculty-colors/README.md).
 
 The footer includes the independent-project disclaimer, **Developed by Chupchick**, and a refresh-safe `#/about` page. No academic database records are changed by these features.
+## Mobile tools and footer
+
+At widths up to 640px, **כלים** beside the map filters opens a right-hand tools drawer. Added courses and marked courses (including the credit total) open inline inside it, alongside prerequisite highlighting, layer/branch controls, local-save status and confirmed reset actions. Search, filters, zoom/fit and graph interactions stay directly accessible. Opening tools does not resize or reset the graph; Escape, the close button or the backdrop dismiss it. Desktop management controls remain in their original locations.
+
+The compact mobile footer keeps About and the developer credit visible. Its independent-project notice expands to show the complete, unchanged English disclaimer. No course data, prerequisite logic, credit calculations or saved-progress format changed in this presentation refactor.
+
 ## Hide one forward branch
 
 The small minus near a forward arrow's child endpoint hides only that connection's branch. Use **הצגת ענפים** by its parent to restore a specific hidden branch with its prior expansions. The original course minus still collapses all children, and reopening the course restores its direct children. Shared courses on other paths, backward prerequisites and global markings are preserved. Hidden connections are saved separately in the migrated version 2 local session. See [individual branch controls](docs/BRANCH_CONTROLS.md).

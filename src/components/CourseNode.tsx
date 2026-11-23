@@ -30,6 +30,7 @@ export interface ExplorerContextValue {
   catalogRoles: (id: string) => CatalogRole[];
   hasFilters: boolean;
   markedCourseIds: ReadonlySet<string>;
+  suppressCoursePanels: boolean;
   highlightSatisfiedPrerequisites: boolean;
   prerequisiteSatisfaction: ReadonlyMap<string, PrerequisiteSatisfaction>;
   toggleMarked: (courseId:string)=>void;
@@ -84,6 +85,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
   const satisfactionLabel = satisfaction?.hasOrdinary ? 'כל הקדמים הרגילים מסומנים' : 'ללא קדמים רגילים לפי המידע במאגר';
 
   const showPanel = () => {
+    if (explorer.suppressCoursePanels) return;
     if (closeTimer.current) clearTimeout(closeTimer.current);
     const rect = cardRef.current?.getBoundingClientRect();
     if (rect) {
@@ -106,6 +108,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
     window.addEventListener('pointerdown', outside);
     return () => { window.removeEventListener('keydown', handler); window.removeEventListener('pointerdown', outside); };
   }, [open]);
+  useEffect(() => {if (explorer.suppressCoursePanels) {setOpen(false); setPanelHeld(false); if (closeTimer.current) clearTimeout(closeTimer.current);}}, [explorer.suppressCoursePanels]);
   useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current); }, []);
   const finishBranchReveal = () => {
     const origin = document.activeElement;

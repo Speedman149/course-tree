@@ -133,11 +133,11 @@ function CollectionPopover({label, title, trigger, triggerClassName = '', prefer
 
 function focusAfterRowRemoval(button: HTMLButtonElement) {
   const row = button.closest('.collection-row');
-  const panel = button.closest('.course-collection-popover');
+  const panel = button.closest('.course-collection-popover, .mobile-tools-section');
   const nextRow = row?.nextElementSibling ?? row?.previousElementSibling;
   requestAnimationFrame(() => {
     const nextButton = nextRow?.isConnected ? nextRow.querySelector<HTMLElement>('button:not(:disabled)') : null;
-    const closeButton = panel?.isConnected ? panel.querySelector<HTMLElement>('.collection-heading button') : null;
+    const closeButton = panel?.isConnected ? panel.querySelector<HTMLElement>('.collection-heading button, summary') : null;
     (nextButton ?? closeButton)?.focus({preventScroll: true});
   });
 }
@@ -149,7 +149,7 @@ export interface AddedCoursesMenuProps {
   onLocateCourse: (courseId: string) => void;
 }
 
-export function AddedCoursesMenu({courses, addedCourseIds, onAddedChange, onLocateCourse}: AddedCoursesMenuProps) {
+export function AddedCoursesContent({courses, addedCourseIds, onAddedChange, onLocateCourse, onNavigate}: AddedCoursesMenuProps & {onNavigate: () => void}) {
   const [query, setQuery] = useState('');
   const filteredIds = useMemo(() => {
     const search = normalizeListQuery(query);
@@ -158,14 +158,11 @@ export function AddedCoursesMenu({courses, addedCourseIds, onAddedChange, onLoca
       return normalizeListQuery(`${id} ${course?.name ?? ''} ${course?.aliases?.join(' ') ?? ''}`).includes(search);
     });
   }, [addedCourseIds, query, courses]);
-  return <CollectionPopover label="קורסים שהוספתי" title={`קורסים שהוספתי (${addedCourseIds.length})`}
-    preferUp trigger={<><ListPlus size={13}/><span>קורסים שהוספתי ({addedCourseIds.length})</span></>}
-    triggerClassName="added-courses-trigger" onOpen={() => setQuery('')}>
-    {close => <>
+  return <>
       {addedCourseIds.length > 6 && <label className="collection-search"><Search size={14}/><input aria-label="חיפוש בקורסים שהוספתי" placeholder="מספר או שם קורס…" value={query} maxLength={1000} onChange={event => setQuery(event.target.value)}/></label>}
       <div className="collection-rows" role="list" aria-label="הקורסים שהוספתי לעץ">
         {filteredIds.map(id => <div className="collection-row added-course-row" key={id} data-added-course={id} role="listitem">
-          <button className="collection-course-main" type="button" aria-label={`מיקוד בקורס שהוספתי ${id}`} title="הצגת החיבור ומיקוד בקורס" onClick={() => {close(); onLocateCourse(id);}}>
+          <button className="collection-course-main" type="button" aria-label={`מיקוד בקורס שהוספתי ${id}`} title="הצגת החיבור ומיקוד בקורס" onClick={() => {onNavigate(); onLocateCourse(id);}}>
             <Focus size={14}/><span><strong>{courses.get(id)?.name ?? 'קורס ללא פרטים במאגר'}</strong><small dir="ltr">{id}</small></span>
           </button>
           <div className="collection-row-actions"><button type="button" aria-label={`הסר מהעץ ${id}`} title="הסר מהעץ" onClick={event => {focusAfterRowRemoval(event.currentTarget); onAddedChange(id, false);}}><X size={15}/></button></div>
@@ -174,7 +171,13 @@ export function AddedCoursesMenu({courses, addedCourseIds, onAddedChange, onLoca
         {addedCourseIds.length > 0 && !filteredIds.length && <p className="collection-empty">לא נמצאו קורסים המתאימים לחיפוש</p>}
       </div>
       {addedCourseIds.length > 0 && <p className="collection-hint">הסרה מהרשימה משאירה קורסים הנחוצים לעץ ולחקירה הנוכחית.</p>}
-    </>}
+  </>;
+}
+
+export function AddedCoursesMenu(props: AddedCoursesMenuProps) {
+  return <CollectionPopover label="קורסים שהוספתי" title={`קורסים שהוספתי (${props.addedCourseIds.length})`} preferUp
+    trigger={<><ListPlus size={13}/><span>קורסים שהוספתי ({props.addedCourseIds.length})</span></>} triggerClassName="added-courses-trigger">
+    {close => <AddedCoursesContent {...props} onNavigate={close}/>}
   </CollectionPopover>;
 }
 
@@ -193,7 +196,7 @@ function normalizeListQuery(value: string) {
   return value.normalize('NFKD').replace(/[\u0591-\u05C7]/g, '').toLocaleLowerCase('he').replace(/[״"׳']/g, '').trim();
 }
 
-export function MarkedCoursesMenu({courses, markedCourseIds, addedCourseIds, visibleCourseIds, onAddedChange, onFocusCourse, onSelectCourse, onToggleMarked}: MarkedCoursesMenuProps) {
+export function MarkedCoursesContent({courses, markedCourseIds, addedCourseIds, visibleCourseIds, onAddedChange, onFocusCourse, onSelectCourse, onToggleMarked, onNavigate}: MarkedCoursesMenuProps & {onNavigate: () => void}) {
   const [query, setQuery] = useState('');
   const addedIds = useMemo(() => new Set(addedCourseIds), [addedCourseIds]);
   const orderedIds = useMemo(() => [...markedCourseIds].reverse(), [markedCourseIds]);
@@ -207,14 +210,7 @@ export function MarkedCoursesMenu({courses, markedCourseIds, addedCourseIds, vis
     });
   }, [orderedIds, query, courses]);
 
-  return <CollectionPopover
-    label="רשימת מסומנים"
-    title={`רשימת מסומנים (${markedCourseIds.size})`}
-    preferUp
-    trigger={<><Check size={12}/><span>רשימת מסומנים</span></>}
-    triggerClassName="marked-courses-trigger"
-    onOpen={() => {setQuery('');}}
-  >{close => <>
+  return <>
     <div className="marked-credit-summary" role="status" aria-atomic="true">
       <strong>{missingCreditCount ? 'נק״ז ידוע:' : 'סה״כ נק״ז:'} <bdi dir="ltr">{creditTotalFormat.format(knownCredits)}</bdi></strong>
       {missingCreditCount > 0 && <small>(ל־{missingCreditCount} מקצועות חסר נתון נק״ז)</small>}
@@ -226,7 +222,7 @@ export function MarkedCoursesMenu({courses, markedCourseIds, addedCourseIds, vis
         const visible = visibleCourseIds.has(id);
         const added = addedIds.has(id);
         return <div className="collection-row marked-course-row" key={id} data-marked-course={id} role="listitem">
-          <button className="collection-course-main" type="button" disabled={!visible} aria-label={`מיקוד במקצוע מסומן ${id}`} title={visible ? 'מיקוד במקצוע במפה' : 'המקצוע אינו מוצג כרגע. אפשר להוסיף לעץ או לפתוח עץ חדש.'} onClick={() => {if (visible) {close(); onFocusCourse(id);}}}>
+          <button className="collection-course-main" type="button" disabled={!visible} aria-label={`מיקוד במקצוע מסומן ${id}`} title={visible ? 'מיקוד במקצוע במפה' : 'המקצוע אינו מוצג כרגע. אפשר להוסיף לעץ או לפתוח עץ חדש.'} onClick={() => {if (visible) {onNavigate(); onFocusCourse(id);}}}>
             <span className="collection-mark"><Check size={12}/></span>
             <span><strong>{course?.name ?? 'קורס ללא פרטים במאגר'}</strong><small><b dir="ltr">{id}</b>{course && <span> · {courseAppearance(course).label}</span>}</small></span>
             {visible && <Focus className="collection-locate-icon" size={13}/>}
@@ -235,7 +231,7 @@ export function MarkedCoursesMenu({courses, markedCourseIds, addedCourseIds, vis
             <button className={added ? 'collection-add active' : 'collection-add'} type="button" aria-label={`${added ? 'הסר מהעץ' : 'הוסף לעץ'} ${id}`} aria-pressed={added} title={added ? 'הסר מהעץ' : 'הוסף לעץ'} onClick={() => {
               onAddedChange(id, !added);
             }}>{added ? <Check size={15}/> : <Plus size={15}/>}</button>
-            <button type="button" aria-label={`פתיחת עץ חדש עם ${id}`} title="פתח עץ חדש" onClick={() => {close(); onSelectCourse(id);}}><GitBranch size={15}/></button>
+            <button type="button" aria-label={`פתיחת עץ חדש עם ${id}`} title="פתח עץ חדש" onClick={() => {onNavigate(); onSelectCourse(id);}}><GitBranch size={15}/></button>
             <button className="collection-unmark" type="button" aria-label={`הסרת סימון של ${id}`} title="הסרת סימון" onClick={event => {focusAfterRowRemoval(event.currentTarget); onToggleMarked(id);}}><X size={15}/></button>
           </div>
         </div>;
@@ -243,5 +239,12 @@ export function MarkedCoursesMenu({courses, markedCourseIds, addedCourseIds, vis
       {!orderedIds.length && <p className="collection-empty">אין מקצועות מסומנים עדיין</p>}
       {orderedIds.length > 0 && !filteredIds.length && <p className="collection-empty">לא נמצאו מקצועות מסומנים המתאימים לחיפוש</p>}
     </div>
-  </>}</CollectionPopover>;
+  </>;
+}
+
+export function MarkedCoursesMenu(props: MarkedCoursesMenuProps) {
+  return <CollectionPopover label="רשימת מסומנים" title={`רשימת מסומנים (${props.markedCourseIds.size})`} preferUp
+    trigger={<><Check size={12}/><span>רשימת מסומנים</span></>} triggerClassName="marked-courses-trigger">
+    {close => <MarkedCoursesContent {...props} onNavigate={close}/>}
+  </CollectionPopover>;
 }

@@ -136,7 +136,7 @@ for(const viewport of [{width:320,height:568},{width:844,height:390}])test(`comp
  await page.setViewportSize(viewport);await ready(page,'01040067');
  const geometry=await page.evaluate(()=>{const note=document.querySelector('.map-footnote')!.getBoundingClientRect();const footer=document.querySelector('.site-footer')!.getBoundingClientRect();return{noteBottom:note.bottom,footerTop:footer.top};});expect(geometry.noteBottom).toBeLessThanOrEqual(geometry.footerTop+1);
  await page.locator('.canvas-controls').scrollIntoViewIfNeeded();await expect(page.getByRole('button',{name:'הגדלת המפה',exact:true})).toBeInViewport();
- await page.locator('.site-footer').scrollIntoViewIfNeeded();await expect(page.getByText('Developed by Chupchick',{exact:true})).toBeInViewport();await expect(page.locator('.site-disclaimer')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.locator('.site-footer').scrollIntoViewIfNeeded();await expect(page.getByText('Developed by Chupchick',{exact:true})).toBeInViewport();if(await page.locator('.mobile-site-disclaimer').count())await page.locator('.mobile-site-disclaimer summary').click();await expect(page.locator('.site-disclaimer')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('four ordered pins, canonical hidden edges, shared expansion and markings restore from the primary URL', async ({ page }) => {
   const pins = ['00140855', '02340114', '01040031', '01140051'];
