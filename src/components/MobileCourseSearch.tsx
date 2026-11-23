@@ -3,11 +3,11 @@ import {createPortal} from 'react-dom';
 import {Search,X} from 'lucide-react';
 import CourseSearch from './CourseSearch';
 
-type Props=ComponentProps<typeof CourseSearch>;
+type Props=ComponentProps<typeof CourseSearch> & {blocked?: boolean};
 const MOBILE_QUERY='(max-width: 640px)';
 
 /** Mobile presentation only: CourseSearch owns the existing search and scope behavior. */
-export default function MobileCourseSearch(props:Props){
+export default function MobileCourseSearch({blocked=false,...props}:Props){
  const [mobile,setMobile]=useState(()=>window.matchMedia(MOBILE_QUERY).matches);
  const [expanded,setExpanded]=useState(false);
  const [bounds,setBounds]=useState({top:71,left:10,width:window.innerWidth-20,height:window.innerHeight-79});
@@ -46,9 +46,10 @@ export default function MobileCourseSearch(props:Props){
   document.addEventListener('focusin',outside);
   return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('focusin',outside);};
  },[expanded]);
+ useLayoutEffect(()=>{if(blocked)setExpanded(false);},[blocked]);
  const close=()=>{setExpanded(false);toggle.current?.focus({preventScroll:true});};
  return <>
-  <button ref={toggle} className="mobile-search-toggle" type="button" aria-label="חיפוש קורסים" title="חיפוש קורסים" aria-haspopup="dialog" aria-expanded={expanded} aria-controls={expanded?panelId:undefined} disabled={props.disabled} onClick={()=>expanded?close():setExpanded(true)}><Search size={19} aria-hidden="true"/></button>
+  <button ref={toggle} className="mobile-search-toggle" type="button" aria-label="חיפוש קורסים" title="חיפוש קורסים" aria-haspopup="dialog" aria-expanded={expanded} aria-controls={expanded?panelId:undefined} disabled={props.disabled||blocked} onClick={()=>expanded?close():setExpanded(true)}><Search size={19} aria-hidden="true"/></button>
   {mobile&&expanded&&createPortal(<div ref={panel} id={panelId} className="mobile-search-panel" role="dialog" aria-label="חיפוש קורסים" dir="rtl" style={{top:bounds.top,left:bounds.left,width:bounds.width,maxHeight:bounds.height}} onPointerDown={event=>event.stopPropagation()} onKeyDown={event=>{if(event.key==='Escape'){event.preventDefault();event.stopPropagation();close();}}}>
    <button className="mobile-search-close" type="button" aria-label="סגירת חיפוש הקורסים" title="סגירת החיפוש" onClick={close}><X size={18} aria-hidden="true"/></button>
    <CourseSearch {...props} onSelect={course=>{props.onSelect(course);setExpanded(false);requestAnimationFrame(()=>toggle.current?.focus({preventScroll:true}));}}/>

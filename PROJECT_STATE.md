@@ -1,20 +1,20 @@
 # Course Tree — Project State
 
-Snapshot updated on 21 November 2026 for ordinary-prerequisite highlighting and the complete help guide, retaining the unified added-course system, marked-credit summary, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
+Snapshot updated on 23 November 2026 for the mobile tools drawer and compact legal footer, retaining ordinary-prerequisite highlighting, the unified added-course system, marked credits, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
 
 ## 1. Project identity and evidence
 
 Course Tree is a Hebrew, RTL Technion course explorer. Users can explicitly add courses without a fixed selection cap, explore dependent courses forward and prerequisites backward in one shared graph, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
 
-This document describes the working implementation on the committed shared-graph and added-course base. The current uncommitted update adds ordinary-prerequisite highlighting, its saved preference, a complete help guide and regression coverage. It does not regenerate or correct academic datasets.
+This document describes the working implementation on the committed prerequisite-highlighting and shared-graph base. The current uncommitted update reorganizes mobile management controls into a modal tools drawer and simplifies the mobile footer, with presentation and regression changes only. It does not regenerate or correct academic datasets.
 
 | Snapshot item | Value |
 |---|---|
 | Repository | `https://github.com/Speedman149/course-tree.git` |
 | Checked-out branch | `main` |
-| Base application commit | `af6aa43` |
-| Base commit subject | `Unify added courses and preserve shared graph exploration` |
-| Current update | Ordinary-prerequisite highlighting and help guide in the working tree; not committed or deployed by this task |
+| Base application commit | `6edf207` |
+| Base commit subject | `Highlight satisfied prerequisites and refresh the help guide` |
+| Current update | Mobile tools drawer and compact mobile footer in the working tree; not committed or deployed by this task |
 | Package | `technion-course-tree`, version `1.0.0`, private ES module |
 | Linux workspace | `/home/seritamar/projects/course-tree` |
 | Windows workspace | `\\wsl.localhost\Ubuntu\home\seritamar\projects\course-tree` |
@@ -63,7 +63,7 @@ The graph workspace has 26px top and horizontal padding. Its toolbar contains th
 | Width at most 640px | Header becomes a single 65px row. Header search is hidden and a 40px graph search icon appears. Graph padding becomes 16px top and 11px horizontally, with a 12px canvas radius. |
 | Height at most 700px | Document scrolling is enabled, workspace minimum height is 430px, and graph minimum height is 250px, keeping the graph note and footer reachable. |
 
-The graph retains fixed-size course cards on narrow screens and relies on zooming and panning. The filter drawer becomes full-width on mobile. The mobile legend moves above the bottom zoom controls. Hebrew content stays RTL while graph geometry and numeric identifiers use appropriate LTR handling.
+The graph retains fixed-size course cards on narrow screens and relies on zooming and panning. The filter drawer becomes full-width on mobile. The mobile toolbar keeps filters and a compact `כלים` button. Collections, prerequisite highlighting, layer/reset actions, saving status and the legend live inside that drawer; zoom/fit and the search icon remain on the graph. Hebrew content stays RTL while graph geometry and numeric identifiers use appropriate LTR handling.
 
 ### Course cards and information panels
 
@@ -249,7 +249,7 @@ Existing-save initialization waits for course/catalog loading; catalog failure p
 
 Same-origin storage events validate and replace complete snapshots, including empty or multi-course graphs. Initial URL override is not reapplied to overwrite an incoming cross-tab snapshot. This remains last-write-wins with no per-field merge. Storage failures keep exploration usable and show `השמירה המקומית אינה זמינה כרגע`.
 
-Transient state includes search text/results and mobile-search opening, filter-panel opening/text/details, information panels, collection popovers and their search text, help/database dialogs, feedback drafts/status, tree notices, focus highlights, and layout animation anchors. Routes/history remain separate, with sanitized feedback origin context.
+Transient state includes mobile-tools opening, its collection disclosures/search fields, the mobile full-disclaimer disclosure, search text/results and mobile-search opening, filter-panel opening/text/details, information panels, collection popovers and their search text, help/database dialogs, feedback drafts/status, tree notices, focus highlights, and layout animation anchors. Routes/history remain separate, with sanitized feedback origin context.
 
 Persistence is scoped to browser origin/profile. Localhost, each Vercel preview origin, and production have separate storage. There is no account, cloud synchronization, progress export/import, or cross-device recovery.
 
@@ -834,7 +834,7 @@ This snapshot supports implementation discussions. Any academic correction still
 
 Concurrent requirements are recorded separately and do not block an otherwise satisfied ordinary rule. A concurrent-only course has no ordinary prerequisite burden. A future OR mixing an ordinary branch with a concurrent-only alternative is handled conservatively: it remains unknown unless an ordinary alternative is confirmed. No academic relationships or registration rules are invented.
 
-The graph-toolbar switch **הדגשת קורסים לפי קדמים מסומנים**, immediately beside **מסננים** (shortened to **הדגשת קורסים** at narrow widths), has the full accessible label **הדגש קורסים שכל הקדמים הרגילים שלהם מסומנים**. It defaults OFF and uses the existing version-5 progress envelope as an additive boolean field. Refresh, cross-tab restoration and full reset use the existing persistence workflow. Adding/removing courses, changing roots and clearing marks do not conflate the preference with marking state.
+The desktop graph-toolbar switch **הדגשת קורסים לפי קדמים מסומנים**, immediately beside **מסננים** (with its existing compact tablet label; mobile now uses the tools drawer described in section 17), has the full accessible label **הדגש קורסים שכל הקדמים הרגילים שלהם מסומנים**. It defaults OFF and uses the existing version-5 progress envelope as an additive boolean field. Refresh, cross-tab restoration and full reset use the existing persistence workflow. Adding/removing courses, changing roots and clearing marks do not conflate the preference with marking state.
 
 When ON, unmarked satisfied cards receive a 3px green outer ring and a green check indicator. The original faculty border and card dimensions remain intact; marked cards keep their red appearance. The course information panel adds the ordinary prerequisite result, marked/unmarked direct requirements, unchanged full logical expression, and a corequisite/registration limitation. No new highlight or explanation is shown when OFF. Calculations are memoized by the course collection and authoritative markings, separately from graph layout and mouse activity.
 
@@ -855,3 +855,40 @@ Verification on 21 November 2026:
 At the user's request, the highlighting switch now sits immediately beside `מסננים` in the upper graph toolbar. Narrow screens use the shorter `הדגשת קורסים` label and a responsive toolbar row. The footer toggle and its props were removed, restoring the original compact-footer height assertion. The help guide points to the new location. Satisfaction logic and saved preferences are unchanged.
 
 TypeScript/production build passed. Placement, alignment and horizontal overflow were checked at 1440, 1000, 641, 390 and 320px. Of 31 browser scenarios, 29 passed initially; the two mobile-search checks still expected the old fixed canvas Y position. Their assertion now checks that collapsed search reserves no row between the actual responsive toolbar and canvas, retaining the graph-height gain and width checks. Both passed on rerun, together with both help layouts (4/4 final follow-up checks). No new academic-data or marking changes were made.
+
+
+## 17. Mobile tools and compact footer (23 November 2026)
+
+The mobile breakpoint remains 640px. `MobileToolsDrawer.tsx` is a modal RTL off-canvas panel reached through the icon-only `כלים` button beside filters. It is closed by default and is not persisted. The panel leaves a 32px backdrop strip, is bounded by the visual viewport (including keyboard changes), and scrolls internally. Native collection disclosures reuse `AddedCoursesContent` and `MarkedCoursesContent`; desktop collection popovers wrap the same content. No drawer opens another collection popover.
+
+The drawer contains added courses, marked courses and their credit summary, the existing prerequisite-highlighting switch, layer/branch actions and legend, saving status, clear markings and full progress reset. Focus/selection closes the drawer before locating a course or opening its new tree. Editing lists, toggling highlighting and clearing marks remain reactive while the drawer is open. Destructive actions keep the existing confirmation messages. `PrerequisiteHighlightToggle.tsx` shares the original switch presentation and callbacks between desktop and mobile.
+
+Search, filters, help/feedback entry points, zoom/fit and course-card controls remain directly accessible. Opening tools closes transient search and course-information panels, makes the background inert, locks background scrolling, focuses the close button and traps Tab navigation. Escape, the close button and the backdrop close it and restore focus. Desktop resizing and navigation away from the tree discard the transient drawer; stored graph state is unaffected. Motion preferences and safe-area insets are respected.
+
+The mobile footer is two simple rows: an independent-project disclosure and the About/developer navigation. The disclosure expands to show the exact full English disclaimer. A storage-unavailable warning remains visible when needed. Desktop footer controls and its complete disclaimer retain their layout. Card dimensions and all academic/persistence algorithms are unchanged.
+
+The recorded before/after measurements at 844px viewport height show approximately 78px more graph height at 320–390px widths, 63px at 430px and 45px at 640px. Mobile footer height is 70px in these measurements. Graph/footer heights at 641px and 1440px are unchanged. Figures compare the same course, fonts, viewport and collapsed default presentations; other screen heights or active filter summaries can change the available area. `tests/fixtures/mobile-tools-before.json` records the baseline. Screenshots are kept in the temporary QA workspace under `.playwright/mobile-tools/`.
+
+Verification on 23 November 2026:
+
+- `npm test`: **218/218 passed** on the final source. `npm run build`: **passed**, including TypeScript and Vite. No lint script is configured; no lint result is claimed.
+- Complete browser run: **133/136 passed**. Three assertions still expected a former popover button or an explicit `dir` attribute on the former popover root. They were updated to check the native drawer disclosure and inherited RTL direction. All 15 new drawer scenarios, including touch emulation, passed in that run.
+- Final source also adds accessible collection-count descriptions and closes tools on navigation away from the tree. The final affected run passed **43/43**: branch controls/appearance, collections, credits, all 15 mobile-tools cases, and prerequisite-highlighting/help cases. It includes the three corrected assertions, browser-history cleanup, responsive transitions, long inline lists, confirmation cancellation/acceptance, immediate highlighting, keyboard viewport bounds, focus trapping/restoration, background locking, touch taps, and exact desktop geometry. The entire 136-case suite was not repeated after these final localized changes.
+- Screenshot review covered mobile closed/open tools, long marked lists, a visibly green-highlighted course, expanded full disclaimer, and desktop, with recorded before/after measurements. Chromium desktop/mobile/touch emulation was used. Physical phones, WebKit/Firefox, live Vercel and external form submissions were not tested.
+- Twelve protected logic/type/palette files are byte-identical to the task baseline: prerequisite satisfaction, credits, progress/use-progress, graph, connecting paths, exploration, layout, filters, faculty colors, types, and faculty palette. Both academic JSON dataset hashes are unchanged. Source/test/public files in the QA mirror match the workspace. `git diff --check` passed.
+- This presentation update has not been committed, pushed or deployed by this task.
+
+Main files: `src/components/MobileToolsDrawer.tsx`, `CourseCollections.tsx`, `PrerequisiteHighlightToggle.tsx`, `SiteFooter.tsx`, `MobileCourseSearch.tsx`, `CourseNode.tsx`, `HelpGuide.tsx`, `src/App.tsx`, `src/styles.css`, and `src/lib/use-mobile-layout.ts`. Browser helpers, responsive fixtures and regression tests were updated; `README.md` documents the mobile entry points.
+
+Measured default layout at 844px viewport height (CSS pixels, one decimal place):
+
+| Width | Previous graph height | New graph height | Graph gain | Previous footer | New footer |
+|---|---:|---:|---:|---:|---:|
+| 320 | 517.1 | 595.0 | 77.9 | 121.5 | 70.0 |
+| 360 | 517.1 | 595.0 | 77.9 | 121.5 | 70.0 |
+| 375 | 517.1 | 595.0 | 77.9 | 121.5 | 70.0 |
+| 390 | 517.1 | 595.0 | 77.9 | 121.5 | 70.0 |
+| 430 | 531.6 | 595.0 | 63.4 | 107.0 | 70.0 |
+| 640 | 549.6 | 595.0 | 45.4 | 89.0 | 70.0 |
+| 641 | 551.4 | 551.4 | 0.0 | 84.0 | 84.0 |
+| 1440 | 550.8 | 550.8 | 0.0 | 62.6 | 62.6 |

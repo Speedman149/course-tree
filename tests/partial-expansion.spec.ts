@@ -1,3 +1,4 @@
+import {openCollection} from './helpers/mobile-tools';
 import {expect,test as base,type Page} from '@playwright/test';
 import {PROGRESS_KEY,PROGRESS_VERSION} from '../src/lib/progress';
 const A='00000001',B='00000002',C='00000003',D='00000004',E='00000005',F='00000006',G='00000007',H='00000008',X='00000009';
@@ -30,8 +31,8 @@ async function pin(page:Page,id:string) {
 }
 async function mark(page:Page,id:string) {const b=node(page,id).locator('.mark-button');await b.focus();await b.press('Enter');await expect(b).toHaveAttribute('aria-pressed','true');}
 async function focusB(page:Page) {
- await mark(page,B);await page.getByRole('button',{name:'רשימת מסומנים',exact:true}).click();
- await page.getByRole('dialog',{name:'רשימת מסומנים',exact:true}).getByRole('button',{name:'מיקוד במקצוע מסומן '+B,exact:true}).click();
+ await mark(page,B);const marked=await openCollection(page,'marked');
+ await marked.getByRole('button',{name:'מיקוד במקצוע מסומן '+B,exact:true}).click();
  await expect(card(page)).toHaveClass(/is-focused/);
 }
 async function ready(page:Page,width:number) {

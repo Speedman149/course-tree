@@ -1,4 +1,7 @@
 import type {Course} from '../types';
+import {useEffect, useState} from 'react';
+import {ChevronDown} from 'lucide-react';
+import {useMobileLayout} from '../lib/use-mobile-layout';
 import {AddedCoursesMenu,MarkedCoursesMenu} from './CourseCollections';
 import {navigateApp} from '../lib/navigation';
 import {validCourseNumber} from '../lib/feedback';
@@ -19,11 +22,15 @@ interface Props {
   onToggleMarked?: (courseId: string) => void;
 }
 export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onSelectCourse,onToggleMarked}:Props) {
+ const mobile=useMobileLayout();
+ const [legalExpanded,setLegalExpanded]=useState(false);
+ useEffect(()=>setLegalExpanded(false),[mobile]);
+ const disclaimer=<p className="site-disclaimer" lang="en" dir="ltr">Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.</p>;
  const count=markedCourseIds?.size??markedCount??0;
  const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
  const aboutHref=courseId&&validCourseNumber(courseId)?`/?course=${encodeURIComponent(courseId)}#/about`:'/#/about';
  return <footer className="site-footer" aria-label="מידע על האתר">
-  {onResetProgress && <div className="saved-progress-controls">
+  {!mobile && onResetProgress && <div className="saved-progress-controls">
    <span className={storageAvailable?'local-save-status':'local-save-status storage-unavailable'} role="status">{storageAvailable?'ההתקדמות נשמרת בדפדפן הזה':'השמירה המקומית אינה זמינה כרגע'}</span>
    <span className="marked-count">קורסים מסומנים: {count}</span>
    <button onClick={onClearMarks} disabled={!count}>ניקוי סימונים</button>
@@ -31,7 +38,8 @@ export default function SiteFooter({treeCourseId,markedCount,storageAvailable=tr
    {courses&&addedCourseIds&&onAddedChange&&onLocateAddedCourse&&<AddedCoursesMenu courses={courses} addedCourseIds={addedCourseIds} onAddedChange={onAddedChange} onLocateCourse={onLocateAddedCourse}/>}
    <button onClick={onResetProgress}>איפוס התקדמות שמורה</button>
   </div>}
-  <div className="site-footer-main"><p className="site-disclaimer" lang="en" dir="ltr">Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.</p>
+  {mobile && !storageAvailable && <p className="mobile-storage-warning" role="status">השמירה המקומית אינה זמינה כרגע</p>}
+  <div className="site-footer-main">{mobile ? <details className="mobile-site-disclaimer" open={legalExpanded} onToggle={event=>setLegalExpanded(event.currentTarget.open)}><summary aria-label="גילוי נאות מלא — פרויקט עצמאי שאינו אתר רשמי של הטכניון"><span>פרויקט עצמאי · לא אתר רשמי של הטכניון</span><ChevronDown size={13}/></summary>{disclaimer}</details> : disclaimer}
    <nav aria-label="קישורי האתר"><a href={aboutHref} onClick={event=>{event.preventDefault();navigateApp(aboutHref);}}>אודות / About</a><span className="developer-credit map-developer-credit" dir="ltr">Developed by Chupchick</span></nav>
   </div>
  </footer>;

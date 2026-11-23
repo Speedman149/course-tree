@@ -1,0 +1,42 @@
+[
+  {
+    "width": 320,
+    "graphHeight": 517.109375,
+    "footerHeight": 121.5
+  },
+  {
+    "width": 360,
+    "graphHeight": 517.109375,
+    "footerHeight": 121.5
+  },
+  {
+    "width": 375,
+    "graphHeight": 517.109375,
+    "footerHeight": 121.5
+  },
+  {
+    "width": 390,
+    "graphHeight": 517.109375,
+    "footerHeight": 121.5
+  },
+  {
+    "width": 430,
+    "graphHeight": 531.609375,
+    "footerHeight": 107
+  },
+  {
+    "width": 640,
+    "graphHeight": 549.609375,
+    "footerHeight": 89
+  },
+  {
+    "width": 641,
+    "graphHeight": 551.40625,
+    "footerHeight": 84
+  },
+  {
+    "width": 1440,
+    "graphHeight": 550.8125,
+    "footerHeight": 62.59375
+  }
+]

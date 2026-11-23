@@ -1,3 +1,4 @@
+import {openCollection, toolsTrigger} from './helpers/mobile-tools';
 import {expect, test as base, type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import type {CourseDataset} from '../src/types';
@@ -10,13 +11,7 @@ const test = base.extend<{runtimeErrors: void}>({runtimeErrors: [async ({page}, 
 }, {auto: true}]});
 const node = (page: Page, id: string) => page.locator(`.react-flow__node[data-id="${id}"]`);
 const saved = (page: Page) => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').progress, PROGRESS_KEY);
-async function menu(page: Page) {
-  await page.mouse.move(0, 0); await page.keyboard.press('Escape');
-  const trigger = page.getByRole('button', {name: 'רשימת מסומנים', exact: true});
-  await trigger.scrollIntoViewIfNeeded(); await trigger.click();
-  const panel = page.getByRole('dialog', {name: 'רשימת מסומנים', exact: true});
-  await expect(panel).toBeVisible(); return panel;
-}
+async function menu(page: Page) {return openCollection(page, 'marked');}
 async function mark(page: Page, id: string) {
   const button = node(page, id).locator('.mark-button'); await button.focus(); await button.press('Enter');
   await expect(button).toHaveAttribute('aria-pressed', 'true');
@@ -43,14 +38,14 @@ for (const width of [1440, 320]) test(`marked credits update, include hidden cou
   await page.getByRole('button', {name: 'הצגת המפה', exact: true}).click();
   panel = await menu(page);
   await expect(panel.getByRole('status')).toHaveText('סה״כ נק״ז: 9.5');
-  await expect(panel).toHaveAttribute('dir', 'rtl'); await expect(panel).toBeInViewport();
+  await expect(panel).toHaveCSS('direction', 'rtl'); await expect(panel).toBeInViewport();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect.poll(async () => (await saved(page))?.markedCourseIds).toEqual([A, B, C]);
   await page.reload(); await expect(node(page, A)).toHaveCount(1); panel = await menu(page);
   await expect(panel.getByRole('status')).toHaveText('סה״כ נק״ז: 9.5');
   await panel.getByRole('button', {name: 'הסרת סימון של ' + B, exact: true}).click();
   await expect(panel.getByRole('status')).toHaveText('סה״כ נק״ז: 6.5');
-  await page.keyboard.press('Escape'); page.once('dialog', dialog => dialog.accept());
+  await page.keyboard.press('Escape'); if (await toolsTrigger(page).isVisible()) await openCollection(page, 'marked'); page.once('dialog', dialog => dialog.accept());
   await page.getByRole('button', {name: 'ניקוי סימונים', exact: true}).click();
   panel = await menu(page); await expect(panel.getByRole('status')).toHaveText('סה״כ נק״ז: 0');
   await expect.poll(async () => (await saved(page))?.markedCourseIds).toEqual([]);

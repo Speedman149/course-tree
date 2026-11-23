@@ -1,3 +1,4 @@
+import {openTools, toolsTrigger} from './helpers/mobile-tools';
 import {expect, test as base, type Page} from '@playwright/test';
 import {PROGRESS_KEY, PROGRESS_VERSION} from '../src/lib/progress';
 import {PREREQUISITE_HIGHLIGHT_LABEL, PREREQUISITE_HIGHLIGHT_SHORT_LABEL} from '../src/lib/prerequisite-satisfaction';
@@ -19,10 +20,12 @@ async function ready(page: Page, primary = A, overrides: Record<string, unknown>
   }, {key: PROGRESS_KEY, version: PROGRESS_VERSION, primary, overrides});
   await page.goto('/?course=' + primary);
   await expect(node(page, primary).locator('.course-link')).toHaveText(primary);
-  await expect(toggle(page)).toBeVisible();
-  await expect(page.locator('.map-actions > .filters-trigger + .prerequisite-highlight-toggle')).toHaveCount(1);
+  if (await toolsTrigger(page).isVisible()) await expect(page.locator('.map-actions > .filters-trigger + .mobile-tools-trigger')).toHaveCount(1);
+  else {await expect(toggle(page)).toBeVisible(); await expect(page.locator('.map-actions > .filters-trigger + .prerequisite-highlight-toggle')).toHaveCount(1);}
   await expect(page.locator('.site-footer [role="switch"]')).toHaveCount(0);
 }
+async function showToggle(page: Page) {if (await toolsTrigger(page).isVisible()) await openTools(page); return toggle(page);}
+async function changeHighlight(page: Page, key: string) {const control = await showToggle(page); await control.focus(); await control.press(key); if (await toolsTrigger(page).isVisible()) await page.keyboard.press('Escape');}
 async function changeMark(page: Page, id: string) {
   const button = node(page, id).locator('.mark-button'); await button.focus(); await button.press('Enter');
 }
@@ -36,12 +39,12 @@ for (const width of [1440, 320]) test(`ordinary satisfaction reacts without chan
   await page.setViewportSize({width, height: width === 320 ? 568 : 1000});
   await ready(page, A, {markedCourseIds: [S]}); // S is marked but hidden and not added.
   await expect(node(page, S)).toHaveCount(0);
-  await expect(toggle(page)).toHaveAttribute('aria-checked', 'false');
+  await expect(await showToggle(page)).toHaveAttribute('aria-checked', 'false');
   await expect(page.locator('.prerequisites-satisfied')).toHaveCount(0);
   const before = await node(page, B).getAttribute('style');
   const border = await card(page, B).evaluate(e => getComputedStyle(e).borderColor);
   const ids = await page.locator('.react-flow__node').evaluateAll(nodes => nodes.map(n => n.getAttribute('data-id')).sort());
-  await toggle(page).focus(); await toggle(page).press('Space');
+  await changeHighlight(page, 'Space');
   await expect(card(page, C)).toHaveClass(/prerequisites-satisfied/); // A OR S, with S marked.
   await expect(card(page, B)).not.toHaveClass(/prerequisites-satisfied/); // A AND S, A still absent.
   await expect(card(page, A)).not.toHaveClass(/prerequisites-satisfied/);
@@ -71,7 +74,7 @@ for (const width of [1440, 320]) test(`ordinary satisfaction reacts without chan
   const collapse = node(page, A).locator('.expand-button'); await collapse.focus(); await collapse.press('Enter');
   await expect(node(page, C)).toHaveCount(0); await collapse.press('Enter');
   await expect(card(page, C)).toHaveClass(/prerequisites-satisfied/);
-  await toggle(page).focus(); await toggle(page).press('Enter');
+  await changeHighlight(page, 'Enter');
   await expect(page.locator('.prerequisites-satisfied')).toHaveCount(0);
   await expect(page.locator('.prerequisite-satisfied-indicator')).toHaveCount(0);
   await expect.poll(async () => (await saved(page))?.highlightSatisfiedPrerequisites).toBe(false);
@@ -139,5 +142,6 @@ for (const width of [1440, 320]) test(`the existing help entry opens the complet
   await expect(guide.getByRole('button', {name: 'ממשיכים לגלות', exact: true})).toBeFocused();
   await page.keyboard.press('Tab'); await expect(guide.getByRole('button', {name: 'סגירה', exact: true})).toBeFocused();
   await page.keyboard.press('Escape'); await expect(guide).toHaveCount(0); await expect(help).toBeFocused();
-  await expect(toggle(page)).toHaveAttribute('aria-checked', 'false');
+  await expect(await showToggle(page)).toHaveAttribute('aria-checked', 'false');
+  if (await toolsTrigger(page).isVisible()) await page.keyboard.press('Escape');
 });
