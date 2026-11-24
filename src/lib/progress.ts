@@ -1,8 +1,9 @@
 import type { Course, DegreeCatalog } from '../types';
+import {normalizeMarkedQuantities} from './repeatable-courses';
 import { collectRequirements, forwardConnectionId, parseConnectionId, resolveCourseId, type CourseConnection, graphRoots, requiredAutomaticConnections } from './graph';
 
 export const PROGRESS_KEY = 'course-tree.progress';
-export const PROGRESS_VERSION = 5;
+export const PROGRESS_VERSION = 6;
 
 export interface Progress {
   primaryCourseId: string;
@@ -20,6 +21,7 @@ export interface Progress {
   filterTab: 'faculty' | 'catalog';
   searchAll: boolean;
   markedCourseIds: string[];
+  markedCourseQuantities: Record<string, number>;
   highlightSatisfiedPrerequisites: boolean;
   recent: string[];
   viewport: { x: number; y: number; zoom: number } | null;
@@ -50,6 +52,7 @@ export const defaultProgress = (db: ProgressDatabase): Progress => ({
   filterTab: 'faculty',
   searchAll: false,
   markedCourseIds: [],
+  markedCourseQuantities: {},
   highlightSatisfiedPrerequisites: false,
   recent: [],
   viewport: null,
@@ -263,6 +266,7 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
   const validCatalogFaculty = typeof raw.catalogFaculty === 'string' && raw.catalogFaculty.length <= 2000 &&
     (db.programs === null || db.facultyIds.has(raw.catalogFaculty) || db.programs.some(program => program.facultyIds.includes(raw.catalogFaculty as string)));
 
+  const markedCourseIds = strings(raw.markedCourseIds, idScanLimit).filter(id => index.knownIds.has(id));
   return {
     primaryCourseId,
     addedCourseIds,
@@ -278,7 +282,8 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
     catalogFaculty: validCatalogFaculty ? raw.catalogFaculty as string : '',
     filterTab: raw.filterTab === 'catalog' ? 'catalog' : 'faculty',
     searchAll: raw.searchAll === true,
-    markedCourseIds: strings(raw.markedCourseIds, idScanLimit).filter(id => index.knownIds.has(id)),
+    markedCourseIds,
+    markedCourseQuantities: normalizeMarkedQuantities(db.courses, markedCourseIds, raw.markedCourseQuantities),
     highlightSatisfiedPrerequisites: raw.highlightSatisfiedPrerequisites === true,
     recent: strings(raw.recent, 100).filter(id => index.knownIds.has(id)).slice(0, 4),
     viewport: keepBranches ? viewport(raw.viewport) : null,
@@ -290,8 +295,9 @@ export function decodeProgress(raw: string | null): unknown {
   try {
     const saved = record(JSON.parse(raw));
     if (!saved.progress || typeof saved.progress !== 'object' || Array.isArray(saved.progress)) return null;
-    if (saved.version === 1) return { ...record(saved.progress), hiddenForwardConnections: [] };
-    return saved.version === 2 || saved.version === 3 || saved.version === 4 || saved.version === PROGRESS_VERSION ? saved.progress : null;
+    if (saved.version === 1) return { ...record(saved.progress), markedCourseQuantities: {}, hiddenForwardConnections: [] };
+    if (saved.version === 2 || saved.version === 3 || saved.version === 4 || saved.version === 5) return {...record(saved.progress), markedCourseQuantities: {}};
+    return saved.version === PROGRESS_VERSION ? saved.progress : null;
   } catch {
     return null;
   }

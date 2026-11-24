@@ -1,6 +1,6 @@
 import {expect,test as base,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
-import {PROGRESS_KEY} from '../src/lib/progress';
+import {PROGRESS_KEY,PROGRESS_VERSION} from '../src/lib/progress';
 import {courseAppearance} from '../src/lib/faculty-colors';
 const sap=JSON.parse(readFileSync(new URL('../public/data/courses.json',import.meta.url),'utf8'));
 const catalogs=JSON.parse(readFileSync(new URL('../public/data/catalogs.json',import.meta.url),'utf8'));
@@ -198,7 +198,7 @@ test('a deliberately empty saved pin set survives refresh and ordinary search op
   await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual(['02340114']);
 });
 
-test('an unmarked version2 session is rewritten to schema5 without a user edit', async ({ page }) => {
+test('an unmarked version2 session is rewritten to the current schema without a user edit', async ({ page }) => {
   await seed(page, JSON.stringify({
     version: 2,
     progress: {
@@ -211,7 +211,7 @@ test('an unmarked version2 session is rewritten to schema5 without a user edit',
     },
   }));
   await ready(page, '00140855');
-  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').version, PROGRESS_KEY)).toBe(5);
+  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '{}').version, PROGRESS_KEY)).toBe(PROGRESS_VERSION);
   const state = await saved(page);
   expect(state.addedCourseIds).toEqual(['00140855']);
   expect(state.expandedForward).toEqual(['00140855', '00140889']);

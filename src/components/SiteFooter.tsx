@@ -1,4 +1,5 @@
 import type {Course} from '../types';
+import type {MarkedCourseQuantities} from '../lib/repeatable-courses';
 import {useEffect, useState} from 'react';
 import {ChevronDown} from 'lucide-react';
 import {useMobileLayout} from '../lib/use-mobile-layout';
@@ -8,6 +9,8 @@ import {validCourseNumber} from '../lib/feedback';
 interface Props {
   treeCourseId?: string;
   markedCount?: number;
+  markedCourseQuantities?: MarkedCourseQuantities;
+  onQuantityChange?: (id: string, quantity: number) => void;
   storageAvailable?: boolean;
   onClearMarks?: ()=>void;
   onResetProgress?: ()=>void;
@@ -19,9 +22,9 @@ interface Props {
   onLocateAddedCourse?: (courseId: string) => void;
   onFocusCourse?: (courseId: string) => void;
   onSelectCourse?: (courseId: string) => void;
-  onToggleMarked?: (courseId: string) => void;
+  onToggleMarked?: (courseId: string) => boolean | void;
 }
-export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onSelectCourse,onToggleMarked}:Props) {
+export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onSelectCourse,onToggleMarked,markedCourseQuantities,onQuantityChange}:Props) {
  const mobile=useMobileLayout();
  const [legalExpanded,setLegalExpanded]=useState(false);
  useEffect(()=>setLegalExpanded(false),[mobile]);
@@ -33,10 +36,10 @@ export default function SiteFooter({treeCourseId,markedCount,storageAvailable=tr
   {!mobile && onResetProgress && <div className="saved-progress-controls">
    <span className={storageAvailable?'local-save-status':'local-save-status storage-unavailable'} role="status">{storageAvailable?'ההתקדמות נשמרת בדפדפן הזה':'השמירה המקומית אינה זמינה כרגע'}</span>
    <span className="marked-count">קורסים מסומנים: {count}</span>
-   <button onClick={onClearMarks} disabled={!count}>ניקוי סימונים</button>
-   {courses&&markedCourseIds&&addedCourseIds&&visibleCourseIds&&onAddedChange&&onFocusCourse&&onSelectCourse&&onToggleMarked&&<MarkedCoursesMenu courses={courses} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={onAddedChange} onFocusCourse={onFocusCourse} onSelectCourse={onSelectCourse} onToggleMarked={onToggleMarked}/>}
+   <button className="footer-destructive" onClick={onClearMarks} disabled={!count}>ניקוי סימונים</button>
+   {courses&&markedCourseIds&&addedCourseIds&&visibleCourseIds&&onAddedChange&&onFocusCourse&&onSelectCourse&&onToggleMarked&&<MarkedCoursesMenu markedCourseQuantities={markedCourseQuantities} onQuantityChange={onQuantityChange} courses={courses} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={onAddedChange} onFocusCourse={onFocusCourse} onSelectCourse={onSelectCourse} onToggleMarked={onToggleMarked}/>}
    {courses&&addedCourseIds&&onAddedChange&&onLocateAddedCourse&&<AddedCoursesMenu courses={courses} addedCourseIds={addedCourseIds} onAddedChange={onAddedChange} onLocateCourse={onLocateAddedCourse}/>}
-   <button onClick={onResetProgress}>איפוס התקדמות שמורה</button>
+   <button className="footer-destructive" onClick={onResetProgress}>איפוס התקדמות שמורה</button>
   </div>}
   {mobile && !storageAvailable && <p className="mobile-storage-warning" role="status">השמירה המקומית אינה זמינה כרגע</p>}
   <div className="site-footer-main">{mobile ? <details className="mobile-site-disclaimer" open={legalExpanded} onToggle={event=>setLegalExpanded(event.currentTarget.open)}><summary aria-label="גילוי נאות מלא — פרויקט עצמאי שאינו אתר רשמי של הטכניון"><span>פרויקט עצמאי · לא אתר רשמי של הטכניון</span><ChevronDown size={13}/></summary>{disclaimer}</details> : disclaimer}

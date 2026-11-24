@@ -127,12 +127,12 @@ test('parallel strong/concurrent connections have separate counts and share thei
  assert.equal(after.nodes.length,2);assert.equal(after.edges.length,2);
 });
 
-test('schema5 preserves partial intent, validates real keys, and clears it for a different root',()=>{
+test('schema6 preserves partial intent, validates real keys, and clears it for a different root',()=>{
  let state=reveal(initial(),E);
  state=explorationReducer(state,{type:'hideConnection',connectionId:edge(B,C)});
  const snapshot={...defaultProgress(db),addedCourseIds:state.addedCourseIds,expandedForward:[...state.expandedForward],revealedForwardConnections:[...state.revealedForwardConnections],hiddenForwardConnections:[...state.hiddenForwardConnections],automaticConnections:state.automaticConnections,markedCourseIds:[E],catalogId:program.id,facultyIds:['cs']};
  const valid=validateProgress(decodeProgress(encodeProgress(snapshot)),db);
- assert.deepEqual(valid,snapshot);assert.equal(PROGRESS_VERSION,5);
+ assert.deepEqual(valid,snapshot);assert.equal(PROGRESS_VERSION,6);
  const restored=explorationReducer(initialExploration(A),{type:'restore',saved:valid});
  assert.deepEqual(graph(restored),graph(state));
  const cleaned=validateProgress({...snapshot,revealedForwardConnections:[edge(B,E),edge(B,E),'junk',edge(A,D),'__proto__->constructor:strong']},db);

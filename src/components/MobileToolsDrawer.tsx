@@ -2,6 +2,7 @@ import {useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type R
 import {createPortal} from 'react-dom';
 import {Check, ChevronDown, Layers, ListPlus, RotateCcw, Settings2, X} from 'lucide-react';
 import type {Course} from '../types';
+import type {MarkedCourseQuantities} from '../lib/repeatable-courses';
 import {MARKED_COURSE_COLOR} from '../lib/faculty-colors';
 import {AddedCoursesContent, MarkedCoursesContent} from './CourseCollections';
 import PrerequisiteHighlightToggle from './PrerequisiteHighlightToggle';
@@ -10,6 +11,8 @@ interface Props {
   courses: ReadonlyMap<string, Course>;
   addedCourseIds: readonly string[];
   markedCourseIds: ReadonlySet<string>;
+  markedCourseQuantities: MarkedCourseQuantities;
+  onQuantityChange: (id: string, quantity: number) => void;
   visibleCourseIds: ReadonlySet<string>;
   highlightSatisfiedPrerequisites: boolean;
   storageAvailable: boolean;
@@ -17,7 +20,7 @@ interface Props {
   onLocateAddedCourse: (id: string) => void;
   onFocusCourse: (id: string) => void;
   onSelectCourse: (id: string) => void;
-  onToggleMarked: (id: string) => void;
+  onToggleMarked: (id: string) => boolean | void;
   onHighlightChange: (enabled: boolean) => void;
   onExpandLayer: () => void;
   onResetBranches: () => void;
@@ -82,7 +85,7 @@ export default function MobileToolsDrawer(props: Props) {
         </details>
         <details className="mobile-tools-section" data-tools-section="marked">
           <summary aria-label="רשימת מסומנים" aria-describedby="tools-marked-count"><Check size={17}/><strong>רשימת מסומנים</strong><span className="tools-count" id="tools-marked-count">{props.markedCourseIds.size}</span><ChevronDown size={15}/></summary>
-          <MarkedCoursesContent courses={props.courses} addedCourseIds={props.addedCourseIds} markedCourseIds={props.markedCourseIds} visibleCourseIds={props.visibleCourseIds} onAddedChange={props.onAddedChange} onFocusCourse={props.onFocusCourse} onSelectCourse={props.onSelectCourse} onToggleMarked={props.onToggleMarked} onNavigate={onClose}/>
+          <MarkedCoursesContent markedCourseQuantities={props.markedCourseQuantities} onQuantityChange={props.onQuantityChange} courses={props.courses} addedCourseIds={props.addedCourseIds} markedCourseIds={props.markedCourseIds} visibleCourseIds={props.visibleCourseIds} onAddedChange={props.onAddedChange} onFocusCourse={props.onFocusCourse} onSelectCourse={props.onSelectCourse} onToggleMarked={props.onToggleMarked} onNavigate={onClose}/>
           <button className="tools-clear-marks" type="button" disabled={!props.markedCourseIds.size} onClick={props.onClearMarks}>ניקוי סימונים</button>
         </details>
         <section className="mobile-tools-section tools-display" aria-labelledby="tools-display-title">

@@ -1,9 +1,11 @@
 import {useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
-import {Check, Focus, GitBranch, ListPlus, Plus, Search, X} from 'lucide-react';
+import {Check, Focus, GitBranch, ListPlus, Minus, Plus, Search, X} from 'lucide-react';
 import {courseAppearance} from '../lib/faculty-colors';
 import {creditTotalFormat, summarizeMarkedCredits} from '../lib/marked-credits';
 import type {Course} from '../types';
+import {markedQuantity, repeatRule, type MarkedCourseQuantities} from '../lib/repeatable-courses';
+import {officialSourceURL} from '../lib/urls';
 
 interface PopoverProps {
   label: string;
@@ -184,23 +186,25 @@ export function AddedCoursesMenu(props: AddedCoursesMenuProps) {
 export interface MarkedCoursesMenuProps {
   courses: ReadonlyMap<string, Course>;
   markedCourseIds: ReadonlySet<string>;
+  markedCourseQuantities?: MarkedCourseQuantities;
+  onQuantityChange?: (id: string, quantity: number) => void;
   addedCourseIds: readonly string[];
   visibleCourseIds: ReadonlySet<string>;
   onAddedChange: (courseId: string, added: boolean) => void;
   onFocusCourse: (courseId: string) => void;
   onSelectCourse: (courseId: string) => void;
-  onToggleMarked: (courseId: string) => void;
+  onToggleMarked: (courseId: string) => boolean | void;
 }
 
 function normalizeListQuery(value: string) {
   return value.normalize('NFKD').replace(/[\u0591-\u05C7]/g, '').toLocaleLowerCase('he').replace(/[״"׳']/g, '').trim();
 }
 
-export function MarkedCoursesContent({courses, markedCourseIds, addedCourseIds, visibleCourseIds, onAddedChange, onFocusCourse, onSelectCourse, onToggleMarked, onNavigate}: MarkedCoursesMenuProps & {onNavigate: () => void}) {
+export function MarkedCoursesContent({courses, markedCourseIds, markedCourseQuantities, onQuantityChange, addedCourseIds, visibleCourseIds, onAddedChange, onFocusCourse, onSelectCourse, onToggleMarked, onNavigate}: MarkedCoursesMenuProps & {onNavigate: () => void}) {
   const [query, setQuery] = useState('');
   const addedIds = useMemo(() => new Set(addedCourseIds), [addedCourseIds]);
   const orderedIds = useMemo(() => [...markedCourseIds].reverse(), [markedCourseIds]);
-  const {knownCredits, missingCreditCount} = useMemo(() => summarizeMarkedCredits(courses, markedCourseIds), [courses, markedCourseIds]);
+  const {knownCredits, missingCreditCount} = useMemo(() => summarizeMarkedCredits(courses, markedCourseIds, markedCourseQuantities), [courses, markedCourseIds, markedCourseQuantities]);
   const filteredIds = useMemo(() => {
     const search = normalizeListQuery(query);
     if (!search) return orderedIds;
@@ -221,7 +225,12 @@ export function MarkedCoursesContent({courses, markedCourseIds, addedCourseIds, 
         const course = courses.get(id);
         const visible = visibleCourseIds.has(id);
         const added = addedIds.has(id);
-        return <div className="collection-row marked-course-row" key={id} data-marked-course={id} role="listitem">
+        const rule = repeatRule(course);
+        const quantity = markedQuantity(course, markedCourseQuantities);
+        const credits = course?.credits;
+        const knownCredits = typeof credits === 'number' && Number.isFinite(credits) && credits >= 0;
+        const documentedRange = rule?.rangeBasis === 'documented-table-range';
+        return <div className={`collection-row marked-course-row${rule && onQuantityChange ? ' repeatable-course-row' : ''}`} key={id} data-marked-course={id} role="listitem">
           <button className="collection-course-main" type="button" disabled={!visible} aria-label={`מיקוד במקצוע מסומן ${id}`} title={visible ? 'מיקוד במקצוע במפה' : 'המקצוע אינו מוצג כרגע. אפשר להוסיף לעץ או לפתוח עץ חדש.'} onClick={() => {if (visible) {onNavigate(); onFocusCourse(id);}}}>
             <span className="collection-mark"><Check size={12}/></span>
             <span><strong>{course?.name ?? 'קורס ללא פרטים במאגר'}</strong><small><b dir="ltr">{id}</b>{course && <span> · {courseAppearance(course).label}</span>}</small></span>
@@ -232,8 +241,30 @@ export function MarkedCoursesContent({courses, markedCourseIds, addedCourseIds, 
               onAddedChange(id, !added);
             }}>{added ? <Check size={15}/> : <Plus size={15}/>}</button>
             <button type="button" aria-label={`פתיחת עץ חדש עם ${id}`} title="פתח עץ חדש" onClick={() => {onNavigate(); onSelectCourse(id);}}><GitBranch size={15}/></button>
-            <button className="collection-unmark" type="button" aria-label={`הסרת סימון של ${id}`} title="הסרת סימון" onClick={event => {focusAfterRowRemoval(event.currentTarget); onToggleMarked(id);}}><X size={15}/></button>
+            <button className="collection-unmark" type="button" aria-label={`הסרת סימון של ${id}`} title="הסרת סימון" onClick={event => {if (onToggleMarked(id) !== false) focusAfterRowRemoval(event.currentTarget);}}><X size={15}/></button>
           </div>
+          {rule && onQuantityChange && <div className="marked-repetition">
+            <div className="repetition-count">
+              <span>מופעים שנספרו</span>
+              <div className="repetition-stepper" dir="ltr">
+                <button type="button" aria-label={`הפחתת מופע של ${id}`} disabled={quantity <= 1} onClick={() => onQuantityChange(id, quantity - 1)}><Minus size={13}/></button>
+                <output aria-label={`כמות מופעים של ${id}`} aria-live="polite">{quantity}</output>
+                <button type="button" aria-label={`הוספת מופע של ${id}`} disabled={quantity >= rule.maxCountedOccurrences} title={quantity >= rule.maxCountedOccurrences ? `מגבלת הספירה בכלי: ${rule.maxCountedOccurrences} מופעים. זו אינה תקרת הרשמה כללית.` : 'ספירת מופע נוסף'} onClick={() => onQuantityChange(id, quantity + 1)}><Plus size={13}/></button>
+              </div>
+              <strong>{knownCredits ? <>סה״כ מהקורס: <bdi>{creditTotalFormat.format(credits * quantity)}</bdi> נק״ז</> : 'חסר נתון נק״ז לקורס'}</strong>
+            </div>
+            {quantity === rule.maxCountedOccurrences && <p className="repetition-limit">{documentedRange ? 'הגעתם לסוף הטווח המתועד' : 'הגעתם למגבלת הספירה בכלי'}: {rule.maxCountedOccurrences} מופעים. זו אינה תקרת הרשמה כללית.</p>}
+            <p className="repetition-note">ספירה אישית; ההכרה לתואר תלויה במסלול ובאישורים.</p>
+            <details className="repetition-evidence"><summary>{rule.sources.length ? 'כללי הספירה ומקורות' : 'כללי הספירה'}</summary>
+              <p>סכום אישי של המופעים שסומנו, לא אישור הכרה לתואר. {knownCredits ? <>כל מופע: <bdi>{creditTotalFormat.format(credits)}</bdi> נק״ז לפי מאגר הקורסים.</> : 'חסר נתון נק״ז במאגר; הסכום הכולל אינו מלא.'}</p>
+              {documentedRange ? <>
+              <p>הטבלה הרשמית מציגה עד 8 מופעים לתואר ארבע־שנתי ועד 6 לתלת־שנתי; הכלי מוגבל לטווח המתועד של 1–8, ולא קובע תקרת הרשמה.</p>
+              <p>הכרה תלויה במסלול ובאישורים: תקרת ההכרה המשולבת בנבחרת, העשרה, בחירה חופשית וחינוך גופני היא 12 נק״ז בארבע־שנתי ו־10 בתלת־שנתי. חלק מההמרות מחייבות אישור ייצוג בשתי עונות ליגה או בשתי תחרויות. אין כאן חישוב זכאות או יישום התקרה המשולבת.</p>
+              <p>רישום לנבחרת לאחר מבחן קבלה ובאמצעות המאמן; קורס ספורט אחד בסמסטר ונוכחות חובה. סמסטרים ואישורים אינם מנוהלים בכלי.</p>
+              </> : <p>אפשר לספור 1–{rule.maxCountedOccurrences} מופעים בכלי. זו מגבלת ספירה אישית, ולא קביעה שכל מופע מקנה זיכוי נוסף לתואר. בדקו את כללי ההכרה החלים עליכם במקורות הרשמיים.</p>}
+              {rule.sources.map(source => <a key={source.url} href={officialSourceURL(source.url)} target="_blank" rel="noopener noreferrer">{source.label}</a>)}
+            </details>
+          </div>}
         </div>;
       })}
       {!orderedIds.length && <p className="collection-empty">אין מקצועות מסומנים עדיין</p>}

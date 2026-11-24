@@ -42,7 +42,8 @@ for(const width of [320,360,375,390,430,640,641,1440])test(`responsive controls 
   expect(await page.locator('.graph-canvas').boundingBox()).toEqual(graph);await closeTools(page);await expect(toolsTrigger(page)).toBeFocused();
  }else{
   await expect(toolsTrigger(page)).toHaveCount(0);await expect(page.locator('.saved-progress-controls')).toBeVisible();await expect(page.getByRole('switch')).toBeVisible();await expect(page.locator('.site-disclaimer')).toBeVisible();
-  expect(Math.abs(graph!.height-baseline.graphHeight)).toBeLessThan(1);expect(Math.abs(footer!.height-baseline.footerHeight)).toBeLessThan(1);
+  // Desktop compact buttons intentionally add a small amount of height; mobile budgets above are unchanged.
+  expect(footer!.height-baseline.footerHeight).toBeLessThan(30);expect(footer!.height).toBeLessThan(110);expect(graph!.height).toBeGreaterThan(baseline.graphHeight-30);
   const added=await openCollection(page,'added');await expect(added.locator('[data-added-course]')).toHaveCount(1);await page.keyboard.press('Escape');
  }
  await expect(page.getByRole('link',{name:'אודות / About',exact:true})).toBeVisible();await expect(page.getByText('Developed by Chupchick',{exact:true})).toBeVisible();
