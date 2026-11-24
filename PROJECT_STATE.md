@@ -1,20 +1,20 @@
-# Course Tree — Project State
+# BranchQuest (formerly Course Tree) — Project State
 
-Snapshot updated on 24 November 2026 for the sports-course whitelist extension, retaining desktop footer buttons and repeated-course counting, retaining ordinary-prerequisite highlighting, the unified added-course system, marked credits, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
+Snapshot updated on 24 November 2026 for BranchQuest branding and production SEO, retaining desktop footer buttons and repeated-course counting, retaining ordinary-prerequisite highlighting, the unified added-course system, marked credits, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
 
 ## 1. Project identity and evidence
 
-Course Tree is a Hebrew, RTL Technion course explorer. Users can explicitly add courses without a fixed selection cap, explore dependent courses forward and prerequisites backward in one shared graph, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
+BranchQuest is an independent Hebrew, RTL Technion course explorer. Users can explicitly add courses without a fixed selection cap, explore dependent courses forward and prerequisites backward in one shared graph, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
 
-This document describes the working implementation on the committed mobile-tools preview base. The current updates add desktop-only footer button styling and bounded repeated counting in the marked list, extended to the user-supplied sports whitelist. It does not regenerate or correct academic datasets. Historical sections retain their original verification scope; sections 18–19 record the current updates.
+This document describes the working implementation on the committed mobile-tools preview base. The current update adds BranchQuest branding, clean public URLs and production-aware SEO on the committed footer/sports-whitelist base. It does not regenerate or correct academic datasets. Historical sections retain their original verification scope; sections 18–20 record the recent updates.
 
 | Snapshot item | Value |
 |---|---|
 | Repository | `https://github.com/Speedman149/course-tree.git` |
 | Checked-out branch | `preview/mobile-tools-2026-11-23` |
-| Base application commit | `23dc86d` (mobile tools preview) |
-| Base commit subject | `Streamline mobile controls with an accessible tools drawer` |
-| Current update | Desktop footer buttons and sports-whitelist repeated counting on `preview/mobile-tools-2026-11-23` |
+| Base application commit | `fcf2e8f` (footer and sports-whitelist preview) |
+| Base commit subject | `Add repeatable sports counts and compact footer buttons` |
+| Current update | BranchQuest branding and SEO in the working tree on `preview/mobile-tools-2026-11-23`; not deployed by this task |
 | Package | `technion-course-tree`, version `1.0.0`, private ES module |
 | Linux workspace | `/home/seritamar/projects/course-tree` |
 | Windows workspace | `\\wsl.localhost\Ubuntu\home\seritamar\projects\course-tree` |
@@ -938,3 +938,31 @@ Detailed source context, the complete found/absent inventory, old-ID forms and r
 - Both academic JSON SHA-256 hashes remain unchanged. Relative to the state at this request, application changes are limited to `src/lib/repeatable-courses.ts` and `src/components/CourseCollections.tsx`. State, storage, graph, cards, filters, layout and CSS are byte-unchanged. The Windows QA source mirror matches all 35 application source files. `git diff --check` passed.
 
 No new course records, graph nodes, data imports, prerequisites or persistence schema were introduced.
+
+
+## 20. BranchQuest branding and production SEO (24 November 2026)
+
+Official public identity is now **BranchQuest**, with canonical origin **https://branchquest.app**. This remains the existing Vite/React application, not a Next.js migration. The homepage uses the exact requested Hebrew title and description. Real `/about` and `/feedback` pages have their own titles/descriptions/canonicals, Open Graph and Twitter metadata. Legacy About/feedback fragment URLs upgrade without a reload while preserving query/history state. Route changes update metadata without copying personal course/filter state into canonical or social URLs.
+
+The Vite build pre-renders visible semantic content for the three actual public pages using React's existing server renderer. About now has descriptive content instead of its placeholder; homepage sidebar copy naturally describes course/prerequisite/catalog exploration. Header/About/feedback/help branding and feedback subjects use BranchQuest. The independent disclaimer's name changes, with its non-affiliation and official-source guidance preserved. RTL, fonts, original favicon/logo, responsive graph controls and all existing course/state mechanisms remain in place. A checked-in 1200×630 PNG sharing card reuses the original logo, with editable SVG and a renderer using the existing Playwright development dependency.
+
+Build artifacts include three canonical public pages, a three-URL sitemap, robots allowing crawler access and referencing that sitemap, and a real noindex static 404 without an explorer boot script. WebSite JSON-LD establishes the preferred site name and canonical home. One exact JSON-LD CSP hash is allowed; arbitrary inline scripts remain blocked. Preview/custom/development builds receive noindex metadata, and an anchored host condition adds `X-Robots-Tag: noindex, nofollow` everywhere except the exact primary domain. Client metadata also checks the actual hostname. Production needs a fresh Production build; promoting a prebuilt preview would preserve its noindex metadata.
+
+Existing live Vercel redirects for `www.branchquest.app` and `course-tree-pied.vercel.app` were observed returning 308 to the apex with paths, duplicate query keys and encoded query values preserved. They were not duplicated in source. Pre-deployment Googlebot requests found the live apex publicly reachable, with old metadata; `/about`, `/sitemap.xml` and `/robots.txt` were still 404 because this work was local. Private Vercel/GSC settings and post-deployment indexing were not accessed.
+
+The build now automatically checks metadata, canonicals, indexability, sitemap/robots, WebSite JSON, CSP hash, sharing image dimensions and 404 output. No runtime dependencies were added. Academic data, graph algorithms, filters, course quantities and storage schema/key were not modified by this task. Analytics and feedback context sanitization now recognize `/about` while continuing to discard arbitrary query/fragment contents.
+
+Verification: **234/234 unit/data tests passed** on the final source; both Production and Preview builds plus their automatic artifact checks passed; final explicit `tsc --noEmit` and production `seo:check` passed. No linter is configured, and no lint pass is claimed. `git diff --check` passed.
+
+The complete two-worker browser run passed **158/162**. Its four failures were an old About hash expectation, a Chromium context-close timeout, a transformed/offscreen menu pointer sequence in the existing multi-root fixture, and Playwright's special text-matcher treatment of `noscript`. The URL assertion was updated; branch restoration uses native keyboard activation consistently with the fixture's other graph helpers; noscript content is read directly. All existing graph state assertions remain. The final normal single-worker run passed **12/12**, comprising all nine SEO cases and the three affected regressions. The whole 162-case suite was not repeated after those test-only updates; no known failures remain. Desktop/mobile About content, static mobile pages and the sharing card were visually reviewed. Graph, filters, layout, storage, marking quantities, original favicon and both academic datasets are byte-unchanged from the task baseline. No production graph code or test timeout was changed. See [SEO_REPORT.md](SEO_REPORT.md) for the exact implementation inventory, environment rules, evidence and required deployment / Search Console actions.
+
+
+## 21. Stable pre-render/hydration transition and About corrections (24 November 2026)
+
+The SEO homepage formerly rendered a different, About-style page that `createRoot` then replaced with the explorer; development styling also depended on JavaScript CSS imports. The public pre-renderer now renders the shared `ApplicationRoot`, and the browser hydrates the identical initial tree with a matching route and identifier prefix. The initial explorer uses actual header/sidebar/toolbar/canvas/footer geometry, with legitimate descriptive content inside its loading view. The existing app and analytics load afterward, and data loading retains that frame. Existing styles/fonts are linked directly in HTML; production uses Vite's hashed assets. No root hiding, crawler detection or crawler-only content was introduced.
+
+Header, footer legal information, sidebar introduction and instructions are shared to avoid divergent markup. Controls that have no handlers yet are disabled during startup. Early public-link navigation retains the selected course, and a layout-effect subscription reconciles the current URL during the handover to the app, including when storage is unavailable. The footer About anchor is an underlined text link again. About's flex content aligns to the top without shrinking; entering the page resets both its scroll area and document scroll, including from the bottom of Feedback. Upper navigation and existing content remain.
+
+No academic records, graph algorithms, filtering rules, markings/quantity helpers, storage keys or schemas changed. Tests distinguish the identical pre-render/loading geometry from the intentional existing summary shown when browser-local filters are restored. Detailed causes, files and final verification are in [SEO_REPORT.md](SEO_REPORT.md), in the refresh-transition follow-up.
+
+Verification of the frozen application: both builds/TypeScript/SEO checks and **234/234 unit/data tests passed**. The **complete 178-case browser suite completed: 175 passed and three desktop collection fixtures failed at a shared loading-footer readiness race**. The helper now waits for its control to be enabled; all three cases subsequently passed three repetitions, **9/9 without retries**, on the same application build. All 16 new transition/About cases passed in the full run. Across 24 cold refreshes (16 throttled), boot-phase CLS was at most **0.001622**; unfiltered header/canvas/footer geometry differed by **0px** from initial HTML to the ready explorer. The existing saved-filter summary is measured separately. Full-run and focused results are deliberately reported separately in the SEO report. No application source changed after that full run; no known failures remain after the helper verification. Testing used Chromium emulation, not a physical phone.

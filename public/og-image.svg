@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f6f7fa"/>
+  <rect x="32" y="32" width="1136" height="566" rx="30" fill="#fff" stroke="#e8e3ef" stroke-width="2"/>
+  <svg x="154" y="96" width="104" height="104" viewBox="0 0 40 40"><rect width="40" height="40" rx="12" fill="#7561d9"/><g fill="none" stroke="white" stroke-width="2.4"><rect x="22" y="15" width="9" height="10" rx="2"/><rect x="6" y="5" width="9" height="10" rx="2"/><rect x="6" y="25" width="9" height="10" rx="2"/><path d="M22 20h-4V10h-3m3 10v10h-3"/></g></svg>
+  <g font-family="Heebo,Arial,sans-serif" font-weight="600" text-anchor="middle">
+    <text x="684" y="176" font-size="82" fill="#292b40">BranchQuest</text>
+    <text x="600" y="300" font-size="43" direction="rtl" fill="#292b40">עץ קורסים ותכנון תואר בטכניון</text>
+    <text x="600" y="372" font-size="28" direction="rtl" fill="#766b85">קורסים · דרישות קדם · מסלולי לימודים</text>
+    <text x="600" y="477" font-size="28" fill="#765991">branchquest.app</text>
+    <text x="600" y="541" font-size="21" direction="rtl" fill="#766b85">פרויקט עצמאי לסטודנטים · ללא שיוך רשמי לטכניון</text>
+  </g>
+</svg>

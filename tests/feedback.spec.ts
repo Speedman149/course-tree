@@ -79,6 +79,6 @@ test('browser Back restores the prior report course rather than the latest repor
 
 test('feedback and About links retain the selected root even without writable local storage',async({page})=>{
  await page.addInitScript(()=>{Storage.prototype.setItem=()=>{throw new Error('Storage unavailable for navigation test');};});
- await page.goto('/?course=00140855');await expect(page.locator('.root-node .course-link')).toHaveText('00140855');await page.locator('.feedback-trigger').click();await expect(page.getByRole('link',{name:'חזרה למפת הקורסים',exact:true})).toHaveAttribute('href','/?course=00140855#/');
- await page.getByRole('link',{name:'אודות / About',exact:true}).click();await expect(page).toHaveURL(/course=00140855#\/about$/);await page.reload();await page.getByRole('link',{name:'חזרה למפת הקורסים ←',exact:true}).click();await expect(page.locator('.root-node .course-link')).toHaveText('00140855');
+ await page.goto('/?course=00140855');await expect(page.locator('.root-node .course-link')).toHaveText('00140855');await page.locator('.feedback-trigger').click();await expect(page.getByRole('link',{name:'חזרה למפת הקורסים',exact:true})).toHaveAttribute('href','/?course=00140855');
+ await page.getByRole('link',{name:'אודות / About',exact:true}).click();await expect(page).toHaveURL(/\/about\?course=00140855$/);await page.reload();await page.getByRole('link',{name:'חזרה למפת הקורסים ←',exact:true}).click();await expect(page.locator('.root-node .course-link')).toHaveText('00140855');
 });

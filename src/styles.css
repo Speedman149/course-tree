@@ -199,8 +199,8 @@ button.backward-badge{padding:2px 5px;gap:3px;line-height:1.5}button.backward-ba
 /* Desktop footer actions only; the mobile legal footer is unchanged. */
 @media(min-width:641px){
  .saved-progress-controls{gap:4px 8px;padding-bottom:4px}
- .saved-progress-controls>button,.saved-progress-controls .collection-control>button,.site-footer nav>a{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:26px;padding:3px 8px;border:1px solid #e4d9ee;border-radius:6px;background:#f8f4fc;color:#765991;font-size:10px;line-height:1.4;text-decoration:none;white-space:nowrap}
- .saved-progress-controls button:hover:not(:disabled),.site-footer nav>a:hover{background:#eee5f7;border-color:#cbb6df;color:#60417d}
+ .saved-progress-controls>button,.saved-progress-controls .collection-control>button{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:26px;padding:3px 8px;border:1px solid #e4d9ee;border-radius:6px;background:#f8f4fc;color:#765991;font-size:10px;line-height:1.4;text-decoration:none;white-space:nowrap}
+ .saved-progress-controls button:hover:not(:disabled){background:#eee5f7;border-color:#cbb6df;color:#60417d}
  .saved-progress-controls>button.footer-destructive{background:#fff9fb;border-color:#ecdde4;color:#9a596f}
  .saved-progress-controls>button.footer-destructive:hover:not(:disabled){background:#fbeef3;border-color:#d9b6c4;color:#8d3f59}
  .saved-progress-controls button:focus-visible,.site-footer nav>a:focus-visible{outline:3px solid #9c87cd;outline-offset:2px}
@@ -218,3 +218,25 @@ button.backward-badge{padding:2px 5px;gap:3px;line-height:1.5}button.backward-ba
 @media(max-width:640px){.repetition-stepper button{min-width:36px;min-height:36px}.marked-repetition{padding:7px}.repetition-count{gap:5px 7px}}
 
 .repetition-note{margin:4px 0 0;color:#85718f;font-size:10px}
+
+/* Public information uses the existing About styling; explorer layout stays intact. */
+.about-content{overflow-y:auto;min-height:0}.about-content>h2{font-size:18px;line-height:1.6;margin:20px 0 6px}.about-content>p{line-height:1.8}.about-content>p[lang="en"]{font-size:14px}.about-content>.eyebrow{margin-bottom:14px}
+.seo-static-shell{min-height:100dvh;display:flex;flex-direction:column;background:#faf8fd}.seo-static-shell>.about-content{flex:1}.seo-static-brand{display:inline-flex;gap:12px;align-items:center}.seo-static-shell .about-header nav{display:flex;gap:18px;font-size:13px}.seo-static-content>h1{line-height:1.5}.seo-static-shell>.site-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}.seo-loading{color:#7662b8}
+@media(max-width:640px){.about-content>h2{font-size:16px}.seo-static-brand{font-size:19px}.seo-static-brand img{width:32px;height:32px}.seo-static-shell .about-header{gap:12px}.seo-static-shell .about-header nav{font-size:11px;gap:10px}.seo-static-content>h1{font-size:25px}}
+
+/* First paint uses the explorer's real geometry; CSS is linked before JavaScript. */
+.mobile-site-disclaimer{display:none}
+.initial-mobile-tools,.initial-mobile-search{display:none}
+span.initial-desktop-action{display:contents}
+.initial-explorer-description{max-width:430px;padding:0 20px;text-align:center;line-height:1.8}
+.initial-loading-links{display:flex;gap:16px;margin-top:5px;font-size:11px;color:#8a70a5}.initial-loading-links a{text-decoration:underline}
+.initial-explorer-content noscript{max-width:430px;padding:0 20px;font-size:11px;text-align:center;line-height:1.7}
+.about-header{flex-shrink:0}.about-content{justify-content:flex-start;scroll-padding-top:35px;overflow-anchor:none}.about-content>*{flex-shrink:0}
+.initial-feedback-card{min-height:620px}.initial-feedback-description{font-size:13px;line-height:1.8;color:#8b7c98}.initial-feedback-card>p[role=status]{font-size:13px;color:#8a70a5}
+@media(max-width:640px){
+ .desktop-site-disclaimer,.initial-progress-controls,.initial-desktop-action{display:none!important}
+ .mobile-site-disclaimer{display:block}
+ .initial-mobile-tools,.initial-mobile-search{display:inline-flex}
+ .initial-explorer-description{font-size:11px;max-width:340px;padding:0 25px}
+ .initial-feedback-card{min-height:775px}
+}

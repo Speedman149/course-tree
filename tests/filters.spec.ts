@@ -45,6 +45,8 @@ test('degree catalog includes complete lists, excludes unrelated successors, and
  await close(page);await expect(page.locator('.active-filter-summary')).toContainText('2026-2027');
  await expect(page.locator('.react-flow__node[data-id="02140901"]')).toHaveCount(0);
  await expect(page.locator('.react-flow__node[data-id="01270454"]')).toHaveCount(0);
+ // Filtering preserves the viewport; fit the changed graph before inspecting a course by pointer.
+ await page.getByRole('button',{name:'התאמת המפה למסך',exact:true}).click();
  await page.locator('.root-node .node-info').click();await expect(page.locator('.course-catalog-roles')).toContainText('חובה');await page.keyboard.press('Escape');
  await rootSearch(page,'01040031');await expect(page.locator('.root-node .node-name')).toContainText('אינפיניטסימלי');
 });

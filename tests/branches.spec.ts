@@ -231,7 +231,7 @@ for (const baseline of footerBefore) test(`footer stays compact with original co
   await ready(page, '02340114');
   const height = await page.locator('.site-footer').evaluate(element => element.getBoundingClientRect().height);
   expect(height).toBeLessThan(baseline.height - 8);
-  await expect(page.locator('.site-disclaimer')).toHaveText('Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.');
+  await expect(page.locator('.site-disclaimer')).toHaveText('BranchQuest is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.');
   if (await toolsTrigger(page).isVisible()) await openCollection(page, 'marked');
   await expect(page.getByRole('button', {name: 'ניקוי סימונים', exact: true})).toBeVisible();
   if (await toolsTrigger(page).isVisible()) await expect(page.locator('[data-tools-section="marked"]>summary')).toBeVisible();
@@ -246,7 +246,7 @@ for (const baseline of footerBefore) test(`footer stays compact with original co
 test('About keeps its content and upper navigation with the large button absent', async ({page}) => {
   await ready(page);
   await page.getByRole('link', {name: 'אודות / About', exact: true}).click();
-  await expect(page.getByText('idk seems kinda cool ill put something here later', {exact: true})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'דרישות קדם ומפת קורסים בטכניון'})).toBeVisible();
   await expect(page.locator('.about-content .modal-primary')).toHaveCount(0);
   await page.reload();
   await page.getByRole('link', {name: 'חזרה למפת הקורסים ←', exact: true}).click();

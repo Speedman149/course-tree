@@ -16,7 +16,7 @@ export default function FeedbackPage({origin,courseId='',treeCourseId}:Props){
  const heading=useRef<HTMLHeadingElement>(null);
  const success=useRef<HTMLDivElement>(null);
  const errorSummary=useRef<HTMLDivElement>(null);
- useEffect(()=>{heading.current?.focus();const prior=document.title;document.title='דיווח ומשוב | Course Tree';return()=>{document.title=prior;};},[]);
+ useEffect(()=>{heading.current?.focus();},[]);
  useEffect(()=>{if(state.succeeded)success.current?.focus();else if(state.errors||unexpectedError)errorSummary.current?.focus();},[state.succeeded,state.errors,unexpectedError]);
  const busy=pending||state.submitting;
  const fieldError=(field:FeedbackField)=>errors[field]||(state.errors?.getFieldErrors(field).length?feedbackFieldError(field):undefined);
@@ -31,10 +31,10 @@ export default function FeedbackPage({origin,courseId='',treeCourseId}:Props){
   catch{reset();setUnexpectedError(true);}
   finally{inFlight.current=false;setPending(false);}
  };
- const treeHref=treeCourseId&&validCourseNumber(treeCourseId)?`/?course=${encodeURIComponent(treeCourseId)}#/`:'/#/';
+ const treeHref=treeCourseId&&validCourseNumber(treeCourseId)?`/?course=${encodeURIComponent(treeCourseId)}`:'/';
  const returnToTree=(event:React.MouseEvent<HTMLAnchorElement>)=>{event.preventDefault();navigateApp(treeHref);};
  return <div className="app-shell feedback-shell" dir="rtl">
-  <header className="about-header"><a className="about-brand" href={treeHref} onClick={returnToTree}>מפת הקורסים<span>.</span></a><a className="about-back" href={treeHref} onClick={returnToTree}><ArrowRight size={14}/>חזרה למפת הקורסים</a></header>
+  <header className="about-header"><a className="about-brand" href={treeHref} onClick={returnToTree} dir="ltr">BranchQuest<span>.</span></a><a className="about-back" href={treeHref} onClick={returnToTree}><ArrowRight size={14}/>חזרה למפת הקורסים</a></header>
   <main className="feedback-main">
    <section className="feedback-card" aria-labelledby="feedback-title">
     <span className="feedback-heading-icon"><Bug size={23}/></span>
