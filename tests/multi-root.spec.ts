@@ -124,7 +124,9 @@ test('course collapse and arrow collapse retain a downstream pin and unrelated e
   await expect(node(page, F)).toHaveCount(1);
   const restore = node(page, B).locator('.branch-restores');
   await restore.locator('summary').focus(); await restore.locator('summary').press('Enter');
-  await restore.getByRole('button', { name: 'החזרת הענף ' + C + ' דרך ' + B, exact: true }).click();
+  // Match the other graph helpers: native keyboard activation avoids scrolling a transformed menu.
+  const restoreButton = restore.getByRole('button', { name: 'החזרת הענף ' + C + ' דרך ' + B, exact: true });
+  await restoreButton.focus(); await restoreButton.press('Enter');
   await expect(node(page, C)).toHaveCount(1);
   await expect(node(page, U)).toHaveCount(0);
   await expand(page, A);

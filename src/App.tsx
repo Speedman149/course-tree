@@ -1,7 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { Background, BackgroundVariant, MarkerType, ReactFlow, useReactFlow, useViewport, type Edge } from '@xyflow/react';
-import { ArrowDownLeft, ArrowLeft, ArrowRight, BookOpen, Bug, Check, ChevronLeft, CircleHelp, Database, ExternalLink, Focus, GitBranch, GraduationCap, Layers, LoaderCircle, Menu, Minus, Move, Plus, RotateCcw, Search, ShieldCheck, Sparkles, SlidersHorizontal, X } from 'lucide-react';
-import CourseSearch from './components/CourseSearch';
+import { ArrowDownLeft, ArrowLeft, ArrowRight, BookOpen, Check, ChevronLeft, CircleHelp, Database, ExternalLink, Focus, GitBranch, Layers, Menu, Minus, Move, Plus, RotateCcw, Search, ShieldCheck, SlidersHorizontal, X } from 'lucide-react';
 import MobileCourseSearch from './components/MobileCourseSearch';
 const FeedbackPage = lazy(() => import('./components/FeedbackPage'));
 const FilterPanel = lazy(() => import('./components/FilterPanel'));
@@ -12,7 +11,8 @@ import { explorationReducer, initialExploration } from './lib/exploration';
 import { layoutCourseGraph, COURSE_WIDTH as WIDTH, COURSE_HEIGHT as HEIGHT } from './lib/layout';
 import type { Course, CourseDataset, CatalogDataset } from './types';
 import { useProgress } from './lib/use-progress';
-import { appRoute, navigateApp } from './lib/navigation';
+import { appRoute, navigateApp, upgradeLegacyRoute } from './lib/navigation';
+import {updatePageMetadata} from './lib/seo';
 import { feedbackPageURL, feedbackHistoryOrigin, validCourseNumber, type FeedbackOrigin } from './lib/feedback';
 import type { Progress } from './lib/progress';
 import { courseAppearance, MARKED_COURSE_COLOR } from './lib/faculty-colors';
@@ -27,6 +27,8 @@ import PrerequisiteHighlightToggle from './components/PrerequisiteHighlightToggl
 import {useMobileLayout} from './lib/use-mobile-layout';
 import {emptyMarkedCourses, setCourseMarked, setMarkedQuantity} from './lib/marked-courses';
 import {markedQuantity} from './lib/repeatable-courses';
+import AppHeader from './components/AppHeader';
+import {ExplorerIntro, ExplorerInstructions, ExplorerLoadingContent, StaticPublicPage} from './components/PublicContent';
 
 const nodeTypes = { course: CourseNode };
 const edgeTypes = { branch: ForwardBranchEdge };
@@ -46,6 +48,7 @@ export default function App() {
   const [viewportState, setViewportState] = useState<Progress['viewport']>(null);
   const pendingViewport = useRef<Progress['viewport'] | undefined>(undefined);
   const [route, setRoute] = useState(() => appRoute(window.location));
+  useEffect(() => {updatePageMetadata(route,__INDEXABLE_BUILD__ && window.location.hostname === 'branchquest.app');},[route]);
   const [feedbackOrigin, setFeedbackOrigin] = useState<FeedbackOrigin | null>(() => feedbackHistoryOrigin(window.history.state));
   const initialPage = useRef(feedbackPageURL(window.location.href));
   const requestedReportCourse = new URLSearchParams(window.location.search).get('courseId') ?? '';
@@ -147,14 +150,17 @@ export default function App() {
     if (rootId) url.searchParams.set('course', rootId); else url.searchParams.delete('course');
     window.history.replaceState(window.history.state, '', url);
   }, [rootId, progressReady, route]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const navigate = () => {
+      upgradeLegacyRoute();
       const next = appRoute(window.location);
       if (next === 'tree') pendingViewport.current = viewportState;
       setFeedbackOrigin(next === 'feedback' ? feedbackHistoryOrigin(window.history.state) : null);
       setRoute(next);
     };
     window.addEventListener('hashchange', navigate); window.addEventListener('popstate', navigate);
+    // Reconcile navigation that happened while the initial HTML was handing over to this app.
+    navigate();
     return () => { window.removeEventListener('hashchange', navigate); window.removeEventListener('popstate', navigate); };
   }, [viewportState]);
 
@@ -347,22 +353,19 @@ export default function App() {
   const clearMarks = () => {if (window.confirm('לנקות את כל סימוני הקורסים? הענפים והמסננים יישמרו.')) setMarkings(emptyMarkedCourses());};
   const resetProgress = () => {if (window.confirm('לאפס את כל ההתקדמות השמורה, הענפים, המסננים וסימוני הקורסים בדפדפן הזה?')) {clearSaved(); setFiltersOpen(false); closeMobileTools();}};
   const openMobileTools = () => {setFiltersOpen(false); setModal(null); setMobileToolsOpen(true);};
-  if (route === 'feedback') return <Suspense fallback={<div className="feedback-loading" role="status">טוענים את עמוד המשוב…</div>}><FeedbackPage treeCourseId={progressReady ? rootId : undefined} origin={feedbackOrigin ?? { pageUrl: initialPage.current, route: 'feedback', startingCourseId: progressReady && rootId ? rootId : undefined, ...(validCourseNumber(requestedReportCourse) ? { relevantCourseId: requestedReportCourse } : {}) }} courseId={feedbackOrigin?.relevantCourseId ?? (validCourseNumber(requestedReportCourse) ? requestedReportCourse : undefined)}/></Suspense>;
-  if (route === 'about') return <AboutPage/>;
+  if (route === 'feedback') return <Suspense fallback={<StaticPublicPage route="feedback"/>}><FeedbackPage treeCourseId={progressReady ? rootId : undefined} origin={feedbackOrigin ?? { pageUrl: initialPage.current, route: 'feedback', startingCourseId: progressReady && rootId ? rootId : undefined, ...(validCourseNumber(requestedReportCourse) ? { relevantCourseId: requestedReportCourse } : {}) }} courseId={feedbackOrigin?.relevantCourseId ?? (validCourseNumber(requestedReportCourse) ? requestedReportCourse : undefined)}/></Suspense>;
+  if (route === 'about') return <AboutPage treeCourseId={progressReady ? rootId : undefined}/>;
+  if ((!dataset||!progressReady)&&!loadError&&!modal) return <StaticPublicPage route="tree" onHelp={()=>setModal('help')}/>;
 
   return <div className="app-shell" dir="rtl" inert={mobileToolsOpen || undefined} style={{'--marked-course':MARKED_COURSE_COLOR} as React.CSSProperties}>
-    <header className="app-header">
-      <a className="brand" href="/" aria-label="מפת הקורסים — לדף הבית"><span className="brand-mark"><GitBranch size={24}/></span><span><strong>מפת הקורסים<span className="brand-dot">.</span></strong><small>לגלות לאן אפשר להמשיך</small></span></a>
-      <div className="desktop-course-search"><CourseSearch courses={filteredCourses} allCourses={courses} filtered={hasFilters} disabled={!dataset || !progressReady} searchAll={searchAll} onSearchAllChange={setSearchAll} onSelect={selectRoot} addedCourseIds={addedCourseIds} onAddedChange={(course, added) => setCourseAdded(course.id, added)}/></div>
-      <div className="header-actions"><a className="feedback-trigger" href="/feedback" title="דיווח על תקלה או שליחת משוב" aria-label="דיווח על תקלה או שליחת משוב" onClick={event=>{event.preventDefault();openFeedback();}}><Bug size={19}/></a><span className="technion-tag"><GraduationCap size={19}/>הטכניון</span><span className="header-divider"/><button className="help-button" onClick={() => setModal('help')}><CircleHelp size={18}/><span>איך זה עובד?</span></button></div>
-    </header>
+    <AppHeader courses={filteredCourses} allCourses={courses} filtered={hasFilters} disabled={!dataset||!progressReady} searchAll={searchAll} onSearchAllChange={setSearchAll} onSelect={selectRoot} addedCourseIds={addedCourseIds} onAddedChange={(course,added)=>setCourseAdded(course.id,added)} onHelp={()=>setModal('help')} onFeedback={()=>openFeedback()}/>
 
     <main className="workspace">
       <aside className="sidebar">
-        <div className="sidebar-intro"><span className="eyebrow"><span/>מגלים את התמונה הגדולה</span><h1>קורס אחד.<br/>הרבה אפשרויות.</h1><p>חקרו את הקשרים בין הקורסים ובנו לעצמכם תמונה של הדרך קדימה.</p></div>
+        <ExplorerIntro/>
         <div className="sidebar-section-label">{'הקורס הנבחר'} <span className="status-dot"/></div>
         <div className="root-summary" style={{'--faculty-accent':courseAppearance(root).accent} as React.CSSProperties}><span className="root-summary-icon"><BookOpen size={21}/></span>{root ? <><CourseLink course={root} id={root.id}/><h2>{root.name}</h2><p>{root.faculty}{root.credits !== undefined ? ` · ${root.credits} נקודות זכות` : ''}</p></> : dataset && progressReady ? rootId ? <><CourseLink id={rootId}/><h2>פרטי המקצוע אינם במאגר</h2></> : <><h2>אין קורס נבחר</h2><p>בחרו מקצוע בחיפוש או ברשימת המסומנים.</p></> : <div className="skeleton skeleton-root"/>}<div className="root-summary-stats"><div><strong>{successors.filter(child => isVisible(child.courseId)).length}</strong><span>קורסי המשך{successors.some(child => !isVisible(child.courseId)) ? ` · ${successors.filter(child => !isVisible(child.courseId)).length} מוסתרים` : ''}</span></div><div><strong>{prerequisites.length}</strong><span>קדמים ישירים</span></div></div></div>
-        <div className="explore-instructions"><div className="sidebar-section-label">מכאן ממשיכים לחקור</div><div className="instruction"><span className="instruction-icon purple"><ArrowLeft size={17}/></span><div><strong>מסתכלים קדימה</strong><p>לחצו + בקורס כדי לגלות את קורסי ההמשך שלו.</p></div></div><div className="instruction"><span className="instruction-icon green"><ArrowRight size={17}/></span><div><strong>חוזרים צעד אחורה</strong><p>עברו עם העכבר על קורס כדי לחקור את הקדמים שלו.</p></div></div></div>
+        <ExplorerInstructions/>
         {recent.length > 0 && <div className="recent-courses"><div className="sidebar-section-label">ביקרתם לאחרונה</div>{recent.map(id => { const course = index.get(id); return course && <button key={id} onClick={() => selectRoot(course)}><span>{course.name}</span><ChevronLeft size={14}/></button>; })}</div>}
         <div className="sidebar-bottom"><div className="data-status"><span/><span>{dataset ? `${courses.length.toLocaleString('he')} קורסים · ${facultyCount} פקולטות ויחידות` : 'טוענים את מאגר הקורסים…'}</span></div><button onClick={() => setModal('data')}><Database size={14}/>על המאגר ומקורות המידע<ChevronLeft size={13}/></button><small>כל הפקולטות. מעבר לסמסטר אחד.</small></div>
       </aside>
@@ -385,7 +388,7 @@ export default function App() {
             {!mobile && <div className="map-legend"><span className="legend-title">מקרא</span><span><i className="legend-faculty"/>מסגרת: פקולטה</span><span><i className="legend-marked"/>סימון אישי</span><span><i className="legend-node strong"/>קדם חזק</span><span><i className="legend-node concurrent"/>מקצוע צמוד</span><button aria-label="הסבר על סוגי הקשרים" onClick={() => setModal('help')}><CircleHelp size={14}/></button></div>}
             <div className="canvas-pan-hint"><Move size={13}/>גררו להזזה · גללו לשינוי קנה מידה</div>
             {graphAnchors.length === 1 && graph.nodes.length === 1 && <div className="single-node-hint">{successors.length > 0 && successors.every(child => !isVisible(child.courseId)) ? 'קורסי ההמשך מוסתרים על ידי המסננים. אפשר לשנות סינון; חקירת קדמים נשארת פתוחה.' : successors.some(child=>isVisible(child.courseId)&&hiddenForwardConnections.has(forwardConnectionId(rootId,child.courseId,child.relation))) ? 'ענפים מוסתרים אישית. אפשר להחזירם דרך ״הצגת ענפים״ ליד הקורס.' : successors.length === 0 ? 'אין במאגר קורסי המשך לקורס הזה. אפשר לחקור את הקדמים או לבחור קורס אחר.' : 'לחצו על + בכרטיס כדי לפתוח את קורסי ההמשך.'}</div>}
-          </> : <div className="loading-state">{loadError ? <><CircleHelp size={32}/><h2>לא הצלחנו לטעון את המאגר</h2><p>בדקו את החיבור ונסו שוב.</p><button onClick={() => window.location.reload()}>טעינה מחדש</button></> : <><LoaderCircle size={30} className="spin"/><h2>מחברים את הנקודות…</h2><p>טוענים את מפת קורסי הטכניון</p></>}</div>}
+          </> : loadError ? <div className="loading-state"><CircleHelp size={32}/><h2>לא הצלחנו לטעון את המאגר</h2><p>בדקו את החיבור ונסו שוב.</p><button onClick={() => window.location.reload()}>טעינה מחדש</button></div> : <ExplorerLoadingContent/>}
         </div>
         <div className="map-footnote"><ShieldCheck size={15}/><p>{graph.truncated && <strong role="status">המפה גדולה מאוד, ולכן מוצג חלק ממנה. צמצמו ענפים או מסננים כדי להמשיך. </strong>}קשר במפה מציין דרישה לקורס. ייתכנו דרישות נוספות או חלופיות — בדקו את כלל הקדמים המלא בחלונית הקורס.</p><button onClick={() => setModal('data')}>פרטי המאגר<ExternalLink size={12}/></button></div>
       </section>

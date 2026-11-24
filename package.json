@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node --import tsx scripts/check-seo.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --import tsx --test --experimental-test-isolation=none --test-reporter spec tests/*.test.ts scripts/course-data.test.mjs",
     "data:update": "node scripts/update-data.mjs --discover --refresh",
@@ -16,7 +16,9 @@
     "catalogs:update": "python3 scripts/catalogs/extract.py --refresh --compatible-only && node scripts/catalogs/build.mjs",
     "catalogs:rebuild": "node scripts/catalogs/build.mjs",
     "catalogs:discover": "node scripts/catalogs/discover.mjs",
-    "catalogs:extract-baseline": "python3 scripts/catalogs/extract.py --source-id 2025-2026-full"
+    "catalogs:extract-baseline": "python3 scripts/catalogs/extract.py --source-id 2025-2026-full",
+    "seo:check": "node --import tsx scripts/check-seo.mjs",
+    "seo:image": "node scripts/render-social-image.mjs"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.8",

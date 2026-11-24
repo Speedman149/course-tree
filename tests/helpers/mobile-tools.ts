@@ -22,6 +22,8 @@ export async function openCollection(page: Page, kind: 'added' | 'marked') {
   await page.keyboard.press('Escape');
   const name = kind === 'added' ? 'קורסים שהוספתי' : 'רשימת מסומנים';
   const trigger = page.getByRole('button', {name, exact: true});
+  // The pre-rendered loading footer intentionally disables actions until the app is ready.
+  await expect(trigger).toBeEnabled();
   await trigger.scrollIntoViewIfNeeded(); await trigger.click();
   const panel = page.getByRole('dialog', {name, exact: true}); await expect(panel).toBeVisible(); return panel;
 }

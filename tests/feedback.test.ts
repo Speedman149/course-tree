@@ -36,9 +36,9 @@ test('server errors have Hebrew retry messages and never include untrusted serve
 test('direct feedback and existing About routing stay independent',()=>{
  assert.equal(appRoute({pathname:'/feedback',hash:''}),'feedback');assert.equal(appRoute({pathname:'/feedback/',hash:''}),'feedback');assert.equal(appRoute({pathname:'/',hash:'#/feedback'}),'feedback');assert.equal(appRoute({pathname:'/',hash:'#/about'}),'about');assert.equal(appRoute({pathname:'/',hash:'#/'}),'tree');
 });
-test('Vercel rewrites only feedback documents and leaves assets/data routes untouched',()=>{
+test('Vercel serves page-specific public documents and leaves assets/data routes untouched',()=>{
  const config=JSON.parse(readFileSync(new URL('../vercel.json',import.meta.url),'utf8'));
- assert.deepEqual(config.rewrites,[{source:'/feedback',destination:'/index.html'},{source:'/feedback/',destination:'/index.html'}]);
+ assert.deepEqual(config.rewrites,[{source:'/about',destination:'/about/index.html'},{source:'/about/',destination:'/about/index.html'},{source:'/feedback',destination:'/feedback/index.html'},{source:'/feedback/',destination:'/feedback/index.html'}]);
 });
 
 test('history report context is validated independently of graph progress',()=>{

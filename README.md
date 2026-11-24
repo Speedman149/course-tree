@@ -1,6 +1,6 @@
-# Technion Course Tree · מפת הקורסים
+# BranchQuest · עץ קורסים ותכנון לימודים בטכניון
 
-A Hebrew RTL course dependency explorer built with React, TypeScript, Vite, React Flow and Dagre. The checked-in database contains 2,761 course records collected from eight Technion SAP semester snapshots across several academic years and academic units.
+BranchQuest is an independent Hebrew RTL course dependency explorer built with React, TypeScript, Vite, React Flow and Dagre. The checked-in database contains 2,761 course records collected from eight Technion SAP semester snapshots across several academic years and academic units.
 
 The default root is **מבוא למדעי המחשב מ׳**, current source ID **`02340114`**. Searching for its legacy number **`234114`** or unpadded current number **`2340114`** finds the same record. Other courses are searchable by their source IDs, explicit aliases, partial numbers, Hebrew names and academic units.
 
@@ -33,7 +33,7 @@ npm run data:test
 
 The interface bundles its Heebo Hebrew and Latin fonts locally through `@fontsource/heebo`; it does not need a third-party font request.
 
-For browser verification, install Chromium once and run the Playwright suite. Its configuration starts Vite automatically, or reuses an existing local server outside CI.
+For browser verification, install Chromium once and run the Playwright suite. Its configuration builds and starts the production fixture; use `PLAYWRIGHT_BASE_URL` to test a separately running server.
 
 ```sh
 npx playwright install chromium
@@ -48,7 +48,7 @@ PLAYWRIGHT_BASE_URL=http://127.0.0.1:5173 npm run test:e2e
 
 Browser tests cover root selection, legacy and Hebrew searches, independent forward branches, recursive backward exploration, course links, relationship colors, viewport controls and a 390px mobile layout. Failure screenshots and traces are written to `.playwright/results/`.
 
-This project is prepared for local development and a static production build. No hosted deployment is assumed.
+The primary production origin is `https://branchquest.app`. The project supports local development and a pre-rendered static production build.
 
 ## Explore the graph
 
@@ -140,12 +140,12 @@ The graph automatically remembers roots, expanded forward/backward branches, fil
 
 The twelve largest faculties/teaching departments receive fixed, non-red accents based on unique course counts and actual prerequisite connectivity. White/gray relationship badges preserve strong/concurrent distinctions on normal and marked cards. See [the palette and analysis](docs/faculty-colors/README.md).
 
-The footer includes the independent-project disclaimer, **Developed by Chupchick**, and a refresh-safe `#/about` page. No academic database records are changed by these features.
+The footer includes the independent-project disclaimer, **Developed by Chupchick**, and a refresh-safe `/about` page (legacy `#/about` links remain supported). No academic database records are changed by these features.
 ## Mobile tools and footer
 
 At widths up to 640px, **כלים** beside the map filters opens a right-hand tools drawer. Added courses and marked courses (including the credit total) open inline inside it, alongside prerequisite highlighting, layer/branch controls, local-save status and confirmed reset actions. Search, filters, zoom/fit and graph interactions stay directly accessible. Opening tools does not resize or reset the graph; Escape, the close button or the backdrop dismiss it. Desktop management controls remain in their original locations.
 
-The compact mobile footer keeps About and the developer credit visible. Its independent-project notice expands to show the complete, unchanged English disclaimer. No course data, prerequisite logic, credit calculations or saved-progress format changed in this presentation refactor.
+The compact mobile footer keeps About and the developer credit visible. Its independent-project notice expands to show the complete English independent-project disclaimer. No course data, prerequisite logic, credit calculations or saved-progress format changed in this presentation refactor.
 
 ## Hide one forward branch
 
@@ -154,3 +154,14 @@ The small minus near a forward arrow's child endpoint hides only that connection
 ## Feedback and bug reports
 
 The header bug icon opens the Hebrew `/feedback` page. Course information panels can prefill a course report. The official Formspree React integration handles asynchronous submission, validation, retries and concise technical context, with no account required for visitors. Graph progress is retained when returning. See [feedback setup, privacy and deployment checks](docs/FEEDBACK.md).
+
+
+## SEO and public URLs
+
+The project uses Vite/React, not Next.js. Builds pre-render real HTML for `/`, `/about` and `/feedback`, with page-specific BranchQuest titles/descriptions, primary-domain canonicals, social metadata, a shared WebSite JSON-LD block, `sitemap.xml`, `robots.txt` and a genuine static 404. The original favicon is retained and a 1200×630 sharing image uses its logo. The explorer remains interactive React; graph/state/data behavior is unchanged.
+
+Preview/development builds are nonindexable, with additional noindex response headers on all non-primary hosts. Production must be built in the Production environment; rebuild rather than promoting a prebuilt preview. Every `npm run build` includes `seo:check`, and no new runtime dependencies are required.
+
+See [SEO_REPORT.md](SEO_REPORT.md) for exact files, test coverage, environment policy, existing verified domain redirects and the Vercel / Google Search Console release steps.
+
+The initial public HTML now uses the explorer's loading layout and is hydrated before the interactive application loads. Stylesheets are linked in the HTML, including in Vite development, to avoid an unstyled or unrelated descriptive-page flash. Browser tests start both production and development servers; existing external servers can be supplied with `PLAYWRIGHT_BASE_URL` and `PLAYWRIGHT_DEV_BASE_URL`.

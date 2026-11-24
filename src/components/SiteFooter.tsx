@@ -1,11 +1,12 @@
+import {useLayoutEffect, useRef} from 'react';
 import type {Course} from '../types';
 import type {MarkedCourseQuantities} from '../lib/repeatable-courses';
-import {useEffect, useState} from 'react';
-import {ChevronDown} from 'lucide-react';
 import {useMobileLayout} from '../lib/use-mobile-layout';
 import {AddedCoursesMenu,MarkedCoursesMenu} from './CourseCollections';
 import {navigateApp} from '../lib/navigation';
 import {validCourseNumber} from '../lib/feedback';
+import FooterInformation from './FooterInformation';
+import {AboutContent} from './PublicContent';
 interface Props {
   treeCourseId?: string;
   markedCount?: number;
@@ -26,12 +27,9 @@ interface Props {
 }
 export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onSelectCourse,onToggleMarked,markedCourseQuantities,onQuantityChange}:Props) {
  const mobile=useMobileLayout();
- const [legalExpanded,setLegalExpanded]=useState(false);
- useEffect(()=>setLegalExpanded(false),[mobile]);
- const disclaimer=<p className="site-disclaimer" lang="en" dir="ltr">Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.</p>;
  const count=markedCourseIds?.size??markedCount??0;
  const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
- const aboutHref=courseId&&validCourseNumber(courseId)?`/?course=${encodeURIComponent(courseId)}#/about`:'/#/about';
+ const aboutHref=courseId&&validCourseNumber(courseId)?`/about?course=${encodeURIComponent(courseId)}`:'/about';
  return <footer className="site-footer" aria-label="מידע על האתר">
   {!mobile && onResetProgress && <div className="saved-progress-controls">
    <span className={storageAvailable?'local-save-status':'local-save-status storage-unavailable'} role="status">{storageAvailable?'ההתקדמות נשמרת בדפדפן הזה':'השמירה המקומית אינה זמינה כרגע'}</span>
@@ -42,15 +40,17 @@ export default function SiteFooter({treeCourseId,markedCount,storageAvailable=tr
    <button className="footer-destructive" onClick={onResetProgress}>איפוס התקדמות שמורה</button>
   </div>}
   {mobile && !storageAvailable && <p className="mobile-storage-warning" role="status">השמירה המקומית אינה זמינה כרגע</p>}
-  <div className="site-footer-main">{mobile ? <details className="mobile-site-disclaimer" open={legalExpanded} onToggle={event=>setLegalExpanded(event.currentTarget.open)}><summary aria-label="גילוי נאות מלא — פרויקט עצמאי שאינו אתר רשמי של הטכניון"><span>פרויקט עצמאי · לא אתר רשמי של הטכניון</span><ChevronDown size={13}/></summary>{disclaimer}</details> : disclaimer}
-   <nav aria-label="קישורי האתר"><a href={aboutHref} onClick={event=>{event.preventDefault();navigateApp(aboutHref);}}>אודות / About</a><span className="developer-credit map-developer-credit" dir="ltr">Developed by Chupchick</span></nav>
-  </div>
+  <FooterInformation aboutHref={aboutHref} navigate mobile={mobile}/>
  </footer>;
 }
-export function AboutPage(){
+export function AboutPage({treeCourseId}: {treeCourseId?: string}){
+ const content=useRef<HTMLElement>(null);
+ useLayoutEffect(()=>{content.current?.scrollTo(0,0);window.scrollTo(0,0);},[]);
+ const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
+ const treeHref=courseId&&validCourseNumber(courseId)?`/?course=${encodeURIComponent(courseId)}`:'/';
  return <div className="app-shell about-shell" dir="rtl">
-  <header className="about-header"><a className="about-brand" href="#/">מפת הקורסים<span>.</span></a><a className="about-back" href="#/">חזרה למפת הקורסים ←</a></header>
-  <main className="about-content"><span className="eyebrow">COURSE TREE</span><h1>אודות / About</h1><p lang="en" dir="ltr">idk seems kinda cool ill put something here later</p></main>
-  <SiteFooter/>
+  <header className="about-header"><a className="about-brand" href={treeHref} onClick={event=>{event.preventDefault();navigateApp(treeHref);}} dir="ltr">BranchQuest<span>.</span></a><a className="about-back" href={treeHref} onClick={event=>{event.preventDefault();navigateApp(treeHref);}}>חזרה למפת הקורסים ←</a></header>
+  <main ref={content} className="about-content"><AboutContent/></main>
+  <SiteFooter treeCourseId={courseId??undefined}/>
  </div>;
 }

@@ -26,7 +26,8 @@ export function feedbackPageURL(input:string):string {
   try {
     if(input.length>8192)return '';
     const url=new URL(input);if(!['https:','http:'].includes(url.protocol))return '';
-    const path=url.pathname.replace(/\/$/,'')==='/feedback'?'/feedback':'/';
+    const requested=url.pathname.replace(/\/$/,'');
+    const path=['/feedback','/about'].includes(requested)?requested:'/';
     const clean=new URL(path,url.origin);
     for(const key of ['course','courseId']){const id=url.searchParams.get(key);if(id&&validCourseNumber(id))clean.searchParams.set(key,id);}
     if(path==='/'&&['#/about','#/feedback'].includes(url.hash))clean.hash=url.hash;
@@ -53,7 +54,7 @@ export function feedbackPayload(values:FeedbackValues,context:{origin:FeedbackOr
     ...(context.origin.startingCourseId&&validCourseNumber(context.origin.startingCourseId)?{starting_course_id:context.origin.startingCourseId}:{}),
     ...(context.origin.relevantCourseId&&validCourseNumber(context.origin.relevantCourseId)?{relevant_course_id:context.origin.relevantCourseId}:{}),
     ...(context.appVersion?{app_version:context.appVersion}:{}),...(context.buildId?{build_id:context.buildId}:{}),
-    _subject:`Course Tree — ${category?.label??'משוב'}`,_gotcha:context.honeypot,
+    _subject:`BranchQuest — ${category?.label??'משוב'}`,_gotcha:context.honeypot,
   };
 }
 export function feedbackErrorMessage(errors:readonly {code:string;message:string}[]):string {

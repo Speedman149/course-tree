@@ -6,7 +6,8 @@ export function redactAnalyticsEvent(event: BeforeSendEvent): BeforeSendEvent | 
   try {
     const url = new URL(event.url);
     if (url.protocol !== 'https:' && url.protocol !== 'http:') return null;
-    url.pathname = url.pathname.replace(/\/$/, '') === '/feedback' ? '/feedback' : '/';
+    const path = url.pathname.replace(/\/$/, '');
+    url.pathname = ['/feedback','/about'].includes(path) ? path : '/';
     url.search = '';
     url.hash = '';
     return { ...event, url: url.href };

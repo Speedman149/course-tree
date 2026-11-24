@@ -102,9 +102,9 @@ test('mobile footer, one-line credit and direct About refresh preserve explorati
  await page.setViewportSize({width:390,height:844});await ready(page,'02340218');await mark(page);
  const credit=page.getByText('Developed by Chupchick',{exact:true});await expect(credit).toBeVisible();await expect(credit).toHaveCSS('white-space','nowrap');
  const fits=await credit.evaluate(el=>({width:el.scrollWidth,client:el.clientWidth,height:el.getBoundingClientRect().height,line:parseFloat(getComputedStyle(el).lineHeight)}));expect(fits.width).toBeLessThanOrEqual(fits.client);expect(fits.height).toBeLessThanOrEqual(fits.line+1);
- await expect(page.locator('.site-disclaimer')).toHaveText('Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.');
+ await expect(page.locator('.site-disclaimer')).toHaveText('BranchQuest is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:testInfo.outputPath('mobile-marked-tree.png')});
- await page.getByRole('link',{name:'אודות / About',exact:true}).click();await expect(page).toHaveURL(/#\/about$/);await expect(page.getByText('idk seems kinda cool ill put something here later',{exact:true})).toBeVisible();await page.reload();await expect(page.getByRole('heading',{name:'אודות / About'})).toBeVisible();
+ await page.getByRole('link',{name:'אודות / About',exact:true}).click();await expect(page).toHaveURL(/\/about(?:\?[^#]*)?$/);await expect(page.getByRole('heading',{name:'דרישות קדם ומפת קורסים בטכניון'})).toBeVisible();await page.reload();await expect(page.getByRole('heading',{name:'אודות / About'})).toBeVisible();
  await page.screenshot({path:testInfo.outputPath('mobile-about.png')});await page.getByRole('link',{name:'חזרה למפת הקורסים ←',exact:true}).click();await expect(node(page).locator('.course-link')).toHaveText('02340218');await expect(node(page).locator('.mark-button')).toHaveAttribute('aria-pressed','true');
 });
 

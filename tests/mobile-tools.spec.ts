@@ -11,7 +11,7 @@ const records=(JSON.parse(readFileSync(new URL('../public/data/courses.json',imp
 const index=new Map(records.map(c=>[c.id,c])), dependents=buildDependents(records);
 const many=records.filter(c=>!dependents.has(c.id)&&![A,B,C,S].includes(c.id)).slice(0,20).map(c=>c.id);
 const before=JSON.parse(readFileSync(new URL('./fixtures/mobile-tools-before.json',import.meta.url),'utf8')) as {width:number;graphHeight:number;footerHeight:number}[];
-const disclaimer='Course Tree is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.';
+const disclaimer='BranchQuest is an independent student project and is not affiliated with or endorsed by the Technion. Always verify degree requirements using official sources.';
 const node=(page:Page,id:string)=>page.locator(`.react-flow__node[data-id="${id}"]`);
 const card=(page:Page,id:string)=>node(page,id).locator('.course-node');
 const saved=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'{}').progress,PROGRESS_KEY);
