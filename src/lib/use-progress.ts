@@ -32,12 +32,12 @@ export function useProgress(current: Progress, db: ProgressDatabase, canRestore:
     signature.current=migrate?'':JSON.stringify(restored);
     restoreRef.current(restored);setReady(true);
   },[canRestore,catalogSettled]);
-  const marks=current.markedCourseIds.join(',');
+  const marks=JSON.stringify([current.markedCourseIds,current.markedCourseQuantities]);
   const previousMarks=useRef(marks);
   useEffect(()=>{
     if(!ready)return;
     clearTimeout(timer.current);
-    // Mark/unmark commits immediately. View and filter changes are coalesced;
+    // Mark/unmark and quantity changes commit immediately. View and filter changes are coalesced;
     // viewport state is supplied only at the end of a pan/zoom interaction.
     if(previousMarks.current!==marks)write();else timer.current=setTimeout(write,300);
     previousMarks.current=marks;

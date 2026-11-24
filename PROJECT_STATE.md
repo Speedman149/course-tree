@@ -1,20 +1,20 @@
 # Course Tree — Project State
 
-Snapshot updated on 23 November 2026 for the mobile tools drawer and compact legal footer, retaining ordinary-prerequisite highlighting, the unified added-course system, marked credits, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
+Snapshot updated on 24 November 2026 for the sports-course whitelist extension, retaining desktop footer buttons and repeated-course counting, retaining ordinary-prerequisite highlighting, the unified added-course system, marked credits, shared graph and partial expansion. Runtime data/import statistics retain their recorded source snapshot; verification dates and scope are distinguished below.
 
 ## 1. Project identity and evidence
 
 Course Tree is a Hebrew, RTL Technion course explorer. Users can explicitly add courses without a fixed selection cap, explore dependent courses forward and prerequisites backward in one shared graph, filter by offering faculty and degree catalog, and mark courses for personal reference. The application displays prerequisite expressions and catalog information. Personal markings have no academic eligibility meaning.
 
-This document describes the working implementation on the committed prerequisite-highlighting and shared-graph base. The current uncommitted update reorganizes mobile management controls into a modal tools drawer and simplifies the mobile footer, with presentation and regression changes only. It does not regenerate or correct academic datasets.
+This document describes the working implementation on the committed mobile-tools preview base. The current updates add desktop-only footer button styling and bounded repeated counting in the marked list, extended to the user-supplied sports whitelist. It does not regenerate or correct academic datasets. Historical sections retain their original verification scope; sections 18–19 record the current updates.
 
 | Snapshot item | Value |
 |---|---|
 | Repository | `https://github.com/Speedman149/course-tree.git` |
-| Checked-out branch | `main` |
-| Base application commit | `6edf207` |
-| Base commit subject | `Highlight satisfied prerequisites and refresh the help guide` |
-| Current update | Mobile tools drawer and compact mobile footer in the working tree; not committed or deployed by this task |
+| Checked-out branch | `preview/mobile-tools-2026-11-23` |
+| Base application commit | `23dc86d` (mobile tools preview) |
+| Base commit subject | `Streamline mobile controls with an accessible tools drawer` |
+| Current update | Desktop footer buttons and sports-whitelist repeated counting on `preview/mobile-tools-2026-11-23` |
 | Package | `technion-course-tree`, version `1.0.0`, private ES module |
 | Linux workspace | `/home/seritamar/projects/course-tree` |
 | Windows workspace | `\\wsl.localhost\Ubuntu\home\seritamar\projects\course-tree` |
@@ -213,7 +213,7 @@ Faculty colors remain sourced from the same palette and ownership mappings: 12 f
 
 ## 7. Exact persistence behavior
 
-`src/lib/progress.ts` validates saved state and `use-progress.ts` loads, migrates, saves, flushes, and synchronizes it. The same browser key, `course-tree.progress`, now contains an envelope with `version: 5`, ISO `savedAt`, and `progress`.
+`src/lib/progress.ts` validates saved state and `use-progress.ts` loads, migrates, saves, flushes, and synchronizes it. The same browser key, `course-tree.progress`, now contains an envelope with `version: 6`, ISO `savedAt`, and `progress`.
 
 | Persisted field | Meaning |
 |---|---|
@@ -229,15 +229,16 @@ Faculty colors remain sourced from the same palette and ownership mappings: 12 f
 | `catalogId`, `catalogYear`, `catalogFaculty` | Active edition and catalog browsing selections |
 | `filterTab`, `searchAll` | Faculty/catalog tab and all-course search scope |
 | `markedCourseIds` | Complete valid canonical marking list, retaining insertion order |
+| `markedCourseQuantities` | Sparse v6 map of eligible repeated counts; absent means one |
 | `highlightSatisfiedPrerequisites` | Boolean presentation preference, OFF by default; older schema-5 records safely default to false |
 | `recent` | Up to four prior starting courses |
 | `viewport` | Finite x/y/zoom, or null |
 
 `primaryCourseId` is now a separately stored exploration base. `addedCourseIds` records explicit additions without a fixed count cap. All stored IDs and relationships are checked against loaded source indexes. Known IDs include full records and missing course IDs explicitly referenced by real prerequisite expressions. Stale or malformed entries are discarded individually where possible; no edges are inferred from saved text.
 
-Versions 1 and 2 replay old path-specific expansion against real relationships and turn the valid old single root into the exploration base plus its preserved explicit selection. Versions 3 and 4 migrate the real stored `pinnedRootIds` array into `addedCourseIds`, using its first course as the base and retaining canonical manual/automatic/partial branch state. Empty legacy pins preserve an empty base and list; no default is resurrected. Version 5 persists only the new collection and base, with no parallel pin array. Revalidating or reloading a migrated/removed collection is idempotent.
+Versions 1 and 2 replay old path-specific expansion against real relationships and turn the valid old single root into the exploration base plus its preserved explicit selection. Versions 3 and 4 migrate the real stored `pinnedRootIds` array into `addedCourseIds`, using its first course as the base and retaining canonical manual/automatic/partial branch state. Empty legacy pins preserve an empty base and list; no default is resurrected. Version 5 introduced the new collection and base, with no parallel pin array. Version 6 adds validated repeated-mark quantities; versions 1–5 assign each old mark one occurrence. Revalidating or reloading a migrated/removed collection is idempotent.
 
-Older saves lack provenance for automatically opened direct children, so migration conservatively retains their existing expansion intent. New version-5 saves preserve that provenance separately. Markings, filter/catalog/search preferences, recents, viewport, manual forward/backward expansion, deliberately hidden keys and individually revealed connections retain their meanings. Old marking timestamps cannot be reconstructed. Automatic-record validation uses the known source universe and actual relationships rather than old four-root/twelve-pair/48-record assumptions. Needed upstream connector records can survive as internal dependencies when their intermediate course is removed from the explicit collection.
+Older saves lack provenance for automatically opened direct children, so migration conservatively retains their existing expansion intent. Current saves preserve that provenance separately. Markings, filter/catalog/search preferences, recents, viewport, manual forward/backward expansion, deliberately hidden keys and individually revealed connections retain their meanings. Old marking timestamps cannot be reconstructed. Automatic-record validation uses the known source universe and actual relationships rather than old four-root/twelve-pair/48-record assumptions. Needed upstream connector records can survive as internal dependencies when their intermediate course is removed from the explicit collection.
 
 If a valid explicit `?course=` query resolves to the saved exploration base, including an alias, the saved added collection and graph state restore together. A different valid explicit course opens a new tree with that explicit course, resetting full-course/individual-forward/backward expansion, hides, automatic paths and viewport while retaining preferences and marks. Invalid queries are ignored. With no explicit course query, an empty added collection stays empty, while its existing exploration base is retained. The tree URL follows the primary and removes `course` when the exploration base is empty; the query is not a serialization of the complete graph and added collection.
 
@@ -245,7 +246,7 @@ Automatic records require distinct known endpoints, a continuous source-supporte
 
 The envelope remains limited to 2,000,000 characters. Legacy paths retain the 5,000-character and 60-component limits and up to 1,500 entries for legacy migration. Canonical ID/relationship scan budgets derive from the loaded database with room for stale entries, rather than truncating legitimate marks at an arbitrary small fixed count. Coordinates must be finite, below 10 million in absolute value, with zoom 0.15–1.8. Malformed JSON, array envelopes, unknown versions, invalid IDs, and invalid connection strings fail safely.
 
-Existing-save initialization waits for course/catalog loading; catalog failure preserves usable saved catalog intent until it can be validated. Mark changes save immediately after readiness. Other changes debounce by 300ms. Movement-end updates save viewport, while page hide and visibility changes flush pending work. Unchanged signatures suppress repeated writes.
+Existing-save initialization waits for course/catalog loading; catalog failure preserves usable saved catalog intent until it can be validated. Mark and quantity changes save immediately after readiness. Other changes debounce by 300ms. Movement-end updates save viewport, while page hide and visibility changes flush pending work. Unchanged signatures suppress repeated writes.
 
 Same-origin storage events validate and replace complete snapshots, including empty or multi-course graphs. Initial URL override is not reapplied to overwrite an incoming cross-tab snapshot. This remains last-write-wins with no per-field merge. Storage failures keep exploration usable and show `השמירה המקומית אינה זמינה כרגע`.
 
@@ -654,7 +655,7 @@ These data generators were inspected and left unexecuted during this task. Extra
 | Cycle and missing-record handling | Implemented | Canonical cycle warnings with finite traversal; metadata fallbacks |
 | Full prerequisite expression | Implemented | Nested AND/OR, alternatives and relation labels preserved |
 | Zoom, pan, fit, layout | Implemented | React Flow, component-aware Dagre and dense/failure fallback |
-| Local progress saving | Implemented | Schema 5, defensive v1–v4 migration, immediate marks and debounced other state |
+| Local progress saving | Implemented | Schema 6, defensive v1–v5 migration, immediate marks/quantities and debounced other state |
 | Same-origin cross-tab sync | Implemented | Validated last-write-wins snapshots, including empty/multi-pin state |
 | Faculty colors and red markings | Implemented | Ownership palette independent of filters, addition status, and marking |
 | Marked-course list | Implemented | Complete newest-first list, search, pin/sole-root/unmark/focus actions |
@@ -892,3 +893,48 @@ Measured default layout at 844px viewport height (CSS pixels, one decimal place)
 | 640 | 549.6 | 595.0 | 45.4 | 89.0 | 70.0 |
 | 641 | 551.4 | 551.4 | 0.0 | 84.0 | 84.0 |
 | 1440 | 550.8 | 550.8 | 0.0 | 62.6 | 62.6 |
+
+
+## 18. Desktop footer buttons and repeated sports-course counting (24 November 2026)
+
+Desktop (`min-width: 641px`) footer actions now use compact purple-tinted, bordered, rounded buttons with hover and keyboard focus states. Clear/reset use muted destructive coloring. About retains link semantics with matching styling. Disclaimer and status wording is unchanged. All footer styling additions are scoped above the mobile breakpoint; the existing mobile footer is preserved.
+
+The marked list adds a compact minus/quantity/plus control only for exact verified course `03940902 — נבחרות ספורט`, with unchanged source credits of 1.5 per occurrence. The supported range is **1–8 total occurrences, including the first**, based on the explicit four-year recognition table through 12 team credits. Eight is a documented tool range, **not a verified universal enrollment maximum**. The three-year table ends at six occurrences. Degree-dependent combined recognition caps, approvals and attendance conditions are disclosed; the displayed sum remains personal planning, not recognized degree credit. `03940803` and other sports courses stay single-instance because their repeat-credit permission/cap was not established. Full source URLs, exact PDF pages, hashes, conditions, uncertainty and maintenance guidance are in [docs/repeatable-courses.md](docs/repeatable-courses.md).
+
+Quantities live beside the existing unique marking Set in atomic state, never in graph records. Per-course and overall totals multiply verified source credits by normalized quantities; unknown credits retain the existing incomplete-total warning. Graph cards and prerequisite satisfaction still use membership only. Mark removal clears all repetitions with confirmation when the count exceeds one, including from the graph. Counts do not alter added-course ownership, filters, roots, branches or unique-course count labels. Repetition controls work in both the desktop popover and mobile tools drawer.
+
+Progress schema **6** adds a sparse `markedCourseQuantities` map; absent means one. Existing v1–v5 envelopes retain their validated marks, additions, roots, expansions, hidden/revealed connections, filters, highlights, recent courses and viewport. Old markings default to one. Unsupported/orphan/inherited quantities are discarded, malformed quantities default to one, excessive integers clamp to the documented range, and missing/changed course credits disable repetition. Quantity edits save immediately and use existing cross-tab synchronization. Clear markings/reset removes counts. No data import, prerequisite, layout, faculty-palette, filter or exploration algorithm changed.
+
+Verification:
+
+- `npm test`: **224/224 unit/data tests passed** on the final application source (218 existing plus six new repeatability/state/credit/migration tests). `npm run build`: **passed**, including TypeScript and Vite. No project lint script is configured.
+- Complete Chromium production-fixture run: **144/145 passed**. The only failure was a historical browser assertion expecting version 5 after migration; it was updated to `PROGRESS_VERSION`. This was an expected-value correction, with no runtime change. The first unit run similarly exposed a historical schema-5 assertion, updated for v6.
+- Final new-feature browser suite: **10/10 passed**, covering desktop and 320px mobile quantities, bounded plus/minus, fractions, hidden/ordinary/unverified courses, refresh, real faculty-filter and root changes, mark removal confirmation/cancellation from graph and list, re-mark defaults, clearing, independent additions, graph uniqueness, v5 migration, excessive/orphan values, real cross-tab synchronization and reset, footer button keyboard/navigation semantics, and a reduced mobile viewport. The first run found two helper assumptions (nested summary selection and raw seed defaults), corrected without application changes.
+- Final saved-progress suite: **18/18 passed**, including the corrected no-user-edit legacy migration check and preservation of graph, additions, markings, filters, viewport, cross-tab/reset and storage-failure behavior. The complete broad suite was not repeated after its one test-only schema assertion correction. No known test failures remain.
+- Visual review used production screenshots at 320, 390, 640, 641 and 1440px. Mobile footer height remains **70px** at 320/390/640px with an 844px viewport. Desktop measured about **103px at 641px** and **71.6px at 1440px**, including unchanged disclosure/status/credits, with 26px action buttons. Desktop-only tests permit a small bounded increase for the requested button styling; mobile geometry budgets remain unchanged. Screenshots and logs are temporary QA artifacts under `.playwright/repeatable-visual/` and `.playwright/repeatable-final/`.
+- Academic JSON hashes match the earlier snapshot. Graph, exploration, layout, filters, faculty colors, prerequisite evaluation and graph-card source are byte-unchanged. All 35 application source files in the Windows QA mirror matched the working tree before final verification. No runtime package dependencies changed. PDF tools were installed only in the temporary QA directory.
+
+Browser checks use desktop Chromium with mobile viewport emulation and a reduced viewport, not a physical phone keyboard/device. Passing mechanism tests does not verify every student's academic recognition.
+
+
+## 19. Extend marked-list repetition to the sports whitelist (24 November 2026)
+
+At the user's explicit request, repeatable personal counting now applies to every existing course in their exact 15-ID PE/sports whitelist. This supersedes section 18's original team-only eligibility and fixed-credit guard. It does not newly certify academic repeat-credit permission for these courses.
+
+Enabled canonical IDs: `03940800`, `03940801`, `03940802`, `03940803`, `03940804`, `03940805`, `03940806`, `03940807`, `03940808`, `03940820`, `03940900`, `03940901`, `03940902`. Twelve exist as SAP records. `03940901` already exists as a catalog-only reference with unknown credits; its quantities are saved and its credits remain explicitly unknown. Missing from both runtime datasets and skipped: `03940809`, `03940810`. No records, aliases, prerequisites or academic credit values were added or edited.
+
+The existing whitelist mechanism recognizes exact modern IDs, their old six-digit PE forms (e.g. `03940803` / `394803`), seven-digit forms and explicit source aliases. It never infers eligibility from course names or faculties. The unrelated accounting course `00940820` remains single-instance. All existing courses in the whitelist reuse the same compact minus/quantity/plus controls on desktop and mobile, with the existing 1–8 counting bound. For new whitelist entries this is a tool limit, not a verified academic repeat-credit ceiling. Team-specific source notes remain restricted to the team rule; other courses show the general personal-counting explanation.
+
+Row subtotals and overall totals now both multiply each current database credit value by its quantity. The registry no longer hardcodes per-occurrence credits or requires a fixed credit value for eligibility. Fractional/updated credits work, including changed sports-team credits. Missing credits remain flagged, and unknown-credit repetitions never become confirmed zero. Normal courses cannot acquire a quantity above one. Quantities do not duplicate graph nodes or change added-course ownership or prerequisite satisfaction.
+
+Schema 6, state transitions, storage code and key are unchanged. Existing saved team quantities, legacy migration, mark-removal confirmations, clearing/resetting, refresh, root/filter changes and cross-tab behavior remain in the existing mechanism. Previous unrelated uncommitted work was preserved.
+
+Detailed source context, the complete found/absent inventory, old-ID forms and recognition limitations are in [docs/repeatable-courses.md](docs/repeatable-courses.md). Verification on the final source:
+
+- `npm test`: **227/227 unit/data tests passed**. Includes the complete current runtime whitelist intersection, all explicit six-/seven-/eight-digit forms, accounting exclusion, actual fractional/updated/missing credits, legacy-ID record persistence, orphan rejection, existing v1–v5 migration and v6 quantities. One newly edited test initially expected an unmarked ball-games quantity to survive; its expectation was corrected to preserve the existing orphan rejection behavior.
+- `npm run build`: **passed**, including TypeScript and Vite. No runtime dependencies or CSS changed.
+- Focused Chromium production-fixture suites: **27/27 passed**: 15 repeatable-course checks, seven collection regressions, three marked-credit regressions, and two real catalog-only sports-reference checks. They exercise every existing whitelist record, desktop and 320px mobile controls, min/max bounds, increment/decrement, source-credit changes, unknown-credit warnings, total updates, refresh, root/faculty-filter changes, tab synchronization, confirmations, clearing, addition independence and unique graph nodes. The unrelated complete browser suite was not repeated for this focused whitelist change.
+- Production screenshots reviewed for desktop/mobile marked-list rows, including the real unknown-credit catalog reference. Browser testing uses Chromium viewport emulation rather than a physical phone.
+- Both academic JSON SHA-256 hashes remain unchanged. Relative to the state at this request, application changes are limited to `src/lib/repeatable-courses.ts` and `src/components/CourseCollections.tsx`. State, storage, graph, cards, filters, layout and CSS are byte-unchanged. The Windows QA source mirror matches all 35 application source files. `git diff --check` passed.
+
+No new course records, graph nodes, data imports, prerequisites or persistence schema were introduced.

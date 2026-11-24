@@ -31,12 +31,12 @@ const aToC: CourseConnection = {
   ],
 };
 
-test('version5 progress round-trips ordered pins and canonical IDs without embedding course records', () => {
+test('version6 progress round-trips ordered pins and canonical IDs without embedding course records', () => {
   const state = { ...defaultProgress(db), addedCourseIds: [a.id, d.id, c.id, b.id], markedCourseIds: [b.id, a.id], automaticConnections: [aToC] };
   assert.deepEqual(decodeProgress(encodeProgress(state)), state);
   assert.equal(PROGRESS_KEY, 'course-tree.progress');
   assert.equal(JSON.parse(encodeProgress(state)).version, PROGRESS_VERSION);
-  assert.equal(PROGRESS_VERSION, 5);
+  assert.equal(PROGRESS_VERSION, 6);
   assert.equal(encodeProgress(state).includes('requirements'), false);
   assert.deepEqual(validateProgress(state, db), state);
 });

@@ -15,7 +15,7 @@ export async function openCollection(page: Page, kind: 'added' | 'marked') {
   if (await toolsTrigger(page).isVisible()) {
     const drawer = await openTools(page);
     const section = drawer.locator(`[data-tools-section="${kind}"]`);
-    if (!await section.evaluate((e: HTMLDetailsElement) => e.open)) await section.locator('summary').click();
+    if (!await section.evaluate((e: HTMLDetailsElement) => e.open)) await section.locator(':scope > summary').click();
     return section;
   }
   await page.mouse.move(0, 0);

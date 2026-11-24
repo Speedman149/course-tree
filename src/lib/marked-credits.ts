@@ -1,7 +1,8 @@
 import type {Course} from '../types';
+import {markedQuantity, type MarkedCourseQuantities} from './repeatable-courses';
 
 /** Sum the full marking collection, independently of graph visibility or additions. */
-export function summarizeMarkedCredits(courses: ReadonlyMap<string, Course>, markedIds: Iterable<string>) {
+export function summarizeMarkedCredits(courses: ReadonlyMap<string, Course>, markedIds: Iterable<string>, quantities: MarkedCourseQuantities = {}) {
   const countedIds = new Set<string>();
   let knownCredits = 0;
   let missingCreditCount = 0;
@@ -11,7 +12,7 @@ export function summarizeMarkedCredits(courses: ReadonlyMap<string, Course>, mar
     if (countedIds.has(canonicalId)) continue;
     countedIds.add(canonicalId);
     const credits = course?.credits;
-    if (typeof credits === 'number' && Number.isFinite(credits) && credits >= 0) knownCredits += credits;
+    if (typeof credits === 'number' && Number.isFinite(credits) && credits >= 0) knownCredits += credits * markedQuantity(course, quantities);
     else missingCreditCount++;
   }
   return {knownCredits, missingCreditCount};

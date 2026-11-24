@@ -25,6 +25,8 @@ import HelpGuide from './components/HelpGuide';
 import MobileToolsDrawer from './components/MobileToolsDrawer';
 import PrerequisiteHighlightToggle from './components/PrerequisiteHighlightToggle';
 import {useMobileLayout} from './lib/use-mobile-layout';
+import {emptyMarkedCourses, setCourseMarked, setMarkedQuantity} from './lib/marked-courses';
+import {markedQuantity} from './lib/repeatable-courses';
 
 const nodeTypes = { course: CourseNode };
 const edgeTypes = { branch: ForwardBranchEdge };
@@ -38,7 +40,8 @@ export default function App() {
   const [catalogFaculty, setCatalogFaculty] = useState('');
   const [filterTab, setFilterTab] = useState<'faculty' | 'catalog'>('faculty');
   const [searchAll, setSearchAll] = useState(false);
-  const [markedCourseIds, setMarkedCourseIds] = useState(new Set<string>());
+  const [markings, setMarkings] = useState(emptyMarkedCourses);
+  const {ids: markedCourseIds, quantities: markedCourseQuantities} = markings;
   const [highlightSatisfiedPrerequisites, setHighlightSatisfiedPrerequisites] = useState(false);
   const [viewportState, setViewportState] = useState<Progress['viewport']>(null);
   const pendingViewport = useRef<Progress['viewport'] | undefined>(undefined);
@@ -108,15 +111,15 @@ export default function App() {
     primaryCourseId, addedCourseIds, expandedForward: [...expandedForward].sort(), autoExpandedCourseIds: [...autoExpandedCourseIds].sort(), revealedForwardConnections: [...revealedForwardConnections].sort(), hiddenForwardConnections: [...hiddenForwardConnections].sort(),
     expandedBackward: [...expandedBackward].map(([id, ids]) => [id, [...ids].sort()]), automaticConnections,
     facultyIds: facultySelection ? [...facultySelection].sort() : null, catalogId, catalogYear, catalogFaculty, filterTab, searchAll,
-    markedCourseIds: [...markedCourseIds], highlightSatisfiedPrerequisites, recent, viewport: viewportState,
-  }), [primaryCourseId, addedCourseIds, expandedForward, autoExpandedCourseIds, revealedForwardConnections, hiddenForwardConnections, expandedBackward, automaticConnections, facultySelection, catalogId, catalogYear, catalogFaculty, filterTab, searchAll, markedCourseIds, highlightSatisfiedPrerequisites, recent, viewportState]);
+    markedCourseIds: [...markedCourseIds], markedCourseQuantities, highlightSatisfiedPrerequisites, recent, viewport: viewportState,
+  }), [primaryCourseId, addedCourseIds, expandedForward, autoExpandedCourseIds, revealedForwardConnections, hiddenForwardConnections, expandedBackward, automaticConnections, facultySelection, catalogId, catalogYear, catalogFaculty, filterTab, searchAll, markedCourseIds, markedCourseQuantities, highlightSatisfiedPrerequisites, recent, viewportState]);
   const restoreProgress = useCallback((saved: Progress) => {
     layoutAnchor.current = null;
     dispatch({ type: 'restore', saved });
     setFacultySelection(saved.facultyIds === null ? null : new Set(saved.facultyIds));
     setCatalogId(saved.catalogId); setCatalogYear(saved.catalogYear); setCatalogFaculty(saved.catalogFaculty);
     setFilterTab(saved.filterTab); setSearchAll(saved.searchAll);
-    setMarkedCourseIds(new Set(saved.markedCourseIds)); setRecent(saved.recent);
+    setMarkings({ids: new Set(saved.markedCourseIds), quantities: saved.markedCourseQuantities}); setRecent(saved.recent);
     setHighlightSatisfiedPrerequisites(saved.highlightSatisfiedPrerequisites);
     setViewportState(saved.viewport); pendingViewport.current = saved.viewport;
     setBranchFocus(null);  setFocusRequest(null); setFocusedCourseId(null);
@@ -128,11 +131,16 @@ export default function App() {
     defaultRoot: dataset?.courses.find(course => course.id === '02340114')?.id ?? dataset?.courses[0]?.id ?? '02340114',
   }), [index, facultyOptions, catalogs, dataset]);
   const { ready: progressReady, storageAvailable, clearSaved } = useProgress(progress, progressDatabase, !!dataset, !!catalogs || catalogError, restoreProgress);
-  const toggleMarked = useCallback((courseId: string) => setMarkedCourseIds(previous => {
-    const next = new Set(previous);
-    if (next.has(courseId)) next.delete(courseId); else next.add(courseId);
-    return next;
-  }), []);
+  const toggleMarked = useCallback((courseId: string) => {
+    const removing = markedCourseIds.has(courseId);
+    const quantity = markedQuantity(index.get(courseId), markedCourseQuantities);
+    if (removing && quantity > 1 && !window.confirm(`להסיר את הסימון של ${courseId} ואת כל ${quantity} המופעים שנספרו?`)) return false;
+    setMarkings(previous => setCourseMarked(previous, courseId, !removing));
+    return true;
+  }, [markedCourseIds, markedCourseQuantities, index]);
+  const changeMarkedQuantity = useCallback((courseId: string, quantity: number) => {
+    setMarkings(previous => setMarkedQuantity(previous, index.get(courseId), quantity));
+  }, [index]);
   useEffect(() => {
     if (!progressReady || route === 'feedback') return;
     const url = new URL(window.location.href);
@@ -336,7 +344,7 @@ export default function App() {
     setFiltersOpen(false);  setModal(null);
     navigateApp(courseId ? `/feedback?courseId=${encodeURIComponent(courseId)}` : '/feedback', { feedbackOrigin: origin });
   };
-  const clearMarks = () => {if (window.confirm('לנקות את כל סימוני הקורסים? הענפים והמסננים יישמרו.')) setMarkedCourseIds(new Set());};
+  const clearMarks = () => {if (window.confirm('לנקות את כל סימוני הקורסים? הענפים והמסננים יישמרו.')) setMarkings(emptyMarkedCourses());};
   const resetProgress = () => {if (window.confirm('לאפס את כל ההתקדמות השמורה, הענפים, המסננים וסימוני הקורסים בדפדפן הזה?')) {clearSaved(); setFiltersOpen(false); closeMobileTools();}};
   const openMobileTools = () => {setFiltersOpen(false); setModal(null); setMobileToolsOpen(true);};
   if (route === 'feedback') return <Suspense fallback={<div className="feedback-loading" role="status">טוענים את עמוד המשוב…</div>}><FeedbackPage treeCourseId={progressReady ? rootId : undefined} origin={feedbackOrigin ?? { pageUrl: initialPage.current, route: 'feedback', startingCourseId: progressReady && rootId ? rootId : undefined, ...(validCourseNumber(requestedReportCourse) ? { relevantCourseId: requestedReportCourse } : {}) }} courseId={feedbackOrigin?.relevantCourseId ?? (validCourseNumber(requestedReportCourse) ? requestedReportCourse : undefined)}/></Suspense>;
@@ -382,8 +390,8 @@ export default function App() {
         <div className="map-footnote"><ShieldCheck size={15}/><p>{graph.truncated && <strong role="status">המפה גדולה מאוד, ולכן מוצג חלק ממנה. צמצמו ענפים או מסננים כדי להמשיך. </strong>}קשר במפה מציין דרישה לקורס. ייתכנו דרישות נוספות או חלופיות — בדקו את כלל הקדמים המלא בחלונית הקורס.</p><button onClick={() => setModal('data')}>פרטי המאגר<ExternalLink size={12}/></button></div>
       </section>
     </main>
-    <SiteFooter treeCourseId={rootId} courses={index} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={setCourseAdded} onLocateAddedCourse={locateAddedCourse} onFocusCourse={focusCourse} onSelectCourse={selectRoot} onToggleMarked={toggleMarked} markedCount={markedCourseIds.size} storageAvailable={storageAvailable} onClearMarks={clearMarks} onResetProgress={resetProgress}/>
-    {mobile && mobileToolsOpen && <MobileToolsDrawer courses={index} addedCourseIds={addedCourseIds} markedCourseIds={markedCourseIds} visibleCourseIds={visibleCourseIds} highlightSatisfiedPrerequisites={highlightSatisfiedPrerequisites} storageAvailable={storageAvailable} onAddedChange={setCourseAdded} onLocateAddedCourse={locateAddedCourse} onFocusCourse={focusCourse} onSelectCourse={selectRoot} onToggleMarked={toggleMarked} onHighlightChange={setHighlightSatisfiedPrerequisites} onExpandLayer={() => dispatch({type:'expandVisible',courseIds:graph.nodes.filter(node => !node.missing).map(node => node.id)})} onResetBranches={resetBranches} onClearMarks={clearMarks} onResetProgress={resetProgress} onClose={closeMobileTools} triggerRef={mobileToolsTrigger} fallbackFocusRef={filtersTrigger}/>}
+    <SiteFooter markedCourseQuantities={markedCourseQuantities} onQuantityChange={changeMarkedQuantity} treeCourseId={rootId} courses={index} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={setCourseAdded} onLocateAddedCourse={locateAddedCourse} onFocusCourse={focusCourse} onSelectCourse={selectRoot} onToggleMarked={toggleMarked} markedCount={markedCourseIds.size} storageAvailable={storageAvailable} onClearMarks={clearMarks} onResetProgress={resetProgress}/>
+    {mobile && mobileToolsOpen && <MobileToolsDrawer markedCourseQuantities={markedCourseQuantities} onQuantityChange={changeMarkedQuantity} courses={index} addedCourseIds={addedCourseIds} markedCourseIds={markedCourseIds} visibleCourseIds={visibleCourseIds} highlightSatisfiedPrerequisites={highlightSatisfiedPrerequisites} storageAvailable={storageAvailable} onAddedChange={setCourseAdded} onLocateAddedCourse={locateAddedCourse} onFocusCourse={focusCourse} onSelectCourse={selectRoot} onToggleMarked={toggleMarked} onHighlightChange={setHighlightSatisfiedPrerequisites} onExpandLayer={() => dispatch({type:'expandVisible',courseIds:graph.nodes.filter(node => !node.missing).map(node => node.id)})} onResetBranches={resetBranches} onClearMarks={clearMarks} onResetProgress={resetProgress} onClose={closeMobileTools} triggerRef={mobileToolsTrigger} fallbackFocusRef={filtersTrigger}/>}
     {filtersOpen && <Suspense fallback={<div className="filter-loading" role="status">טוענים מסננים…</div>}><FilterPanel faculties={facultyOptions} selected={selectedFaculties} onFacultiesChange={setFacultySelection} catalogs={catalogs} catalogError={catalogError} activeCatalog={activeCatalog} onCatalogChange={id=>{setCatalogId(id);const program=catalogs?.programs.find(p=>p.id===id);if(program)setCatalogYear(program.catalogYear);}} tab={filterTab} onTabChange={setFilterTab} year={catalogYear} onYearChange={setCatalogYear} catalogFaculty={catalogFaculty} onCatalogFacultyChange={setCatalogFaculty} courses={index} onCourseSelect={selectRoot} onClose={closeFilters}/></Suspense> }
     {modal && <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) setModal(null); }}><div className={`modal ${modal === 'help' ? 'help-modal' : ''}`} role="dialog" aria-modal="true" aria-labelledby="modal-title" onKeyDown={event => {
       if (event.key !== 'Tab') return;
