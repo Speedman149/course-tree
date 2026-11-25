@@ -1,3 +1,4 @@
+import {settledViewport} from './helpers/mobile-tools';
 import {expect as baseExpect,test as base,type Page} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {PROGRESS_KEY} from '../src/lib/progress';
@@ -10,10 +11,10 @@ const toggle=(page:Page)=>page.getByRole('button',{name:'חיפוש קורסים
 const panel=(page:Page)=>page.getByRole('dialog',{name:'חיפוש קורסים',exact:true});
 const input=(page:Page)=>panel(page).getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true});
 const close=(page:Page)=>page.getByRole('button',{name:'סגירת חיפוש הקורסים',exact:true});
-const root=(page:Page)=>page.locator('.root-node .course-link');
+const root=(page:Page)=>page.locator('.course-node.is-added .course-link');
 const saved=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'{}').progress,PROGRESS_KEY);
 async function ready(page:Page,course='02340247'){await page.goto(`/?course=${course}`,{waitUntil:'domcontentloaded'});await expect(root(page)).toHaveText(course);await expect(toggle(page)).toBeEnabled();await page.evaluate(()=>document.fonts.ready);}
-async function seeded(page:Page){await page.addInitScript(key=>{if(!sessionStorage.getItem('mobile-search-seed')){localStorage.setItem(key,JSON.stringify({version:2,progress:{rootId:'00140855',expandedForward:['root','root/f:00140889:strong'],expandedBackward:[],hiddenForwardConnections:['root/f:00140856:strong'],markedCourseIds:['00140866'],facultyIds:['civil'],catalogId:'mapping-3-mapping-2025-2026',catalogYear:'2025-2026',catalogFaculty:'civil',filterTab:'catalog',searchAll:false,recent:[],viewport:{x:-100,y:90,zoom:.7}}}));sessionStorage.setItem('mobile-search-seed','yes');}},PROGRESS_KEY);await ready(page,'00140855');await expect.poll(async()=>(await saved(page))?.searchAll).toBe(false);await expect.poll(async()=>page.locator('.react-flow__viewport').evaluate(el=>new DOMMatrixReadOnly(getComputedStyle(el).transform).a)).toBe(.7);}
+async function seeded(page:Page){await page.addInitScript(key=>{if(!sessionStorage.getItem('mobile-search-seed')){localStorage.setItem(key,JSON.stringify({version:2,progress:{rootId:'00140855',expandedForward:['root','root/f:00140889:strong'],expandedBackward:[],hiddenForwardConnections:['root/f:00140856:strong'],markedCourseIds:['00140866'],facultyIds:['civil'],catalogId:'mapping-3-mapping-2025-2026',catalogYear:'2025-2026',catalogFaculty:'civil',filterTab:'catalog',searchAll:false,recent:[],viewport:{x:-100,y:90,zoom:.7}}}));sessionStorage.setItem('mobile-search-seed','yes');}},PROGRESS_KEY);await ready(page,'00140855');await expect.poll(async()=>(await saved(page))?.searchAll).toBe(false);await expect.poll(async()=>page.locator('.react-flow__viewport').evaluate(el=>new DOMMatrixReadOnly(getComputedStyle(el).transform).a)).toBe(.7);await settledViewport(page);}
 async function contained(page:Page,bottom:number){const box=await panel(page).boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(await page.evaluate(()=>innerWidth));expect(box!.y).toBeGreaterThanOrEqual(0);expect(box!.y+box!.height).toBeLessThanOrEqual(bottom+.5);await expect(close(page)).toBeInViewport();}
 
 for(const width of [390,320])test(`mobile defaults to only the search icon with no reserved search row at ${width}px`,async({page},testInfo)=>{
@@ -32,9 +33,9 @@ test('opening and closing the RTL overlay preserves branches, filters, red marks
  await expect(panel(page)).toHaveCount(0);await expect(toggle(page)).toBeFocused();expect(await page.locator('.graph-canvas').boundingBox()).toEqual(graph);expect(await page.locator('.react-flow__viewport').getAttribute('style')).toEqual(transform);expect(await page.locator('.react-flow__node').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-id')))).toEqual(ids);expect(await saved(page)).toEqual(progress);await expect(page.locator('.user-marked .course-link')).toHaveText('00140866');
 });
 
-test('existing number/legacy and Hebrew searches select the single root and close the mobile panel',async({page})=>{
- await page.setViewportSize({width:390,height:844});await ready(page);await toggle(page).click();await input(page).fill('234114');await panel(page).getByRole('option').filter({hasText:'02340114'}).click();await expect(root(page)).toHaveText('02340114');await expect(panel(page)).toHaveCount(0);await expect(page.locator('.root-node')).toHaveCount(1);
- await toggle(page).click();await input(page).fill('אלגוריתמים 1');await input(page).press('Enter');await expect(root(page)).toHaveText('02340247');await expect(panel(page)).toHaveCount(0);
+test('legacy and Hebrew search add or focus equal courses and close the mobile panel',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await ready(page);await toggle(page).click();await input(page).fill('234114');await panel(page).getByRole('option').filter({hasText:'02340114'}).click();await expect(page.locator('.react-flow__node[data-id="02340114"] .added-badge')).toBeVisible();await expect(panel(page)).toHaveCount(0);await expect(page.locator('.course-node.is-added')).toHaveCount(2);
+ await toggle(page).click();await input(page).fill('אלגוריתמים 1');await input(page).press('Enter');await expect(page.locator('.react-flow__node[data-id="02340247"] .course-node')).toHaveClass(/is-focused/);await expect(page.locator('.course-node.is-added')).toHaveCount(2);await expect(panel(page)).toHaveCount(0);
 });
 
 test('existing clear control works, Escape closes, and an outside zoom click still reaches the graph',async({page})=>{

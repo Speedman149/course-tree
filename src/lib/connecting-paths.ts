@@ -158,8 +158,9 @@ export function findCourseConnection(
   const hidden = options.hiddenForwardConnections ?? new Set<string>();
   const isVisible = options.isForwardVisible ?? (() => true);
   const index = neighbors(coursesById, dependents);
+  const starts = [...addedCourseIds].sort();
   const search = (ignoreHidden: boolean, ignoreFilters: boolean) =>
-    shortestConnection(addedCourseIds, targetCourseId, coursesById, index, visible, hidden, isVisible, ignoreHidden, ignoreFilters);
+    shortestConnection(starts, targetCourseId, coursesById, index, visible, hidden, isVisible, ignoreHidden, ignoreFilters);
   const strict = search(false, false);
   if (strict) {
     const result = resultFor(strict, 'connected', visible, hidden);

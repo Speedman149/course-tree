@@ -90,8 +90,8 @@ export function layoutCourseGraph(graph: CourseGraph, addedCourseIds: readonly s
         positions = layeredPositions(ids, edges);
       }
     }
-    const anchor = addedCourseIds.find(id => members.has(id)) ?? ids[0];
-    const anchorX = positions.get(anchor)!.x;
+    // Align independent components by prerequisite rank, never by a privileged first addition.
+    const anchorX = Math.max(...[...positions.values()].map(point => point.x));
     const minY = Math.min(...[...positions.values()].map(point => point.y));
     const maxY = Math.max(...[...positions.values()].map(point => point.y));
     for (const [id, point] of positions) result.set(id, { x: point.x - anchorX, y: point.y - minY + top });

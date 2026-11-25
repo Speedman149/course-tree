@@ -19,7 +19,7 @@ interface Props {
   onAddedChange: (id: string, added: boolean) => void;
   onLocateAddedCourse: (id: string) => void;
   onFocusCourse: (id: string) => void;
-  onSelectCourse: (id: string) => void;
+  onClearAddedCourses: () => void;
   onToggleMarked: (id: string) => boolean | void;
   onHighlightChange: (enabled: boolean) => void;
   onExpandLayer: () => void;
@@ -81,11 +81,11 @@ export default function MobileToolsDrawer(props: Props) {
       <div className="mobile-tools-content">
         <details className="mobile-tools-section" data-tools-section="added">
           <summary aria-label="קורסים שהוספתי" aria-describedby="tools-added-count"><ListPlus size={17}/><strong>קורסים שהוספתי</strong><span className="tools-count" id="tools-added-count">{props.addedCourseIds.length}</span><ChevronDown size={15}/></summary>
-          <AddedCoursesContent courses={props.courses} addedCourseIds={props.addedCourseIds} onAddedChange={props.onAddedChange} onLocateCourse={props.onLocateAddedCourse} onNavigate={onClose}/>
+          <AddedCoursesContent courses={props.courses} addedCourseIds={props.addedCourseIds} onAddedChange={props.onAddedChange} onLocateCourse={props.onLocateAddedCourse} onClearAdded={props.onClearAddedCourses} onNavigate={onClose}/>
         </details>
         <details className="mobile-tools-section" data-tools-section="marked">
           <summary aria-label="רשימת מסומנים" aria-describedby="tools-marked-count"><Check size={17}/><strong>רשימת מסומנים</strong><span className="tools-count" id="tools-marked-count">{props.markedCourseIds.size}</span><ChevronDown size={15}/></summary>
-          <MarkedCoursesContent markedCourseQuantities={props.markedCourseQuantities} onQuantityChange={props.onQuantityChange} courses={props.courses} addedCourseIds={props.addedCourseIds} markedCourseIds={props.markedCourseIds} visibleCourseIds={props.visibleCourseIds} onAddedChange={props.onAddedChange} onFocusCourse={props.onFocusCourse} onSelectCourse={props.onSelectCourse} onToggleMarked={props.onToggleMarked} onNavigate={onClose}/>
+          <MarkedCoursesContent markedCourseQuantities={props.markedCourseQuantities} onQuantityChange={props.onQuantityChange} courses={props.courses} addedCourseIds={props.addedCourseIds} markedCourseIds={props.markedCourseIds} visibleCourseIds={props.visibleCourseIds} onAddedChange={props.onAddedChange} onFocusCourse={props.onFocusCourse} onToggleMarked={props.onToggleMarked} onNavigate={onClose}/>
           <button className="tools-clear-marks" type="button" disabled={!props.markedCourseIds.size} onClick={props.onClearMarks}>ניקוי סימונים</button>
         </details>
         <section className="mobile-tools-section tools-display" aria-labelledby="tools-display-title">

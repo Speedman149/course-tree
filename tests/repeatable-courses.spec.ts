@@ -12,7 +12,7 @@ const test=base.extend<{runtimeErrors:void}>({runtimeErrors:[async({page},use)=>
 },{auto:true}]});
 async function ready(page:Page,width=1440,overrides:Record<string,unknown>={},version=PROGRESS_VERSION){
  await page.setViewportSize({width,height:width===320?568:900});
- await page.addInitScript(({key,version,TEAM,REG,BALL,overrides})=>{if(sessionStorage.getItem('repeat-seeded'))return;sessionStorage.setItem('repeat-seeded','yes');localStorage.setItem(key,JSON.stringify({version,progress:{primaryCourseId:TEAM,addedCourseIds:[TEAM,REG],expandedForward:[],facultyIds:null,catalogId:'',markedCourseIds:[TEAM,REG,BALL],highlightSatisfiedPrerequisites:true,viewport:{x:0,y:0,zoom:.5},...overrides}}));},{key:PROGRESS_KEY,version,TEAM,REG,BALL,overrides});
+ await page.addInitScript(({key,version,TEAM,REG,BALL,overrides})=>{if(sessionStorage.getItem('repeat-seeded'))return;sessionStorage.setItem('repeat-seeded','yes');localStorage.setItem(key,JSON.stringify({version,progress:{addedCourseIds:[TEAM,REG],expandedForward:[],facultyIds:null,catalogId:'',markedCourseIds:[TEAM,REG,BALL],highlightSatisfiedPrerequisites:true,viewport:{x:0,y:0,zoom:.5},...overrides}}));},{key:PROGRESS_KEY,version,TEAM,REG,BALL,overrides});
  await page.goto('/?course='+TEAM);await expect(node(page,TEAM)).toHaveCount(1);await page.evaluate(()=>document.fonts.ready);
 }
 for(const width of [1440,320])test(`repeat quantities update credits, clamp, persist and preserve graph/filter/addition state at ${width}px`,async({page},info)=>{
@@ -35,7 +35,7 @@ for(const width of [1440,320])test(`repeat quantities update credits, clamp, per
  await page.getByRole('button',{name:'פתיחת מסנני המפה'}).click();await page.getByRole('tab',{name:/סינון לפי פקולטה/}).click();await page.getByRole('button',{name:'ניקוי הכול',exact:true}).click();await page.getByRole('checkbox',{name:'מדעי המחשב',exact:true}).check();await page.getByRole('button',{name:'הצגת המפה',exact:true}).click();
  panel=await openCollection(page,'marked');await expect(panel.locator('.marked-credit-summary')).toHaveText('סה״כ נק״ז: 16');await expect(row().getByRole('status')).toHaveText('8');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- await panel.getByRole('button',{name:'פתיחת עץ חדש עם '+REG,exact:true}).click();await expect(page).toHaveURL(new RegExp('course='+REG));
+ await expect(panel.getByRole('button',{name:'פתיחת עץ חדש עם '+REG,exact:true})).toHaveCount(0);await panel.getByRole('button',{name:'מיקוד במקצוע מסומן '+REG,exact:true}).click();await expect(page.locator('.react-flow__node[data-id="'+REG+'"] .course-node')).toHaveClass(/is-focused/);
  panel=await openCollection(page,'marked');await expect(row().getByRole('status')).toHaveText('8');await expect(panel.locator('.marked-credit-summary')).toHaveText('סה״כ נק״ז: 16');
  await page.reload();panel=await openCollection(page,'marked');await expect(row().getByRole('status')).toHaveText('8');
 });
@@ -52,10 +52,10 @@ for(const width of [1440,320])test(`graph removal confirms all repetitions, keep
  if(!await toolsTrigger(page).isVisible())await page.keyboard.press('Escape');page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'ניקוי סימונים',exact:true}).click();
  panel=await openCollection(page,'marked');await expect(panel.locator('.marked-credit-summary')).toHaveText('סה״כ נק״ז: 0');await expect.poll(async()=>(await saved(page)).markedCourseQuantities).toEqual({});expect((await saved(page)).addedCourseIds).toContain(TEAM);
 });
-test('old v5 session migrates to default one and persists v6 without losing its other state',async({page})=>{
+test('old v5 session migrates to default one and persists the current schema without losing its other state',async({page})=>{
  await ready(page,1440,{markedCourseQuantities:{[TEAM]:4},facultyIds:[],searchAll:true},5);
  const panel=await openCollection(page,'marked');await expect(panel.locator(`[data-marked-course="${TEAM}"] output`)).toHaveText('1');
- await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'{}').version,PROGRESS_KEY)).toBe(6);
+ await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'{}').version,PROGRESS_KEY)).toBe(7);
  const state=await saved(page);expect(state.markedCourseIds).toEqual([TEAM,REG,BALL]);expect(state.markedCourseQuantities).toEqual({});expect(state.addedCourseIds).toEqual([TEAM,REG]);expect(state.facultyIds).toEqual([]);expect(state.searchAll).toBe(true);expect(state.highlightSatisfiedPrerequisites).toBe(true);
 });
 test('malformed/excessive saved quantities are bounded and cannot enable an ordinary course',async({page})=>{

@@ -22,7 +22,7 @@ const data = [course('A'), course('B', leaf('A')), course('C', leaf('B')), cours
 const courses = buildCourseIndex(data), dependents = buildDependents(data);
 const edge = (source: string, target: string) => forwardConnectionId(source, target, 'strong');
 const graph = (state: ExplorationState, isVisible: (id: string) => boolean = () => true) =>
-  buildGraph([state.primaryCourseId,...state.addedCourseIds].filter(Boolean), courses, dependents, state.expandedForward,
+  buildGraph(state.addedCourseIds, courses, dependents, state.expandedForward,
     state.expandedBackward, isVisible, state.hiddenForwardConnections, state.automaticConnections, state.revealedForwardConnections);
 const context = (state: ExplorationState, isVisible: (id: string) => boolean = () => true): AddCourseContext => ({
   courses, dependents, visibleCourseIds: new Set(graph(state, isVisible).nodes.map(node => node.id)), isVisible,
@@ -80,27 +80,19 @@ test('a fifth addition is retained without replacing earlier courses or warning'
   assert.equal(state.expandedForward.has('Z'), true);
 });
 
-test('ordinary root selection replaces four pins and resets graph exploration only', () => {
-  let state = initialExploration('A');
-  for (const id of ['U', 'V', 'W']) state = pin(state, id);
-  state.hiddenForwardConnections.add(edge('B', 'C'));
-  const next = explorationReducer(state, { type: 'selectRoot', courseId: 'Z' });
-  assert.deepEqual(next.addedCourseIds, ['Z']);
-  assert.deepEqual([...next.expandedForward], ['Z']);
-  assert.equal(next.expandedBackward.size, 0);
-  assert.equal(next.hiddenForwardConnections.size, 0);
-  assert.equal(next.automaticConnections.length, 0);
+test('ordinary selection adds to existing courses and preserves manual branch choices', () => {
+ let state=initialExploration('A');for(const id of ['U','V','W'])state=pin(state,id);
+ state.hiddenForwardConnections.add(edge('B','C'));state.expandedBackward.set('Y',new Set(['X']));
+ const next=explorationReducer(state,{type:'addCourse',courseId:'Z',context:context(state)});
+ assert.deepEqual(next.addedCourseIds,['A','U','V','W','Z']);assert.ok(next.expandedForward.has('A'));assert.ok(next.expandedForward.has('Z'));
+ assert.ok(next.hiddenForwardConnections.has(edge('B','C')));assert.deepEqual([...next.expandedBackward.get('Y')!],['X']);
 });
 
-test('removing the final addition preserves primary exploration and a later addition joins it', () => {
-  const empty = pin(initialExploration('A'), 'A');
-  assert.deepEqual(empty.addedCourseIds, []);
-  assert.equal(empty.primaryCourseId, 'A');
-  assert.deepEqual(new Set(graph(empty).nodes.map(node => node.id)), new Set(['A','B','X']));
-  const next = pin(empty, 'U');
-  assert.deepEqual(next.addedCourseIds, ['U']);
-  assert.equal(next.expandedForward.has('U'), true);
-  assert.deepEqual(new Set(graph(next).nodes.map(node => node.id)), new Set(['A','B','X','U']));
+test('removing the final addition leaves an empty graph and the next addition stands alone', () => {
+ const empty=pin(initialExploration('A'),'A');assert.deepEqual(empty.addedCourseIds,[]);
+ assert.deepEqual(graph(empty).nodes,[]);assert.equal('primaryCourseId' in empty,false);
+ const next=pin(empty,'U');assert.deepEqual(next.addedCourseIds,['U']);assert.ok(next.expandedForward.has('U'));
+ assert.deepEqual(graph(next).nodes.map(node=>node.id),['U']);
 });
 
 test('unpinning a connector endpoint removes its automatic path while manual sibling choices survive', () => {
@@ -121,7 +113,7 @@ test('unpinning the old anchor preserves another pin and its manual descendants'
   assert.deepEqual(next.addedCourseIds, ['D']);
   assert.equal(next.automaticConnections.length, 1);
   assert.equal(next.expandedForward.has('D'), true);
-  assert.deepEqual(new Set(graph(next).nodes.map(node => node.id)), new Set(['A','B','C','D','X']));
+  assert.deepEqual(new Set(graph(next).nodes.map(node => node.id)), new Set(['A','B','C','D']));
 });
 
 test('course-level minus suppresses manual and automatic forward reasons but preserves pins', () => {

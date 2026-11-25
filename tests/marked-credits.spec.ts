@@ -59,7 +59,7 @@ test('missing credits are explicitly incomplete and update as unknown courses ar
   await page.route('**/data/courses.json', route => route.fulfill({json: dataset}));
   await page.addInitScript(({key, version, A, B, C}) => {
     if (sessionStorage.getItem('missing-credit-seed')) return;
-    localStorage.setItem(key, JSON.stringify({version, progress: {primaryCourseId: A, addedCourseIds: [A], markedCourseIds: [A, B, C], facultyIds: ['cs'], expandedForward: []}}));
+    localStorage.setItem(key, JSON.stringify({version, progress: {addedCourseIds: [A], markedCourseIds: [A, B, C], facultyIds: ['cs'], expandedForward: []}}));
     sessionStorage.setItem('missing-credit-seed', 'yes');
   }, {key: PROGRESS_KEY, version: PROGRESS_VERSION, A, B, C});
   await page.goto('/?course=' + A); await expect(node(page, A)).toHaveCount(1);
