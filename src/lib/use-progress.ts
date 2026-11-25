@@ -1,8 +1,9 @@
 import {useCallback,useEffect,useRef,useState} from 'react';
+import {resolveCourseId} from './graph';
 import {PROGRESS_KEY,PROGRESS_VERSION,decodeProgress,defaultProgress,encodeProgress,validateProgress,type Progress,type ProgressDatabase} from './progress';
 
 /** Browser-only IO never runs during rendering. Saved sessions wait for both databases; a fresh session can display courses while catalogs load. */
-export function useProgress(current: Progress, db: ProgressDatabase, canRestore: boolean, catalogSettled: boolean, restore: (saved: Progress)=>void) {
+export function useProgress(current: Progress, db: ProgressDatabase, canRestore: boolean, catalogSettled: boolean, restore: (saved: Progress, requestedCourseId?: string)=>void) {
   const [ready,setReady]=useState(false);
   const [storageAvailable,setStorageAvailable]=useState(true);
   const latest=useRef(current);latest.current=current;
@@ -27,22 +28,32 @@ export function useProgress(current: Progress, db: ProgressDatabase, canRestore:
     }catch{setStorageAvailable(false);}
     if(saved!==null&&!catalogSettled)return;
     initialized.current=true;
+    const baseline=validateProgress(saved,database.current);
     const restored=validateProgress(saved,database.current,new URLSearchParams(window.location.search).get('course'));
+    const rawRequested=new URLSearchParams(window.location.search).get('course');
+    const requested=rawRequested&&(restored.addedCourseIds.includes(rawRequested)?rawRequested:resolveCourseId(rawRequested,new Map(database.current.courses)));
+    const reload=(performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming|undefined)?.type==='reload';
+    const requestedCourseId=requested&&(!reload||!baseline.addedCourseIds.includes(requested))?requested:undefined;
     // Rewrite legacy envelopes once the converted state has reached React.
-    signature.current=migrate?'':JSON.stringify(restored);
-    restoreRef.current(restored);setReady(true);
+    // Compare against what was already saved, so a course added by the incoming URL is committed too.
+    signature.current=migrate||saved===null?'':JSON.stringify(baseline);
+    restoreRef.current(restored,requestedCourseId);setReady(true);
   },[canRestore,catalogSettled]);
   const marks=JSON.stringify([current.markedCourseIds,current.markedCourseQuantities]);
   const previousMarks=useRef(marks);
+  const graphIntent=JSON.stringify([current.addedCourseIds,current.expandedForward,current.expandedBackward,
+    current.hiddenForwardConnections,current.revealedForwardConnections,current.automaticConnections,current.autoExpandedCourseIds]);
+  const previousGraphIntent=useRef(graphIntent);
   useEffect(()=>{
     if(!ready)return;
     clearTimeout(timer.current);
-    // Mark/unmark and quantity changes commit immediately. View and filter changes are coalesced;
+    // Explicit graph, mark and quantity changes commit immediately so startup camera writes cannot overtake a branch edit.
+    // View and filter changes are coalesced;
     // viewport state is supplied only at the end of a pan/zoom interaction.
-    if(previousMarks.current!==marks)write();else timer.current=setTimeout(write,300);
-    previousMarks.current=marks;
+    if(previousMarks.current!==marks||previousGraphIntent.current!==graphIntent)write();else timer.current=setTimeout(write,300);
+    previousMarks.current=marks;previousGraphIntent.current=graphIntent;
     return ()=>clearTimeout(timer.current);
-  },[current,ready,marks,write]);
+  },[current,ready,marks,graphIntent,write]);
   useEffect(()=>{
     if(!ready)return;
     const flush=()=>write();

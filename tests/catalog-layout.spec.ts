@@ -4,7 +4,7 @@ for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
  test(`baseline catalog layout at ${viewport.width}px`,async({page},testInfo)=>{
   await page.setViewportSize(viewport);
   await page.goto('/?course=02340114');
-  await expect(page.locator('.root-node .course-link')).toHaveText('02340114');
+  await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340114');
   await expect(page.getByRole('button',{name:viewport.width<=640?'כלים':'קורסים שהוספתי',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'פתיחת מסנני המפה'}).click();
   await page.getByRole('tab',{name:/קטלוג תואר/}).click();

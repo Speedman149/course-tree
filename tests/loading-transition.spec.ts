@@ -15,7 +15,7 @@ for(const mode of ['development','production'] as const)for(const width of [1440
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));page.on('console',message=>{if(message.type()==='error'&&/hydrat|server rendered|didn't match|Minified React error/i.test(message.text()))errors.push(message.text());});
  await page.setViewportSize({width,height:844});
  await page.addInitScript(({key,version,A,TEAM,savedFilters})=>{
-  if(!sessionStorage.getItem('transition-progress')){sessionStorage.setItem('transition-progress','yes');localStorage.setItem(key,JSON.stringify({version,progress:{primaryCourseId:A,addedCourseIds:[A,TEAM],expandedForward:[A,'00140889'],hiddenForwardConnections:[A+'->00140856:strong'],markedCourseIds:[A,TEAM],markedCourseQuantities:{[TEAM]:3},facultyIds:savedFilters?['civil']:null,highlightSatisfiedPrerequisites:true}}));}
+  if(!sessionStorage.getItem('transition-progress')){sessionStorage.setItem('transition-progress','yes');localStorage.setItem(key,JSON.stringify({version,progress:{addedCourseIds:[A,TEAM],expandedForward:[A,'00140889'],hiddenForwardConnections:[A+'->00140856:strong'],markedCourseIds:[A,TEAM],markedCourseQuantities:{[TEAM]:3},facultyIds:savedFilters?['civil']:null,highlightSatisfiedPrerequisites:true}}));}
   (window as any).__transition={shifts:[],firstPaint:null};
   new PerformanceObserver(list=>{for(const e of list.getEntries())if(!(e as any).hadRecentInput)(window as any).__transition.shifts.push({value:(e as any).value,time:e.startTime});}).observe({type:'layout-shift',buffered:true});
   new PerformanceObserver(list=>{if(list.getEntries().some(e=>e.name==='first-contentful-paint')){const header=document.querySelector('.app-header');(window as any).__transition.firstPaint={margin:getComputedStyle(document.body).margin,headerHeight:header?.getBoundingClientRect().height};}}).observe({type:'paint',buffered:true});
@@ -88,6 +88,6 @@ for(const mode of ['development','production'] as const)test(`${mode}: an early 
   await page.goto(base+'/about?course='+A);await moduleRequested.promise;
   await expect(page.locator('.about-back')).toHaveAttribute('href','/');
   await page.locator('.about-back').click();await expect(page).toHaveURL(new RegExp('/\\?course='+A+'$'));
-  moduleReady.release();await expect(page.locator('.root-node .course-link')).toHaveText(A);
+  moduleReady.release();await expect(page.locator('.course-node.is-added .course-link')).toHaveText(A);
  }finally{moduleReady.release();}
 });

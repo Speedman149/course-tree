@@ -19,7 +19,7 @@ const A = '00140855', B = '00140856', C = '00140889', D = '00140866';
 const connection = (source: string, target: string, relation = 'strong') => `${source}->${target}:${relation}`;
 const AB = connection(A, B), AC = connection(A, C), BD = connection(B, D), CD = connection(C, D);
 const node = (page: Page, id = 'root') => id === 'root'
-  ? page.locator('.react-flow__node:has(.root-node)')
+  ? page.locator('.react-flow__node:has(.course-node.is-added)')
   : page.locator(`.react-flow__node[data-id="${id}"]`);
 const edgeControl = (page: Page, id: string) => page.locator(`[data-connection="${id}"]`);
 const saved = (page: Page) => page.evaluate(key => {
@@ -29,7 +29,7 @@ const saved = (page: Page) => page.evaluate(key => {
 
 async function ready(page: Page, root = A) {
   await page.goto(`/?course=${root}`);
-  await expect(node(page).locator('.course-link')).toHaveText(root);
+  await expect(node(page,root).locator('.course-link')).toHaveText(root);
 }
 async function toggle(page: Page, id: string) {
   const button = node(page, id).locator('.expand-button');
@@ -171,7 +171,7 @@ test('course-level reopen restores direct hidden children while keeping a deeper
   await expect(node(page, D)).toHaveCount(1);
 });
 
-test('branch reset and sole-root changes clear hidden connections while preserving markings', async ({page}) => {
+test('branch reset clears hidden connections while ordinary additions preserve hidden choices and markings', async ({page}) => {
   await diamond(page);
   await mark(page, D);
   await hide(page, AB);
@@ -183,11 +183,12 @@ test('branch reset and sole-root changes clear hidden connections while preservi
   const search = page.getByRole('combobox');
   await search.fill(D);
   await page.getByRole('option').filter({hasText: D}).click();
-  await expect(node(page).locator('.mark-button')).toHaveAttribute('aria-pressed', 'true');
-  await expect.poll(async () => (await saved(page))?.hiddenForwardConnections).toEqual([]);
+  await expect(node(page,D).locator('.mark-button')).toHaveAttribute('aria-pressed', 'true');
+  await expect.poll(async () => (await saved(page))?.hiddenForwardConnections).toContain(AB);
   await search.fill(A);
   await page.getByRole('option').filter({hasText: A}).click();
-  await expect(node(page, B)).toHaveCount(1);
+  await expect(node(page, B)).toHaveCount(0);
+  await expect(node(page,D)).toHaveCount(1);
 });
 
 test('legacy and outdated connection identifiers migrate without losing valid progress', async ({page}) => {

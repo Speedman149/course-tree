@@ -4,7 +4,7 @@ import { courseAppearance } from '../lib/faculty-colors';
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Handle, Position, type Node, type NodeProps } from '@xyflow/react';
-import { ArrowUpLeft, BookOpen, Bug, Check, ChevronLeft, CircleHelp, GitBranch, Info, Minus, Plus, RotateCcw } from 'lucide-react';
+import { ArrowUpLeft, BookOpen, Bug, Check, CircleHelp, GitBranch, Info, Minus, Plus, RotateCcw } from 'lucide-react';
 import type { Course, Requirement, Relation, DegreeCatalog } from '../types';
 import type { CatalogRole } from '../lib/filters';
 import type {PrerequisiteSatisfaction} from '../lib/prerequisite-satisfaction';
@@ -13,7 +13,6 @@ import { collectRequirements, forwardConnectionId, forwardExpansionState, type G
 export interface ExplorerContextValue {
   courses: Map<string, Course>;
   dependents: Map<string, { courseId: string; relation: Relation }[]>;
-  primaryCourseId: string;
   addedCourseIds: readonly string[];
   setCourseAdded: (courseId:string,added:boolean)=>void;
   collapseBackward: (courseId:string)=>void;
@@ -23,7 +22,6 @@ export interface ExplorerContextValue {
   expandedBackward: Map<string, Set<string>>;
   toggleForward: (id: string) => void;
   toggleBackward: (id: string, courseId: string) => void;
-  setRoot: (course: Course) => void;
   catalogTerm: string;
   isVisible: (id: string) => boolean;
   activeCatalog: DegreeCatalog | null;
@@ -75,7 +73,6 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
   const requirements = collectRequirements(course?.requirements);
   const expanded = expansion.status !== 'collapsed';
   const isAdded = item.added;
-  const isRoot = id === explorer.primaryCourseId;
   const isBackward = item.backwardParents.length > 0;
   const isConcurrent = item.relations.includes('concurrent');
   const marked=explorer.markedCourseIds.has(item.courseId);
@@ -125,7 +122,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
   };
 
   return <>
-    <div ref={cardRef} data-expansion={expansion.status} data-faculty={appearance.id} data-marked={marked} data-prerequisite-status={explorer.highlightSatisfiedPrerequisites ? satisfaction?.status ?? 'unknown' : undefined} style={{'--faculty-accent':appearance.accent} as CSSProperties} className={`course-node ${highlight ? 'prerequisites-satisfied' : ''} ${marked ? 'user-marked' : ''} ${isConcurrent && item.relations.length === 1 ? 'concurrent' : 'strong'} ${isRoot ? 'root-node' : ''} ${isAdded ? 'is-added' : ''} ${explorer.focusedCourseId === item.courseId ? 'is-focused' : ''} ${isBackward ? 'backward-node' : ''} ${item.cycle ? 'cycle-node' : ''} ${(isRoot || isAdded) && !explorer.isVisible(item.courseId) ? 'outside-filter-root' : ''}`} onMouseEnter={showPanel} onMouseLeave={hidePanel}>
+    <div ref={cardRef} data-expansion={expansion.status} data-faculty={appearance.id} data-marked={marked} data-prerequisite-status={explorer.highlightSatisfiedPrerequisites ? satisfaction?.status ?? 'unknown' : undefined} style={{'--faculty-accent':appearance.accent} as CSSProperties} className={`course-node ${highlight ? 'prerequisites-satisfied' : ''} ${marked ? 'user-marked' : ''} ${isConcurrent && item.relations.length === 1 ? 'concurrent' : 'strong'} ${isAdded ? 'is-added' : ''} ${explorer.focusedCourseId === item.courseId ? 'is-focused' : ''} ${isBackward ? 'backward-node' : ''} ${item.cycle ? 'cycle-node' : ''} ${isAdded && !explorer.isVisible(item.courseId) ? 'outside-filter-root' : ''}`} onMouseEnter={showPanel} onMouseLeave={hidePanel}>
       {highlight && <span className="prerequisite-satisfied-indicator" role="img" aria-label={satisfactionLabel} title={`${satisfactionLabel}. מקצועות צמודים ותנאי רישום נוספים אינם נבדקים.`}><Check size={15} aria-hidden="true"/></span>}
       <Handle type="target" position={Position.Right}/>
       <Handle type="source" position={Position.Left}/>
@@ -167,7 +164,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
       </> : <div className="no-prerequisites"><CircleHelp size={22}/><p>{course?.requirementsStatus === 'none' ? 'לא תועדו קדמים לקורס הזה במקור. בדקו את כללי הרישום בקטלוג.' : 'אין במאגר מידע מפוענח על קדמים לקורס הזה.'}</p>{course?.rawRequirements && <p className="raw-requirements">{course.rawRequirements}</p>}</div>}
       {hiddenChildren > 0 && <p className="panel-filter-note">{hiddenChildren} קשרי המשך מוסתרים במסננים. הקדמים מוצגים במלואם וניתנים לפתיחה.</p>}
       <button className="course-feedback-link" onClick={()=>{close();explorer.reportCourse(item.courseId);}}><Bug size={12}/>דיווח על מידע בקורס</button>
-      {course && <div className="panel-footer"><a href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer">מידע במקור <ArrowUpLeft size={12}/></a>{(!isRoot || explorer.addedCourseIds.some(courseId => courseId !== id)) && <button onClick={() => { explorer.setRoot(course); close(); }}>פתח עץ חדש <ChevronLeft size={12}/></button>}</div>}
+      {course && <div className="panel-footer"><a href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer">מידע במקור <ArrowUpLeft size={12}/></a></div>}
     </div>, document.body)}
   </>;
 }

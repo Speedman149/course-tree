@@ -2,7 +2,7 @@
 
 BranchQuest is an independent Hebrew RTL course dependency explorer built with React, TypeScript, Vite, React Flow and Dagre. The checked-in database contains 2,761 course records collected from eight Technion SAP semester snapshots across several academic years and academic units.
 
-The default root is **מבוא למדעי המחשב מ׳**, current source ID **`02340114`**. Searching for its legacy number **`234114`** or unpadded current number **`2340114`** finds the same record. Other courses are searchable by their source IDs, explicit aliases, partial numbers, Hebrew names and academic units.
+A new visitor starts with **מבוא למדעי המחשב מ׳**, current source ID **`02340114`**, as one ordinary entry in **קורסים שהוספתי**. Every added course is equal, removable, and saved; removing all additions leaves an intentionally empty graph. Searching for its legacy number **`234114`** or unpadded current number **`2340114`** finds the same record. Other courses are searchable by their source IDs, explicit aliases, partial numbers, Hebrew names and academic units.
 
 ## Run locally
 
@@ -33,33 +33,33 @@ npm run data:test
 
 The interface bundles its Heebo Hebrew and Latin fonts locally through `@fontsource/heebo`; it does not need a third-party font request.
 
-For browser verification, install Chromium once and run the Playwright suite. Its configuration builds and starts the production fixture; use `PLAYWRIGHT_BASE_URL` to test a separately running server.
+For browser verification, install Chromium once and run the Playwright suite with an explicit local production QA build. Its configuration builds and starts the production fixture and a Vite development server. `PLAYWRIGHT_BASE_URL` and `PLAYWRIGHT_DEV_BASE_URL` can target separately running production and development servers.
 
 ```sh
 npx playwright install chromium
-npm run test:e2e
+BRANCHQUEST_DEPLOYMENT_ENV=production npm run test:e2e
 
 # Optional: use an already-installed Chromium executable.
-PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/absolute/path/to/chromium npm run test:e2e
+PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/absolute/path/to/chromium BRANCHQUEST_DEPLOYMENT_ENV=production npm run test:e2e
 
-# Optional: test a separately running instance without starting Vite.
-PLAYWRIGHT_BASE_URL=http://127.0.0.1:5173 npm run test:e2e
+# Optional: target an existing production test server.
+PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173 BRANCHQUEST_DEPLOYMENT_ENV=production npm run test:e2e
 ```
 
-Browser tests cover root selection, legacy and Hebrew searches, independent forward branches, recursive backward exploration, course links, relationship colors, viewport controls and a 390px mobile layout. Failure screenshots and traces are written to `.playwright/results/`.
+Browser tests cover equal added-course selection, legacy and Hebrew searches, independent forward branches, recursive backward exploration, course links, relationship colors, viewport controls and a 390px mobile layout. Failure screenshots and traces are written to `.playwright/results/`.
 
 The primary production origin is `https://branchquest.app`. The project supports local development and a pre-rendered static production build.
 
 ## Explore the graph
 
-- Select a course in the search box to make it the root and reset the expanded graph. Arrow keys, Enter and Escape work in search. A `?course=02340114` URL can select a root directly.
-- Use a course's **+** to show courses that list it as a prerequisite or concurrent requirement. **−** collapses that branch. Repeated course instances have independent expansion state, so collapsing one path does not collapse an unrelated path.
+- Click a search result to add it to the existing graph, or focus its existing node if already added. There is no separate search plus button and no primary root. Arrow keys, Enter and Escape work in search. A `?course=02340114` link initializes a new visitor at that course; for an existing visitor it adds or focuses the course without replacing their selection.
+- Use a course's **+** to show courses that list it as a prerequisite or concurrent requirement. **−** collapses that branch. Each canonical course has one node. Connection-level collapse removes only unreachable branches; shared courses reachable through another visible connection remain.
 - Hover over a course, or use its prerequisites information button, to open the interactive prerequisites panel. The panel remains usable when the pointer moves into it. Each prerequisite's **+** adds a full course node for further backward exploration; **−** removes that prerequisite branch. A green minus control on a backward card also closes that branch directly.
-- **White** nodes represent strong prerequisites; **gray** nodes represent concurrent requirements. The color describes the relationship to that instance's parent, not a permanent attribute of the course. The root has a separate accent treatment.
+- **White** nodes represent strong prerequisites; **gray** nodes represent concurrent requirements. Relationship badges distinguish source prerequisite types. All explicitly added courses share the same subtle indicator; faculty colors and personal red markings remain independent.
 - Backward exploration uses **green dashed edges**. Forward course relationships use purple edges. Original nested **AND/OR** requirements remain visible in the prerequisites panel.
-- Drag the canvas to pan, use the zoom controls or scrolling to zoom, and use the fit control to bring the whole visible graph into view. “עוד שכבה” expands one visible forward layer; “איפוס ענפים” resets the exploration to the root's direct dependents.
+- Drag the canvas to pan, use the zoom controls or scrolling to zoom, and use the fit control to bring the whole visible graph into view. “עוד שכבה” expands one visible forward layer; “איפוס ענפים” resets expansion around all added courses while preserving markings and filters.
 - Course information links open the course-specific official Technion catalog page in a new tab. Expansion controls are separate from navigation.
-- Cyclic ancestor references stop at a labeled terminal node. Referenced courses missing from the database remain visible as incomplete records instead of receiving invented details.
+- Source cycles are identified without duplicating course nodes. Referenced courses missing from the database remain visible as incomplete records instead of receiving invented details.
 
 A connection means the parent is **one part of the child's requirements**. It does not mean completing that parent alone makes a student eligible for the child. This is a general course explorer, not a semester planner or registration eligibility checker.
 
@@ -136,7 +136,7 @@ The requested developer credit appears unobtrusively on desktop and mobile: **De
 
 ## Remembered exploration and personal markings
 
-The graph automatically remembers roots, expanded forward/backward branches, filters, red course markings and viewport in browser-local storage. Markings are global to a course number and do not imply academic completion. Branch reset preserves markings; clearing markings or all saved progress asks for confirmation. Tabs on the same origin synchronize with latest-write-wins behavior. See [local progress details](docs/LOCAL_PROGRESS.md).
+The graph automatically remembers the entire ordered added-course collection, expanded forward/backward branches, filters, red course markings and viewport in browser-local storage. The added-course list can remove any course or clear all additions after confirmation; markings and their credit quantities remain independent. Schema 7 merges older primary/pinned selections without promoting any course into a special role. Markings are global to a course number and do not imply academic completion. Branch reset preserves markings; clearing markings or all saved progress asks for confirmation. Tabs on the same origin synchronize with latest-write-wins behavior. See [local progress details](docs/LOCAL_PROGRESS.md).
 
 The twelve largest faculties/teaching departments receive fixed, non-red accents based on unique course counts and actual prerequisite connectivity. White/gray relationship badges preserve strong/concurrent distinctions on normal and marked cards. See [the palette and analysis](docs/faculty-colors/README.md).
 
@@ -165,3 +165,5 @@ Preview/development builds are nonindexable, with additional noindex response he
 See [SEO_REPORT.md](SEO_REPORT.md) for exact files, test coverage, environment policy, existing verified domain redirects and the Vercel / Google Search Console release steps.
 
 The initial public HTML now uses the explorer's loading layout and is hydrated before the interactive application loads. Stylesheets are linked in the HTML, including in Vite development, to avoid an unstyled or unrelated descriptive-page flash. Browser tests start both production and development servers; existing external servers can be supplied with `PLAYWRIGHT_BASE_URL` and `PLAYWRIGHT_DEV_BASE_URL`.
+
+Every course in **קורסים שהוספתי** is equal. Search adds or focuses rather than replacing the selection; the list can remove any member or clear all additions while keeping personal markings. The collection remains unlimited. See [equal added courses](docs/EQUAL_ADDED_COURSES.md) for migration, empty-board and link behavior.

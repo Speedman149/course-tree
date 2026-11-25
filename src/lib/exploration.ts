@@ -3,7 +3,6 @@ import { forwardConnectionId, parseConnectionId, restoreDirectConnections, build
 import { findCourseConnection } from './connecting-paths';
 
 export interface ExplorationState {
-  primaryCourseId: string;
   addedCourseIds: string[];
   expandedForward: Set<string>;
   autoExpandedCourseIds: Set<string>;
@@ -21,7 +20,6 @@ export interface AddCourseContext {
   isVisible: (courseId: string) => boolean;
 }
 export interface ExplorationSnapshot {
-  primaryCourseId: string;
   addedCourseIds: string[];
   expandedForward: string[];
   autoExpandedCourseIds?: string[];
@@ -32,7 +30,7 @@ export interface ExplorationSnapshot {
 }
 export type ExplorationAction =
   | { type: 'restore'; saved: ExplorationSnapshot }
-  | { type: 'selectRoot'; courseId: string }
+  | { type: 'clearAdded' }
   | { type: 'toggleAdded' | 'addCourse' | 'removeCourse'; courseId: string; context: AddCourseContext }
   | { type: 'locateAdded'; courseId: string; context: AddCourseContext }
   | { type: 'revealConnection'; courseId: string; context: AddCourseContext }
@@ -48,10 +46,9 @@ export type ExplorationAction =
 
 export function initialExploration(defaultRoot = '02340114'): ExplorationState {
   return {
-    primaryCourseId: defaultRoot,
-    addedCourseIds: [],
-    expandedForward: new Set([defaultRoot]),
-    autoExpandedCourseIds: new Set(),
+    addedCourseIds: defaultRoot ? [defaultRoot] : [],
+    expandedForward: new Set(defaultRoot ? [defaultRoot] : []),
+    autoExpandedCourseIds: new Set(defaultRoot ? [defaultRoot] : []),
     revealedForwardConnections: new Set(),
     expandedBackward: new Map(),
     hiddenForwardConnections: new Set(),
@@ -121,7 +118,6 @@ export function explorationReducer(state: ExplorationState, action: ExplorationA
     case 'restore':
       return {
         ...state,
-        primaryCourseId: action.saved.primaryCourseId,
         addedCourseIds: action.saved.addedCourseIds,
         expandedForward: new Set(action.saved.expandedForward),
         autoExpandedCourseIds: new Set(action.saved.autoExpandedCourseIds),
@@ -132,8 +128,10 @@ export function explorationReducer(state: ExplorationState, action: ExplorationA
         treeMessage: '',
         focusRequest: null,
       };
-    case 'selectRoot':
-      return { ...initialExploration(action.courseId), addedCourseIds: [action.courseId], focusRequest: null };
+    case 'clearAdded':
+      return { ...state, addedCourseIds: [],
+        expandedForward: new Set([...state.expandedForward].filter(id => !state.autoExpandedCourseIds.has(id))),
+        autoExpandedCourseIds: new Set(), automaticConnections: [], treeMessage: '', focusRequest: null };
     case 'toggleAdded':
     case 'addCourse':
     case 'removeCourse': {
@@ -142,22 +140,21 @@ export function explorationReducer(state: ExplorationState, action: ExplorationA
       if (action.type === 'removeCourse' || (action.type === 'toggleAdded' && exists)) {
         const addedCourseIds = state.addedCourseIds.filter(course => course !== id);
         const expandedForward = new Set(state.expandedForward), autoExpandedCourseIds = new Set(state.autoExpandedCourseIds);
-        if (autoExpandedCourseIds.has(id) && id !== state.primaryCourseId) expandedForward.delete(id);
+        if (autoExpandedCourseIds.has(id)) expandedForward.delete(id);
         autoExpandedCourseIds.delete(id);
         return { ...state, addedCourseIds, expandedForward, autoExpandedCourseIds,
-          automaticConnections: requiredAutomaticConnections(graphRoots(state.primaryCourseId, addedCourseIds), state.automaticConnections),
+          automaticConnections: requiredAutomaticConnections(graphRoots(addedCourseIds), state.automaticConnections),
           treeMessage: '', focusRequest: null };
       }
       if (exists) return { ...state, focusRequest: focus(state, id), treeMessage: '' };
-      const primaryCourseId = state.primaryCourseId || id;
-      const plan = findCourseConnection(graphRoots(state.primaryCourseId, state.addedCourseIds), id, action.context.courses, action.context.dependents, {
+      const plan = findCourseConnection(graphRoots(state.addedCourseIds), id, action.context.courses, action.context.dependents, {
         visibleCourseIds: action.context.visibleCourseIds,
         hiddenForwardConnections: state.hiddenForwardConnections,
         isForwardVisible: action.context.isVisible,
       });
       let connection = plan.connection;
-      if (plan.reason === 'visible' && id !== state.primaryCourseId) {
-        const anchors = graphRoots(state.primaryCourseId, state.addedCourseIds);
+      if (plan.reason === 'visible') {
+        const anchors = graphRoots(state.addedCourseIds);
         const current = buildGraph(anchors, action.context.courses, action.context.dependents, state.expandedForward,
           state.expandedBackward, action.context.isVisible, state.hiddenForwardConnections, state.automaticConnections,
           state.revealedForwardConnections, new Set(state.addedCourseIds), state.autoExpandedCourseIds);
@@ -170,10 +167,10 @@ export function explorationReducer(state: ExplorationState, action: ExplorationA
       }
       const expandedForward = new Set(state.expandedForward);
       const autoExpandedCourseIds = new Set(state.autoExpandedCourseIds);
-      if (plan.reason === 'unrelated' || !state.primaryCourseId) { expandedForward.add(id); autoExpandedCourseIds.add(id); }
+      if (plan.reason === 'unrelated' || !state.addedCourseIds.length) { expandedForward.add(id); autoExpandedCourseIds.add(id); }
       return {
         ...state,
-        primaryCourseId, addedCourseIds: [...state.addedCourseIds, id],
+        addedCourseIds: [...state.addedCourseIds, id],
         expandedForward, autoExpandedCourseIds,
         automaticConnections: (plan.autoReveal || plan.reason === 'visible') && connection ? addConnection(state.automaticConnections, connection) : state.automaticConnections,
         treeMessage: plan.reason === 'hidden' ? 'הקורס נוסף לעץ. החיבור שהוסתר נשמר סגור.' : plan.reason === 'filtered' ? 'הקורס נוסף לעץ. החיבור מוסתר במסננים הנוכחיים.' : plan.reason === 'long' ? 'הקורס נוסף לעץ. אפשר להציג את החיבור לפי הצורך.' : '',
@@ -183,9 +180,8 @@ export function explorationReducer(state: ExplorationState, action: ExplorationA
     case 'locateAdded':
     case 'revealConnection': {
       if (!state.addedCourseIds.includes(action.courseId)) return state;
-      const anchors = graphRoots(state.primaryCourseId, state.addedCourseIds);
+      const anchors = graphRoots(state.addedCourseIds);
       if (action.type === 'locateAdded') {
-        if (action.courseId === state.primaryCourseId) return { ...state, focusRequest: focus(state, action.courseId), treeMessage: '' };
         const owned = requiredAutomaticConnections([action.courseId], state.automaticConnections);
         if (owned.length) {
           const permitted = owned.every(connection => connection.steps.every(step =>
@@ -298,7 +294,7 @@ export function explorationReducer(state: ExplorationState, action: ExplorationA
     case 'expandVisible':
       return { ...state, expandedForward: new Set([...state.expandedForward, ...action.courseIds]), autoExpandedCourseIds: new Set([...state.autoExpandedCourseIds].filter(id => !action.courseIds.includes(id))) };
     case 'resetBranches':
-      return { ...state, expandedForward: new Set(graphRoots(state.primaryCourseId, state.addedCourseIds)), autoExpandedCourseIds: new Set(), revealedForwardConnections: new Set(), expandedBackward: new Map(), hiddenForwardConnections: new Set(), automaticConnections: [], treeMessage: '', focusRequest: null };
+      return { ...state, expandedForward: new Set(graphRoots(state.addedCourseIds)), autoExpandedCourseIds: new Set(), revealedForwardConnections: new Set(), expandedBackward: new Map(), hiddenForwardConnections: new Set(), automaticConnections: [], treeMessage: '', focusRequest: null };
     case 'clearMessage':
       return { ...state, treeMessage: '' };
   }

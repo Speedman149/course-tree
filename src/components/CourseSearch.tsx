@@ -1,7 +1,7 @@
 import { officialSourceURL } from '../lib/urls';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
-import { ArrowLeft, BookOpen, Check, Plus, Search, X } from 'lucide-react';
+import { ArrowLeft, BookOpen, Check, Search, X } from 'lucide-react';
 import {courseAppearance} from '../lib/faculty-colors';
 import type { Course } from '../types';
 
@@ -14,7 +14,6 @@ interface CourseSearchProps {
   searchAll:boolean;
   onSearchAllChange:(all:boolean)=>void;
   addedCourseIds?: readonly string[];
-  onAddedChange?: (course: Course, added: boolean) => void;
 }
 
 interface IndexedCourse {
@@ -33,7 +32,7 @@ function normalizeNumber(value: string) {
   return value.replace(/^0+(?=\d)/, '');
 }
 
-export default function CourseSearch({ courses, allCourses, onSelect, disabled = false, filtered = false, searchAll, onSearchAllChange, addedCourseIds = [], onAddedChange }: CourseSearchProps) {
+export default function CourseSearch({ courses, allCourses, onSelect, disabled = false, filtered = false, searchAll, onSearchAllChange, addedCourseIds = [] }: CourseSearchProps) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -127,7 +126,7 @@ export default function CourseSearch({ courses, allCourses, onSelect, disabled =
     } else if (event.key === 'Escape') {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Tab' && !onAddedChange && (!filtered || !allCourses)) setOpen(false);
+    }
   }
 
   return (
@@ -185,23 +184,12 @@ export default function CourseSearch({ courses, allCourses, onSelect, disabled =
                 <span className="search-result-icon" style={{color:courseAppearance(course).accent}}><BookOpen size={17} aria-hidden="true" /></span>
                 <span className="search-result-content"><span className="search-result-name" title={course.name}>{course.name}</span><span className="search-result-faculty">{course.faculty}</span>{allScope && !visibleIds.has(course.id) && <span className="search-result-outside-filter">מחוץ לסינון · יישאר זמין בעץ</span>}</span>
                 <a className="search-result-number" dir="ltr" href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer" aria-label={`פרטי קורס ${course.id} בקטלוג`} onClick={event => event.stopPropagation()}>{course.id}</a>
-                {onAddedChange ? <button
-                  className={`search-result-add${addedIds.has(course.id) ? ' is-added' : ''}`}
-                  type="button"
-                  aria-label={addedIds.has(course.id) ? `הסר מהעץ ${course.id}` : `הוסף לעץ ${course.id}`}
-                  aria-pressed={addedIds.has(course.id)}
-                  title={addedIds.has(course.id) ? 'הסר מהעץ' : 'הוסף לעץ'}
-                  onMouseDown={event => event.stopPropagation()}
-                  onClick={event => {
-                    event.stopPropagation();
-                    onAddedChange(course, !addedIds.has(course.id));
-                  }}
-                >{addedIds.has(course.id) ? <Check size={15}/> : <Plus size={15}/>}</button> : <ArrowLeft className="search-result-arrow" size={15} aria-hidden="true" />}
+                {addedIds.has(course.id) ? <span className="search-result-added" title="כבר נוסף לעץ — בחירה תמקד את הקורס"><Check size={15} aria-hidden="true"/><span>נוסף</span></span> : <ArrowLeft className="search-result-arrow" size={15} aria-hidden="true" />}
               </div>
             ))}
           </div>
           {!results.length && <div className="search-empty"><Search size={24} aria-hidden="true" /><strong>לא נמצאו קורסים</strong><span>{filtered && !allScope ? 'אין קורסים מתאימים למסננים. אפשר לחפש בכל הקורסים או לנסות חיפוש אחר.' : 'נסו מספר קורס אחר או חלק מהשם בעברית.'}</span></div>}
-          <div className="search-footer"><span>{onAddedChange ? 'בחירה פותחת עץ חדש · + מוסיף לעץ הקיים' : 'בחירת קורס תפתח מפה חדשה'}</span><span className="search-keyboard-hint">↑ ↓ לניווט · Enter לבחירה</span></div>
+          <div className="search-footer"><span>{'בחירה מוסיפה לעץ · קורס שכבר נוסף ימוקד במפה'}</span><span className="search-keyboard-hint">↑ ↓ לניווט · Enter לבחירה</span></div>
         </div>
       )}
       <span className="search-sr-only" role="status" aria-live="polite">{open && query.trim() ? `${results.length}${results.length === 30 ? ' או יותר' : ''} קורסים נמצאו` : ''}</span>

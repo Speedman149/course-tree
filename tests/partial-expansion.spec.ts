@@ -1,4 +1,4 @@
-import {openCollection} from './helpers/mobile-tools';
+import {openCollection,settledViewport} from './helpers/mobile-tools';
 import {expect,test as base,type Page} from '@playwright/test';
 import {PROGRESS_KEY,PROGRESS_VERSION} from '../src/lib/progress';
 const A='00000001',B='00000002',C='00000003',D='00000004',E='00000005',F='00000006',G='00000007',H='00000008',X='00000009';
@@ -26,14 +26,14 @@ async function toggle(page:Page,id=B) {const b=node(page,id).locator('.expand-bu
 async function pin(page:Page,id:string) {
  const input=page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true});
  if(!await input.isVisible())await page.getByRole('button',{name:'חיפוש קורסים',exact:true}).click();
- await input.fill(id);await page.getByRole('option').filter({hasText:id}).getByRole('button',{name:'הוסף לעץ '+id,exact:true}).click();
- await input.press('Escape');await expect(node(page,id).locator('.added-badge')).toBeVisible();
+ await input.fill(id);await page.getByRole('option').filter({hasText:id}).click();
+ await page.keyboard.press('Escape');await expect(node(page,id).locator('.added-badge')).toBeVisible();
 }
 async function mark(page:Page,id:string) {const b=node(page,id).locator('.mark-button');await b.focus();await b.press('Enter');await expect(b).toHaveAttribute('aria-pressed','true');}
 async function focusB(page:Page) {
  await mark(page,B);const marked=await openCollection(page,'marked');
  await marked.getByRole('button',{name:'מיקוד במקצוע מסומן '+B,exact:true}).click();
- await expect(card(page)).toHaveClass(/is-focused/);
+ await expect(card(page)).toHaveClass(/is-focused/);await settledViewport(page);
 }
 async function ready(page:Page,width:number) {
  await page.setViewportSize({width,height:width<640?844:1000});await page.goto('/?course='+A);

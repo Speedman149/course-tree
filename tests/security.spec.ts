@@ -29,7 +29,7 @@ test('HTML-like course, faculty, catalog and group names render as literal text'
   await page.route('**/data/courses.json', route => route.fulfill({ json: data }));
   await page.route('**/data/catalogs.json', route => route.fulfill({ json: cat }));
   await page.goto('/');
-  await expect(page.locator('.root-node .node-name')).toHaveText(payload);
+  await expect(page.locator('.course-node.is-added .node-name')).toHaveText(payload);
   const search = page.locator('.desktop-course-search .search-input');
   await search.fill('02340114');
   await expect(page.getByRole('option').filter({ hasText: '02340114' })).toContainText(payload);
@@ -46,14 +46,14 @@ test('HTML-like course, faculty, catalog and group names render as literal text'
 
 test('script-like search, course query and unknown hash remain safe', async ({ page }) => {
   await page.goto('/?course=' + encodeURIComponent('javascript:window.__xss=1') + '#/about<img>');
-  await expect(page.locator('.root-node .course-link')).toHaveText('02340114');
+  await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340114');
   const search = page.locator('.desktop-course-search .search-input');
   await search.fill(payload);
   await expect(page.getByText('לא נמצאו קורסים', { exact: true })).toBeVisible();
   await expect(page.locator('img[src=x]')).toHaveCount(0);
   expect(await page.evaluate(() => (window as any).__xss)).toBe(0);
   await page.goto('/?course=' + '0'.repeat(2000));
-  await expect(page.locator('.root-node .course-link')).toHaveText('02340114');
+  await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340114');
 });
 
 for (const scenario of ['bad JSON', 'wrong name type', 'duplicate ID', 'dangerous URL', 'deep prerequisite']) {
@@ -81,7 +81,7 @@ test('invalid catalog metadata preserves the working graph and saved markings', 
   await page.addInitScript(key => localStorage.setItem(key, JSON.stringify({ version: 2, progress: { rootId: '02340114', markedCourseIds: ['02340114'], expandedForward: ['root'] } })), PROGRESS_KEY);
   await page.route('**/data/catalogs.json', route => route.fulfill({ json: cat }));
   await page.goto('/');
-  await expect(page.locator('.root-node.user-marked')).toBeVisible();
+  await expect(page.locator('.course-node.is-added.user-marked')).toBeVisible();
   await page.getByRole('button', { name: 'פתיחת מסנני המפה' }).click();
   await page.getByRole('tab', { name: /קטלוג תואר/ }).click();
   await expect(page.locator('.catalog-option')).toHaveCount(0);
@@ -94,7 +94,7 @@ test('hostile storage fields retain a valid root and mark without prototype chan
     localStorage.setItem(key, JSON.stringify({ version: 2, progress: hostile }));
   }, PROGRESS_KEY);
   await page.goto('/');
-  await expect(page.locator('.root-node.user-marked')).toBeVisible();
+  await expect(page.locator('.course-node.is-added.user-marked')).toBeVisible();
   await expect(page.locator('.canvas-controls')).toBeVisible();
   expect(await page.evaluate(() => ({} as any).polluted)).toBeUndefined();
 });
@@ -126,7 +126,7 @@ test('enforced CSP blocks inline JavaScript while graph controls remain function
     document.addEventListener('securitypolicyviolation', event => (window as any).__violations.push(event.violatedDirective));
   });
   await page.goto('/');
-  await expect(page.locator('.root-node')).toBeVisible();
+  await expect(page.locator('.course-node.is-added')).toBeVisible();
   await page.evaluate(() => {
     const script = document.createElement('script');
     script.textContent = 'window.__xss=1';
@@ -134,11 +134,11 @@ test('enforced CSP blocks inline JavaScript while graph controls remain function
   });
   expect(await page.evaluate(() => (window as any).__xss)).toBe(0);
   await expect.poll(() => page.evaluate(() => (window as any).__violations)).toContain('script-src-elem');
-  await page.locator('.root-node .expand-button').focus();
-  await page.locator('.root-node .expand-button').press('Enter');
+  await page.locator('.course-node.is-added .expand-button').focus();
+  await page.locator('.course-node.is-added .expand-button').press('Enter');
   await expect(page.locator('.react-flow__node')).toHaveCount(1);
-  await page.locator('.root-node .expand-button').focus();
-  await page.locator('.root-node .expand-button').press('Enter');
+  await page.locator('.course-node.is-added .expand-button').focus();
+  await page.locator('.course-node.is-added .expand-button').press('Enter');
   expect(await page.locator('.react-flow__node').count()).toBeGreaterThan(1);
 });
 
@@ -195,9 +195,9 @@ test('a large shared saved graph deduplicates and can collapse without losing ma
   await expect(page.locator('.react-flow__edge')).toHaveCount(2550);
   // This complete canonical graph fits the emergency budget; no partial-graph warning is warranted.
   await expect(page.getByText('המפה גדולה מאוד, ולכן מוצג חלק ממנה.', { exact: false })).toHaveCount(0);
-  const toggle = page.locator('.root-node .expand-button');
+  const toggle = page.locator('.course-node.is-added .expand-button');
   await toggle.focus();
   await toggle.press('Enter');
   await expect(page.locator('.react-flow__node')).toHaveCount(1);
-  await expect(page.locator('.root-node.user-marked')).toBeVisible();
+  await expect(page.locator('.course-node.is-added.user-marked')).toBeVisible();
 });

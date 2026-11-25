@@ -12,7 +12,7 @@ const node=(page:Page,id:string)=>page.locator('.react-flow__node[data-id="'+id+
 const saved=(page:Page)=>page.evaluate(k=>JSON.parse(localStorage.getItem(k)??'{}').progress,PROGRESS_KEY);
 async function ready(page:Page){await page.goto('/?course='+A);await expect(node(page,A).locator('.course-link')).toHaveText(A);}
 async function search(page:Page){const input=page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true});if(!await input.isVisible())await page.getByRole('button',{name:'חיפוש קורסים',exact:true}).click();return input;}
-async function add(page:Page,id:string){const input=await search(page);await input.fill(id);await page.getByRole('option').filter({hasText:id}).getByRole('button',{name:'הוסף לעץ '+id,exact:true}).click();await input.press('Escape');await expect(node(page,id).locator('.added-badge')).toBeVisible();}
+async function add(page:Page,id:string){const input=await search(page);await input.fill(id);await page.getByRole('option').filter({hasText:id}).click();await page.keyboard.press('Escape');await expect(node(page,id).locator('.added-badge')).toBeVisible();}
 async function addedMenu(page:Page){return openCollection(page,'added');}
 async function markedMenu(page:Page){return openCollection(page,'marked');}
 async function mark(page:Page,id:string){const b=node(page,id).locator('.mark-button');await b.focus();await b.press('Enter');await expect(b).toHaveAttribute('aria-pressed','true');}
@@ -24,11 +24,11 @@ test('one add/remove system stays synchronized across search, cards and list bey
  let menu=await addedMenu(page);await expect(menu.locator('[data-added-course]')).toHaveCount(5);await page.keyboard.press('Escape');
  await node(page,B).locator('.added-badge').focus();await node(page,B).locator('.added-badge').press('Enter');
  await expect(node(page,B)).toHaveCount(1);await expect(node(page,B).locator('.added-badge')).toHaveCount(0);
- const input=await search(page);await input.fill(B);await expect(page.getByRole('option').filter({hasText:B}).getByRole('button',{name:'הוסף לעץ '+B,exact:true})).toBeVisible();await input.press('Escape');
+ const input=await search(page);await input.fill(B);await expect(page.getByRole('option').filter({hasText:B})).toBeVisible();await expect(page.getByRole('option').filter({hasText:B}).locator('.search-result-add')).toHaveCount(0);await input.press('Escape');
  await remove(page,C);await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([A,D,E]);
- await input.fill(E);const row=page.getByRole('option').filter({hasText:E});await row.getByRole('button',{name:'הסר מהעץ '+E,exact:true}).focus();await row.locator('.search-result-name').click();
+ await input.fill(E);const row=page.getByRole('option').filter({hasText:E});await expect(row.locator('.search-result-added')).toBeVisible();await row.locator('.search-result-name').click();
  await expect(page.getByRole('listbox')).toHaveCount(0);await expect(input).toBeFocused();
- await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([E]);expect((await saved(page)).primaryCourseId).toBe(E);
+ await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([A,D,E]);expect((await saved(page)).primaryCourseId).toBeUndefined();await expect(node(page,E).locator('.course-node')).toHaveClass(/is-focused/);
 });
 
 test('marked and added collections stay independent and clear markings leaves additions intact',async({page})=>{
@@ -53,14 +53,14 @@ test('added-list locate restores a deliberately collapsed connector and keeps on
  await expect(edge).toHaveCount(1);await expect(node(page,D)).toHaveCount(1);await expect(node(page,D).locator('.course-node')).toHaveClass(/is-focused/);
 });
 
-test('mobile collection menu stays compact and removing every addition preserves exploration and markings',async({page})=>{
+test('mobile collection menu stays compact and removing every addition leaves an empty graph with markings preserved',async({page})=>{
  await page.setViewportSize({width:320,height:568});await ready(page);await add(page,B);await mark(page,A);
  let menu=await addedMenu(page);await expect(menu).toBeInViewport();await expect(menu).toHaveCSS('direction','rtl');
  await menu.getByRole('button',{name:'הסר מהעץ '+B,exact:true}).click();await menu.getByRole('button',{name:'הסר מהעץ '+A,exact:true}).click();
  await expect(menu.getByText('עדיין לא הוספתם קורסים לעץ',{exact:true})).toBeVisible();await page.keyboard.press('Escape');
- await expect(toolsTrigger(page)).toBeFocused();await expect(node(page,A)).toHaveCount(1);
- await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([]);await page.reload();await expect(node(page,A).locator('.mark-button')).toHaveAttribute('aria-pressed','true');
- expect((await saved(page)).addedCourseIds).toEqual([]);expect((await saved(page)).primaryCourseId).toBe(A);
+ await expect(toolsTrigger(page)).toBeFocused();await expect(page.locator('.react-flow__node')).toHaveCount(0);
+ await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([]);await page.reload();await expect(page.locator('.empty-graph-state')).toBeVisible();
+ expect((await saved(page)).addedCourseIds).toEqual([]);expect((await saved(page)).markedCourseIds).toContain(A);expect((await saved(page)).primaryCourseId).toBeUndefined();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 

@@ -22,10 +22,10 @@ interface Props {
   onAddedChange?: (courseId: string, added: boolean) => void;
   onLocateAddedCourse?: (courseId: string) => void;
   onFocusCourse?: (courseId: string) => void;
-  onSelectCourse?: (courseId: string) => void;
+  onClearAddedCourses?: () => void;
   onToggleMarked?: (courseId: string) => boolean | void;
 }
-export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onSelectCourse,onToggleMarked,markedCourseQuantities,onQuantityChange}:Props) {
+export default function SiteFooter({treeCourseId,markedCount,storageAvailable=true,onClearMarks,onResetProgress,courses,markedCourseIds,addedCourseIds,visibleCourseIds,onAddedChange,onLocateAddedCourse,onFocusCourse,onClearAddedCourses,onToggleMarked,markedCourseQuantities,onQuantityChange}:Props) {
  const mobile=useMobileLayout();
  const count=markedCourseIds?.size??markedCount??0;
  const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
@@ -35,8 +35,8 @@ export default function SiteFooter({treeCourseId,markedCount,storageAvailable=tr
    <span className={storageAvailable?'local-save-status':'local-save-status storage-unavailable'} role="status">{storageAvailable?'ההתקדמות נשמרת בדפדפן הזה':'השמירה המקומית אינה זמינה כרגע'}</span>
    <span className="marked-count">קורסים מסומנים: {count}</span>
    <button className="footer-destructive" onClick={onClearMarks} disabled={!count}>ניקוי סימונים</button>
-   {courses&&markedCourseIds&&addedCourseIds&&visibleCourseIds&&onAddedChange&&onFocusCourse&&onSelectCourse&&onToggleMarked&&<MarkedCoursesMenu markedCourseQuantities={markedCourseQuantities} onQuantityChange={onQuantityChange} courses={courses} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={onAddedChange} onFocusCourse={onFocusCourse} onSelectCourse={onSelectCourse} onToggleMarked={onToggleMarked}/>}
-   {courses&&addedCourseIds&&onAddedChange&&onLocateAddedCourse&&<AddedCoursesMenu courses={courses} addedCourseIds={addedCourseIds} onAddedChange={onAddedChange} onLocateCourse={onLocateAddedCourse}/>}
+   {courses&&markedCourseIds&&addedCourseIds&&visibleCourseIds&&onAddedChange&&onFocusCourse&&onToggleMarked&&<MarkedCoursesMenu markedCourseQuantities={markedCourseQuantities} onQuantityChange={onQuantityChange} courses={courses} markedCourseIds={markedCourseIds} addedCourseIds={addedCourseIds} visibleCourseIds={visibleCourseIds} onAddedChange={onAddedChange} onFocusCourse={onFocusCourse} onToggleMarked={onToggleMarked}/>}
+   {courses&&addedCourseIds&&onAddedChange&&onLocateAddedCourse&&onClearAddedCourses&&<AddedCoursesMenu courses={courses} addedCourseIds={addedCourseIds} onAddedChange={onAddedChange} onLocateCourse={onLocateAddedCourse} onClearAdded={onClearAddedCourses}/>}
    <button className="footer-destructive" onClick={onResetProgress}>איפוס התקדמות שמורה</button>
   </div>}
   {mobile && !storageAvailable && <p className="mobile-storage-warning" role="status">השמירה המקומית אינה זמינה כרגע</p>}

@@ -13,7 +13,7 @@ const records=[course(A),course(B,leaf(A)),course(C,leaf(B)),course(D,leaf(C)),c
 const courses=buildCourseIndex(records), dependents=buildDependents(records);
 const edge=(source:string,target:string)=>forwardConnectionId(source,target,'strong');
 const all=()=>true;
-const graph=(state:ExplorationState,visible=all)=>buildGraph([state.primaryCourseId,...state.addedCourseIds].filter(Boolean),courses,dependents,state.expandedForward,state.expandedBackward,visible,state.hiddenForwardConnections,state.automaticConnections,state.revealedForwardConnections);
+const graph=(state:ExplorationState,visible=all)=>buildGraph(state.addedCourseIds,courses,dependents,state.expandedForward,state.expandedBackward,visible,state.hiddenForwardConnections,state.automaticConnections,state.revealedForwardConnections);
 const expansion=(state:ExplorationState,visible=all)=>forwardExpansionState(B,dependents,new Set(graph(state,visible).edges.filter(e=>e.directions.includes('forward')).map(e=>forwardConnectionId(e.source,e.target,e.relation))),visible);
 const pin=(state:ExplorationState,id:string)=>explorationReducer(state,{type:'toggleAdded',courseId:id,context:{courses,dependents,visibleCourseIds:new Set(graph(state).nodes.map(n=>n.id)),isVisible:all}});
 const initial=()=>pin(initialExploration(A),D);
@@ -127,19 +127,20 @@ test('parallel strong/concurrent connections have separate counts and share thei
  assert.equal(after.nodes.length,2);assert.equal(after.edges.length,2);
 });
 
-test('schema6 preserves partial intent, validates real keys, and clears it for a different root',()=>{
+test('schema7 preserves partial intent, validates real keys, and keeps it when a URL course is added',()=>{
  let state=reveal(initial(),E);
  state=explorationReducer(state,{type:'hideConnection',connectionId:edge(B,C)});
  const snapshot={...defaultProgress(db),addedCourseIds:state.addedCourseIds,expandedForward:[...state.expandedForward],revealedForwardConnections:[...state.revealedForwardConnections],hiddenForwardConnections:[...state.hiddenForwardConnections],automaticConnections:state.automaticConnections,markedCourseIds:[E],catalogId:program.id,facultyIds:['cs']};
  const valid=validateProgress(decodeProgress(encodeProgress(snapshot)),db);
- assert.deepEqual(valid,snapshot);assert.equal(PROGRESS_VERSION,6);
+ assert.deepEqual(valid,snapshot);assert.equal(PROGRESS_VERSION,7);
  const restored=explorationReducer(initialExploration(A),{type:'restore',saved:valid});
  assert.deepEqual(graph(restored),graph(state));
  const cleaned=validateProgress({...snapshot,revealedForwardConnections:[edge(B,E),edge(B,E),'junk',edge(A,D),'__proto__->constructor:strong']},db);
  assert.deepEqual(cleaned.revealedForwardConnections,[edge(B,E)]);
- assert.deepEqual(validateProgress(snapshot,db,X).revealedForwardConnections,[]);
+ assert.deepEqual(validateProgress(snapshot,db,X).revealedForwardConnections,snapshot.revealedForwardConnections);
  assert.equal(explorationReducer(state,{type:'resetBranches'}).revealedForwardConnections.size,0);
- assert.equal(explorationReducer(state,{type:'selectRoot',courseId:X}).revealedForwardConnections.size,0);
+ assert.equal(explorationReducer(state,{type:'clearAdded'}).addedCourseIds.length,0);
+ assert.ok(state.revealedForwardConnections.size>0);
 });
 
 test('existing schema3 sessions migrate with automatic paths and preferences intact',()=>{

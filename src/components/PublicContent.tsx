@@ -4,6 +4,7 @@ import {validCourseNumber} from '../lib/feedback';
 import {HOME_DESCRIPTION} from '../lib/seo';
 import {ArrowLeft, ArrowRight, BookOpen, Bug, Check, ChevronLeft, Database, ExternalLink, GitBranch, Layers, ListPlus, LoaderCircle, Menu, RotateCcw, Search, ShieldCheck, SlidersHorizontal} from 'lucide-react';
 import AppHeader from './AppHeader';
+import AddedCoursesSummary from './AddedCoursesSummary';
 import FooterInformation from './FooterInformation';
 import PrerequisiteHighlightToggle from './PrerequisiteHighlightToggle';
 import type {AppRoute} from '../lib/navigation';
@@ -47,9 +48,9 @@ function InitialFooter({progress=false}:{progress?:boolean}){
 /** Route-specific first paint in the real application layout, shared with the loading application. */
 export function StaticPublicPage({route,onHelp}:{route:AppRoute|'not-found';onHelp?:()=>void}){
  if(route==='tree')return <div className="app-shell initial-explorer-shell" dir="rtl" onClickCapture={preserveInitialCourse}>
-  <AppHeader courses={[]} allCourses={[]} filtered={false} disabled searchAll={false} onSearchAllChange={noop} onSelect={noop} addedCourseIds={[]} onAddedChange={noop} onHelp={onHelp}/>
+  <AppHeader courses={[]} allCourses={[]} filtered={false} disabled searchAll={false} onSearchAllChange={noop} onSelect={noop} addedCourseIds={[]} onHelp={onHelp}/>
   <main className="workspace">
-   <aside className="sidebar"><ExplorerIntro/><div className="sidebar-section-label">הקורס הנבחר <span className="status-dot"/></div><div className="root-summary"><span className="root-summary-icon"><BookOpen size={21}/></span><div className="skeleton skeleton-root"/><div className="root-summary-stats"><div><strong>0</strong><span>קורסי המשך</span></div><div><strong>0</strong><span>קדמים ישירים</span></div></div></div><ExplorerInstructions/><div className="sidebar-bottom"><div className="data-status"><span/><span>טוענים את מאגר הקורסים…</span></div><button disabled={!onHelp} onClick={onHelp}><Database size={14}/>על המאגר ומקורות המידע<ChevronLeft size={13}/></button><small>כל הפקולטות. מעבר לסמסטר אחד.</small></div></aside>
+   <aside className="sidebar"><ExplorerIntro/><AddedCoursesSummary loading/><ExplorerInstructions/><div className="sidebar-bottom"><div className="data-status"><span/><span>טוענים את מאגר הקורסים…</span></div><button disabled={!onHelp} onClick={onHelp}><Database size={14}/>על המאגר ומקורות המידע<ChevronLeft size={13}/></button><small>כל הפקולטות. מעבר לסמסטר אחד.</small></div></aside>
    <section className="map-workspace" aria-label="מפת קשרי הקורסים"><div className="map-toolbar"><div className="map-heading"><span className="map-heading-icon"><GitBranch size={18}/></span><div><h2>מפת הקשרים</h2><p>כל חיבור הוא צעד חדש לגלות</p></div><span className="visible-count">0 קורסים במפה</span></div><div className="map-actions"><button className="filters-trigger" aria-label="פתיחת מסנני המפה" disabled><SlidersHorizontal size={15}/><span>מסננים</span></button><button className="mobile-tools-trigger initial-mobile-tools" aria-label="כלים" disabled><Menu size={19}/></button><span className="initial-desktop-action"><PrerequisiteHighlightToggle enabled={false} onChange={noop} disabled/></span><button className="initial-desktop-action" disabled title="איפוס ענפי העץ"><RotateCcw size={15}/><span>איפוס ענפים</span></button><button className="layers-button initial-desktop-action" disabled><Layers size={15}/><span>עוד שכבה</span></button></div></div>
     <div className="graph-canvas"><button className="mobile-search-toggle initial-mobile-search" type="button" aria-label="חיפוש קורסים" disabled><Search size={20}/></button><ExplorerLoadingContent/></div>
     <div className="map-footnote"><ShieldCheck size={15}/><p>קשר במפה מציין דרישה לקורס. ייתכנו דרישות נוספות או חלופיות — בדקו את כלל הקדמים המלא בחלונית הקורס.</p><button disabled={!onHelp} onClick={onHelp}>פרטי המאגר<ExternalLink size={12}/></button></div>

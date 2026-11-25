@@ -60,7 +60,8 @@ test('related pinned courses retain actual prerequisite order in either pin orde
     assert.ok(positions.get('A')!.x > positions.get('B')!.x);
     assert.ok(positions.get('B')!.x > positions.get('C')!.x);
     assert.notEqual(positions.get('A')!.x, positions.get('C')!.x);
-    assert.equal(positions.get(pins[0])!.x, 0);
+    assert.equal(positions.get('A')!.x, 0);
+    assert.deepEqual(positions,layoutCourseGraph(graph,[...pins].reverse()));
   }
 });
 

@@ -45,8 +45,8 @@ async function search(page: Page) {
 }
 async function pin(page: Page, id: string) {
   const input = await search(page); await input.fill(id);
-  await page.getByRole('option').filter({ hasText: id }).getByRole('button', { name: 'הוסף לעץ ' + id, exact: true }).click();
-  await input.press('Escape');
+  await page.getByRole('option').filter({ hasText: id }).click();
+  await page.keyboard.press('Escape');
   await expect(node(page, id).locator('.added-badge')).toBeVisible();
 }
 async function unpin(page: Page, id: string) {
@@ -151,7 +151,7 @@ test('filtered connecting courses stay hidden but manual prerequisite exploratio
   await expect(node(page, B)).toHaveCount(1);
 });
 
-test('all four pins and canonical state survive URL refresh, while removing every addition preserves primary exploration', async ({ page }) => {
+test('all additions survive refresh and removing every addition leaves a saved empty graph', async ({ page }) => {
   await ready(page);
   for (const id of [D, X, Y]) await pin(page, id);
   await expect.poll(async () => (await saved(page))?.addedCourseIds).toEqual([A, D, X, Y]);
@@ -159,19 +159,19 @@ test('all four pins and canonical state survive URL refresh, while removing ever
   for (const id of [A, D, X, Y]) await expect(node(page, id).locator('.added-badge')).toBeVisible();
   expect((await saved(page)).addedCourseIds).toEqual([A, D, X, Y]);
   for (const id of [A, D, X, Y]) await unpin(page, id);
-  await expect(node(page,A)).toHaveCount(1);
+  await expect(page.locator('.react-flow__node')).toHaveCount(0);
   await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual([]);
-  await expect(page).toHaveURL(new RegExp('course='+A));
-  await page.reload();await expect(node(page,A)).toHaveCount(1);
+  expect(new URL(page.url()).searchParams.has('course')).toBe(false);
+  await page.reload();await expect(page.locator('.empty-graph-state')).toBeVisible();
   expect((await saved(page)).addedCourseIds).toEqual([]);
 });
 
-test('new explicit course query opens a sole root while preserving marks and preferences', async ({ page }) => {
+test('a new explicit course query adds another equal course while preserving marks and preferences', async ({ page }) => {
   await ready(page); await pin(page, D); await pin(page, X);
   const mark = node(page, A).locator('.mark-button'); await mark.focus(); await mark.press('Enter');
   await expect.poll(async () => (await saved(page))?.addedCourseIds).toEqual([A, D, X]);
   await page.goto('/?course=' + E);
   await expect(node(page, E).locator('.added-badge')).toBeVisible();
-  await expect.poll(async () => (await saved(page))?.addedCourseIds).toEqual([E]);
+  await expect.poll(async () => (await saved(page))?.addedCourseIds).toEqual([A,D,X,E]);
   expect((await saved(page)).markedCourseIds).toContain(A);
 });

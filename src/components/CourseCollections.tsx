@@ -1,6 +1,6 @@
 import {useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode} from 'react';
 import {createPortal} from 'react-dom';
-import {Check, Focus, GitBranch, ListPlus, Minus, Plus, Search, X} from 'lucide-react';
+import {Check, Focus, ListPlus, Minus, Plus, Search, X} from 'lucide-react';
 import {courseAppearance} from '../lib/faculty-colors';
 import {creditTotalFormat, summarizeMarkedCredits} from '../lib/marked-credits';
 import type {Course} from '../types';
@@ -149,9 +149,10 @@ export interface AddedCoursesMenuProps {
   addedCourseIds: readonly string[];
   onAddedChange: (courseId: string, added: boolean) => void;
   onLocateCourse: (courseId: string) => void;
+  onClearAdded: () => void;
 }
 
-export function AddedCoursesContent({courses, addedCourseIds, onAddedChange, onLocateCourse, onNavigate}: AddedCoursesMenuProps & {onNavigate: () => void}) {
+export function AddedCoursesContent({courses, addedCourseIds, onAddedChange, onLocateCourse, onClearAdded, onNavigate}: AddedCoursesMenuProps & {onNavigate: () => void}) {
   const [query, setQuery] = useState('');
   const filteredIds = useMemo(() => {
     const search = normalizeListQuery(query);
@@ -161,6 +162,7 @@ export function AddedCoursesContent({courses, addedCourseIds, onAddedChange, onL
     });
   }, [addedCourseIds, query, courses]);
   return <>
+      <button type="button" className="collection-clear-added" aria-label="הסרת כל הקורסים שהוספתי" disabled={!addedCourseIds.length} onClick={onClearAdded}>הסרת כל הקורסים</button>
       {addedCourseIds.length > 6 && <label className="collection-search"><Search size={14}/><input aria-label="חיפוש בקורסים שהוספתי" placeholder="מספר או שם קורס…" value={query} maxLength={1000} onChange={event => setQuery(event.target.value)}/></label>}
       <div className="collection-rows" role="list" aria-label="הקורסים שהוספתי לעץ">
         {filteredIds.map(id => <div className="collection-row added-course-row" key={id} data-added-course={id} role="listitem">
@@ -172,7 +174,7 @@ export function AddedCoursesContent({courses, addedCourseIds, onAddedChange, onL
         {!addedCourseIds.length && <p className="collection-empty">עדיין לא הוספתם קורסים לעץ</p>}
         {addedCourseIds.length > 0 && !filteredIds.length && <p className="collection-empty">לא נמצאו קורסים המתאימים לחיפוש</p>}
       </div>
-      {addedCourseIds.length > 0 && <p className="collection-hint">הסרה מהרשימה משאירה קורסים הנחוצים לעץ ולחקירה הנוכחית.</p>}
+      {addedCourseIds.length > 0 && <p className="collection-hint">כל הקורסים ברשימה שווים. הסרה מהעץ אינה משנה סימונים אישיים.</p>}
   </>;
 }
 
@@ -192,7 +194,6 @@ export interface MarkedCoursesMenuProps {
   visibleCourseIds: ReadonlySet<string>;
   onAddedChange: (courseId: string, added: boolean) => void;
   onFocusCourse: (courseId: string) => void;
-  onSelectCourse: (courseId: string) => void;
   onToggleMarked: (courseId: string) => boolean | void;
 }
 
@@ -200,7 +201,7 @@ function normalizeListQuery(value: string) {
   return value.normalize('NFKD').replace(/[\u0591-\u05C7]/g, '').toLocaleLowerCase('he').replace(/[״"׳']/g, '').trim();
 }
 
-export function MarkedCoursesContent({courses, markedCourseIds, markedCourseQuantities, onQuantityChange, addedCourseIds, visibleCourseIds, onAddedChange, onFocusCourse, onSelectCourse, onToggleMarked, onNavigate}: MarkedCoursesMenuProps & {onNavigate: () => void}) {
+export function MarkedCoursesContent({courses, markedCourseIds, markedCourseQuantities, onQuantityChange, addedCourseIds, visibleCourseIds, onAddedChange, onFocusCourse, onToggleMarked, onNavigate}: MarkedCoursesMenuProps & {onNavigate: () => void}) {
   const [query, setQuery] = useState('');
   const addedIds = useMemo(() => new Set(addedCourseIds), [addedCourseIds]);
   const orderedIds = useMemo(() => [...markedCourseIds].reverse(), [markedCourseIds]);
@@ -231,7 +232,7 @@ export function MarkedCoursesContent({courses, markedCourseIds, markedCourseQuan
         const knownCredits = typeof credits === 'number' && Number.isFinite(credits) && credits >= 0;
         const documentedRange = rule?.rangeBasis === 'documented-table-range';
         return <div className={`collection-row marked-course-row${rule && onQuantityChange ? ' repeatable-course-row' : ''}`} key={id} data-marked-course={id} role="listitem">
-          <button className="collection-course-main" type="button" disabled={!visible} aria-label={`מיקוד במקצוע מסומן ${id}`} title={visible ? 'מיקוד במקצוע במפה' : 'המקצוע אינו מוצג כרגע. אפשר להוסיף לעץ או לפתוח עץ חדש.'} onClick={() => {if (visible) {onNavigate(); onFocusCourse(id);}}}>
+          <button className="collection-course-main" type="button" disabled={!visible} aria-label={`מיקוד במקצוע מסומן ${id}`} title={visible ? 'מיקוד במקצוע במפה' : 'המקצוע אינו מוצג כרגע. אפשר להוסיף אותו לעץ.'} onClick={() => {if (visible) {onNavigate(); onFocusCourse(id);}}}>
             <span className="collection-mark"><Check size={12}/></span>
             <span><strong>{course?.name ?? 'קורס ללא פרטים במאגר'}</strong><small><b dir="ltr">{id}</b>{course && <span> · {courseAppearance(course).label}</span>}</small></span>
             {visible && <Focus className="collection-locate-icon" size={13}/>}
@@ -240,7 +241,6 @@ export function MarkedCoursesContent({courses, markedCourseIds, markedCourseQuan
             <button className={added ? 'collection-add active' : 'collection-add'} type="button" aria-label={`${added ? 'הסר מהעץ' : 'הוסף לעץ'} ${id}`} aria-pressed={added} title={added ? 'הסר מהעץ' : 'הוסף לעץ'} onClick={() => {
               onAddedChange(id, !added);
             }}>{added ? <Check size={15}/> : <Plus size={15}/>}</button>
-            <button type="button" aria-label={`פתיחת עץ חדש עם ${id}`} title="פתח עץ חדש" onClick={() => {onNavigate(); onSelectCourse(id);}}><GitBranch size={15}/></button>
             <button className="collection-unmark" type="button" aria-label={`הסרת סימון של ${id}`} title="הסרת סימון" onClick={event => {if (onToggleMarked(id) !== false) focusAfterRowRemoval(event.currentTarget);}}><X size={15}/></button>
           </div>
           {rule && onQuantityChange && <div className="marked-repetition">

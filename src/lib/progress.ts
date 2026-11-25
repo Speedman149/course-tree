@@ -1,12 +1,13 @@
 import type { Course, DegreeCatalog } from '../types';
+import {createCourseVisibility} from './filters';
+import {explorationReducer, initialExploration} from './exploration';
 import {normalizeMarkedQuantities} from './repeatable-courses';
-import { collectRequirements, forwardConnectionId, parseConnectionId, resolveCourseId, type CourseConnection, graphRoots, requiredAutomaticConnections } from './graph';
+import { collectRequirements, forwardConnectionId, parseConnectionId, resolveCourseId, type CourseConnection, buildDependents, buildGraph, requiredAutomaticConnections } from './graph';
 
 export const PROGRESS_KEY = 'course-tree.progress';
-export const PROGRESS_VERSION = 6;
+export const PROGRESS_VERSION = 7;
 
 export interface Progress {
-  primaryCourseId: string;
   addedCourseIds: string[];
   expandedForward: string[];
   autoExpandedCourseIds: string[];
@@ -37,10 +38,9 @@ export interface ProgressDatabase {
 }
 
 export const defaultProgress = (db: ProgressDatabase): Progress => ({
-  primaryCourseId: db.defaultRoot,
-  addedCourseIds: [],
+  addedCourseIds: [db.defaultRoot],
   expandedForward: [db.defaultRoot],
-  autoExpandedCourseIds: [],
+  autoExpandedCourseIds: [db.defaultRoot],
   revealedForwardConnections: [],
   hiddenForwardConnections: [],
   expandedBackward: [],
@@ -209,27 +209,20 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
   const raw = record(value);
   const index = validationIndex(db.courses);
   const idScanLimit = Math.max(6000, index.knownIds.size * 4);
-  const canonical = Object.hasOwn(raw, 'addedCourseIds') || Object.hasOwn(raw, 'pinnedRootIds');
-  const legacyRoot = typeof raw.rootId === 'string' && index.knownIds.has(raw.rootId) ? raw.rootId : null;
-  const collection = Object.hasOwn(raw, 'addedCourseIds') ? raw.addedCourseIds : raw.pinnedRootIds;
-  let addedCourseIds = canonical && Array.isArray(collection)
-    ? strings(collection, idScanLimit).filter(id => index.knownIds.has(id))
-    : legacyRoot ? [legacyRoot] : defaults.addedCourseIds;
-  let primaryCourseId = canonical && Array.isArray(collection)
-    ? typeof raw.primaryCourseId === 'string'
-      ? index.knownIds.has(raw.primaryCourseId) ? raw.primaryCourseId : raw.primaryCourseId === '' ? '' : addedCourseIds[0] ?? ''
-      : addedCourseIds[0] ?? ''
-    : legacyRoot ?? defaults.primaryCourseId;
-  let keepBranches = canonical ? Array.isArray(collection) : legacyRoot !== null;
-
-  const requested = typeof urlCourse === 'string' && urlCourse.length <= 64
-    ? index.knownIds.has(urlCourse.trim()) ? urlCourse.trim() : resolveCourseId(urlCourse, index.courses)
-    : null;
-  if (requested && (requested !== primaryCourseId || Object.keys(raw).length === 0)) {
-    primaryCourseId = requested;
-    addedCourseIds = [requested];
-    keepBranches = false;
-  }
+  const canonicalId = (id: unknown): string | null => typeof id !== 'string' ? null
+    : index.knownIds.has(id) ? id : resolveCourseId(id, index.courses);
+  const legacyRoot = canonicalId(raw.rootId);
+  const legacyPrimary = Object.hasOwn(raw, 'primaryCourseId') ? canonicalId(raw.primaryCourseId) : legacyRoot;
+  const collection = Object.hasOwn(raw, 'addedCourseIds') ? raw.addedCourseIds
+    : Object.hasOwn(raw, 'pinnedRootIds') ? raw.pinnedRootIds : raw.pinnedCourseIds;
+  const canonical = Array.isArray(collection);
+  // Versions 1–6 may keep the old primary outside the additions. Merge it once; never promote a new primary.
+  const addedCourseIds = [...new Set([
+    ...(legacyPrimary ? [legacyPrimary] : []),
+    ...(canonical ? strings(collection, idScanLimit).flatMap(id => canonicalId(id) ?? []) : legacyPrimary ? [] : defaults.addedCourseIds),
+  ])];
+  const keepBranches = canonical || legacyRoot !== null || legacyPrimary !== null;
+  const requested = typeof urlCourse === 'string' && urlCourse.length <= 64 ? canonicalId(urlCourse.trim()) : null;
 
   let expandedForward = defaults.expandedForward;
   let hiddenForwardConnections: string[] = [];
@@ -243,7 +236,7 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
     revealedForwardConnections = strings(raw.revealedForwardConnections, Math.max(6000, index.relationships.size * 4))
       .filter(id => parseConnectionId(id) !== null && index.relationships.has(id));
     expandedBackward = backwardSelections(raw.expandedBackward, index, id => index.knownIds.has(id) ? id : null, idScanLimit);
-    connections = automaticConnections(raw.automaticConnections, graphRoots(primaryCourseId, addedCourseIds), index);
+    connections = automaticConnections(raw.automaticConnections, addedCourseIds, index);
   } else if (keepBranches && legacyRoot) {
     const resolveInstance = legacyResolver(legacyRoot, index);
     expandedForward = [...new Set(strings(raw.expandedForward, 1500).flatMap(path => {
@@ -256,7 +249,7 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
     }))];
     expandedBackward = backwardSelections(raw.expandedBackward, index, path => resolveInstance(path)?.courseId ?? null, 1500);
   } else {
-    expandedForward = graphRoots(primaryCourseId, addedCourseIds);
+    expandedForward = addedCourseIds;
   }
 
   const program = typeof raw.catalogId === 'string' ? db.programs?.find(program => program.id === raw.catalogId) : null;
@@ -267,11 +260,10 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
     (db.programs === null || db.facultyIds.has(raw.catalogFaculty) || db.programs.some(program => program.facultyIds.includes(raw.catalogFaculty as string)));
 
   const markedCourseIds = strings(raw.markedCourseIds, idScanLimit).filter(id => index.knownIds.has(id));
-  return {
-    primaryCourseId,
+  const progress: Progress = {
     addedCourseIds,
     expandedForward,
-    autoExpandedCourseIds: keepBranches && canonical ? strings(raw.autoExpandedCourseIds, idScanLimit).filter(id => addedCourseIds.includes(id) && expandedForward.includes(id)) : [],
+    autoExpandedCourseIds: keepBranches && canonical ? strings(raw.autoExpandedCourseIds, idScanLimit).filter(id => addedCourseIds.includes(id) && expandedForward.includes(id)) : keepBranches ? [] : addedCourseIds,
     revealedForwardConnections,
     hiddenForwardConnections,
     expandedBackward,
@@ -288,6 +280,21 @@ export function validateProgress(value: unknown, db: ProgressDatabase, urlCourse
     recent: strings(raw.recent, 100).filter(id => index.knownIds.has(id)).slice(0, 4),
     viewport: keepBranches ? viewport(raw.viewport) : null,
   };
+  if (!requested || addedCourseIds.includes(requested)) return progress;
+  // A genuinely new visitor starts at their explicit link; existing selections are never replaced.
+  if (!Object.keys(raw).length) return { ...progress, addedCourseIds: [requested], expandedForward: [requested], autoExpandedCourseIds: [requested], viewport: null };
+  const restored = explorationReducer(initialExploration(''), {type: 'restore', saved: progress});
+  const dependents = buildDependents([...db.courses.values()]);
+  const isVisible = createCourseVisibility([...db.courses.values()], new Set(progress.facultyIds ?? db.facultyIds), program ?? null);
+  const visible = buildGraph(addedCourseIds, index.courses, dependents, restored.expandedForward, restored.expandedBackward,
+    isVisible, restored.hiddenForwardConnections, restored.automaticConnections, restored.revealedForwardConnections,
+    new Set(addedCourseIds), restored.autoExpandedCourseIds);
+  const next = explorationReducer(restored, {type: 'addCourse', courseId: requested, context: {
+    courses: index.courses, dependents, isVisible, visibleCourseIds: new Set(visible.nodes.map(node => node.id)),
+  }});
+  return {...progress, addedCourseIds: next.addedCourseIds, expandedForward: [...next.expandedForward],
+    autoExpandedCourseIds: [...next.autoExpandedCourseIds], automaticConnections: next.automaticConnections};
+
 }
 
 export function decodeProgress(raw: string | null): unknown {
@@ -297,7 +304,7 @@ export function decodeProgress(raw: string | null): unknown {
     if (!saved.progress || typeof saved.progress !== 'object' || Array.isArray(saved.progress)) return null;
     if (saved.version === 1) return { ...record(saved.progress), markedCourseQuantities: {}, hiddenForwardConnections: [] };
     if (saved.version === 2 || saved.version === 3 || saved.version === 4 || saved.version === 5) return {...record(saved.progress), markedCourseQuantities: {}};
-    return saved.version === PROGRESS_VERSION ? saved.progress : null;
+    return saved.version === 6 || saved.version === PROGRESS_VERSION ? saved.progress : null;
   } catch {
     return null;
   }

@@ -1,26 +1,35 @@
 # Local exploration progress
 
-Course Tree saves a versioned session in browser `localStorage` under `course-tree.progress`. No account or server user database is involved. This does not modify the academic course/catalog data.
+BranchQuest stores one versioned session in browser `localStorage` under `course-tree.progress`. No account or server user database is involved, and academic course/catalog data is not modified.
 
-Saved fields include the canonical root ID, stable forward-instance IDs, backward-instance/course selections, individually hidden forward connection IDs, faculty IDs, catalog edition ID (including degree/track), catalog browsing year/faculty/tab, all-course search preference, recent roots, marked course IDs and viewport x/y/zoom. Visible courses are reconstructed using the existing graph builder and current filters. Course records and prerequisite expressions are not duplicated in storage.
+## Current schema: version 7
 
-Normal changes are coalesced for 300ms. Mark/unmark changes commit after the React update without a debounce. Viewport changes are captured at the end of pan/zoom, rather than every frame. `pagehide` and background visibility changes flush pending state.
+The only explicit starting-course collection is the ordered `addedCourseIds` array. There is no persisted primary/root course. A genuinely new session starts with `02340114` (מבוא למדעי המחשב מ׳), or the course in an explicit incoming link. This default is an ordinary removable addition. A saved `[]` stays empty on refresh; it does not trigger default initialization.
 
-Saved sessions wait for course and catalog downloads to settle before validation/restoration. Fresh sessions can display SAP courses while catalogs are still loading. Course IDs, faculty IDs, catalog editions/years, each expansion path and each backward prerequisite are checked against the current database. Filter-hidden and collapsed descendants remain eligible for restoration; filters are never used to decide whether a real prerequisite exists. An explicit `?course=` URL takes precedence over the saved root while preserving markings and filters.
+Other saved fields retain their existing purposes: manually expanded forward course IDs, automatic expansion bookkeeping, independently revealed and hidden canonical connections, backward prerequisite selections, owned real connecting paths, faculty IDs, catalog edition/year/faculty/tab, all-course search preference, recent-course history, red-marked IDs and repeat quantities, prerequisite-highlighting preference, and viewport x/y/zoom. Course records and prerequisite expressions are not duplicated in storage. The source fields `fromRootId`/`toRootId` in legacy-compatible path records identify connector endpoints, not a privileged primary course.
 
-The schema is version 2. Version 1 sessions migrate with all existing progress retained and an initially empty hidden-connection set. Malformed JSON, oversized records and unsupported versions fall back safely. Individually obsolete IDs/paths are discarded while unrelated valid markings and selections survive. Storage access failures leave the app usable and show a local-saving notice. Unsupported versions are not migrated by guessing their schema.
+Explicit graph/addition/connection changes, mark/unmark actions and repeat-quantity changes save after the React update without debounce. Ordinary browsing/filter changes coalesce for 300ms; viewport state is supplied at the end of pan/zoom. `pagehide` and background visibility changes flush pending state. Storage failures leave the application usable and show the existing local-saving notice.
 
-Markings are a set of course IDs, shared by every rendered instance in either direction. They indicate personal organization only, not completion, admission or graduation eligibility.
+## Migration and validation
 
-Reset controls are separate:
+Versions 1–6 migrate into version 7. A separate old primary course is merged with existing added/pinned courses once, preserving order and removing duplicate canonical IDs. Old six-digit aliases resolve through existing source aliases. Valid forward/backward expansion, individually hidden/revealed connections, automatic paths, markings, faculty/catalog settings and viewport are retained. Version 6 repeat quantities are preserved; the older versions predate those quantity records. Legacy occurrence paths migrate only through real cataloged course relationships. The rewritten envelope contains no primary or pinned-course selection field.
 
-- **Reset branches** resets expansion/layout and individual hidden connections around the current root, preserving personal markings and filters.
-- **Clear markings** asks for confirmation, then clears only markings.
-- **Reset saved progress** asks for confirmation, removes this app's storage key, and starts a default session with empty markings and default graph/filters. Other local-storage keys are untouched. Subsequent interaction can create a new saved session.
+An explicitly empty old collection with no separate primary remains empty. Corrupt JSON, oversized records and unsupported versions fall back safely. Individually stale IDs, edges and catalog references are rejected while unrelated valid progress survives. Saved sessions wait for necessary database validation before restoration; filters do not determine whether a source prerequisite exists.
 
-The browser `storage` event synchronizes validated sessions and explicit resets across tabs on the same origin. The latest write wins for the session as a whole; simultaneous independent edits are not merged. Progress is specific to this browser/profile and origin, so localhost and a hosted deployment have separate sessions. Clearing browser site data or using a different device does not transfer progress.
+## Course links and ordinary selection
 
-`#/about` is a small hash route because this project had no routing library. It survives direct refresh on static hosting without a server rewrite. Returning preserves the exploration; the About page contains the requested exact placeholder text.
+Search, recent courses and catalog course browsers all add or focus a course. Source links and prerequisite-expansion buttons retain their separate purposes. An incoming `?course=` link initializes a new visitor at that course, and joins an existing saved selection using the same connecting-path logic as ordinary addition. It never replaces the rest of an existing collection. Already-added courses are not duplicated. Reload preserves the saved viewport; an explicit new navigation can focus the linked course. In-app back/forward navigation handles a changed course query through the same add-or-focus action.
 
-Relevant implementation: `src/lib/progress.ts`, `src/lib/use-progress.ts`, `src/components/SiteFooter.tsx`. Test with `npm test` and `npm run test:e2e`.
-Forward connection controls and reachability are described in [individual branches](BRANCH_CONTROLS.md).
+The app does not rewrite every ordinary selection into an obsolete primary-course URL. Removing the linked course or clearing all additions removes its stale `course` query while keeping other parameters. About/feedback navigation may retain the current course context without giving that course graph priority. `/about` and `/feedback` are refresh-safe public routes, with legacy fragment links still supported.
+
+## Separate removal and reset actions
+
+- **Remove one addition** removes membership in the collection. A course can remain as an unmarked-as-added graph node when another addition still needs its real connecting path. Other reachable additions, expansions and red markings remain independent.
+- **הסרת כל הקורסים** in the added-course list asks for confirmation, removes every addition and its automatic path ownership, and displays the empty graph. Markings, repeat quantities, filters and saved manual/hidden exploration intent remain. With no explicit additions, latent exploration never produces standalone nodes.
+- **Reset branches** resets expansion around all additions, hidden/revealed edges and automatic connectors, preserving the collection, personal markings and filters.
+- **Clear markings** asks for confirmation and clears personal markings/quantities only.
+- **Reset saved progress** asks for confirmation and returns to the ordinary default-course session with empty markings and default preferences. Other storage keys remain untouched.
+
+Tabs on the same origin synchronize validated sessions through `storage` events. Latest write wins for the whole session; simultaneous edits are not merged. Browser profiles, localhost and hosted deployments have separate progress. Personal marks and credit sums do not certify enrollment or graduation eligibility.
+
+Implementation: `src/lib/progress.ts`, `src/lib/use-progress.ts`, `src/lib/exploration.ts`, `src/App.tsx`. Regression checks include `tests/equal-added-courses.test.ts`, `tests/equal-added-courses.spec.ts`, and the existing graph, collection, progress, filter, marking and quantity suites.

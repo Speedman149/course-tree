@@ -229,8 +229,8 @@ export function forwardExpansionState(
   return { status, eligible, active, remaining };
 }
 
-export function graphRoots(primaryCourseId: string, addedCourseIds: readonly string[]): string[] {
-  return [...new Set([primaryCourseId, ...addedCourseIds].filter(Boolean))];
+export function graphRoots(addedCourseIds: readonly string[]): string[] {
+  return [...new Set(addedCourseIds.filter(Boolean))];
 }
 
 /** Keep connector segments transitively needed by the remaining explicit anchors. */

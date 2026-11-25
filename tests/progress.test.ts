@@ -31,12 +31,12 @@ const aToC: CourseConnection = {
   ],
 };
 
-test('version6 progress round-trips ordered pins and canonical IDs without embedding course records', () => {
+test('version7 progress round-trips equal ordered additions and canonical IDs without embedding course records', () => {
   const state = { ...defaultProgress(db), addedCourseIds: [a.id, d.id, c.id, b.id], markedCourseIds: [b.id, a.id], automaticConnections: [aToC] };
   assert.deepEqual(decodeProgress(encodeProgress(state)), state);
   assert.equal(PROGRESS_KEY, 'course-tree.progress');
   assert.equal(JSON.parse(encodeProgress(state)).version, PROGRESS_VERSION);
-  assert.equal(PROGRESS_VERSION, 6);
+  assert.equal(PROGRESS_VERSION, 7);
   assert.equal(encodeProgress(state).includes('requirements'), false);
   assert.deepEqual(validateProgress(state, db), state);
 });
@@ -66,33 +66,32 @@ test('legacy forward/backward paths migrate only through actual source relations
   assert.deepEqual(valid.facultyIds, []);
 });
 
-test('explicit new URL course replaces graph configuration while preserving marks and filters', () => {
+test('a new URL course joins the saved collection without resetting branches, marks, filters or viewport', () => {
   const saved = { ...defaultProgress(db), addedCourseIds: [b.id, d.id], expandedForward: [b.id], markedCourseIds: [c.id], facultyIds: ['math'], viewport: { x: 10, y: 20, zoom: 1 }, expandedBackward: [[b.id, [a.id]]] };
   const valid = validateProgress(saved, db, c.id);
-  assert.deepEqual(valid.addedCourseIds, [c.id]);
+  assert.deepEqual(valid.addedCourseIds, [b.id,d.id,c.id]);
   assert.deepEqual(valid.markedCourseIds, [c.id]);
   assert.deepEqual(valid.facultyIds, ['math']);
-  assert.deepEqual(valid.expandedBackward, []);
-  assert.deepEqual(valid.expandedForward, [c.id]);
-  assert.deepEqual(valid.automaticConnections, []);
-  assert.equal(valid.viewport, null);
+  assert.deepEqual(valid.expandedBackward, saved.expandedBackward);
+  assert.deepEqual(valid.expandedForward, [b.id]);
+  assert.equal(valid.automaticConnections.length, 1);
+  assert.equal(valid.automaticConnections[0].toRootId,c.id);
+  assert.deepEqual(valid.viewport, saved.viewport);
 });
 
-test('matching primary URL including legacy alias restores all four pins and their shared state', () => {
+test('any already-added URL including a legacy alias preserves the entire collection and shared state', () => {
   const saved = { ...defaultProgress(db), addedCourseIds: [a.id, d.id, c.id, b.id], expandedForward: [a.id, b.id, c.id], automaticConnections: [aToC], viewport: { x: 20, y: 30, zoom: .6 } };
   assert.deepEqual(validateProgress(saved, db, a.id), saved);
   assert.deepEqual(validateProgress(saved, db, '234114'), saved);
   const different = validateProgress(saved, db, c.id);
-  assert.deepEqual(different.addedCourseIds, [c.id]);
-  assert.deepEqual(different.automaticConnections, []);
-  assert.equal(different.viewport, null);
+  assert.deepEqual(different,saved);
 });
 
 test('invalid legacy root discards only its graph state and retains marks/catalog selection', () => {
   const saved = legacy({ rootId: '99999999', catalogId: db.programs![0].id, markedCourseIds: [b.id], expandedForward: ['root/f:02340247:strong'] });
   const valid = validateProgress(saved, db);
-  assert.deepEqual(valid.addedCourseIds, []);
-  assert.equal(valid.primaryCourseId, a.id);
+  assert.deepEqual(valid.addedCourseIds, [a.id]);
+  assert.equal('primaryCourseId' in valid,false);
   assert.equal(valid.catalogId, db.programs![0].id);
   assert.deepEqual(valid.markedCourseIds, [b.id]);
   assert.deepEqual(valid.expandedForward, [a.id]);
@@ -107,13 +106,13 @@ test('empty faculties, all-years browsing and a collapsed course survive', () =>
 });
 
 test('deliberately removing every pin survives refresh and never restores the default implicitly', () => {
-  const saved = { ...defaultProgress(db), addedCourseIds: [], expandedForward: [b.id], markedCourseIds: [c.id], viewport: { x: 0, y: 0, zoom: .8 } };
+  const saved = { ...defaultProgress(db), addedCourseIds: [], autoExpandedCourseIds: [], expandedForward: [b.id], markedCourseIds: [c.id], viewport: { x: 0, y: 0, zoom: .8 } };
   const valid = validateProgress(decodeProgress(encodeProgress(saved)), db);
   assert.deepEqual(valid, saved);
   assert.deepEqual(validateProgress(valid, db, 'invalid').addedCourseIds, []);
-  assert.deepEqual(validateProgress(valid, db, a.id).addedCourseIds, []);
-  assert.equal(valid.primaryCourseId, a.id);
-  assert.deepEqual(defaultProgress(db).addedCourseIds, []);
+  assert.deepEqual(validateProgress(valid, db, a.id).addedCourseIds, [a.id]);
+  assert.equal('primaryCourseId' in valid,false);
+  assert.deepEqual(defaultProgress(db).addedCourseIds, [a.id]);
 });
 
 test('invalid viewport values cannot discard other valid exploration state', () => {

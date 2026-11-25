@@ -4,7 +4,7 @@ import type {CourseDataset} from '../src/types';
 import {PROGRESS_KEY, PROGRESS_VERSION} from '../src/lib/progress';
 import {buildDependents} from '../src/lib/graph';
 import {PREREQUISITE_HIGHLIGHT_LABEL} from '../src/lib/prerequisite-satisfaction';
-import {openCollection, openTools, toolsPanel, toolsTrigger} from './helpers/mobile-tools';
+import {settledViewport,openCollection, openTools, toolsPanel, toolsTrigger} from './helpers/mobile-tools';
 
 const A='00140855', B='00140856', C='00140889', S='00140843';
 const records=(JSON.parse(readFileSync(new URL('../public/data/courses.json',import.meta.url),'utf8')) as CourseDataset).courses;
@@ -20,7 +20,7 @@ const test=base.extend<{runtimeErrors:void}>({runtimeErrors:[async({page},use)=>
  const ids=await page.locator('.react-flow__node').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-id')));expect(new Set(ids).size).toBe(ids.length);
 },{auto:true}]});
 async function ready(page:Page,overrides:Record<string,unknown>={}){
- await page.addInitScript(({key,version,A,overrides})=>{if(sessionStorage.getItem('tools-seeded'))return;sessionStorage.setItem('tools-seeded','yes');localStorage.setItem(key,JSON.stringify({version,progress:{primaryCourseId:A,addedCourseIds:[A],expandedForward:[A],markedCourseIds:[],viewport:{x:0,y:0,zoom:.75},...overrides}}));},{key:PROGRESS_KEY,version:PROGRESS_VERSION,A,overrides});
+ await page.addInitScript(({key,version,A,overrides})=>{if(sessionStorage.getItem('tools-seeded'))return;sessionStorage.setItem('tools-seeded','yes');localStorage.setItem(key,JSON.stringify({version,progress:{addedCourseIds:[A],expandedForward:[A],markedCourseIds:[],viewport:{x:0,y:0,zoom:.75},...overrides}}));},{key:PROGRESS_KEY,version:PROGRESS_VERSION,A,overrides});
  await page.goto('/?course='+A);await expect(node(page,A).locator('.course-link')).toHaveText(A);await page.evaluate(()=>document.fonts.ready);
 }
 async function closeTools(page:Page){await toolsPanel(page).getByRole('button',{name:'סגירת הכלים',exact:true}).click();await expect(toolsPanel(page)).toHaveCount(0);}
@@ -83,8 +83,8 @@ test('full reset preserves cancellation and restores default progress after acce
  await page.setViewportSize({width:360,height:640});await ready(page,{addedCourseIds:[A,B],markedCourseIds:[A],facultyIds:['civil'],highlightSatisfiedPrerequisites:true,hiddenForwardConnections:[A+'->'+C+':strong']});
  let drawer=await openTools(page);await expect(drawer.getByText('ההתקדמות נשמרת בדפדפן הזה',{exact:true})).toBeVisible();const reset=drawer.getByRole('button',{name:'איפוס התקדמות שמורה',exact:true});
  page.once('dialog',d=>d.dismiss());await reset.click();await expect(drawer).toBeVisible();expect((await saved(page)).markedCourseIds).toEqual([A]);
- page.once('dialog',d=>d.accept());await reset.click();await expect(drawer).toHaveCount(0);await expect(page.locator('.root-node .course-link')).toHaveText('02340114');drawer=await openTools(page);await expect(drawer.getByRole('switch')).toHaveAttribute('aria-checked','false');const marked=await openCollection(page,'marked');await expect(marked.getByRole('status')).toHaveText('סה״כ נק״ז: 0');await closeTools(page);
- await page.reload();await expect(page.locator('.root-node .course-link')).toHaveText('02340114');
+ page.once('dialog',d=>d.accept());await reset.click();await expect(drawer).toHaveCount(0);await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340114');drawer=await openTools(page);await expect(drawer.getByRole('switch')).toHaveAttribute('aria-checked','false');const marked=await openCollection(page,'marked');await expect(marked.getByRole('status')).toHaveText('סה״כ נק״ז: 0');await closeTools(page);
+ await page.reload();await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340114');
 });
 
 test('search, filters, course details and desktop resizing never leave overlapping tools overlays',async({page})=>{
@@ -112,7 +112,7 @@ test('touch taps toggle tools, update markings, and close the backdrop without m
  const context=await browser.newContext({viewport:{width:375,height:812},hasTouch:true,isMobile:true,deviceScaleFactor:2,baseURL:process.env.PLAYWRIGHT_BASE_URL??'http://127.0.0.1:4173'});
  const page=await context.newPage();const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  try{
-  await ready(page,{markedCourseIds:[A,S],highlightSatisfiedPrerequisites:false});const transform=await page.locator('.react-flow__viewport').getAttribute('style');
+  await ready(page,{markedCourseIds:[A,S],highlightSatisfiedPrerequisites:false});await settledViewport(page);const transform=await page.locator('.react-flow__viewport').getAttribute('style');
   await toolsTrigger(page).tap();const drawer=toolsPanel(page);await expect(drawer).toBeVisible();await drawer.getByRole('switch').tap();await expect(card(page,B)).toHaveClass(/prerequisites-satisfied/);
   await drawer.locator('[data-tools-section="marked"]>summary').tap();await drawer.getByRole('button',{name:'הסרת סימון של '+A,exact:true}).tap();await expect(card(page,B)).not.toHaveClass(/prerequisites-satisfied/);await expect(card(page,C)).toHaveClass(/prerequisites-satisfied/);
   await page.touchscreen.tap(8,180);await expect(drawer).toHaveCount(0);expect(await page.locator('.react-flow__viewport').getAttribute('style')).toBe(transform);expect(errors).toEqual([]);

@@ -6,7 +6,7 @@ const sap=JSON.parse(readFileSync(new URL('../public/data/courses.json',import.m
 const catalogs=JSON.parse(readFileSync(new URL('../public/data/catalogs.json',import.meta.url),'utf8'));
 const courses=new Map([...sap.courses,...catalogs.referencedCourses].map(c=>[c.id,c]));
 const test=base.extend<{runtimeErrors:void}>({runtimeErrors:[async({page},use)=>{const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await use();expect(errors).toEqual([]);},{auto:true}]});
-const node=(page:Page,id?:string)=>id?page.locator(`.react-flow__node[data-id="${id}"]`):page.locator('.react-flow__node:has(.root-node)').first();
+const node=(page:Page,id?:string)=>id?page.locator(`.react-flow__node[data-id="${id}"]`):page.locator('.react-flow__node:has(.course-node.is-added)').first();
 const saved=(page:Page)=>page.evaluate(key=>{const raw=localStorage.getItem(key);return raw?JSON.parse(raw).progress:null;},PROGRESS_KEY);
 async function ready(page:Page,root='02340247') {await page.goto(`/?course=${root}`);await expect(node(page).locator('.course-link')).toHaveText(root);}
 async function fit(page:Page){await page.keyboard.press('Escape');await page.getByRole('button',{name:'התאמת המפה למסך',exact:true}).click();}
@@ -57,9 +57,9 @@ test('one shared course preserves its marking across roots, filters and branch r
  for(const duplicate of await shared.all())await expect(duplicate).toHaveClass(/user-marked/);
  await page.getByRole('button',{name:'איפוס ענפים',exact:true}).click();await expect.poll(async()=> (await saved(page))?.markedCourseIds).toContain('00140866');
  const search=page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם'});await search.fill('00140866');await page.getByRole('option').filter({hasText:'00140866'}).click();
- await expect(node(page).locator('.mark-button')).toHaveAttribute('aria-pressed','true');await page.reload();await expect(node(page).locator('.course-node')).toHaveClass(/user-marked/);
- await openFilters(page);await page.getByRole('button',{name:'ניקוי הכול',exact:true}).click();await closeFilters(page);await expect(node(page).locator('.course-node')).toHaveClass(/user-marked/);
- await mark(page);await expect(node(page).locator('.course-node')).not.toHaveClass(/user-marked/);expect((await saved(page)).markedCourseIds).not.toContain('00140866');
+ await expect(node(page,'00140866').locator('.mark-button')).toHaveAttribute('aria-pressed','true');await page.reload();await expect(node(page,'00140866').locator('.course-node')).toHaveClass(/user-marked/);
+ await openFilters(page);await page.getByRole('button',{name:'ניקוי הכול',exact:true}).click();await closeFilters(page);await expect(node(page,'00140866').locator('.course-node')).toHaveClass(/user-marked/);
+ await mark(page,'00140866');await expect(node(page,'00140866').locator('.course-node')).not.toHaveClass(/user-marked/);expect((await saved(page)).markedCourseIds).not.toContain('00140866');
 });
 
 test('concurrent badge and faculty identity survive red highlighting',async({page})=>{
@@ -94,7 +94,7 @@ test('branch reset preserves marks, and destructive reset/clear controls require
 test('tabs synchronize exploration, markings and explicit saved-progress reset',async({page,context})=>{
  await ready(page,'02340218');await mark(page);const second=await context.newPage();await second.goto('/');await expect(node(second).locator('.course-link')).toHaveText('02340218');await expect(node(second).locator('.mark-button')).toHaveAttribute('aria-pressed','true');
  await mark(second);await expect(node(page).locator('.mark-button')).toHaveAttribute('aria-pressed','false');
- const search=second.getByRole('combobox');await search.fill('02340247');await second.getByRole('option').filter({hasText:'02340247'}).click();await expect(node(page).locator('.course-link')).toHaveText('02340247');
+ const search=second.getByRole('combobox');await search.fill('02340247');await second.getByRole('option').filter({hasText:'02340247'}).click();await expect(node(page,'02340247').locator('.course-link')).toHaveText('02340247');await expect(node(page,'02340218')).toHaveCount(1);
  second.once('dialog',dialog=>dialog.accept());await second.getByRole('button',{name:'איפוס התקדמות שמורה',exact:true}).click();await expect(node(page).locator('.course-link')).toHaveText('02340114');await second.close();
 });
 
@@ -177,7 +177,7 @@ test('four ordered pins, canonical hidden edges, shared expansion and markings r
   expect(new Set(ids).size).toBe(ids.length);
 });
 
-test('a deliberately empty saved pin set survives refresh and ordinary search opens a sole root', async ({ page }) => {
+test('an intentionally empty saved collection survives refresh and the next search adds its first ordinary course', async ({ page }) => {
   await seed(page, JSON.stringify({
     version: 3,
     progress: { pinnedRootIds: [], expandedForward: [], expandedBackward: [], hiddenForwardConnections: [], automaticConnections: [], markedCourseIds: ['01040031'], facultyIds: null },
@@ -192,8 +192,8 @@ test('a deliberately empty saved pin set survives refresh and ordinary search op
   await expect(page.locator('.react-flow__node')).toHaveCount(0);
   await search.fill('234114');
   await page.getByRole('option').filter({ hasText: '02340114' }).click();
-  await expect(node(page, '02340114').locator('.course-node')).toHaveClass(/root-node/);
-  await expect(page.locator('.root-node')).toHaveCount(1);
+  await expect(node(page, '02340114').locator('.course-node')).toHaveClass(/is-added/);
+  await expect(page.locator('.course-node.is-added')).toHaveCount(1);
   await expect.poll(async () => (await saved(page))?.markedCourseIds).toEqual(['01040031']);
   await expect.poll(async()=>(await saved(page))?.addedCourseIds).toEqual(['02340114']);
 });

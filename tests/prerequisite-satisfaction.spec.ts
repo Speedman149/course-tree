@@ -16,7 +16,7 @@ const test = base.extend<{runtimeErrors: void}>({runtimeErrors: [async ({page}, 
 async function ready(page: Page, primary = A, overrides: Record<string, unknown> = {}) {
   await page.addInitScript(({key, version, primary, overrides}) => {
     if (localStorage.getItem(key)) return;
-    localStorage.setItem(key, JSON.stringify({version, progress: {primaryCourseId: primary, addedCourseIds: [primary], expandedForward: [primary], markedCourseIds: [], ...overrides}}));
+    localStorage.setItem(key, JSON.stringify({version, progress: {addedCourseIds: [primary], expandedForward: [primary], markedCourseIds: [], ...overrides}}));
   }, {key: PROGRESS_KEY, version: PROGRESS_VERSION, primary, overrides});
   await page.goto('/?course=' + primary);
   await expect(node(page, primary).locator('.course-link')).toHaveText(primary);

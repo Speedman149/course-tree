@@ -19,7 +19,7 @@ const test = base.extend<{ runtimeErrors: void }>({
 });
 
 function instance(page: Page, id: string): Locator {
-  return id === 'root' ? page.locator('.react-flow__node:has(.root-node)') : page.locator(`.react-flow__node[data-id="${id}"]`);
+  return id === 'root' ? page.locator('.react-flow__node:has(.course-node.is-added)') : page.locator(`.react-flow__node[data-id="${id}"]`);
 }
 async function ready(page: Page, course = '02340114') {
   await page.goto(course === '02340114' ? '/' : `/?course=${course}`);
@@ -27,6 +27,7 @@ async function ready(page: Page, course = '02340114') {
   await expect(page.locator('.desktop-course-search .search-input')).toBeEnabled();
 }
 async function fit(page: Page) {
+  await page.mouse.move(0,0);
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'התאמת המפה למסך', exact: true }).click();
 }
@@ -37,8 +38,8 @@ async function selectCourse(page: Page, query: string, id: string) {
   const result = page.getByRole('option').filter({ hasText: id });
   await expect(result).toHaveCount(1);
   await result.click();
-  await expect(instance(page, 'root').locator('.node-name')).toHaveText(courses.get(id)!.name);
-  await expect(page).toHaveURL(new RegExp(`[?&]course=${id}`));
+  await expect(instance(page,id).locator('.node-name')).toHaveText(courses.get(id)!.name);
+  await expect(instance(page,id).locator('.course-node')).toHaveClass(/is-added/);
 }
 
 // Assert links locally: external Technion availability does not gate graph QA.
@@ -55,7 +56,7 @@ test('default introduction root and course-specific information links', async ({
   await expect(page.locator('.react-flow__node')).not.toHaveCount(1);
 });
 
-test('legacy and partial Hebrew searches select roots across faculties and clear exploration', async ({ page }) => {
+test('legacy and partial Hebrew searches add courses across faculties without clearing exploration', async ({ page }) => {
   await ready(page);
   const search = page.getByRole('combobox');
   await search.fill('234114');
@@ -65,11 +66,13 @@ test('legacy and partial Hebrew searches select roots across faculties and clear
 
   // Select a mathematics course via a partial Hebrew name, then return by old ID.
   await selectCourse(page, 'אלגברה 1מ3', '01040067');
-  await expect(instance(page, 'root').locator('.node-meta')).toContainText('מתמטיקה');
-  await instance(page, 'root').locator('.expand-button').click();
-  await expect(page.locator('.react-flow__node')).toHaveCount(1);
+  await expect(instance(page,'01040067').locator('.node-meta')).toContainText('מתמטיקה');
+  await instance(page,'01040067').locator('.expand-button').click();
+  await expect(instance(page,'01040067').locator('.expand-button')).toHaveAttribute('aria-expanded','false');
+  await expect(page.locator('.course-node.is-added')).toHaveCount(2);
   await selectCourse(page, '234114', '02340114');
-  await expect(instance(page, 'root').locator('.expand-button')).toHaveAttribute('aria-expanded', 'true');
+  await expect(instance(page,'01040067').locator('.expand-button')).toHaveAttribute('aria-expanded','false');
+  await expect(instance(page, '02340114').locator('.expand-button')).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator('.react-flow__node:has(.backward-node)')).toHaveCount(0);
 
   await search.fill('קורסשאינובמאגר');
@@ -188,7 +191,7 @@ test('mobile layout fits the screen and supports root search and prerequisite co
   await expect(page.getByRole('combobox')).toBeInViewport();
   await selectCourse(page, 'אלגוריתמים 1', '02340247');
   await fit(page);
-  const root = instance(page, 'root');
+  const root = instance(page, '02340247');
   await expect(root).toBeInViewport();
   // The information button is available on touch devices without relying on hover.
   await root.locator('.node-info').click();
