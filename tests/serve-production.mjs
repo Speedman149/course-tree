@@ -1,3 +1,6 @@
+import {createFeedbackHandler} from '../server/feedback.ts';
+const feedback=createFeedbackHandler({env:{},http:async()=>{throw new Error('Real mail disabled in browser fixture');},log:()=>{}});
+import {serveFeedback} from '../server/feedback-node.ts';
 import {createServer} from 'node:http';
 import {readFile, realpath, stat} from 'node:fs/promises';
 import {resolve, sep, extname} from 'node:path';
@@ -21,6 +24,7 @@ createServer(async (request, response) => {
     for (const header of rule.headers) response.setHeader(header.key,header.value);
   }
   try {
+    if(new URL(request.url,'http://localhost').pathname==='/api/feedback'){await serveFeedback(request,response,feedback);return;}
     if (request.method !== 'GET' && request.method !== 'HEAD') {response.writeHead(405).end();return;}
     let path = decodeURIComponent(new URL(request.url,'http://localhost').pathname);
     const rewrite = config.rewrites.find(rule=>rule.source===path);

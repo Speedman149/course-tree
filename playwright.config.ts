@@ -23,7 +23,7 @@ export default defineConfig({
       : {},
   },
   webServer: [
-    ...(!externalBaseURL ? [{command:'npm run build && node tests/serve-production.mjs',url:'http://127.0.0.1:4173',reuseExistingServer:false,timeout:120_000}] : []),
+    ...(!externalBaseURL ? [{command:'npm run build && node --import tsx tests/serve-production.mjs',url:'http://127.0.0.1:4173',reuseExistingServer:false,timeout:120_000}] : []),
     ...(!externalDevURL ? [{command:'npm run dev -- --host 127.0.0.1 --port 5174 --strictPort',url:'http://127.0.0.1:5174',reuseExistingServer:false,timeout:120_000}] : []),
   ],
 });

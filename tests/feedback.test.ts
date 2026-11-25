@@ -22,15 +22,15 @@ test('URL context strips arbitrary queries and fragments and keeps only app/cour
  assert.equal(feedbackPageURL('https://example.com/private/person'),'https://example.com/');
  assert.equal(feedbackPageURL('javascript:alert(1)'),'');assert.equal(feedbackPageURL('bad url'),'');
 });
-test('payload targets the configured form and contains concise context but no graph state',()=>{
- assert.equal(FEEDBACK_ENDPOINT,'https://formspree.io/f/xrpqqyge');
+test('payload targets the same-origin endpoint and contains concise context but no graph state',()=>{
+ assert.equal(FEEDBACK_ENDPOINT,'/api/feedback');
  const payload=feedbackPayload({...valid,course_number:'234114',description:'  '+valid.description+'  '},{origin:{pageUrl:'https://example.com/?course=02340247&token=secret',route:'tree',startingCourseId:'02340247',relevantCourseId:'234114'},pageUrl:'https://example.com/feedback?email=private@example.com',userAgent:'Browser',appVersion:'1.0.0',buildId:'abc1234',timestamp:'2026-11-17T12:00:00.000Z',honeypot:''});
  assert.equal(payload.description,valid.description);assert.equal(payload.course_number,'234114');assert.equal(payload.starting_course_id,'02340247');assert.equal(payload.relevant_course_id,'234114');assert.equal(payload.email,undefined);assert.equal(payload.category_label,'דיווח על תקלה');assert.equal(payload.build_id,'abc1234');assert.equal(payload._gotcha,'');
  assert.ok(!JSON.stringify(payload).includes('secret'));assert.ok(!JSON.stringify(payload).includes('private@example'));assert.ok(!JSON.stringify(payload).includes('expandedForward'));assert.ok(!JSON.stringify(payload).includes('markedCourseIds'));
 });
 test('server errors have Hebrew retry messages and never include untrusted server HTML',()=>{
  assert.match(feedbackErrorMessage([{code:'UNSPECIFIED',message:'Too many requests'}]),/כמה דקות/);
- assert.match(feedbackErrorMessage([{code:'INACTIVE',message:'disabled'}]),/אינה זמינה/);
+ assert.match(feedbackErrorMessage([{code:'UNAVAILABLE',message:'disabled'}]),/אינה זמינה/);
  const text=feedbackErrorMessage([{code:'UNSPECIFIED',message:'<script>alert(1)</script>'}]);assert.ok(!text.includes('<script>'));assert.match(text,/נשמר/);
 });
 test('direct feedback and existing About routing stay independent',()=>{

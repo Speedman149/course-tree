@@ -1,5 +1,7 @@
 # BranchQuest — SEO implementation and verification
 
+> Feedback migration notice — 25 November 2026: provider-specific observations below are historical. The active submission system is now the server-side Resend implementation described in [FEEDBACK.md](docs/FEEDBACK.md). They do not certify current email delivery or dashboard configuration.
+
 Implemented for the existing repository on 24 November 2026. **This project uses React + Vite, not Next.js.** The implementation preserves that architecture and uses build-time React rendering to produce real static public HTML. No framework migration, new server, runtime dependencies, academic-data edits or graph redesign were introduced. These local changes have not been deployed to the live website by this task.
 
 ## Public identity and content

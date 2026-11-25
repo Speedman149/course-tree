@@ -153,7 +153,7 @@ The small minus near a forward arrow's child endpoint hides only that connection
 
 ## Feedback and bug reports
 
-The header bug icon opens the Hebrew `/feedback` page. Course information panels can prefill a course report. The official Formspree React integration handles asynchronous submission, validation, retries and concise technical context, with no account required for visitors. Graph progress is retained when returning. See [feedback setup, privacy and deployment checks](docs/FEEDBACK.md).
+The header bug icon opens the Hebrew `/feedback` page. Course information panels can prefill a course report. A server-side Vercel Function sends feedback through Resend, with validated input, durable Redis rate limits, idempotent retries and concise technical context. Visitors need no account. Configure the four server-only variables in `.env.example`; the shared Redis protection can use Upstash’s Free plan and fails closed if unavailable. Graph progress is retained when returning. See [feedback setup, privacy and deployment checks](docs/FEEDBACK.md).
 
 
 ## SEO and public URLs

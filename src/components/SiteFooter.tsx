@@ -45,7 +45,7 @@ export default function SiteFooter({treeCourseId,markedCount,storageAvailable=tr
 }
 export function AboutPage({treeCourseId}: {treeCourseId?: string}){
  const content=useRef<HTMLElement>(null);
- useLayoutEffect(()=>{content.current?.scrollTo(0,0);window.scrollTo(0,0);},[]);
+ useLayoutEffect(()=>{content.current?.scrollTo(0,0);window.scrollTo(0,0);if(window.location.hash==='#privacy'){const frame=requestAnimationFrame(()=>document.getElementById('privacy')?.scrollIntoView({block:'start'}));return()=>cancelAnimationFrame(frame);}},[]);
  const courseId=treeCourseId??new URLSearchParams(window.location.search).get('course');
  const treeHref=courseId&&validCourseNumber(courseId)?`/?course=${encodeURIComponent(courseId)}`:'/';
  return <div className="app-shell about-shell" dir="rtl">

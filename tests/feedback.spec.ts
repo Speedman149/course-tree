@@ -5,11 +5,11 @@ import {readFileSync} from 'node:fs';
 const appVersion=JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8')).version;
 const test=base.extend<{runtimeErrors:void}>({runtimeErrors:[async({page},use)=>{const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await use();expect(errors).toEqual([]);},{auto:true}]});
 const description='מצאתי תקלה בעת פתיחת ענף במפת הקורסים. אשמח שתבדקו אותה.';
-const success={next:'https://formspree.io/thanks'};
+const success={ok:true};
 const headers={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'POST, OPTIONS'};
-// All Formspree traffic is intercepted. Tests never send mail to the real inbox.
-test.beforeEach(async({page})=>{await page.route('https://formspree.io/**',route=>route.fulfill({status:503,headers,contentType:'application/json',body:JSON.stringify({error:'Unmocked submission blocked by test'})}));});
-async function mock(page:Page,handler:(route:Route)=>Promise<void>){await page.route(FEEDBACK_ENDPOINT,async route=>{if(route.request().method()==='OPTIONS'){await route.fulfill({status:204,headers});return;}await handler(route);});}
+// All submission traffic is intercepted. Tests never send mail to the real inbox.
+test.beforeEach(async({page})=>{await page.route('**/api/feedback',route=>route.fulfill({status:503,headers,contentType:'application/json',body:JSON.stringify({error:'Unmocked submission blocked by test'})}));});
+async function mock(page:Page,handler:(route:Route)=>Promise<void>){await page.route('**'+FEEDBACK_ENDPOINT,async route=>{if(route.request().method()==='OPTIONS'){await route.fulfill({status:204,headers});return;}await handler(route);});}
 async function respond(route:Route,body:unknown,status=200){await route.fulfill({status,headers,contentType:'application/json',body:JSON.stringify(body)});}
 async function form(page:Page,url='/feedback'){await page.goto(url);await expect(page.getByRole('heading',{name:'דיווח על תקלה ושליחת משוב'})).toBeVisible();}
 async function fill(page:Page){await page.getByLabel('סוג המשוב').selectOption('bug');await page.locator('#feedback-description').fill(description);}
@@ -30,7 +30,7 @@ test('required and optional fields validate in Hebrew without sending invalid da
 
 test('anonymous submission has the structured payload and sanitized context, and confirms success in-app',async({page})=>{
  let payload:any;await mock(page,async route=>{payload=route.request().postDataJSON();await respond(route,success);});await page.goto('/?course=02340247&email=private@example.com&token=secret');await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340247');await page.getByRole('link',{name:'דיווח על תקלה או שליחת משוב',exact:true}).click();await fill(page);const submitted=Date.now();await send(page).click();await expect(page.getByText('המשוב נשלח בהצלחה! תודה שעזרתם לנו להשתפר.',{exact:true})).toBeVisible();
- expect(payload.category).toBe('bug');expect(payload.category_label).toBe('דיווח על תקלה');expect(payload.description).toBe(description);expect(payload.starting_course_id).toBe('02340247');expect(payload.source_route).toBe('tree');expect(payload.user_agent).toBeTruthy();expect(payload.app_version).toBe(appVersion);expect(Date.parse(payload.submitted_at)).toBeGreaterThanOrEqual(submitted);expect(payload.course_number).toBeUndefined();expect(payload.email).toBeUndefined();expect(payload._gotcha).toBe('');expect(payload.page_url).toMatch(/\/feedback$/);expect(payload.source_page_url).toMatch(/\/?\?course=02340247$/);expect(JSON.stringify(payload)).not.toMatch(/private|secret|expandedForward|markedCourseIds/);await expect(page).toHaveURL(/\/feedback$/);
+ expect(payload.category).toBe('bug');expect(payload.category_label).toBe('דיווח על תקלה');expect(payload.description).toBe(description);expect(payload.starting_course_id).toBe('02340247');expect(payload.source_route).toBe('tree');expect(payload.user_agent).toBeTruthy();expect(payload.app_version).toBe(appVersion);expect(Date.parse(payload.submitted_at)).toBeGreaterThanOrEqual(submitted);expect(payload.course_number).toBeUndefined();expect(payload.email).toBeUndefined();expect(payload._gotcha).toBe('');expect(payload.submission_id).toMatch(/^[a-f0-9-]{36}$/);expect(payload.page_url).toMatch(/\/feedback$/);expect(payload.source_page_url).toMatch(/\/?\?course=02340247$/);expect(JSON.stringify(payload)).not.toMatch(/private|secret|expandedForward|markedCourseIds/);await expect(page).toHaveURL(/\/feedback$/);
  await page.getByRole('link',{name:'חזרה למפת הקורסים',exact:true}).last().click();await expect(page.locator('.course-node.is-added .course-link')).toHaveText('02340247');
 });
 
@@ -41,10 +41,10 @@ test('pending request disables duplicate submit events and displays a loading in
 });
 
 test('network failure preserves the description and permits a successful retry',async({page})=>{
- let count=0;await mock(page,async route=>{if(++count===1)await route.abort('failed');else await respond(route,success);});await form(page);await fill(page);await send(page).click();await expect(page.getByRole('alert')).toContainText('לא הצלחנו לשלוח');await expect(page.locator('#feedback-description')).toHaveValue(description);await expect(send(page)).toBeEnabled();await send(page).click();await expect(page.getByText('המשוב נשלח בהצלחה! תודה שעזרתם לנו להשתפר.',{exact:true})).toBeVisible();expect(count).toBe(2);
+ const attempts:any[]=[];let count=0;await mock(page,async route=>{attempts.push(route.request().postDataJSON());if(++count===1)await route.abort('failed');else await respond(route,success);});await form(page);await fill(page);await send(page).click();await expect(page.getByRole('alert')).toContainText('לא הצלחנו לשלוח');await expect(page.locator('#feedback-description')).toHaveValue(description);await expect(send(page)).toBeEnabled();await send(page).click();await expect(page.getByText('המשוב נשלח בהצלחה! תודה שעזרתם לנו להשתפר.',{exact:true})).toBeVisible();expect(count).toBe(2);expect(attempts[0]).toEqual(attempts[1]);
 });
 
-for(const scenario of [{status:429,body:{error:'Too many submissions; rate limit exceeded'},message:'בעוד כמה דקות'},{status:403,body:{errors:[{code:'INACTIVE',message:'This form is inactive'}]},message:'אינה זמינה'}])test(`submission limit or inactive form is handled without data loss (${scenario.status})`,async({page})=>{
+for(const scenario of [{status:429,body:{error:'Too many submissions; rate limit exceeded'},message:'בעוד כמה דקות'},{status:403,body:{errors:[{code:'UNAVAILABLE',message:'Service unavailable'}]},message:'אינה זמינה'}])test(`submission limit or unavailable service is handled without data loss (${scenario.status})`,async({page})=>{
  await mock(page,route=>respond(route,scenario.body,scenario.status));await form(page);await fill(page);await send(page).click();await expect(page.getByRole('alert')).toContainText(scenario.message);await expect(page.locator('#feedback-description')).toHaveValue(description);await expect(send(page)).toBeEnabled();await expect(page.locator('.feedback-success')).toHaveCount(0);
 });
 
@@ -81,4 +81,16 @@ test('feedback and About links retain the selected root even without writable lo
  await page.addInitScript(()=>{Storage.prototype.setItem=()=>{throw new Error('Storage unavailable for navigation test');};});
  await page.goto('/?course=00140855');await expect(page.locator('.course-node.is-added .course-link')).toHaveText('00140855');await page.locator('.feedback-trigger').click();await expect(page.getByRole('link',{name:'חזרה למפת הקורסים',exact:true})).toHaveAttribute('href','/?course=00140855');
  await page.getByRole('link',{name:'אודות / About',exact:true}).click();await expect(page).toHaveURL(/\/about\?course=00140855$/);await page.reload();await page.getByRole('link',{name:'חזרה למפת הקורסים ←',exact:true}).click();await expect(page.locator('.course-node.is-added .course-link')).toHaveText('00140855');
+});
+
+test('privacy disclosure links to the visible server-rendered policy without losing saved courses',async({page})=>{
+ await page.goto('/?course=02340114');await expect(page.locator('.course-node.is-added')).toBeVisible();await page.locator('.feedback-trigger').click();
+ await page.getByRole('link',{name:'מדיניות הפרטיות',exact:true}).click();await expect(page).toHaveURL(/\/about#privacy$/);await expect(page.getByRole('heading',{name:'מדיניות פרטיות',exact:true})).toBeInViewport();await expect(page.locator('#privacy')).toContainText('Resend');await expect(page.locator('#privacy')).toContainText('24 שעות');
+ await page.getByRole('link',{name:'חזרה למפת הקורסים ←',exact:true}).click();await expect(page.locator('.react-flow__node[data-id="02340114"] .added-badge')).toBeVisible();
+});
+for(const mode of ['production','development'])test(`${mode}: the native API rejects GET, cross-site and invalid submissions before delivery`,async({request,baseURL})=>{
+ const base=mode==='development'?(process.env.PLAYWRIGHT_DEV_BASE_URL??'http://127.0.0.1:5174'):baseURL!;
+ const get=await request.get(base+'/api/feedback');expect(get.status()).toBe(405);expect(get.headers().allow).toBe('POST');
+ const foreign=await request.post(base+'/api/feedback',{headers:{Origin:'https://evil.example','X-BranchQuest-Feedback':'1'},data:{}});expect(foreign.status()).toBe(403);
+ const invalid=await request.post(base+'/api/feedback',{headers:{Origin:new URL(base).origin,'X-BranchQuest-Feedback':'1'},data:{}});expect(invalid.status()).toBe(400);expect(await invalid.json()).toMatchObject({ok:false});expect(invalid.headers()['cache-control']).toBe('no-store');
 });

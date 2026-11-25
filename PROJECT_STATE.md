@@ -21,7 +21,7 @@ This document describes the working implementation on the committed mobile-tools
 | Course data generation | `2026-11-16T20:02:00.949Z` |
 | Catalog data generation | `2026-11-16T20:02:12.830Z` |
 
-The branch and base commit were inspected locally. The currently deployed production commit, publication of the new graph update, Vercel preview URL, Formspree account settings, and Analytics dashboard were not checked in this implementation task. `SECURITY_AUDIT.md` retains the separate 18 November security assessment and its limited production observations.
+The branch and base commit were inspected locally. The currently deployed production commit, publication of the new graph update, Vercel preview URL, previous feedback-provider account settings, and Analytics dashboard were not checked in this implementation task. `SECURITY_AUDIT.md` retains the separate 18 November security assessment and its limited production observations.
 
 **Implemented** means the feature exists in inspected code. **Partial** means concrete functioning pieces exist alongside an incomplete area. **Not Implemented** identifies an absent feature. **Unverified** identifies behavior dependent on an external service or environment that was not exercised.
 
@@ -282,15 +282,15 @@ Both modals support Escape, backdrop close, X, a completion button, and keyboard
 
 `FeedbackPage.tsx` is lazy-loaded. The header bug icon is labeled `דיווח על תקלה או שליחת משוב`. A course information panel can open feedback with the relevant course and course-information category prefilled.
 
-The Hebrew form uses `@formspree/react` with form ID `xrpqqyge`, corresponding to `https://formspree.io/f/xrpqqyge`. Categories cover a bug, improvement, general feedback, and course information. Description is required, trimmed, and 10–5,000 characters. Optional course number accepts 5–8 ASCII digits. Optional email is validated and limited to 254 characters.
+The Hebrew form posts to the same-origin `/api/feedback` Vercel Function. Node’s native HTTPS fetch delivers fixed-recipient plaintext email through Resend, guarded by shared Redis quotas and idempotency (see section 23). Categories cover a bug, improvement, general feedback, and course information. Description is required, trimmed, and 10–5,000 characters. Optional course number accepts 5–8 ASCII digits. Optional email is validated and limited to 254 characters.
 
 A hidden `_gotcha` honeypot and immediate in-flight guard reduce spam/duplicate clicks. Pending submission disables the fieldset and shows a spinner. Errors retain input, show Hebrew field or summary feedback, and permit retry. Raw server HTML is not rendered.
 
 The payload contains category/value label, description, optional course/email, timestamp, limited user agent, app version/build identifier when available, sanitized page/source route context, and known root/relevant course IDs. URL sanitization permits application paths and numeric course queries while stripping arbitrary query/hash content. Full graph state, markings, and browsing history are not submitted.
 
-Success appears only after the Formspree hook reports success, with `המשוב נשלח בהצלחה! תודה שעזרתם לנו להשתפר.` Return navigation retains the existing graph. The page has accessible labels, focus handling, responsive single-column mobile fields, and 16px mobile input text.
+Success appears only after the server confirms Resend acceptance and records completion, with `המשוב נשלח בהצלחה! תודה שעזרתם לנו להשתפר.` Return navigation retains the existing graph. The page has accessible labels, focus handling, responsive single-column mobile fields, and 16px mobile input text.
 
-Automated feedback tests intercept requests and simulate responses. Live Formspree account configuration, spam classification, quotas, notification recipients, and email delivery were not checked. A successful endpoint response establishes submission acceptance. Recipient email delivery requires external account/service confirmation.
+Automated feedback tests intercept requests and simulate responses. Private Resend/Redis configuration, the destination mailbox and live email delivery are manual deployment checks. A successful endpoint response establishes submission acceptance. Recipient email delivery requires external account/service confirmation.
 
 ### Analytics
 
@@ -515,7 +515,7 @@ Valid alternative courses remain eligible. Some graduation grouping/classificati
 
 `App.tsx` fetches `data/courses.json` and `data/catalogs.json` relative to Vite's base URL, using separate requests and abort cleanup. Bounded runtime validation checks the payloads before use. App merges catalog-only records, derives indexes/filters, restores schema-5 progress, builds the canonical visible graph, invokes component-aware layout, and supplies callbacks to cards and edges.
 
-Course-load failure presents an error/reload state. Catalog-load failure is reported separately and avoids destroying a usable saved catalog selection. Filter and feedback components are lazy-loaded. This is a client-rendered static application with external Formspree submission. There is no custom application server, account system, or application database service.
+Course-load failure presents an error/reload state. Catalog-load failure is reported separately and avoids destroying a usable saved catalog selection. Filter and feedback components are lazy-loaded. This is a Vite static frontend with one native Vercel feedback Function. Shared Redis stores short-lived abuse-prevention and idempotency records only; there is no account system or academic/user-profile database.
 
 `exploration.ts` centralizes pin, manual expansion, hidden-connection, automatic ownership, and reset transitions in an atomic reducer. App separately holds filters, markings, viewport, and transient UI state. Memoized source indexes, canonical reachability, and topology-keyed geometry feed React Flow. CSS is organized in one `src/styles.css` file, including successive feature overrides. Final override order matters for faculty card colors, compact footer, and mobile search.
 
@@ -530,7 +530,6 @@ The following versions come from the inspected lockfile, alongside their package
 | Vite | 7.3.8 | Dev server and production build |
 | `@xyflow/react` | 12.12.1 | Graph rendering and viewport |
 | `@dagrejs/dagre` | 1.1.8 | Directed layout |
-| `@formspree/react` | 3.0.0 | Feedback submission |
 | `@vercel/analytics` | 2.0.1 | Analytics integration |
 | `lucide-react` | 0.577.0 | Icons |
 | `@fontsource/heebo` | 5.3.0 | Bundled typography |
@@ -599,7 +598,7 @@ npm ci
 npm run dev
 ```
 
-The development script binds `0.0.0.0` and normally uses port 5173. Open the URL printed by Vite. Local Formspree requests use the configured external endpoint, subject to its account and spam handling.
+The development script binds `0.0.0.0` and normally uses port 5173. Open the URL printed by Vite. A server-only development middleware serves `/api/feedback` using the same handler as Vercel. Four private environment variables are required for real delivery; missing Redis/configuration fails closed. See `docs/FEEDBACK.md`.
 
 ```sh
 npm test
@@ -611,7 +610,7 @@ npm run test:e2e
 
 `npm run build` runs `tsc -b && vite build` and outputs `dist/`. `npm run preview` serves that build. No lint script is configured. Playwright normally builds and starts the production fixture at port 4173 unless `PLAYWRIGHT_BASE_URL` is supplied; it does not reuse an arbitrary existing server. `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` can select a local browser.
 
-Vercel can build the repository as a Vite static project. The build defines `__APP_VERSION__` from package metadata and `__BUILD_ID__` from a valid hexadecimal `VERCEL_GIT_COMMIT_SHA`, if supplied. Without that environment value, build SHA context is unavailable. Vendor dependencies share a vendor chunk. Existing rewrites enable direct feedback visits. Repository security headers include a self-hosted-script CSP with Formspree connect/form permission, MIME-sniffing protection, frame denial, strict-origin-when-cross-origin referrers, and a restricted Permissions-Policy.
+Vercel builds the frontend as a Vite static project and discovers the root `api/feedback.ts` Node.js Function separately. The build defines `__APP_VERSION__` from package metadata and `__BUILD_ID__` from a valid hexadecimal `VERCEL_GIT_COMMIT_SHA`, if supplied. Without that environment value, build SHA context is unavailable. Vendor dependencies share a vendor chunk. Existing rewrites enable direct feedback visits. Repository security headers include a self-hosted-script CSP with same-origin-only connect/form permission, MIME-sniffing protection, frame denial, strict-origin-when-cross-origin referrers, and a restricted Permissions-Policy.
 
 Actual Vercel project linkage, branch-to-preview settings, deployed domain, latest production build, and environment/dashboard configuration were not queried. No branch, commit, deployment, or push was performed during this documentation task.
 
@@ -671,7 +670,7 @@ These data generators were inspected and left unexecuted during this task. Extra
 | About page | Partial | Functional navigation and placeholder body |
 | Footer disclaimer and developer credits | Implemented | Exact wording retained with compact collection controls |
 | Help and database modals/downloads | Implemented | Updated graph guidance, source policy and existing downloads |
-| Feedback UI and submission handling | Implemented | Validated Formspree client; limited primary-course context |
+| Feedback UI and submission handling | Implemented | Validated same-origin client, server-side Resend delivery, durable Redis protection |
 | Live feedback/notifications | Unverified | Provider/account configuration and mail delivery |
 | Runtime validation and security headers | Implemented | Local source/fixtures; deployed enforcement needs separate confirmation |
 | Analytics dashboard | Unverified | Redaction integration retained; external collection unchecked |
@@ -799,7 +798,7 @@ Security headers were locally enforced and tested in that assessment. Its read-o
 
 The WSL UNC workspace required a byte-matched Windows QA copy for executable checks because of command-runner connectivity/setup constraints. The established environment uses Node 24.21.0 and Chromium/Chrome 157.0.8103.79. Current browser details are recorded above. The source Playwright defaults are one worker, a 1440×1000 viewport, 30-second test timeout and 7-second expectation timeout. Its normal entry point builds and serves production output with configured security headers at port 4173; an explicit external URL can select an existing fixture. The current complete browser run and historical full runs used QA-only 90/25-second timing allowances.
 
-Feedback tests intercept Formspree requests; no test result proves mail delivery. Python mechanism/evidence regressions and parser compatibility do not constitute a fresh exhaustive academic comparison. The current Python rerun used the existing isolated `security-pdf-venv`, rather than the global Python lacking pdfplumber. Physical iOS/Android keyboards, Firefox/WebKit, production deployment and external service dashboards remain outside the recorded verification.
+Feedback tests intercept same-origin submission requests; no test result proves real inbox delivery. Python mechanism/evidence regressions and parser compatibility do not constitute a fresh exhaustive academic comparison. The current Python rerun used the existing isolated `security-pdf-venv`, rather than the global Python lacking pdfplumber. Physical iOS/Android keyboards, Firefox/WebKit, production deployment and external service dashboards remain outside the recorded verification.
 
 Normal application commands are in section 11. Independent offline test commands remain:
 
@@ -989,3 +988,27 @@ The **complete 186-case browser suite finished successfully**: **185 passed on t
 All **24 cold refreshes (16 throttled)** passed in development and production, desktop and mobile. Maximum measured boot-phase CLS was **0.001622**. Shared loading/header/canvas/footer geometry and crawlable content remained stable. Additional real-database checks at **1440px and 320px** added three courses, reviewed the collection/clear-all UI, then confirmed an empty board and preserved red marking after refresh, with no runtime errors. Academic dataset hashes remain unchanged, as do credit/quantity helpers, faculty colors, prerequisite evaluation and filtering rules.
 
 Verification used an isolated Windows QA copy with identical application/tests/scripts, package/lockfile and build configuration, running system Chromium desktop/mobile emulation. A physical phone and WebKit were not tested. The single teardown retry is reported explicitly; no application assertion failure remains. No application source changed after the successful complete run. Detailed behavior and limitations are in [equal added courses](docs/EQUAL_ADDED_COURSES.md).
+
+## 23. Resend feedback migration and shared abuse protection (25 November 2026)
+
+The Vite/React architecture remains. `api/feedback.ts` is a native Web Request/Response Vercel Node.js Function; helpers live in `server/`. The existing Hebrew form, fields, translations, focus, loading/success/error behavior, anonymous submissions, course context, graph-preserving navigation and responsive design remain. It now posts to `/api/feedback` and retries unchanged submissions with a stable UUID/payload. The retired browser SDK and seven unused transitive packages were removed (eight packages total). No new runtime dependency, framework migration, external account or paid resource was introduced.
+
+Only server code reads `RESEND_API_KEY` and `FEEDBACK_TO_EMAIL`. Sender is fixed to `BranchQuest <feedback@branchquest.app>`, recipient is one server-configured address, optional visitor email is Reply-To, and subject is derived from an allowlisted category. Plaintext mail prevents HTML interpolation. Arbitrary recipient/header/attachment fields are rejected. The CSP now allows only same-origin connect/form actions; existing script hash, routes, canonicals, public pages, preview noindex and analytics remain.
+
+The endpoint repeats validation independently, bounds streamed bodies to 32 KiB with a deadline, limits every field, strips unrelated URL context, requires allowed Origin/JSON/app header, retains the hidden honeypot, and returns safe no-store/noindex JSON. It trusts only Vercel's client-IP header on deployed functions, groups IPv6 by /64 and persists HMAC identities rather than raw IPs. Origin checks are browser protections, not script authentication.
+
+Atomic Redis Lua admission enforces a global 200 validated attempts/10 minutes (including failed retries and rotating IPs), 15 validated attempts/minute/IP, 5 new reports/10 minutes/IP, 10 new reports/24 hours/IP, and a global 50/24 hours in Production (10 in Preview/development). These are fixed windows. Redis also binds submission IDs to fingerprints, uses recoverable short worker leases and stores sent/retry status. Resend receives a stable server-derived idempotency key, preserving safe retries after ambiguous provider or confirmation failures within its 24-hour window. Stored hashes/counters/status expire within 24 hours; message bodies, visitor email and raw IP are not written to Redis. No process-memory production fallback exists; missing/unavailable protection fails closed.
+
+The public Hebrew privacy policy is shared between prerendered and interactive About at `/about#privacy`, linked from the form. `docs/PRIVACY.md` and rewritten `docs/FEEDBACK.md` document processing, limited Redis retention, provider/mailbox boundaries, deployment, local development and Free-plan setup. Earlier dated security/feedback artifacts remain historical evidence, explicitly superseded for the retired provider. Runtime code, dependencies and current configuration have no old-provider endpoint or permissions.
+
+Manual configuration still required: create an explicitly **Free** Upstash Redis database and set `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` in the Vercel environments used for feedback, then redeploy. The owner reports the Resend domain and existing key/recipient variables are ready. No secret values or account dashboards were accessed. Actual delivery/bounces and inbox/Reply-To remain manual deployed checks. Do not enable a paid plan without the owner's approval. `.env.example` contains blank server-only placeholders; `npm run dev` loads private `.env.local` values through server middleware. Ordinary static `vite preview` does not emulate functions.
+
+Verification of frozen application code: **302/302 unit/data tests passed**, including independent server/protocol security cases. **11/11 real-Redis integration tests passed** against an isolated local Redis 7.2.7 instance, executing the actual atomic Lua scripts. These verified 32 concurrent instances producing one mocked delivery, per-IP and global quotas, the 200-attempt budget under provider failure/rotating IPs, fingerprint conflicts, private bounded-TTL records, lease recovery, ambiguous delivery acceptance and store outages. No real emails were sent.
+
+Both **Production and Preview builds passed** TypeScript, Vite and SEO artifact checks. Injected secret/recipient sentinel values, private environment names and the retired provider endpoint were absent from `dist`. `npm audit` reported **zero known vulnerabilities**. No linter is configured, and no lint pass is claimed. `git diff --check` passed. There are no added runtime dependencies; eight obsolete packages were removed in total.
+
+The **complete 189-case browser suite completed successfully**: **188 first-attempt passes and one pass on retry**, zero unexpected failures/skips. The existing individual-branch expansion fixture hit an expansion-state assertion on its first attempt; it then passed the retry and **3/3 additional normal repetitions without retries**, with unchanged graph/application code, fixture assertions and timeouts. All 186 original browser cases remain; three new cases cover visible privacy navigation and production/development API rejection behavior. A prior focused feedback/security/SEO run passed 43/43 before the final global-attempt hardening; the complete run exercised the final build. An earlier incomplete broad run was stopped to add the retry-abuse budget and is excluded from these figures.
+
+All **24 cold refreshes (16 throttled)** passed in development/production at desktop/mobile widths; maximum boot-phase CLS remained **0.001622**. Mobile feedback screenshots were reviewed, including 320px fields, action controls and the provider/privacy disclosure. Main app/graph/exploration/progress implementations, academic data hashes, filtering, credit/quantity and prerequisite logic, styles and SEO metadata helpers remain byte-unchanged from the migration baseline. The source, tests, server and build configuration matched the isolated QA copy. No application code changed after the complete run.
+
+Verification used Chromium emulation, not a physical phone or WebKit, and local real Redis with mocked Resend responses. No private dashboard, actual deployed Vercel function, live Upstash instance or inbox delivery was verified. Redis Free configuration, deployment and a real acceptance/delivery/Reply-To check remain necessary. The migration is local and has not been committed, pushed or deployed in this task. Machine-readable evidence: [resend-results.json](docs/feedback-verification/resend-results.json).

@@ -127,5 +127,7 @@
     "Confirm active Formspree form, verified notification recipients and any allowed-domain settings.",
     "Deploy to Vercel and directly refresh /feedback.",
     "Send one intentional report after deployment and verify the dashboard entry and notification delivery."
-  ]
+  ],
+  "historical_report": true,
+  "superseded_feedback_implementation": "../FEEDBACK.md"
 }

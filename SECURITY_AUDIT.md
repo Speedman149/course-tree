@@ -1,5 +1,7 @@
 # Course Tree — Pre-Launch Security Audit
 
+> Feedback migration notice — 25 November 2026: provider-specific observations below are historical. The active submission system is now the server-side Resend implementation described in [FEEDBACK.md](docs/FEEDBACK.md). They do not certify current email delivery or dashboard configuration.
+
 Assessment date 18 November 2026. Scope includes the checked-out application, build configuration, public datasets, import/audit tooling, available Git history, dependency metadata, controlled local attacks, and limited read-only production checks.
 
 ## Executive summary
@@ -451,3 +453,11 @@ Old audit caches and historical academic findings retain their original verifica
 The reviewed architecture is suitable for a public educational explorer after the repository fixes are deployed and the identified provider/privacy actions are completed. There are no remaining confirmed Critical or High findings in the assessed application/tooling changes.
 
 The current public URL still serves responses without the new application headers, and Formspree/Analytics account behavior remains partly unverified. Complete those explicit checks before treating this assessment as a final production launch approval.
+
+## Feedback migration follow-up — 25 November 2026
+
+This is scoped follow-up evidence, not a repeat certification of every historical finding. The retired external browser integration and its CSP permissions were removed. A native Node.js Vercel Function validates bounded streamed JSON, fixes the sender/recipient/subject authority, uses optional Reply-To only, sends plaintext and keeps secrets out of static assets. Same-origin/header/content-type checks and the existing honeypot complement atomic shared Redis quotas and a global retry-attempt budget. Keyed hashes, short worker leases and Resend idempotency protect bounded records and uncertain retries. Protection/configuration failure rejects delivery; there is no production process-memory fallback. Logs and HTTP errors contain fixed safe codes rather than visitor messages or credentials.
+
+Independent server/protocol tests, actual Redis Lua concurrency/quota/outage tests and browser security regressions passed: 302 unit/data, 11 Redis and 189 browser cases (one existing graph fixture needed retry and passed three extra repetitions). Both builds and bundle-secret scans passed; dependency audit reported zero known vulnerabilities. Source/academic/graph mechanisms outside the feedback scope remain unchanged. See [current setup and threat boundaries](docs/FEEDBACK.md) and [recorded results](docs/feedback-verification/resend-results.json).
+
+No paid resource or private provider setting was created/changed. Upstash Free configuration and Vercel redeployment are still required. Real deployment behavior, trusted platform-header delivery, Resend acceptance/delivery/bounces and the destination inbox/Reply-To require the owner's deployed smoke check. Application acceptance cannot certify final mailbox delivery, and anonymous quota controls do not eliminate distributed denial of service. Earlier provider-specific observations in this document are historical.

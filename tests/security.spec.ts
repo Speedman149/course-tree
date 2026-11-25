@@ -8,7 +8,7 @@ const test = base.extend<{ securityRuntime: void }>({
   securityRuntime: [async ({ page }, use) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
-    await page.route('https://formspree.io/**', route => route.abort());
+    await page.route('**/api/feedback', route => route.abort());
     await page.addInitScript(() => { (window as any).__xss = 0; });
     await use();
     expect(errors).toEqual([]);
@@ -157,7 +157,7 @@ test('malicious feedback text and malformed responses stay inert and duplicate s
   let requests = 0;
   let release!: () => void;
   const pending = new Promise<void>(resolve => { release = resolve; });
-  await page.route('https://formspree.io/**', async route => {
+  await page.route('**/api/feedback', async route => {
     if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-methods': 'POST', 'access-control-allow-headers': '*' } });
     requests++;
     await pending;

@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-25",
+  "implementation": "native Vercel Node.js Function + Resend REST + atomic Redis admission",
+  "unit_and_data_tests": {
+    "passed": 302,
+    "failed": 0
+  },
+  "real_redis_integration": {
+    "passed": 11,
+    "failed": 0,
+    "engine": "Redis 7.2.7, isolated localhost, persistence disabled",
+    "provider_delivery": "mocked; no real emails"
+  },
+  "complete_browser_suite": {
+    "cases": 189,
+    "first_attempt_passes": 188,
+    "passed_on_retry": 1,
+    "unexpected_failures": 0,
+    "skipped": 0,
+    "duration_seconds": 979.167,
+    "retry_case": "existing individual-branch expansion fixture assertion",
+    "additional_unchanged_case_repetitions": {
+      "passed": 3,
+      "failed": 0,
+      "retries": 0
+    },
+    "environment": "Chromium desktop/mobile emulation on identical Windows QA source; no physical phone/WebKit"
+  },
+  "focused_browser_run_before_final_global_attempt_hardening": {
+    "passed": 43,
+    "failed": 0
+  },
+  "cold_refreshes": {
+    "count": 24,
+    "throttled": 16,
+    "maximum_boot_cls": 0.0016219061950322902
+  },
+  "production_build": "passed TypeScript/Vite/SEO artifact checks",
+  "preview_build": "passed TypeScript/Vite/SEO artifact checks",
+  "bundle_isolation": "no provider endpoint, private environment names or injected secret/recipient sentinels in dist",
+  "npm_audit_known_vulnerabilities": 0,
+  "linter": "not configured; no lint pass claimed",
+  "live_emails_sent": 0,
+  "paid_services_provisioned": 0,
+  "server_side_rate_limiting": "atomic Redis Lua; fails closed; no in-memory production fallback",
+  "manual_requirements": [
+    "Create/select explicit Upstash Redis Free database",
+    "Set private UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN for desired Vercel environments",
+    "Keep existing RESEND_API_KEY and FEEDBACK_TO_EMAIL server-only",
+    "Redeploy, verify native API function and inspect actual Resend delivery/bounce events and mailbox/Reply-To"
+  ],
+  "private_dashboards_verified": false,
+  "data_hashes": {
+    "public/data/courses.json": "c8ec8e3f47b331e4e27392bf3d3c6456883f8a78682611f4079853d574f9688e",
+    "public/data/catalogs.json": "5b71693610e2a8c19a35d096a212cbd03267c199a6a0ec7b3f9888ed4c14eada"
+  }
+}

@@ -1,5 +1,7 @@
 # Feedback verification
 
+> Feedback migration notice — 25 November 2026: provider-specific observations below are historical. The active submission system is now the server-side Resend implementation described in [FEEDBACK.md](../FEEDBACK.md). They do not certify current email delivery or dashboard configuration.
+
 Verification performed on 2026-11-17 using Node.js 24.21.0 and installed Chrome 157.0.8103.79 on Windows. The project's source/config/tests were copied byte-for-byte to a temporary local mirror because Windows Vite cannot reliably serve the WSL UNC working directory. Dependencies were installed with `npm ci` from the project lockfile. The final browser suite targets the production build through Vite preview, rather than the development server.
 
 ## Checks
@@ -38,3 +40,7 @@ The course and catalog JSON, prerequisite graph implementation, faculty palette 
 - Separate navigation/persistence repetition: **6 passed**.
 - 38 source/config/test files match the QA mirror byte-for-byte. Academic data, graph logic, palette and persistence schema are unchanged against baseline `341f17b`.
 - Real Formspree submissions: **0**. Deployed routing and real inbox delivery remain manual checks.
+
+## Current Resend migration — 25 November 2026
+
+The measurements above describe the retired provider and remain historical. Current implementation/configuration: [FEEDBACK.md](../FEEDBACK.md). Current machine-readable evidence: [resend-results.json](resend-results.json). The new run passed 302 unit/data tests, 11 real-Redis integration cases and all 189 browser cases (188 first try, one retry plus three clean repetitions). Both build modes, secret-isolation scan and dependency audit passed. External Redis setup and actual delivery verification remain manual; no real email was sent by automated checks.

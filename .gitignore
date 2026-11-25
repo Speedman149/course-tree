@@ -4,5 +4,6 @@ dist/
 .playwright/
 .data-cache/
 .env*
+!.env.example
 
 .cache/

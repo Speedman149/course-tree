@@ -18,12 +18,12 @@
     "catalogs:discover": "node scripts/catalogs/discover.mjs",
     "catalogs:extract-baseline": "python3 scripts/catalogs/extract.py --source-id 2025-2026-full",
     "seo:check": "node --import tsx scripts/check-seo.mjs",
-    "seo:image": "node scripts/render-social-image.mjs"
+    "seo:image": "node scripts/render-social-image.mjs",
+    "test:feedback-redis": "node --import tsx --test tests/feedback-redis.integration.mjs"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.8",
     "@fontsource/heebo": "^5.3.0",
-    "@formspree/react": "^3.0.0",
     "@vercel/analytics": "^2.0.1",
     "@xyflow/react": "^12.9.3",
     "lucide-react": "^0.577.0",

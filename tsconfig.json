@@ -21,6 +21,9 @@
   "include": [
     "src",
     "vite.config.ts",
-    "scripts/seo-build.ts"
+    "scripts/seo-build.ts",
+    "server",
+    "api",
+    "scripts/feedback-dev.ts"
   ]
 }

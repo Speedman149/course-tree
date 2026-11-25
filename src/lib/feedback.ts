@@ -1,5 +1,4 @@
-export const FEEDBACK_FORM_ID='xrpqqyge';
-export const FEEDBACK_ENDPOINT=`https://formspree.io/f/${FEEDBACK_FORM_ID}`;
+export const FEEDBACK_ENDPOINT='/api/feedback';
 export const FEEDBACK_CATEGORIES=[
   {value:'bug',label:'דיווח על תקלה'},
   {value:'improvement',label:'הצעה לשיפור'},
@@ -54,14 +53,34 @@ export function feedbackPayload(values:FeedbackValues,context:{origin:FeedbackOr
     ...(context.origin.startingCourseId&&validCourseNumber(context.origin.startingCourseId)?{starting_course_id:context.origin.startingCourseId}:{}),
     ...(context.origin.relevantCourseId&&validCourseNumber(context.origin.relevantCourseId)?{relevant_course_id:context.origin.relevantCourseId}:{}),
     ...(context.appVersion?{app_version:context.appVersion}:{}),...(context.buildId?{build_id:context.buildId}:{}),
-    _subject:`BranchQuest — ${category?.label??'משוב'}`,_gotcha:context.honeypot,
+    _gotcha:context.honeypot,
   };
 }
 export function feedbackErrorMessage(errors:readonly {code:string;message:string}[]):string {
-  if(errors.some(e=>/limit|too many|quota|rate/i.test(e.message)))return 'כרגע לא ניתן לשלוח משובים נוספים. נסו שוב בעוד כמה דקות. התיאור שהזנתם נשמר בטופס.';
-  if(errors.some(e=>['INACTIVE','FORM_NOT_FOUND','PROJECT_NOT_FOUND','BLOCKED'].includes(e.code)))return 'שליחת המשוב אינה זמינה כרגע. נסו שוב מאוחר יותר. התיאור שהזנתם נשמר בטופס.';
+  if(errors.some(e=>e.code==='RATE_LIMITED'||/limit|too many|quota|rate/i.test(e.message)))return 'כרגע לא ניתן לשלוח משובים נוספים. נסו שוב בעוד כמה דקות. התיאור שהזנתם נשמר בטופס.';
+  if(errors.some(e=>['UNAVAILABLE','FORBIDDEN'].includes(e.code)))return 'שליחת המשוב אינה זמינה כרגע. נסו שוב מאוחר יותר. התיאור שהזנתם נשמר בטופס.';
   return 'לא הצלחנו לשלוח את המשוב. בדקו את החיבור או את השדות המסומנים ונסו שוב. התיאור שהזנתם נשמר בטופס.';
 }
 export function feedbackFieldError(field:FeedbackField):string {
   return field==='email'?'הכתובת לא התקבלה. בדקו את כתובת האימייל או השאירו אותה ריקה.':field==='description'?'התיאור לא התקבל. בדקו את התוכן ונסו שוב.':field==='category'?'בחרו סוג משוב תקין ונסו שוב.':'בדקו את מספר הקורס ונסו שוב.';
+}
+export interface FeedbackResponseError {code:string;message:string;field?:FeedbackField}
+export class FeedbackSubmissionError extends Error {
+ constructor(public errors:FeedbackResponseError[]){super('Feedback submission unavailable');}
+}
+/** Same-origin only. Provider responses, secrets and recipient addresses never reach the browser. */
+export async function submitFeedback(payload:Record<string,string>,http:typeof fetch=fetch):Promise<void>{
+ const response=await http(FEEDBACK_ENDPOINT,{method:'POST',credentials:'same-origin',redirect:'error',signal:AbortSignal.timeout(25000),
+  headers:{'Content-Type':'application/json','X-BranchQuest-Feedback':'1'},body:JSON.stringify(payload)});
+ const body:unknown=await response.json();
+ if(response.ok&&body&&typeof body==='object'&&!Array.isArray(body)&&(body as {ok?:unknown}).ok===true)return;
+ const raw=body&&typeof body==='object'?(body as {errors?:unknown}).errors:null;
+ const errors:FeedbackResponseError[]=Array.isArray(raw)?raw.slice(0,10).flatMap(item=>{
+  if(!item||typeof item!=='object')return [];
+  const {code,field}=item as {code?:unknown;field?:unknown};
+  return [{code:typeof code==='string'&&/^[A-Z_]{1,40}$/.test(code)?code:'UNSPECIFIED',message:'',
+   ...(typeof field==='string'&&['category','description','course_number','email'].includes(field)?{field:field as FeedbackField}:{})}];
+ }):[];
+ if(response.status===429&&!errors.some(e=>e.code==='RATE_LIMITED'))errors.push({code:'RATE_LIMITED',message:''});
+ throw new FeedbackSubmissionError(errors.length?errors:[{code:'UNSPECIFIED',message:''}]);
 }
