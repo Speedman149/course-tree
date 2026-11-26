@@ -1,85 +1,27 @@
-import {BookOpen, Bug, Check, ChevronDown, ExternalLink, Focus, GitBranch, Info, Layers, ListPlus, Menu, Minus, Move, Plus, RotateCcw, Search, ShieldCheck, SlidersHorizontal} from 'lucide-react';
-import {facultyPalette} from '../lib/faculty-colors';
-import {PREREQUISITE_HIGHLIGHT_SHORT_LABEL} from '../lib/prerequisite-satisfaction';
-
-/** The existing help modal's guide, kept beside the controls it documents. */
-export default function HelpGuide() {
-  return <div className="help-guide">
-    <p className="help-intro">מפת הקורסים עוזרת לחקור קדמים וקורסי המשך. אפשר להוסיף כמה קורסים לאותה מפה, לסמן קורסים כרצונכם ולגלות אילו קדמים מולאו לפי הסימונים.</p>
-    <details className="help-section" open>
-      <summary><h3><GitBranch size={17}/>התחלה מהירה<ChevronDown size={15}/></h3></summary>
-      <ol>
-        <li><Search size={14}/>חפשו שם או מספר קורס. בטלפון פותחים קודם את כפתור הזכוכית המגדלת.</li>
-        <li><Plus size={14}/>לחצו על תוצאת חיפוש כדי להוסיף את הקורס למפה הקיימת. קורס שכבר נוסף ימוקד בלי כפילות.</li>
-        <li><Plus size={14}/>הרחיבו קורסי המשך בכפתור + בכרטיס, או פתחו את חלונית הקדמים כדי לחקור מה צריך לפני.</li>
-      </ol>
-    </details>
-    <details className="help-section">
-      <summary><h3><Search size={17}/>חיפוש והוספת קורסים<ChevronDown size={15}/></h3></summary>
-      <p>החיפוש מזהה שמות, מספרים וכינויים ישנים המופיעים במאגר. כשמסננים פעילים, <strong>חיפוש בכל הקורסים</strong> מאפשר למצוא גם קורסים מחוץ לסינון בלי לשנות אותו.</p>
-      <p><Plus className="help-inline-icon" size={14}/><strong>הוסף לעץ</strong> מצרף קורס בלי להתחיל מחדש. כשאפשר, נפתח אליו חיבור קצר דרך קשרי הקדם האמיתיים. מסלול ארוך או מוסתר בסינון לא בהכרח ייפתח אוטומטית; קורס ללא חיבור מתאים יכול להופיע כנקודת מוצא נוספת.</p>
-      <p><ListPlus className="help-inline-icon" size={14}/>ב־<strong>קורסים שהוספתי</strong> שאפשר לחפש, למקד קורס ולהסירו. במחשב הרשימה בתחתית האתר; בטלפון פותחים קודם את כפתור כלים שבסרגל המפה. המיקוד מנסה להציג מחדש את החיבור אליו בהתאם למסננים. כל הקורסים שהוספתם שווים, כולל הקורס שמופיע בביקור הראשון.</p>
-      <p>כל קורס מופיע פעם אחת, גם כשהוא משותף לכמה מסלולים. <strong>הסר מהעץ</strong> מסיר את ההוספה האישית; כרטיס שנחוץ לחיבור אחר, לחקירה ידנית  עשוי להישאר במפה. הוספה אינה סימון אדום. אפשר להסיר גם את הקורס הראשון, או להשתמש ב־<strong>הסרת כל הקורסים</strong> ברשימה. עץ ריק נשמר גם אחרי רענון; הסימונים והמסננים נשארים.</p>
-    </details>
-    <details className="help-section">
-      <summary><h3><Move size={17}/>ניווט בעץ ובענפים<ChevronDown size={15}/></h3></summary>
-      <ul>
-        <li><Plus size={14}/><strong>+ בכרטיס</strong> פותח קורסי המשך ישירים. <Minus className="help-inline-icon" size={13}/><strong>− בכרטיס</strong> סוגר את כל הענפים היוצאים ממנו.</li>
-        <li><Minus size={14}/><strong>− על חיבור</strong> מסתיר רק את הענף המסוים הזה. ענפים אחרים נשארים פתוחים, וקורס משותף נשאר אם עדיין מגיעים אליו בדרך אחרת.</li>
-        <li><Plus size={14}/><strong>הצגת ענפים</strong> ליד הקורס מאפשרת להחזיר ענף אחד או את כל הענפים. היא שימושית גם כשהקורס נפתח באופן חלקי דרך חיבור אוטומטי.</li>
-        <li><Layers size={14}/><strong>עוד שכבה</strong> מרחיב את הקורסים המוצגים. <RotateCcw className="help-inline-icon" size={13}/><strong>איפוס ענפים</strong> מאתחל את פתיחת הענפים, בלי לנקות סימונים או מסננים.</li>
-        <li><Move size={14}/>גררו את הרקע להזזה וגללו לשינוי קנה המידה. בטלפון אפשר להזיז ולשנות קנה מידה במגע. כפתורי + ו־− בתחתית המפה משנים את קנה המידה; <Focus className="help-inline-icon" size={13}/>מתאים את המפה למסך.</li>
-      </ul>
-    </details>
-    <details className="help-section">
-      <summary><h3><Info size={17}/>קדמים, צבעים וסוגי קשרים<ChevronDown size={15}/></h3></summary>
-      <p>החצים מציגים דרישות לקורסי המשך, ואינם אומרים שקדם אחד לבדו מספיק. מעבר עם העכבר על כרטיס או לחיצה על כפתור פרטי הקדמים פותחים את החלונית <strong>מה צריך לפני?</strong> עם הכלל המלא.</p>
-      <p><Plus className="help-inline-icon" size={14}/>בחלונית אפשר לפתוח כל קדם במפה ולהמשיך לחקור אחורה, גם מחוץ למסננים. קווים ירוקים מקווקווים ותג <strong>קדם</strong> מציינים חקירה אחורה; לחיצה על התג סוגרת אותה.</p>
-      <div className="help-relation-samples">
-        <p><i className="legend-faculty"/><strong>מסגרת בצבע פקולטה</strong> — השיוך האקדמי של הקורס.</p>
-        <p><i className="legend-node strong"/><strong>קדם חזק</strong> — נדרש לפני הקורס הבא, לפי הכלל המלא. אין לו תג מלבני בכרטיס.</p>
-        <p><i className="legend-node concurrent"/><strong>מקצוע צמוד</strong> — תג אפור; עשוי להילמד במקביל, בכפוף לכללי הרישום.</p>
-      </div>
-      <p><strong>וגם</strong> מחייב את כל התנאים בקבוצה; <strong>או</strong> מציין חלופות. הדרישות הן של הקורס עצמו, ולא רשימה של כל אבותיו במפה.</p>
-      <div className="faculty-color-key">{facultyPalette.map(f => <span key={f.id}><i style={{background: f.accent}}/>{f.label}</span>)}</div>
-      <p><ExternalLink className="help-inline-icon" size={14}/>מספרי הקורסים ו־<strong>מידע במקור</strong> פותחים את הפרסום הרשמי בחלון חדש. אם המידע חסר או עמום, הוא אינו מושלם באמצעות קשרים משוערים.</p>
-    </details>
-    <details className="help-section">
-      <summary><h3><Check size={17}/>סימון קורסים ורשימת מסומנים<ChevronDown size={15}/></h3></summary>
-      <p><Check className="help-inline-icon" size={14}/>כפתור הסימון בכרטיס צובע אותו באדום; לחיצה נוספת מבטלת את הסימון. אפשר להשתמש בסימונים לקורסים שלמדתם, לתכנון או לכל מטרה אישית אחרת. האתר אינו משנה את המשמעות שבחרתם.</p>
-      <p><strong>רשימת מסומנים</strong>, בתחתית האתר במחשב או בתוך <strong>כלים</strong> בטלפון, כוללת את כל הסימונים, גם מחוץ למפה או למסננים. אפשר לחפש ברשימה ארוכה, למקד כרטיס מוצג, להשתמש ב־<strong>הוסף לעץ</strong>, להסיר הוספה מהעץ או לבטל סימון.</p>
-      <p><strong>סה״כ נק״ז</strong> מסכם את ערכי הזכות הידועים של כל קורס מסומן פעם אחת. כשחסר נתון מופיעים <strong>נק״ז ידוע</strong> ומספר הקורסים ללא נתון. זהו סכום אישי, ואינו חישוב נקודות שנצברו לתואר.</p>
-      <p><strong>ניקוי סימונים</strong> מבטל את כל הסימונים לאחר אישור, ומשאיר את הענפים, ההוספות והמסננים במקומם.</p>
-    </details>
-    <details className="help-section">
-      <summary><h3><Check size={17}/>הדגשת קדמים שמולאו<ChevronDown size={15}/></h3></summary>
-      <p>במחשב, הפעילו ליד מסננים את <strong>{PREREQUISITE_HIGHLIGHT_SHORT_LABEL}</strong>. בטלפון פותחים <strong>כלים</strong> ובוחרים באפשרויות התצוגה. המצב כבוי כברירת מחדל ונשמר בדפדפן.</p>
-      <p className="help-satisfaction-sample"><span aria-hidden="true"><Check size={15}/></span><strong>מסגרת ירוקה וסימן ✓</strong> מסמנים קורס לא מסומן שכל דרישות הקדם הרגילות שלו מולאו לפי הסימונים. צבע הפקולטה נשאר במקומו; קורס שכבר מסומן נשאר אדום.</p>
-      <p>ההדגשה מתעדכנת מיד עם סימון, ביטול סימון או ניקוי הרשימה. היא משתמשת בכל הסימונים, גם בקורסים מוסתרים, ואינה מוסיפה או מסננת כרטיסים. הוספה לעץ אינה נחשבת לסימון.</p>
-      <p><strong>דוגמה:</strong> אם הדרישה היא (א או ב) וגם ג, צריך לסמן את ג ולפחות אחד מא׳ וב׳. אם ג דורש רק את ב, סימון ב מספיק לבדיקה הזו; אין צורך לסמן גם את הקדמים של ב.</p>
-      <p>קורס שאושר במאגר כחסר קדמים רגילים יכול להיות מודגש גם בלי סימונים. מידע חסר, עמום או חלופה שלא ניתן להפריד בבטחה אינם מקבלים אישור ירוק.</p>
-      <p className="help-caution"><ShieldCheck size={14}/>נבדקים קדמים רגילים בלבד. מקצועות צמודים, מגבלות תכנית או פקולטה, מצב אקדמי, זמינות קורס ותנאים נוספים אינם נבדקים. ההדגשה אינה מבטיחה אפשרות רישום.</p>
-    </details>
-    <details className="help-section">
-      <summary><h3><SlidersHorizontal size={17}/>מסננים וקטלוגים<ChevronDown size={15}/></h3></summary>
-      <p>ב־<strong>מסננים</strong> אפשר לבחור כמה פקולטות, או לעבור ל־<strong>קטלוג תואר</strong>, לבחור שנת קטלוג ולחפש תואר, מסלול או התמחות. מסנן הפקולטות ורשימות התואר פועלים יחד.</p>
-      <p>פרטי התכנית מציגים את הקורסים המיובאים, קבוצות החובה והבחירה, חלופות, תנאים וקישורי מקור עם עמודי הקטלוג. אפשר לחפש ב־<strong>קורסים בתכנית הזו</strong>; בחירת קורס שם מוסיפה אותו למפה הקיימת או ממקדת אותו אם כבר נוסף.</p>
-      <p>הסינון משפיע על קורסי המשך וחיפוש. קורסים שהוספתם במפורש נשארים גם מחוץ לסינון, וחקירת קדמים אחורה אינה מסוננת. <strong>איפוס סינון</strong> מחזיר את כל הפקולטות ומסיר את בחירת התואר.</p>
-      <p>ייבוא חלקי או תכנית שטרם אומתה מסומנים במפורש. קורס בחירה או חלופה עשוי להופיע לצד אפשרויות נוספות; זו אינה בדיקת השלמת תואר. שנת הקטלוג קובעת את רשימות התואר, ואילו הקדמים נשארים לפי רשומת הקורס העדכנית במאגר.</p>
-    </details>
-    <details className="help-section">
-      <summary><h3><RotateCcw size={17}/>שמירת מצב ושימוש בטלפון<ChevronDown size={15}/></h3></summary>
-      <p>המצב נשמר מקומית בדפדפן: כל הקורסים שהוספתם, ענפים פתוחים ומוסתרים, חקירה אחורה, מסננים, סימונים, מיקום וקנה המידה של המפה והעדפת ההדגשה. רענון משחזר את המצב כששמירה מקומית זמינה.</p>
-      <p>הנתונים אינם מסתנכרנים לחשבון או למכשיר אחר. בטלפון, מצב השמירה והאיפוס נמצאים ב־<strong>כלים</strong>, תחת שמירה ואיפוס. אם השמירה המקומית אינה זמינה, מופיעה גם הודעה בתחתית האתר. ניקוי נתוני הדפדפן עלול למחוק את ההתקדמות.</p>
-      <p>בטלפון, כפתור <Menu className="help-inline-icon" size={14}/><strong>כלים</strong> ליד מסננים פותח מגירה עם הקורסים שהוספתם, רשימת מסומנים ונק״ז, הדגשת קדמים, עוד שכבה, איפוס ענפים ושמירה ואיפוס. הרשימות נפתחות בתוך המגירה; מיקוד קורס סוגר אותה. סוגרים ב־×, בלחיצה על הרקע או ב־Escape.</p>
-      <p>בטלפון, זכוכית המגדלת פותחת חיפוש זמני מעל המפה. כפתור × סוגר אותו, ובחירה בתוצאה מוסיפה או ממקדת קורס וסוגרת את החיפוש.</p>
-      <p><strong>איפוס התקדמות שמורה</strong> מחזיר את מצב ברירת המחדל לאחר אישור, כולל הסימונים, המסננים וההדגשה. הוא נפרד מ־<strong>איפוס ענפים</strong> ומ־<strong>ניקוי סימונים</strong>.</p>
-    </details>
-    <details className="help-section">
-      <summary><h3><BookOpen size={17}/>מקורות מידע, משוב ומגבלות<ChevronDown size={15}/></h3></summary>
-      <p><strong>על המאגר ומקורות המידע</strong> ו־<strong>פרטי המאגר</strong> מסבירים את כיסוי הנתונים ומקורותיהם. רשומות הקורסים נאספו מכמה סמסטרים; לכל קורס נשמרת הרשומה העדכנית שנאספה, בלי לחבר כללי קדם משנים שונות.</p>
-      <p><Bug className="help-inline-icon" size={14}/>למשוב כללי השתמשו בכפתור הדיווח בראש האתר. <strong>דיווח על מידע בקורס</strong> בחלונית הקדמים פותח משוב עם הקורס הרלוונטי. בעמוד <strong>אודות</strong> שבתחתית האתר מופיע מידע על הפרויקט. בטלפון, לחיצה על הודעת הפרויקט העצמאי מציגה את הגילוי הנאות המלא.</p>
-      <p>BranchQuest הוא פרויקט עצמאי שאינו מסונף לטכניון ואינו מערכת אישור אקדמית. לפני רישום הסתמכו על המקורות הרשמיים ועל התקנון החל עליכם.</p>
-    </details>
-  </div>;
+import {useLayoutEffect,useMemo,useRef,useState} from 'react';
+import {ArrowLeft,ArrowRight,Check,GitBranch,MousePointer2,X} from 'lucide-react';
+import type {Course} from '../types';
+import {tutorialSteps} from './tutorial/content';
+import {tutorialExamples} from './tutorial/examples';
+import {AddedCoursesStep,BranchesStep,CardStep,FiltersStep,MarkedCoursesStep,PrerequisitesStep,ToolbarStep} from './tutorial/Steps';
+const steps=[CardStep,BranchesStep,PrerequisitesStep,AddedCoursesStep,ToolbarStep,FiltersStep,MarkedCoursesStep];
+/** An isolated walkthrough: the only application action it receives is closing the dialog. */
+export default function HelpGuide({courses,onClose}:{courses:ReadonlyMap<string,Course>;onClose:()=>void}){
+ const [current,setCurrent]=useState(0),body=useRef<HTMLDivElement>(null),heading=useRef<HTMLHeadingElement>(null),previous=useRef<number|null>(null);
+ const examples=useMemo(()=>{const index=new Map(tutorialExamples.map(c=>[c.id,c as Course]));courses.forEach((c,id)=>index.set(id,c));return index;},[courses]);
+ const step=tutorialSteps[current],Visual=steps[current];
+ useLayoutEffect(()=>{
+  body.current?.scrollTo(0,0);const changed=previous.current!==null;previous.current=current;
+  if(changed){const frame=requestAnimationFrame(()=>heading.current?.focus({preventScroll:true}));return()=>cancelAnimationFrame(frame);}
+ },[current]);
+ return <div className="tutorial-guide" dir="rtl">
+  <header className="tutorial-header"><span className="tutorial-brand-icon"><GitBranch size={22}/></span><div><span className="tutorial-eyebrow">סיור קצר במפה</span><h2 id="modal-title">איך משתמשים במפת הקורסים?</h2></div><button className="modal-close tutorial-close" type="button" aria-label="סגירה" onClick={onClose}><X size={20}/></button></header>
+  <div className="tutorial-progress"><nav aria-label="שלבי המדריך">{tutorialSteps.map((s,i)=><button type="button" key={s.id} aria-label={`שלב ${i+1}: ${s.title}`} aria-current={i===current?'step':undefined} title={s.title} onClick={()=>setCurrent(i)}><span/></button>)}</nav><span className="tutorial-page-count">{current+1} מתוך {steps.length}</span><span className="tutorial-practice-tag"><MousePointer2 size={12}/>אפשר להתנסות כאן</span></div>
+  <div className="tutorial-body" ref={body} data-tutorial-step={step.id}>
+   <div className="tutorial-step-heading"><span aria-hidden="true">{String(current+1).padStart(2,'0')}</span><div><h3 ref={heading} tabIndex={-1}>{step.title}</h3><p>{step.subtitle}</p></div></div>
+   <Visual key={step.id} courses={examples}/>
+   <p className="tutorial-takeaway"><Check size={15}/>{step.takeaway}</p>
+  </div>
+  <footer className="tutorial-footer"><button type="button" className="tutorial-previous" disabled={current===0} onClick={()=>setCurrent(i=>i-1)}><ArrowRight size={15}/>הקודם</button><small>התרגול כאן לא משנה את המפה שלכם.</small><button type="button" className="tutorial-next" onClick={()=>current===steps.length-1?onClose():setCurrent(i=>i+1)}>{current===steps.length-1?'הבנתי, בואו נתחיל!':'הבא'}{current===steps.length-1?<Check size={15}/>:<ArrowLeft size={15}/>}</button></footer>
+ </div>;
 }

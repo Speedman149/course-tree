@@ -120,28 +120,27 @@ test('real concurrent requirements are explained separately without blocking ord
   await expect(node(page, '00940222').getByRole('img', {name: 'ללא קדמים רגילים לפי המידע במאגר'})).toHaveCount(1);
 });
 
-for (const width of [1440, 320]) test(`the existing help entry opens the complete RTL guide at ${width}px`, async ({page}) => {
+for (const width of [1440, 320]) test(`the existing help entry opens the visual seven-step tutorial at ${width}px`, async ({page}) => {
   await page.setViewportSize({width, height: width === 320 ? 568 : 1000});
   await ready(page);
   const help = page.getByRole('button', {name: 'איך זה עובד?', exact: true}); await help.click();
-  const guide = page.getByRole('dialog', {name: 'איך זה עובד?', exact: true}); await expect(guide).toBeVisible();
+  const guide = page.getByRole('dialog', {name: 'איך משתמשים במפת הקורסים?', exact: true}); await expect(guide).toBeVisible();
   await expect(guide).toHaveCSS('direction', 'rtl');
-  await expect(guide.locator('.help-section')).toHaveCount(9);
-  const headings = ['התחלה מהירה', 'חיפוש והוספת קורסים', 'ניווט בעץ ובענפים', 'קדמים, צבעים וסוגי קשרים', 'סימון קורסים ורשימת מסומנים', 'הדגשת קדמים שמולאו', 'מסננים וקטלוגים', 'שמירת מצב ושימוש בטלפון', 'מקורות מידע, משוב ומגבלות'];
-  for (const heading of headings) {
-    const section = guide.locator('.help-section').filter({has: page.getByRole('heading', {name: heading, level: 3, exact: true})});
-    if (!await section.getAttribute('open').then(value => value !== null)) await section.locator('summary').click();
-    await expect(section).toHaveAttribute('open', '');
+  await expect(guide.locator('.tutorial-progress nav button')).toHaveCount(7);
+  await expect(guide.getByRole('button',{name:'הקודם',exact:true})).toBeDisabled();
+  for(let step=0;step<7;step++){
+    await expect(guide.locator('.tutorial-step-heading h3')).toBeVisible();
+    await expect(guide.locator('.tutorial-progress nav button').nth(step)).toHaveAttribute('aria-current','step');
+    if(step===4)await expect(guide.getByText(PREREQUISITE_HIGHLIGHT_SHORT_LABEL,{exact:true})).toBeAttached();
+    if(step===6)await expect(guide.locator('.tutorial-credit-total')).toContainText('סה״כ נק״ז');
+    expect(await guide.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+    if(step<6)await guide.getByRole('button',{name:'הבא',exact:true}).click();
   }
-  await expect(guide.getByText(PREREQUISITE_HIGHLIGHT_SHORT_LABEL, {exact: true})).toBeAttached();
-  await expect(guide.getByText('סה״כ נק״ז', {exact: true})).toBeAttached();
-  await expect(guide).not.toContainText(/נעיצות|נעוצים|pinned/i);
-  expect(await guide.evaluate(e => e.scrollWidth <= e.clientWidth)).toBe(true);
-  expect(await guide.evaluate(e => e.scrollHeight > e.clientHeight)).toBe(true);
-  await guide.getByRole('button', {name: 'סגירה', exact: true}).focus(); await page.keyboard.press('Shift+Tab');
-  await expect(guide.getByRole('button', {name: 'ממשיכים לגלות', exact: true})).toBeFocused();
-  await page.keyboard.press('Tab'); await expect(guide.getByRole('button', {name: 'סגירה', exact: true})).toBeFocused();
-  await page.keyboard.press('Escape'); await expect(guide).toHaveCount(0); await expect(help).toBeFocused();
-  await expect(await showToggle(page)).toHaveAttribute('aria-checked', 'false');
-  if (await toolsTrigger(page).isVisible()) await page.keyboard.press('Escape');
+  await expect(guide).not.toContainText(/נעיצות|נעוצים|pinned|React Flow/i);
+  await guide.getByRole('button', {name:'סגירה',exact:true}).focus();await page.keyboard.press('Shift+Tab');
+  await expect(guide.getByRole('button',{name:'הבנתי, בואו נתחיל!',exact:true})).toBeFocused();
+  await page.keyboard.press('Tab');await expect(guide.getByRole('button',{name:'סגירה',exact:true})).toBeFocused();
+  await page.keyboard.press('Escape');await expect(guide).toHaveCount(0);await expect(help).toBeFocused();
+  await expect(await showToggle(page)).toHaveAttribute('aria-checked','false');
+  if(await toolsTrigger(page).isVisible())await page.keyboard.press('Escape');
 });
