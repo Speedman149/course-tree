@@ -1,3 +1,4 @@
+import ThemeToggle from './ThemeToggle';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import {ArrowRight,Bug,CheckCircle2,LoaderCircle,Send} from 'lucide-react';
 import SiteFooter from './SiteFooter';
@@ -37,7 +38,7 @@ export default function FeedbackPage({origin,courseId='',treeCourseId}:Props){
  const treeHref=treeCourseId&&validCourseNumber(treeCourseId)?`/?course=${encodeURIComponent(treeCourseId)}`:'/';
  const returnToTree=(event:React.MouseEvent<HTMLAnchorElement>)=>{event.preventDefault();navigateApp(treeHref);};
  return <div className="app-shell feedback-shell" dir="rtl">
-  <header className="about-header"><a className="about-brand" href={treeHref} onClick={returnToTree} dir="ltr">BranchQuest<span>.</span></a><a className="about-back" href={treeHref} onClick={returnToTree}><ArrowRight size={14}/>חזרה למפת הקורסים</a></header>
+  <header className="about-header"><a className="about-brand" href={treeHref} onClick={returnToTree} dir="ltr">BranchQuest<span>.</span></a><div className="about-header-actions"><ThemeToggle/><a className="about-back" href={treeHref} onClick={returnToTree}><ArrowRight size={14}/>חזרה למפת הקורסים</a></div></header>
   <main className="feedback-main">
    <section className="feedback-card" aria-labelledby="feedback-title">
     <span className="feedback-heading-icon"><Bug size={23}/></span>

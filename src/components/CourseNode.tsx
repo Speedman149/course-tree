@@ -1,6 +1,6 @@
 import { officialSourceURL } from '../lib/urls';
 import type { CSSProperties } from 'react';
-import { courseAppearance } from '../lib/faculty-colors';
+import { courseAppearance ,facultyDisplayColor} from '../lib/faculty-colors';
 import { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Handle, Position, type Node, type NodeProps } from '@xyflow/react';
@@ -122,7 +122,7 @@ export default function CourseNode({ data, id }: NodeProps<CourseFlowNode>) {
   };
 
   return <>
-    <div ref={cardRef} data-expansion={expansion.status} data-faculty={appearance.id} data-marked={marked} data-prerequisite-status={explorer.highlightSatisfiedPrerequisites ? satisfaction?.status ?? 'unknown' : undefined} style={{'--faculty-accent':appearance.accent} as CSSProperties} className={`course-node ${highlight ? 'prerequisites-satisfied' : ''} ${marked ? 'user-marked' : ''} ${isConcurrent && item.relations.length === 1 ? 'concurrent' : 'strong'} ${isAdded ? 'is-added' : ''} ${explorer.focusedCourseId === item.courseId ? 'is-focused' : ''} ${isBackward ? 'backward-node' : ''} ${item.cycle ? 'cycle-node' : ''} ${isAdded && !explorer.isVisible(item.courseId) ? 'outside-filter-root' : ''}`} onMouseEnter={showPanel} onMouseLeave={hidePanel}>
+    <div ref={cardRef} data-expansion={expansion.status} data-faculty={appearance.id} data-marked={marked} data-prerequisite-status={explorer.highlightSatisfiedPrerequisites ? satisfaction?.status ?? 'unknown' : undefined} style={{'--faculty-accent':facultyDisplayColor(appearance.id)} as CSSProperties} className={`course-node ${highlight ? 'prerequisites-satisfied' : ''} ${marked ? 'user-marked' : ''} ${isConcurrent && item.relations.length === 1 ? 'concurrent' : 'strong'} ${isAdded ? 'is-added' : ''} ${explorer.focusedCourseId === item.courseId ? 'is-focused' : ''} ${isBackward ? 'backward-node' : ''} ${item.cycle ? 'cycle-node' : ''} ${isAdded && !explorer.isVisible(item.courseId) ? 'outside-filter-root' : ''}`} onMouseEnter={showPanel} onMouseLeave={hidePanel}>
       {highlight && <span className="prerequisite-satisfied-indicator" role="img" aria-label={satisfactionLabel} title={`${satisfactionLabel}. מקצועות צמודים ותנאי רישום נוספים אינם נבדקים.`}><Check size={15} aria-hidden="true"/></span>}
       <Handle type="target" position={Position.Right}/>
       <Handle type="source" position={Position.Left}/>

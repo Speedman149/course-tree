@@ -1,3 +1,4 @@
+import {THEME_BOOTSTRAP} from '../src/lib/theme-bootstrap';
 import {createElement} from 'react';
 import {renderToString} from 'react-dom/server';
 import ApplicationRoot from '../src/ApplicationRoot';
@@ -22,7 +23,7 @@ export function seoPlugin(indexable: boolean): Plugin {
     configResolved(config) {outDir=resolve(config.root,config.build.outDir);building=config.command==='build';},
     transformIndexHtml: {order:'pre', handler(html, context) {
       const route = appRoute({pathname: (context.originalUrl ?? context.path).split('?')[0],hash:''});
-      return html.replace(headPattern,head(route,indexable)).replace(bodyPattern,body(route)).replace(/data-initial-route="[^"]*"/,`data-initial-route="${route}"`);
+      return html.replace('<!--theme:init-->',`<script id="branchquest-theme">${THEME_BOOTSTRAP}</script>`).replace(headPattern,head(route,indexable)).replace(bodyPattern,body(route)).replace(/data-initial-route="[^"]*"/,`data-initial-route="${route}"`);
     }},
     async closeBundle() {
       if (!building) return;

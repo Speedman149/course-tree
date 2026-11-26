@@ -57,10 +57,17 @@ test('resizing restores desktop search and returns to collapsed mobile without c
  await page.setViewportSize({width:1440,height:1000});await page.goto('/?course=02340247');await expect(root(page)).toHaveText('02340247');const desktop=page.locator('.desktop-course-search .search-input');await desktop.fill('234114');await page.setViewportSize({width:640,height:844});await expect(desktop).toBeHidden();await expect(toggle(page)).toHaveAttribute('aria-expanded','false');await toggle(page).click();await input(page).fill('אלגוריתמים');await page.setViewportSize({width:641,height:1000});await expect(panel(page)).toHaveCount(0);await expect(desktop).toBeVisible();await expect(desktop).toHaveValue('234114');await expect(toggle(page)).toBeHidden();await page.setViewportSize({width:390,height:844});await expect(toggle(page)).toHaveAttribute('aria-expanded','false');await expect(root(page)).toHaveText('02340247');
 });
 
-for(const width of [1440,641])test(`desktop search and header geometry stay unchanged at ${width}px`,async({page},testInfo)=>{
+for(const width of [1440,641])test(`desktop header accommodates the theme control and preserves search and graph geometry at ${width}px`,async({page},testInfo)=>{
  await page.setViewportSize({width,height:1000});await page.goto('/?course=02340247');await expect(root(page)).toHaveText('02340247');await page.evaluate(()=>document.fonts.ready);await expect(page.getByRole('combobox',{name:'חיפוש קורס לפי מספר או שם',exact:true})).toBeVisible();await expect(toggle(page)).toBeHidden();
- for(const selector of ['.app-header','.brand','.header-actions','.search-container']){const box=await page.locator(selector).boundingBox();for(const key of ['x','y','width','height'] as const)expect(box![key],`${selector}.${key}`).toBeCloseTo(before[width][selector][key],1);}
- // The added collection is in the footer; the desktop search/header/canvas origin stay unchanged.
+ // The new 33px theme button and 6px icon gap intentionally occupy one header slot.
+ const theme=await page.locator('.app-header .theme-toggle').boundingBox();expect(theme!.width).toBe(33);expect(await page.locator('.header-icon-actions').evaluate(el=>getComputedStyle(el).columnGap)).toBe('6px');const themeSlot=39;
+ for(const selector of ['.app-header','.brand','.header-actions','.search-container']){
+  const expected={...before[width][selector]};
+  if(selector==='.header-actions')expected.width+=themeSlot;
+  if(selector==='.search-container'&&width===641){expected.width-=themeSlot;expected.x+=themeSlot;}
+  const box=await page.locator(selector).boundingBox();for(const key of ['x','y','width','height'] as const)expect(box![key],`${selector}.${key}`).toBeCloseTo(expected[key],1);
+ }
+ // Brand/header height and graph geometry remain exact; only the intentional theme slot is budgeted.
  const graph=await page.locator('.graph-canvas').boundingBox();const footer=await page.locator('.site-footer').boundingBox();
  for(const key of ['x','width'] as const)expect(graph![key],`desktop graph.${key}`).toBeCloseTo(before[width]['.graph-canvas'][key],1);
  expect(graph!.y).toBeCloseTo(before[width]['.graph-canvas'].y,1);expect(graph!.height).toBeLessThanOrEqual(before[width]['.graph-canvas'].height);

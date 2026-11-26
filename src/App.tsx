@@ -209,8 +209,8 @@ export default function App() {
         childCourseId: edge.target, parentCourseId: edge.source, forward: edge.directions.includes('forward'),
         parallelOffset: parallel.get(edge.source + '>' + edge.target)! > 1 ? (edge.relation === 'strong' ? -14 : 14) : 0,
       },
-      markerEnd: { type: MarkerType.ArrowClosed, width: 14, height: 14, color: edge.direction === 'backward' ? '#65a99a' : '#b5add7' },
-      style: { stroke: edge.direction === 'backward' ? '#65a99a' : '#b5add7', strokeWidth: 1.6, strokeDasharray: edge.direction === 'backward' ? '5 5' : undefined },
+      markerEnd: { type: MarkerType.ArrowClosed, width: 14, height: 14, color: edge.direction === 'backward' ? 'var(--graph-edge-backward)' : 'var(--graph-edge-forward)' },
+      style: { stroke: edge.direction === 'backward' ? 'var(--graph-edge-backward)' : 'var(--graph-edge-forward)', strokeWidth: 1.6, strokeDasharray: edge.direction === 'backward' ? '5 5' : undefined },
     }));
   }, [graph]);
 
@@ -387,7 +387,7 @@ export default function App() {
   if (route === 'about') return <AboutPage treeCourseId={progressReady ? contextCourseId : undefined}/>;
   if ((!dataset||!progressReady)&&!loadError&&!modal) return <StaticPublicPage route="tree" onHelp={()=>setModal('help')}/>;
 
-  return <div className="app-shell" dir="rtl" inert={mobileToolsOpen || undefined} style={{'--marked-course':MARKED_COURSE_COLOR} as React.CSSProperties}>
+  return <div className="app-shell" dir="rtl" inert={mobileToolsOpen || undefined} style={{'--marked-course':`var(--theme-mark-accent,${MARKED_COURSE_COLOR})`} as React.CSSProperties}>
     <AppHeader courses={filteredCourses} allCourses={courses} filtered={hasFilters} disabled={!dataset||!progressReady} searchAll={searchAll} onSearchAllChange={setSearchAll} onSelect={addCourse} addedCourseIds={addedCourseIds} onHelp={()=>setModal('help')} onFeedback={()=>openFeedback()}/>
 
     <main className="workspace">
@@ -408,7 +408,7 @@ export default function App() {
           {dataset && progressReady ? <>
             <ExplorerContext.Provider value={{ courses: index, dependents, expandedForward:effectiveForward, activeForwardConnections, expandedBackward:effectiveBackward, addedCourseIds, setCourseAdded, collapseBackward, focusedCourseId, toggleForward, toggleBackward, catalogTerm: String(dataset.meta.latestTerm), isVisible, activeCatalog, catalogRoles, hasFilters, markedCourseIds, suppressCoursePanels: mobileToolsOpen || filtersOpen || !!modal, highlightSatisfiedPrerequisites, prerequisiteSatisfaction, toggleMarked, hiddenForwardConnections, hideForwardConnection, restoreForwardConnection, revealAllForwardConnections, reportCourse:openFeedback }}>
               <ReactFlow<CourseFlowNode> nodes={nodes} edges={edges} nodeTypes={nodeTypes} edgeTypes={edgeTypes} minZoom={0.15} maxZoom={1.8} nodesConnectable={false} nodesDraggable={false} elementsSelectable={false} panOnDrag zoomOnDoubleClick={false} defaultViewport={viewportState??undefined} onMoveEnd={(_,viewport)=>setViewportState(viewport)} proOptions={{ hideAttribution: true }}>
-                <Background variant={BackgroundVariant.Dots} gap={22} size={1.1} color="#dadbe5"/>
+                <Background variant={BackgroundVariant.Dots} gap={22} size={1.1} color="var(--graph-grid)"/>
               </ReactFlow>
               {graphAnchors.length === 0 && <div className="loading-state empty-graph-state" role="status"><Search size={28}/><h2>לא הוספתם קורסים עדיין</h2><p>חפשו קורס כדי להתחיל לבנות את העץ שלכם.</p><button onClick={openSearch}>חיפוש מקצוע</button></div>}
             </ExplorerContext.Provider>

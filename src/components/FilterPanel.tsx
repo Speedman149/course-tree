@@ -2,7 +2,7 @@ import { officialSourceURL } from '../lib/urls';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, ChevronDown, ExternalLink, Filter, RotateCcw, Search, X } from 'lucide-react';
 import type { CatalogDataset, CatalogReference, Course, CurriculumRequirement, DegreeCatalog, ProgramCategory } from '../types';
-import { facultyColor } from '../lib/faculty-colors';
+import { facultyDisplayColor } from '../lib/faculty-colors';
 import { facultyLabels, getCatalogRoles, type FacultyOption } from '../lib/filters';
 
 interface Props {
@@ -82,7 +82,7 @@ export default function FilterPanel({ faculties, selected, onFacultiesChange, ca
           <p className="filter-explanation">הפקולטה שמציעה את הקורס, לפי נתוני המקור. אפשר לבחור כמה פקולטות ויחידות. שיוכים משותפים, אם תועדו, נבדקים כולם.</p>
           <label className="filter-search"><Search size={15}/><input aria-label="חיפוש פקולטה" placeholder="חיפוש פקולטה או יחידה…" value={facultyQuery} onChange={event => setFacultyQuery(event.target.value)}/></label>
           <div className="faculty-bulk-actions"><button onClick={() => onFacultiesChange(null)}>בחירת הכול</button><button onClick={() => onFacultiesChange(new Set())}>ניקוי הכול</button><button onClick={() => { onFacultiesChange(null); setFacultyQuery(''); }}><RotateCcw size={12}/>איפוס פקולטות</button></div>
-          <div className="faculty-checkboxes">{faculties.filter(f => `${f.label} ${f.sourceLabels.join(' ')}`.includes(facultyQuery)).map(faculty => <label key={faculty.id} className="faculty-checkbox"><input type="checkbox" aria-label={faculty.label} checked={selected.has(faculty.id)} onChange={() => { const next = new Set(selected); if (next.has(faculty.id)) next.delete(faculty.id); else next.add(faculty.id); onFacultiesChange(next); }}/><span className="faculty-color-label"><i style={{background:facultyColor(faculty.id)}}/>{faculty.label}</span><small>{faculty.courseCount}</small></label>)}</div>
+          <div className="faculty-checkboxes">{faculties.filter(f => `${f.label} ${f.sourceLabels.join(' ')}`.includes(facultyQuery)).map(faculty => <label key={faculty.id} className="faculty-checkbox"><input type="checkbox" aria-label={faculty.label} checked={selected.has(faculty.id)} onChange={() => { const next = new Set(selected); if (next.has(faculty.id)) next.delete(faculty.id); else next.add(faculty.id); onFacultiesChange(next); }}/><span className="faculty-color-label"><i style={{background:facultyDisplayColor(faculty.id)}}/>{faculty.label}</span><small>{faculty.courseCount}</small></label>)}</div>
           {selected.size === 0 && <p className="filter-warning">לא נבחרו פקולטות. קורסי המשך ותוצאות חיפוש מוסתרים; הקדמים והקורס הנבחר נשארים זמינים.</p>}
         </div> : <div id="catalog-filter-tab" role="tabpanel" aria-labelledby="catalog-filter-tab-button">
           <p className="filter-explanation">מסלולים רשמיים מסודרים לפי פקולטה ותכנית בסיס. רשומות שטרם אומתו מסומנות בנפרד; הן אינן מספקות רשימת קורסים מאושרת.</p>

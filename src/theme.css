@@ -1,0 +1,42 @@
+/* Existing light tones remain the declaration fallbacks. Only dark mode supplies semantic overrides. */
+:root{color-scheme:light;--graph-edge-forward:#b5add7;--graph-edge-backward:#65a99a;--graph-grid:#dadbe5}
+:root[data-theme="dark"]{
+ color-scheme:dark;
+ --surface-page:#171922;--surface-panel:#21232f;--surface-subtle:#1d1f2b;--surface-raised:#292b3a;
+ --surface-accent:#2c263d;--surface-selected:#372d4d;--surface-hover:#343044;--surface-neutral:#303443;--surface-translucent:#21232ff2;
+ --text-primary:#f0edf7;--text-secondary:#d0c8de;--text-muted:#b3a9c4;
+ --border-subtle:#494353;--border-strong:#777083;--focus-ring:#c4a7ff;
+ --accent-text:#c6a9f5;--accent-fill:#7553b8;--accent-fill-hover:#8160c1;--accent-border:#9276b8;--on-fill:#fff;
+ --success-text:#9cdbc3;--success-fill:#246349;--success-surface:#1d3530;--success-border:#67a28c;
+ --danger-text:#ffa0b4;--danger-fill:#a42d4a;--danger-surface:#39232e;--danger-border:#b86b82;--theme-mark-accent:#ff829c;
+ --warning-text:#e8c98b;--warning-surface:#372f23;--warning-border:#9b8253;
+ --shadow-soft:#05071238;--shadow-strong:#05071280;--overlay:#080b15a6;
+ --theme-graph-forward:var(--graph-edge-forward);--theme-graph-backward:var(--graph-edge-backward);
+ --graph-edge-forward:#b6a0da;--graph-edge-backward:#7bc5ae;--graph-grid:#414555;
+ /* Separate presentation palette: original light faculty colors/ownership are unchanged. */
+ --faculty-civil:#76c9b3;--faculty-cs:#bd9aef;--faculty-architecture:#aab9cb;--faculty-ee:#67bce8;
+ --faculty-data:#8dcc86;--faculty-humanities:#6bd0d6;--faculty-mechanical:#80a7ed;--faculty-math:#e4be65;
+ --faculty-aerospace:#d6a6dd;--faculty-medicine:#c7b18d;--faculty-physics:#b3c97b;--faculty-chemistry:#9f9ce7;--faculty-neutral:#b3b9c8;
+}
+/* React Flow's own tokens are scoped here; custom cards/edges use the same inherited document palette. */
+:root[data-theme="dark"] .react-flow{
+ --xy-background-color:transparent;--xy-edge-stroke-default:var(--graph-edge-forward);--xy-edge-stroke-selected-default:var(--accent-text);
+ --xy-connectionline-stroke-default:var(--graph-edge-forward);--xy-node-background-color-default:var(--surface-panel);
+ --xy-node-color-default:var(--text-primary);--xy-handle-background-color-default:var(--accent-text);--xy-handle-border-color-default:var(--surface-panel);
+ --xy-controls-button-background-color-default:var(--surface-panel);--xy-controls-button-background-color-hover-default:var(--surface-hover);
+ --xy-controls-button-color-default:var(--text-primary);--xy-controls-button-border-color-default:var(--border-subtle);
+ --xy-edge-label-background-color-default:var(--surface-panel);--xy-attribution-background-color-default:var(--surface-translucent);
+}
+.header-icon-actions,.about-header-actions{display:flex;align-items:center;flex-shrink:0;gap:6px}
+.about-header-actions{gap:16px}
+.theme-toggle{position:relative;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:33px;height:33px;padding:0;border:1px solid transparent;border-radius:8px;color:var(--text-secondary,#8b7aa3);background:var(--surface-accent,#f8f5fc)}
+.theme-toggle:hover{background:var(--surface-hover,#eee7f8);color:var(--accent-text,#70518f);border-color:var(--accent-border,#e0d5ef)}
+.theme-toggle:focus-visible{outline:3px solid var(--focus-ring,#ab96cc);outline-offset:3px}
+.theme-action{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.theme-when-dark{display:none}:root[data-theme="dark"] .theme-when-light{display:none}:root[data-theme="dark"] .theme-when-dark{display:inline}
+.theme-tooltip{position:absolute;z-index:300;top:calc(100% + 8px);inset-inline-start:50%;transform:translateX(50%);pointer-events:none;visibility:hidden;opacity:0;white-space:nowrap;padding:5px 9px;border:1px solid var(--border-subtle,#e0d5ef);border-radius:6px;background:var(--surface-raised,#fff);color:var(--text-primary,#594669);box-shadow:0 3px 12px var(--shadow-soft,#30203f18);font-size:11px;line-height:1.6}
+.theme-toggle:is(:hover,:focus-visible) .theme-tooltip{visibility:visible;opacity:1}
+@media(max-width:640px){.header-icon-actions{gap:4px}.theme-toggle{width:32px;height:34px}.about-header-actions{gap:8px}.about-header-actions .about-back{font-size:11px}}
+
+/* Three compact icon targets fit narrow phones without crowding the brand. */
+@media(max-width:359px){.app-header .header-actions .help-button{width:32px;min-height:34px;padding:0}.app-header .header-actions .help-button span{display:none}}

@@ -1,0 +1,284 @@
+{
+  "1440-tree": {
+    "html": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(246, 247, 250)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".app-header": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".sidebar": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".graph-canvas": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(251, 251, 253)",
+      "borderTopColor": "rgb(228, 228, 237)"
+    },
+    ".course-node": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "color(srgb 0.967765 0.959059 0.982588)",
+      "borderTopColor": "rgb(118, 81, 181)"
+    },
+    ".node-name": {
+      "color": "rgb(48, 42, 60)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(48, 42, 60)"
+    },
+    ".node-meta": {
+      "color": "rgb(101, 94, 113)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(101, 94, 113)"
+    },
+    ".node-info": {
+      "color": "rgb(160, 160, 178)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(160, 160, 178)"
+    },
+    ".added-badge": {
+      "color": "rgb(136, 109, 175)",
+      "backgroundColor": "rgb(240, 234, 250)",
+      "borderTopColor": "rgb(136, 109, 175)"
+    },
+    ".site-footer": {
+      "color": "rgb(118, 107, 133)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 227, 239)"
+    },
+    ".search-field": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(248, 247, 251)",
+      "borderTopColor": "rgb(233, 230, 239)"
+    },
+    ".search-input": {
+      "color": "rgb(76, 69, 93)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(76, 69, 93)"
+    }
+  },
+  "1440-about": {
+    "html": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(246, 247, 250)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-header": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-brand": {
+      "color": "rgb(103, 84, 126)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(103, 84, 126)"
+    },
+    ".about-content": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(250, 248, 253)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-content p": {
+      "color": "rgb(81, 71, 93)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(81, 71, 93)"
+    },
+    ".site-footer": {
+      "color": "rgb(118, 107, 133)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 227, 239)"
+    }
+  },
+  "1440-feedback": {
+    "html": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(246, 247, 250)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-header": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".feedback-card": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 225, 240)"
+    },
+    ".feedback-card h1": {
+      "color": "rgb(102, 80, 120)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(102, 80, 120)"
+    },
+    ".feedback-field input": {
+      "color": "rgb(79, 67, 92)",
+      "backgroundColor": "rgb(252, 251, 254)",
+      "borderTopColor": "rgb(222, 213, 232)"
+    },
+    ".feedback-field textarea": {
+      "color": "rgb(79, 67, 92)",
+      "backgroundColor": "rgb(252, 251, 254)",
+      "borderTopColor": "rgb(222, 213, 232)"
+    },
+    ".feedback-field select": {
+      "color": "rgb(79, 67, 92)",
+      "backgroundColor": "rgb(252, 251, 254)",
+      "borderTopColor": "rgb(222, 213, 232)"
+    },
+    ".feedback-submit": {
+      "color": "rgb(255, 255, 255)",
+      "backgroundColor": "rgb(119, 97, 206)",
+      "borderTopColor": "rgb(255, 255, 255)"
+    },
+    ".site-footer": {
+      "color": "rgb(118, 107, 133)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 227, 239)"
+    }
+  },
+  "320-tree": {
+    "html": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(246, 247, 250)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".app-header": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".sidebar": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".graph-canvas": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(251, 251, 253)",
+      "borderTopColor": "rgb(228, 228, 237)"
+    },
+    ".course-node": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "color(srgb 0.967765 0.959059 0.982588)",
+      "borderTopColor": "rgb(118, 81, 181)"
+    },
+    ".node-name": {
+      "color": "rgb(48, 42, 60)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(48, 42, 60)"
+    },
+    ".node-meta": {
+      "color": "rgb(101, 94, 113)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(101, 94, 113)"
+    },
+    ".node-info": {
+      "color": "rgb(160, 160, 178)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(160, 160, 178)"
+    },
+    ".added-badge": {
+      "color": "rgb(136, 109, 175)",
+      "backgroundColor": "rgb(240, 234, 250)",
+      "borderTopColor": "rgb(136, 109, 175)"
+    },
+    ".site-footer": {
+      "color": "rgb(118, 107, 133)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 227, 239)"
+    },
+    ".search-field": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(248, 247, 251)",
+      "borderTopColor": "rgb(233, 230, 239)"
+    },
+    ".search-input": {
+      "color": "rgb(76, 69, 93)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(76, 69, 93)"
+    }
+  },
+  "320-about": {
+    "html": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(246, 247, 250)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-header": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-brand": {
+      "color": "rgb(103, 84, 126)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(103, 84, 126)"
+    },
+    ".about-content": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(250, 248, 253)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-content p": {
+      "color": "rgb(81, 71, 93)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(81, 71, 93)"
+    },
+    ".site-footer": {
+      "color": "rgb(118, 107, 133)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 227, 239)"
+    }
+  },
+  "320-feedback": {
+    "html": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(246, 247, 250)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".about-header": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(41, 43, 64)"
+    },
+    ".feedback-card": {
+      "color": "rgb(41, 43, 64)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 225, 240)"
+    },
+    ".feedback-card h1": {
+      "color": "rgb(102, 80, 120)",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "borderTopColor": "rgb(102, 80, 120)"
+    },
+    ".feedback-field input": {
+      "color": "rgb(79, 67, 92)",
+      "backgroundColor": "rgb(252, 251, 254)",
+      "borderTopColor": "rgb(222, 213, 232)"
+    },
+    ".feedback-field textarea": {
+      "color": "rgb(79, 67, 92)",
+      "backgroundColor": "rgb(252, 251, 254)",
+      "borderTopColor": "rgb(222, 213, 232)"
+    },
+    ".feedback-field select": {
+      "color": "rgb(79, 67, 92)",
+      "backgroundColor": "rgb(252, 251, 254)",
+      "borderTopColor": "rgb(222, 213, 232)"
+    },
+    ".feedback-submit": {
+      "color": "rgb(255, 255, 255)",
+      "backgroundColor": "rgb(119, 97, 206)",
+      "borderTopColor": "rgb(255, 255, 255)"
+    },
+    ".site-footer": {
+      "color": "rgb(118, 107, 133)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderTopColor": "rgb(232, 227, 239)"
+    }
+  }
+}

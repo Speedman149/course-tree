@@ -14,3 +14,8 @@ export function courseAppearance(course?: Course) {
   const id=owners.includes(primary)?primary:[...owners].sort()[0]??'';
   return {id,accent:facultyColor(id),label:facultyLabels.get(id)??course?.faculty??'שיוך לא ידוע',owners};
 }
+/** Rendering-only indirection lets portals and SVGs inherit the dark palette without changing ownership. */
+export function facultyDisplayColor(id:string):string {
+ const key=palette.some(f=>f.id===id)?id:'neutral';
+ return `var(--faculty-${key},${facultyColor(id)})`;
+}

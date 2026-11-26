@@ -1,7 +1,7 @@
 import {useId,useLayoutEffect,useRef,useState,type CSSProperties,type ReactNode} from 'react';
 import {ArrowUpLeft,BookOpen,Check,Info,Minus,Plus} from 'lucide-react';
 import type {Course} from '../../types';
-import {courseAppearance} from '../../lib/faculty-colors';
+import {courseAppearance,facultyDisplayColor} from '../../lib/faculty-colors';
 import {officialSourceURL} from '../../lib/urls';
 import type {TutorialAnnotation} from './content';
 
@@ -63,7 +63,7 @@ export function AnnotatedDemo({notes,active,onSelect,children,wide=false}:{notes
 }
 export function DemoCourseCard({course,marked=false,expanded=false,onMark,onExpand,onInfo,added=true,dependentCount}:{course:Course;marked?:boolean;expanded?:boolean;onMark?:()=>void;onExpand?:()=>void;onInfo?:()=>void;added?:boolean;dependentCount?:number}){
  const appearance=courseAppearance(course);
- return <article data-tutorial-region className={`tutorial-course-card${marked?' is-marked':''}`} style={{'--demo-faculty':appearance.accent} as CSSProperties} aria-label={`כרטיס הדגמה: ${course.name}`}>
+ return <article data-tutorial-region className={`tutorial-course-card${marked?' is-marked':''}`} style={{'--demo-faculty':facultyDisplayColor(appearance.id)} as CSSProperties} aria-label={`כרטיס הדגמה: ${course.name}`}>
   <div className="tutorial-card-top"><span className="tutorial-book"><BookOpen size={19}/></span><a data-tutorial-target="number" className="tutorial-course-number" href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer" dir="ltr">{course.id}<ArrowUpLeft size={12}/></a>{added&&<span className="tutorial-added"><Check size={11}/>נוסף לעץ</span>}</div>
   <h4 data-tutorial-target="name">{course.name}</h4>
   <div className="tutorial-card-meta"><span data-tutorial-target="faculty"><i/>{appearance.label}</span><span data-tutorial-target="credits">{course.credits??'—'} נק׳</span></div>
@@ -93,8 +93,8 @@ export function DemoGraph({nodes,edges,className='',children}:{nodes:MiniNode[];
   return()=>{cancelAnimationFrame(frame);resize.disconnect();window.removeEventListener('resize',schedule);};
  },[topology,className]);
  return <div data-tutorial-region className={'tutorial-flow '+className} ref={host}>
-  <svg className="tutorial-flow-lines" aria-hidden="true"><defs>{[false,true].map(green=><marker key={String(green)} id={`flow-${marker}-${green}`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill={green?'#589c89':'#b1a0d5'}/></marker>)}</defs>{lines.map(line=>{const edge=edges.find(e=>e.id===line.id);return <path key={line.id} d={line.d} className={edge?.backward?'is-backward':''} markerEnd={`url(#flow-${marker}-${!!edge?.backward})`}/>;})}</svg>
-  {nodes.map(node=><article key={node.id} data-demo-node={node.id} data-tutorial-target={node.target} className={`tutorial-mini-card ${node.className??''}`} style={{'--demo-faculty':node.accent??'#7651b5'} as CSSProperties}>
+  <svg className="tutorial-flow-lines" aria-hidden="true"><defs>{[false,true].map(green=><marker key={String(green)} id={`flow-${marker}-${green}`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill={green?'var(--theme-graph-backward,#589c89)':'var(--theme-graph-forward,#b1a0d5)'}/></marker>)}</defs>{lines.map(line=>{const edge=edges.find(e=>e.id===line.id);return <path key={line.id} d={line.d} className={edge?.backward?'is-backward':''} markerEnd={`url(#flow-${marker}-${!!edge?.backward})`}/>;})}</svg>
+  {nodes.map(node=><article key={node.id} data-demo-node={node.id} data-tutorial-target={node.target} className={`tutorial-mini-card ${node.className??''}`} style={{'--demo-faculty':node.accent??facultyDisplayColor('cs')} as CSSProperties}>
    <span className="tutorial-mini-top"><BookOpen size={14}/>{node.added&&<span><Check size={9}/>נוסף לעץ</span>}{node.backward&&<button type="button" className="tutorial-backward-badge" data-tutorial-target="backward" onClick={node.onBackward} aria-label="סגירת הקדם בהדגמה"><Minus size={10}/>קדם</button>}</span>
    <strong>{node.name}</strong>{node.onExpand&&<button type="button" className="tutorial-mini-expand" data-tutorial-target={node.id==='a'?'expand':undefined} aria-expanded={node.expanded} aria-label={`${node.expanded?'סגירת':'פתיחת'} ענפים של ${node.name} בהדגמה`} onClick={node.onExpand}>{node.expanded?<Minus size={14}/>:<Plus size={14}/>}<span>קורסי המשך</span></button>}
   </article>)}

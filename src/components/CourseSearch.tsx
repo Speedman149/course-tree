@@ -2,7 +2,7 @@ import { officialSourceURL } from '../lib/urls';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { ArrowLeft, BookOpen, Check, Search, X } from 'lucide-react';
-import {courseAppearance} from '../lib/faculty-colors';
+import {courseAppearance,facultyDisplayColor} from '../lib/faculty-colors';
 import type { Course } from '../types';
 
 interface CourseSearchProps {
@@ -181,7 +181,7 @@ export default function CourseSearch({ courses, allCourses, onSelect, disabled =
                 onMouseDown={(event) => event.preventDefault()}
                 onClick={() => select(course)}
               >
-                <span className="search-result-icon" style={{color:courseAppearance(course).accent}}><BookOpen size={17} aria-hidden="true" /></span>
+                <span className="search-result-icon" style={{color:facultyDisplayColor(courseAppearance(course).id)}}><BookOpen size={17} aria-hidden="true" /></span>
                 <span className="search-result-content"><span className="search-result-name" title={course.name}>{course.name}</span><span className="search-result-faculty">{course.faculty}</span>{allScope && !visibleIds.has(course.id) && <span className="search-result-outside-filter">מחוץ לסינון · יישאר זמין בעץ</span>}</span>
                 <a className="search-result-number" dir="ltr" href={officialSourceURL(course.source.url)} target="_blank" rel="noopener noreferrer" aria-label={`פרטי קורס ${course.id} בקטלוג`} onClick={event => event.stopPropagation()}>{course.id}</a>
                 {addedIds.has(course.id) ? <span className="search-result-added" title="כבר נוסף לעץ — בחירה תמקד את הקורס"><Check size={15} aria-hidden="true"/><span>נוסף</span></span> : <ArrowLeft className="search-result-arrow" size={15} aria-hidden="true" />}

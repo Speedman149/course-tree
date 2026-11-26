@@ -63,13 +63,13 @@ test('one shared course preserves its marking across roots, filters and branch r
 });
 
 test('concurrent badge and faculty identity survive red highlighting',async({page})=>{
- await ready(page,'01040067');const id='01040022';const card=node(page,id).locator('.course-node');
+ await page.emulateMedia({colorScheme:'light'});await ready(page,'01040067');const id='01040022';const card=node(page,id).locator('.course-node');
  await expect(card.locator('.relationship-chip.concurrent')).toHaveText('מקצוע צמוד');
  const accent=courseAppearance(courses.get('01040022')).accent;
- expect(await card.evaluate(el=>(el as HTMLElement).style.getPropertyValue('--faculty-accent'))).toBe(accent);
+ expect(await card.evaluate(el=>getComputedStyle(el).getPropertyValue('--faculty-accent').trim())).toBe(accent);
  await mark(page,id);await expect(card).toHaveClass(/user-marked/);await expect(card.locator('.relationship-chip.concurrent')).toBeVisible();await expect(card).toHaveCSS('border-color','rgb(198, 43, 61)');
- await page.reload();await expect(card).toHaveClass(/user-marked/);await mark(page,id);await expect(card).not.toHaveClass(/user-marked/);expect(await card.evaluate(el=>(el as HTMLElement).style.getPropertyValue('--faculty-accent'))).toBe(accent);
- const actual=await page.locator('.course-node').evaluateAll(nodes=>nodes.map(n=>({id:n.querySelector('.course-link')!.textContent!.trim(),color:(n as HTMLElement).style.getPropertyValue('--faculty-accent')})));
+ await page.reload();await expect(card).toHaveClass(/user-marked/);await mark(page,id);await expect(card).not.toHaveClass(/user-marked/);expect(await card.evaluate(el=>getComputedStyle(el).getPropertyValue('--faculty-accent').trim())).toBe(accent);
+ const actual=await page.locator('.course-node').evaluateAll(nodes=>nodes.map(n=>({id:n.querySelector('.course-link')!.textContent!.trim(),color:getComputedStyle(n).getPropertyValue('--faculty-accent').trim()})));
  for(const item of actual)expect(item.color).toBe(courseAppearance(courses.get(item.id)).accent);
 });
 

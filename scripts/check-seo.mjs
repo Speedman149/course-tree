@@ -1,3 +1,4 @@
+import {THEME_BOOTSTRAP} from '../src/lib/theme-bootstrap.ts';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -8,12 +9,16 @@ const escape=value=>value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':
 const config=JSON.parse(await readFile(new URL('vercel.json',root),'utf8'));
 const csp=config.headers.flatMap(rule=>rule.headers).find(h=>h.key==='Content-Security-Policy').value;
 const hash=createHash('sha256').update(WEBSITE_JSON_LD).digest('base64');
+const themeHash=createHash('sha256').update(THEME_BOOTSTRAP).digest('base64');
+assert.ok(csp.includes(`'sha256-${themeHash}'`),'CSP must permit exactly the pre-paint theme controller');
 assert.ok(csp.includes(`'sha256-${hash}'`),'CSP must permit exactly the generated JSON-LD payload');
 assert.ok(!csp.match(/script-src [^;]*'unsafe-inline'/),'Inline JavaScript must remain blocked');
 assert.ok(config.headers.some(rule=>rule.missing?.some(c=>c.type==='host'&&c.value==='^branchquest\\.app$')&&rule.headers.some(h=>h.key==='X-Robots-Tag'&&h.value.includes('noindex'))),'Preview-host noindex header is required');
 for(const page of Object.values(PUBLIC_PAGES)){
  const file=page.path==='/'?'index.html':page.path.slice(1)+'/index.html';
  const html=await readFile(new URL('dist/'+file,root),'utf8');
+ assert.equal(html.match(/<script id="branchquest-theme">([\s\S]*?)<\/script>/)?.[1],THEME_BOOTSTRAP);
+ assert.ok(html.indexOf('id="branchquest-theme"')<html.indexOf('rel="stylesheet"'),'Theme must resolve before linked styles and first paint');
  assert.match(html,/<html lang="he" dir="rtl">/);
  assert.ok(/<link[^>]*rel="stylesheet"/.test(html),'Initial HTML needs CSS before JavaScript');
  assert.ok(html.includes('data-initial-route="'+Object.entries(PUBLIC_PAGES).find(([,p])=>p===page)[0]+'"'),'Hydration route must match the pre-rendered document');

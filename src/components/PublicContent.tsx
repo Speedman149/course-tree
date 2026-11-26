@@ -1,3 +1,4 @@
+import ThemeToggle from './ThemeToggle';
 import type {MouseEvent} from 'react';
 import {navigateApp} from '../lib/navigation';
 import {validCourseNumber} from '../lib/feedback';
@@ -63,7 +64,7 @@ export function StaticPublicPage({route,onHelp}:{route:AppRoute|'not-found';onHe
  </div>;
  const feedback=route==='feedback';
  return <div className={`app-shell ${feedback?'feedback-shell':'about-shell'}`} dir="rtl" onClickCapture={preserveInitialCourse}>
-  <header className="about-header"><a className="about-brand" href="/" dir="ltr">BranchQuest<span>.</span></a><a className="about-back" href="/">חזרה למפת הקורסים ←</a></header>
+  <header className="about-header"><a className="about-brand" href="/" dir="ltr">BranchQuest<span>.</span></a><div className="about-header-actions"><ThemeToggle/><a className="about-back" href="/">חזרה למפת הקורסים ←</a></div></header>
   {route==='about'?<main className="about-content"><AboutContent/></main>:feedback?<main className="feedback-main"><section className="feedback-card initial-feedback-card"><span className="feedback-heading-icon"><Bug size={23}/></span><h1>דיווח על תקלה ושליחת משוב</h1><p className="feedback-intro">נתקלתם בתקלה? יש לכם רעיון לשיפור? נשמח לשמוע!</p><p className="initial-feedback-description">דווחו על תקלה, הציעו שיפור או ספרו לנו על מידע שגוי בקורס ב־BranchQuest. אפשר לשלוח משוב ללא כתובת אימייל; ציינו מספר קורס כשהוא רלוונטי.</p><p role="status">טוענים את טופס המשוב…</p><noscript>יש להפעיל JavaScript כדי להשתמש בטופס המשוב.</noscript><p><a href="/about">אודות BranchQuest</a></p></section></main>:<main className="about-content"><h1>העמוד לא נמצא</h1><p>הכתובת הזו אינה עמוד באתר BranchQuest.</p><a className="about-back" href="/">חזרה למפת הקורסים</a></main>}
   <InitialFooter/>
  </div>;
