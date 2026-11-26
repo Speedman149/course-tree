@@ -50,7 +50,7 @@ for(const width of [320,360,375,390,430,640,641,1440])test(`responsive controls 
 });
 
 test('drawer traps focus, locks background, closes by Escape/backdrop, and preserves viewport',async({page})=>{
- await page.setViewportSize({width:320,height:568});await ready(page);
+ await page.setViewportSize({width:320,height:568});await ready(page);await settledViewport(page);
  const box=await page.locator('.graph-canvas').boundingBox(),transform=await page.locator('.react-flow__viewport').getAttribute('style');
  let drawer=await openTools(page);await expect(page.locator('.app-shell')).toHaveAttribute('inert','');expect(await page.evaluate(()=>document.body.style.position)).toBe('fixed');
  await drawer.getByRole('button',{name:'איפוס התקדמות שמורה',exact:true}).focus();await page.keyboard.press('Tab');await expect(drawer.getByRole('button',{name:'סגירת הכלים'})).toBeFocused();await page.keyboard.press('Shift+Tab');await expect(drawer.getByRole('button',{name:'איפוס התקדמות שמורה',exact:true})).toBeFocused();
